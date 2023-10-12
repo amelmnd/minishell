@@ -6,25 +6,25 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/12 20:21:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/10/12 20:53:12 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALL_STRUCT_H
 # define ALL_STRUCT_H
 
-typedef enum e_bool t_bool;
-typedef enum e_lexer_type t_lexer_type;
-typedef struct	s_lexer_list t_lexer_list;
-typedef enum e_expander_type t_expander_type;
-typedef struct s_expander_list t_expander_list;
-typedef struct s_redirect t_redirect; 
-typedef struct s_exec_list t_exec_list;
+typedef enum e_bool				t_bool;
+typedef enum e_lexer_type		t_lexer_type;
+typedef struct s_lexer_list		t_lexer_list;
+typedef enum e_expander_type	t_expander_type;
+typedef struct s_expander_list	t_expander_list;
+typedef struct s_redirect		t_redirect;
+typedef struct s_exec_list		t_exec_list;
 
 enum	e_bool
 {
-	TRUE 1,
-	FALSE 0
+	TRUE = 1,
+	FALSE = 0
 };
 
 enum	e_lexer_type
@@ -51,7 +51,7 @@ struct	s_lexer_list
 	char			*str;
 };
 
-enum e_expander_type
+enum	e_expander_type
 {
 	WORD,
 	R_ORIGIN_REDIRECT
@@ -63,26 +63,26 @@ enum e_expander_type
 struct	s_expander_list
 {
 	t_expander_list	*previous;
-	t_expander_list *next;
+	t_expander_list	*next;
 	t_expander_type	expander_type;
 	char			*str;
 	char			*env_name;
 	char			*env_value;
 };
 
-struct s_redirect
+struct	s_redirect
 {
-	enum E_EXPEND_TYPE;
-	char *value;
+	t_expander_type	expander_type;
+	char			*value;
 };
 
-struct s_exec_list
+struct	s_exec_list
 {
 	t_exec_list	*previous;
 	t_exec_list	*next;
-	t_redirect *redirect_array;
-	char 		*cmd;
-	char 		**arg_array;
+	t_redirect	*redirect_array;
+	char		*cmd;
+	char		**arg_array;
 };
 
 #endif
