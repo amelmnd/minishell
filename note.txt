@@ -1,0 +1,3 @@
+A adapter et incure dans chaque fichier
+
+#include "minishell.h"
