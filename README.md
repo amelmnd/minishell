@@ -1,1 +1,3 @@
 # minishell
+
+Fist group project
