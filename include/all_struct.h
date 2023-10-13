@@ -50,8 +50,8 @@ struct	s_lexer_list
 	t_lexer_list	*next;
 	t_lexer_type	lexer_type;
 	char			*str;
-	char			*env_name;
-	char			*env_value;
+	char			*var_name;
+	char			*var_value;
 };
 
 enum	e_expander_type
