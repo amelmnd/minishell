@@ -88,6 +88,7 @@ struct	s_exec_list
 
 struct s_msh
 {
+	int			return_code;
 	t_lexer_list		*lexer_list;
 	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
