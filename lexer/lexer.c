@@ -5,30 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 10:09:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/13 12:12:43 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/13 14:51:05 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	lexer_check(t_lexer_list **lexer_list, char *prompt)
+t_bool	prompt_isempty(char **prompt)
 {
-	int			i;
-	enum e_bool	is_empty;
+	int	i;
+	int	len;
 
 	i = 0;
-	is_empty = TRUE;
-	*lexer_list = NULL;
-
-	while (prompt[i] != '\0')
+	len = ft_strlen(*prompt);
+	while (i < len)
 	{
-		if (prompt[i] != ' ')
+		if ((*prompt)[i] != ' ' && (*prompt)[i] != '\t')
 		{
-			is_empty = FALSE;
+			*prompt = ft_substr(*prompt, i, (len - i));
+			return (FALSE);
 		}
 		i++;
 	}
-	if (is_empty == TRUE)
-		rl_on_new_line();
+	return (TRUE);
+}
+
+void	lexer_check(t_lexer_list **lexer_list, char *prompt)
+{
+	*lexer_list = NULL;
+	if (prompt_isempty(&prompt) == TRUE)
+		exit_new_line();
+	else
+		printf("%s\n", prompt);
 }

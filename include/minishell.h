@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/13 10:41:03 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/13 14:45:02 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@
 
 // IMP : readline.h is last include to avoid errors
 # include <readline/readline.h>
+
+void	exit_new_line(void);
 
 #endif

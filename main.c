@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/13 12:14:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/13 14:47:10 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	generate_prompt(void)
 {
-	char	*user;
-	char	*prompt;
+	char			*user;
+	char			*prompt;
 	t_lexer_list	*lexer_list;
 
 	user = getenv("USER");
@@ -24,8 +24,6 @@ void	generate_prompt(void)
 	{
 		prompt = readline(user);
 		lexer_check(&lexer_list, prompt);
-		if (prompt[0] != 0)
-			printf("%s\n", prompt);
 	}
 }
 
