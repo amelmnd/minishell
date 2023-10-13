@@ -65,15 +65,15 @@ enum	e_expander_type
 
 struct	s_expander_list
 {
-	t_expander_list	*previous;
-	t_expander_list	*next;
-	t_expander_type	expander_type;
+	t_exp_list		*previous;
+	t_exp_list		*next;
+	t_exp_type		exp_type;
 	char			*str;
 };
 
 struct	s_redirect
 {
-	t_expander_type	expander_type;
+	t_exp_type		exp_type;
 	char			*str;
 };
 
@@ -88,8 +88,8 @@ struct	s_exec_list
 
 struct s_msh
 {
-	t_lexer_list	*lexer_list;
-	t_expander_list	*expander_list;
+	t_lexer_list		*lexer_list;
+	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
 };
 
