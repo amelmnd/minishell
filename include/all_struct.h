@@ -56,7 +56,7 @@ struct	s_lexer_list
 
 enum	e_expander_type
 {
-	WORD,
+	WORD_EXPANDED,
 	R_ORIGIN_REDIRECT,
 	LIMITER_HEREDOC,
 	W_DEST_REDIRECT,
