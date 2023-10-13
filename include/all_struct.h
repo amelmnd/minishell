@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/12 23:27:27 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/10/13 15:05:38 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_expander_list		t_exp_list;
 typedef struct s_redirect		t_redirect;
 typedef struct s_exec_list		t_exec_list;
 typedef struct s_msh			t_msh;
+
 
 enum	e_bool
 {
@@ -92,6 +93,7 @@ struct s_msh
 	t_lexer_list		*lexer_list;
 	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
+	t_timestamp		*timestamp;
 };
 
 #endif
