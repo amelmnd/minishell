@@ -16,8 +16,8 @@
 typedef enum e_bool				t_bool;
 typedef enum e_lexer_type		t_lexer_type;
 typedef struct s_lexer_list		t_lexer_list;
-typedef enum e_expander_type	t_expander_type;
-typedef struct s_expander_list	t_expander_list;
+typedef enum e_exp_type			t_exp_type;
+typedef struct s_exp_list		t_exp_list;
 typedef struct s_redirect		t_redirect;
 typedef struct s_exec_list		t_exec_list;
 typedef struct s_msh			t_msh;
@@ -50,8 +50,8 @@ struct	s_lexer_list
 	t_lexer_list	*next;
 	t_lexer_type	lexer_type;
 	char			*str;
-	char			*env_name;
-	char			*env_value;
+	char			*var_name;
+	char			*var_value;
 };
 
 enum	e_expander_type
@@ -65,15 +65,15 @@ enum	e_expander_type
 
 struct	s_expander_list
 {
-	t_expander_list	*previous;
-	t_expander_list	*next;
-	t_expander_type	expander_type;
+	t_exp_list		*previous;
+	t_exp_list		*next;
+	t_exp_type		exp_type;
 	char			*str;
 };
 
 struct	s_redirect
 {
-	t_expander_type	expander_type;
+	t_exp_type		exp_type;
 	char			*str;
 };
 
@@ -88,8 +88,8 @@ struct	s_exec_list
 
 struct s_msh
 {
-	t_lexer_list	*lexer_list;
-	t_expander_list	*expander_list;
+	t_lexer_list		*lexer_list;
+	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
 };
 
