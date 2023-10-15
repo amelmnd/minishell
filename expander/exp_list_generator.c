@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../include/minishell.h"
 #include "../include/fn_dev.h"
 
 t_msh *new_msh(void)
@@ -74,43 +74,19 @@ int	msh_random_0_127(t_msh *msh)
 
 void	add_node(t_msh *msh, t_exp_list *node)
 {
+	t_exp_list	*node_i;
 
+	node_i = msh->exp_list;
+	while (node_i->next)
+		node_i = node_i->next;
+	node_i->next = node;
+	node->previous = node_i;
 }
 
 void	feed_exp_list_node(t_exp_list *exp_list, char *str, int exp_type)
 {
-
-}
-/*
-	msh->exp_list->str = NULL;
-	msh->exp_list->exp_type = 0;
-
-*/
-
-char gen_random_printable_char_ascii(t_msh *msh)
-{
-	char	random_char = 0;
-
-	while (!ft_isprint((int)random_char))
-		random_char = msh_random_0_127(msh);
-	return (random_char);
-}
-
-char *gen_random_str(t_msh *msh)
-{
-	int len_str = 0;
-	char *random_str;
-	int i = -1;
-
-	while (len_str < 1 || len_str > 15)
-		len_str = msh_random_0_99(msh) % 15;
-	random_str = (char *)malloc(sizeof(char) * (len_str + 1));
-	if (!random_str)
-		return (NULL);
-	random_str[len_str] = '\0';
-	while (++i < len_str)
-		random_str[i] = gen_random_printable_char_ascii(msh);
-	return (NULL);
+	exp_list->str = str;
+	exp_list->exp_type = exp_type;
 }
 
 void	exp_list_generator(t_msh *msh)
@@ -133,14 +109,14 @@ void	exp_list_generator(t_msh *msh)
 		j = -1;
 		while (++j < nb_elt)
 		{
-			node = new_exp_list();
+			node = new_exp_list_node();
 			str = gen_random_str(msh);
 			exp_type = msh_random_0_99(msh) % 5;
 			feed_exp_list_node(node, str, exp_type);
-			add_node(msh, node);
+			add_exp_list_node(msh, node);
 		}
 		if (i != nb_pipe)
-			add_pipe_node(msh);
+			add_pipe_exp_list_node(msh);
 	}
 }
 
@@ -166,41 +142,6 @@ void	free_msh(t_msh *msh)
 		free(msh->timestamp);
 		msh->timestamp = NULL;
 	}
-}
-
-void	print_exp_type(int exp_type)
-{
-	printf("exp_type = ");
-	if (exp_type == 0)
-		printf("WORD_EXPANDED\n");
-	else if (exp_type == 1)
-		printf("R_ORIGIN_REDIRECT\n");
-	else if (exp_type == 2)
-		printf("LIMITER_HEREDOC\n");
-	else if (exp_type == 3)
-		printf("W_DEST_REDIRECT\n");
-	else if (exp_type == 4)
-		printf("WA_DEST_REDIRECT\n");
-}
-
-void	print_node(t_exp_list *node)
-{
-	print_exp_type(node->exp_type);
-	printf("node->str = %s\n", node->str);
-}
-
-void	print_exp_list(t_msh *msh)
-{
-	printf("===== print_explist : Entrée =====\n");
-	int num_node = -1;
-	t_exp_list *node = msh->exp_list;
-	//nécessité de remonter au premier node ?
-	while (node)
-	{
-		print_node(node);
-		node = node->next;
-	}
-	printf("===== print_explist : Sortie =====\n");
 }
 
 int	main(void)
