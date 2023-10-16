@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/16 11:42:57 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/16 15:38:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ struct	s_exec_list
 
 struct s_msh
 {
-	int			return_code;
-	t_lexer_list		*lexer_list;
+	int				return_code;
+	t_lexer_list	*lexer_list;
 	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
 };

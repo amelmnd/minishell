@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:40:04 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/16 15:09:13 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/16 19:09:10 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_push_new_node(t_lexer_list *list, t_lexer_list	*new_node)
 }
 
 
-t_lexer_list	*ft_push(t_lexer_list *list, char *item)
+t_lexer_list	*ft_push(t_lexer_list *list, char *item, t_lexer_type type)
 {
 	t_lexer_list	*new_node;
 
@@ -49,7 +49,7 @@ t_lexer_list	*ft_push(t_lexer_list *list, char *item)
 	//TODO DEBUG
 	print_debug_list(list, "LIST start");
 	//TODO END DEBUG
-	new_node->lexer_type = 	WORD;
+	new_node->lexer_type = 	type;
 	new_node->str = item;
 	if (list_is_empty(list) == TRUE)
 	{
