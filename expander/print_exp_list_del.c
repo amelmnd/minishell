@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "../include/fn_dev.h"
+#include "../include/minishell.h"
+
 
 void	print_exp_type(int exp_type)
 {
