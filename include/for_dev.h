@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   for_dev.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/16 12:06:26 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/16 11:51:34 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/16 15:09:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef FOR_DEV_H
+# define FOR_DEV_H
 
-void	exit_new_line(void)
-{
-	rl_on_new_line();
-}
+# include "minishell.h"
+
+void	print_list(t_lexer_list *list);
+void	print_debug_list(t_lexer_list *list, char *name);
+
+#endif
+

@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/12 09:34:37 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/16 12:02:48 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,9 @@ DCFLAGS_FSA = $(CFLAGS) -g3 -fsanitize=address
 
 PATH_LEX = $(addprefix $(DIR_LEX), $(SRCS_LEX))
 DIR_LEX = lexer/
-SRCS_LEX = lexer.c\
+SRCS_LEX =	lexer.c\
+			lexer_list_manage.c\
+			create_lexer_list.c\
 
 PATH_PARS = $(addprefix $(DIR_PARS), $(SRCS_PARS))
 DIR_PARS = parser/
@@ -54,7 +56,12 @@ PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
 SRCS_UTILS = utils.c\
 
-SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL)  $(ORIGIN)
+# TODO DELETE
+PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
+DIR_DEV = for_dev/
+SRCS_DEV = for_dev.c\
+
+SRCS =  $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
 OBJS = $(SRCS:.c=.o)
 

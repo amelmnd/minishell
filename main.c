@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/13 14:47:10 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/16 12:36:13 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,14 @@ void	generate_prompt(void)
 	char			*prompt;
 	t_lexer_list	*lexer_list;
 
+	lexer_list = NULL;
+
 	user = getenv("USER");
 	user = ft_strjoin(user, " $> ");
 	while (1)
 	{
 		prompt = readline(user);
-		lexer_check(&lexer_list, prompt);
+		lexer_check(lexer_list, prompt);
 	}
 }
 
