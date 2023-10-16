@@ -4,6 +4,7 @@
 
 # include "libft/libft.h"
 # include "all_struct.h"
+# include "fn_dev.h" // à supprimer à terme
 
 // selon les besoins du projet, ajouter les includes nécessaires
 # include <errno.h>

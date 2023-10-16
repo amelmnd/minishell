@@ -44,6 +44,9 @@ SRCS_EXP = expander.c\
 		   exp_list_generator_del.c \
 		   print_exp_list_del.c \
 		   gen_random_str_del.c \
+		   msh_random_del.c \
+		   exp_list_node_management_del.c \
+		   msh_del.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/

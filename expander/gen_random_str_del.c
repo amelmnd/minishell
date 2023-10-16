@@ -1,5 +1,5 @@
-#include "minishell.h"
-#include "../include/fn_dev.h"
+#include "../include/minishell.h"
+
 
 char gen_random_printable_char_ascii(t_msh *msh)
 {

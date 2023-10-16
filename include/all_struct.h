@@ -13,6 +13,12 @@
 #ifndef ALL_STRUCT_H
 # define ALL_STRUCT_H
 
+# include "minishell.h"
+
+# include <sys/time.h>
+typedef struct timeval t_timestamp;
+// bloc à supprimer à terme
+
 typedef enum e_bool				t_bool;
 typedef enum e_lexer_type		t_lexer_type;
 typedef struct s_lexer_list		t_lexer_list;
@@ -61,7 +67,8 @@ enum	e_expander_type
 	R_ORIGIN_REDIRECT,
 	LIMITER_HEREDOC,
 	W_DEST_REDIRECT,
-	WA_DEST_REDIRECT
+	WA_DEST_REDIRECT,
+	PIPE_EXPANDED
 };
 
 struct	s_expander_list
