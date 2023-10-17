@@ -1,36 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   dev_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 10:42:41 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/17 09:50:55 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/17 09:54:42 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	generate_prompt(void)
+void	blue(void)
 {
-	char			*user;
-	char			*prompt;
-	t_lexer_list	*lexer_list;
-
-	lexer_list = NULL;
-
-	user = getenv("USER");
-	user = ft_strjoin(user, " $> ");
-	while (1)
-	{
-		prompt = readline(user);
-		lexer_check(&lexer_list, prompt);
-	}
+	printf("\033[1;34m");
 }
 
-int	main(void)
+void	cyan(void)
 {
-	generate_prompt();
-	return (0);
+	printf("\033[1;36m");
+}
+
+void	pink(void)
+{
+	printf("\033[1;35m");
+}
+
+void	red(void)
+{
+	printf("\033[1;31m");
+}
+
+void	yellow(void)
+{
+	printf("\033[1;33m");
+}
+
+void	green(void)
+{
+	printf("\033[1;32m");
+}
+
+void	reset(void)
+{
+	printf("\033[0m");
 }

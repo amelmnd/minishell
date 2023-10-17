@@ -1,36 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   manage_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 10:42:41 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/17 11:31:42 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	generate_prompt(void)
+void	exit_synthax_error(char cara)
 {
-	char			*user;
-	char			*prompt;
-	t_lexer_list	*lexer_list;
-
-	lexer_list = NULL;
-
-	user = getenv("USER");
-	user = ft_strjoin(user, " $> ");
-	while (1)
-	{
-		prompt = readline(user);
-		lexer_check(&lexer_list, prompt);
-	}
-}
-
-int	main(void)
-{
-	generate_prompt();
-	return (0);
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	printf("bash: erreur de syntaxe près du symbole inattendu « %c »\n", cara);
 }
