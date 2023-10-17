@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:07:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:41:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:52:08 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_pipe(t_msh *msh, char *prompt, int *i)
 {
-	if (*i == 0 || prompt[*i + 1] == '|')
+	if (*i == 0 || prompt[*i + 1] == '|' || prompt[ft_strlen(prompt)-1] == '|' )
 	{
 		exit_synthax_error(msh, '|');
 		return (258);
