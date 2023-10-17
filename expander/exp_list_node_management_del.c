@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+void	fill_the_first_node(t_msh *msh)
+{
+	t_exp_list *first_node = NULL;
+
+	if (msh)
+	{
+		if (msh->exp_list)
+		{
+			while (msh->exp_list->previous)
+			{
+				print_node(first_node);
+				first_node = msh->exp_list->previous;
+			}
+		}
+	}
+	if (!first_node)
+		first_node = msh->exp_list;
+	first_node->str = gen_random_str(msh);
+}
+
+
 t_exp_list	*new_exp_list_node(void)
 {
 	t_exp_list *new_node;
@@ -40,7 +61,6 @@ void	add_pipe_exp_list_node(t_msh *msh)
 {
 	t_exp_list	*pipe_exp_list_node;
 
-	pipe_exp_list_node = NULL;
 	pipe_exp_list_node = new_exp_list_node();
 	feed_exp_list_node(pipe_exp_list_node, NULL, 5);
 	add_exp_list_node(msh, pipe_exp_list_node);

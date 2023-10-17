@@ -14,12 +14,19 @@ void	print_exp_type(int exp_type)
 		printf("W_DEST_REDIRECT\n");
 	else if (exp_type == 4)
 		printf("WA_DEST_REDIRECT\n");
+	else if (exp_type == 5)
+		printf("PIPE_EXPANDED\n\n");
 }
 
 void	print_node(t_exp_list *node)
 {
-	print_exp_type(node->exp_type);
-	printf("node->str = %s\n", node->str);
+	if (node)
+	{
+		printf("\n== node ==\n");
+		print_exp_type(node->exp_type);
+		printf("node->str = %s\n", node->str);
+		printf("====\n");
+	}
 }
 
 void	print_exp_list(t_msh *msh)

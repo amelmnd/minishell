@@ -29,6 +29,7 @@ void	exp_list_generator(t_msh *msh)
 		if (i != nb_pipe)
 			add_pipe_exp_list_node(msh);
 	}
+	fill_the_first_node(msh);
 }
 
 int	main(void)
@@ -40,6 +41,8 @@ int	main(void)
 	init_node_exp_list(msh);
 	exp_list_generator(msh);
 	print_exp_list(msh);
+	build_exec_list(msh);
+	print_exec_list(msh);
 	free_msh(msh);
 	return (0);
 }
