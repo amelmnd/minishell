@@ -6,7 +6,7 @@ char gen_random_printable_char_ascii(t_msh *msh)
 	char	random_char = 0;
 
 	while (!ft_isprint((int)random_char))
-		random_char = msh_random_0_127(msh);
+		random_char = (char)msh_random_0_127(msh);
 	return (random_char);
 }
 
@@ -24,5 +24,5 @@ char *gen_random_str(t_msh *msh)
 	random_str[len_str] = '\0';
 	while (++i < len_str)
 		random_str[i] = gen_random_printable_char_ascii(msh);
-	return (NULL);
+	return (random_str);
 }

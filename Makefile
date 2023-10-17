@@ -51,6 +51,8 @@ SRCS_EXP = expander.c\
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
 SRCS_EXEC = exec.c\
+			build_exec_list_del.c \
+			
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
