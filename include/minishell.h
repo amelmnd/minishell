@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/16 19:13:48 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:28:44 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # include <readline/readline.h>
 
 void	exit_new_line(void);
-void	exit_synthax_error(char cara);
+void	clean_msh(t_msh *msh);
+void	exit_synthax_error(t_msh *msh, char cara);
 
 #endif

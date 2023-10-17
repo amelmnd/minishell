@@ -1,23 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_error.c                                     :+:      :+:    :+:   */
+/*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:41:49 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/17 17:39:41 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO add here other error type
+//TODO add here other free list inside msh
 
-void	exit_synthax_error(t_msh *msh, char cara)
+void	free_lexer_list(t_lexer_list *lexer_list)
 {
-	clean_msh(msh);
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	printf("bash: erreur de syntaxe près du symbole inattendu « %c »\n", cara);
+	t_lexer_list	*current;
+	t_lexer_list	*next;
+
+	current = lexer_list;
+	while (current != NULL)
+	{
+		next = current->next;
+		free(current);
+		current = next;
+	}
+}
+
+void	clean_msh(t_msh *msh)
+{
+	if (msh->lexer_list)
+	{
+		free_lexer_list(msh->lexer_list);
+		msh->lexer_list = NULL;
+	}
 }

@@ -6,60 +6,50 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:40:04 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 11:30:25 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:41:24 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	list_is_empty(t_lexer_list *list)
+int	lexer_list_is_empty(t_lexer_list *list)
 {
 	if (list == NULL)
 		return (TRUE);
 	return (FALSE);
 }
 
-void	ft_first_node(t_lexer_list *node)
+void	lexer_first_node(t_lexer_list *node)
 {
-	printf("\nIF list == NULL =>list is empty\n");
 	node->previous = NULL;
 	node->next = NULL;
 }
 
-void	ft_push_new_node(t_lexer_list *list, t_lexer_list	*new_node)
+void	lexer_push_new_node(t_msh *msh, t_lexer_list	*new_node)
 {
-	t_lexer_list *tmp;
+	t_lexer_list	*tmp;
 
-		printf("\nELSE list == NULL => list is not empty\n");
-	tmp = list;
+	tmp = msh->lexer_list;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new_node;
 	new_node->previous = tmp;
 }
 
-t_lexer_list	*ft_push(t_lexer_list **list, char *str, t_lexer_type type)
+void	lexer_push(t_msh *msh, char *str, t_lexer_type type)
 {
 	t_lexer_list	*new_node;
-	printf("str : %s", str);
+
 	new_node = (t_lexer_list *)malloc(sizeof(t_lexer_list));
-	new_node->str = 0;
-	// TODO DEBUG
-	print_debug_list(*list, "LIST start");
-	//TODO END DEBUG
-	new_node->lexer_type = 	type;
-	new_node->str = "|";
-	if (list_is_empty(*list) == TRUE)
+	new_node->lexer_type = type;
+	new_node->str = str;
+	if (lexer_list_is_empty(msh->lexer_list) == TRUE)
 	{
-		ft_first_node(new_node);
+		lexer_first_node(new_node);
+		msh->lexer_list = new_node;
 	}
 	else
 	{
-		ft_push_new_node(*list, new_node);
+		lexer_push_new_node(msh, new_node);
 	}
-	//TODO DEBUG
-	print_debug_list(new_node, "NEW NODE end");
-	print_debug_list(*list, "LIST end");
-	//TODO END DEBUG
-	return (new_node);
 }
