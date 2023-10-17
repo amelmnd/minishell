@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/16 12:36:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/17 11:33:33 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ t_bool	prompt_isempty(char **prompt)
 	return (TRUE);
 }
 
-void	lexer_check(t_lexer_list *lexer_list, char *prompt)
+void	lexer_check(t_lexer_list **lexer_list, char *prompt)
 {
 	if (prompt_isempty(&prompt) == TRUE)
 		exit_new_line();
 	else
-		lexex_create_list(lexer_list, prompt);
+		lexer_create_list(lexer_list, prompt);
 }
