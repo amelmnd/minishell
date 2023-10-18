@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:07:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 14:18:46 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:59:12 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	lexer_create_list(t_msh *msh, char *prompt)
 	return_code = 0;
 	while (i < ft_strlen(prompt))
 	{
-		printf("prompt[%d] = %c\n", i, prompt[i]);
+		// printf("prompt[%d] = %c\n", i, prompt[i]);
 		if (prompt[i] == '|')
 			return_code = is_pipe(msh, prompt, &i);
 		else if (prompt[i] == ' ' || prompt[i] == '\t')
@@ -30,6 +30,8 @@ int	lexer_create_list(t_msh *msh, char *prompt)
 			return_code = is_right_bracket(msh, prompt, &i);
 		else if (prompt[i] == '<')
 			return_code = is_left_bracket(msh, prompt, &i);
+		else if (prompt[i] == 39)
+			return_code = is_simple_quote(msh, prompt, &i);
 		if (return_code != 0)
 		{
 			msh->return_code = return_code;

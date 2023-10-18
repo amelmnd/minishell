@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/18 14:22:48 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/18 14:36:35 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ DCFLAGS_FSA = $(CFLAGS) -g3 -fsanitize=address
 
 PATH_LEX = $(addprefix $(DIR_LEX), $(SRCS_LEX))
 DIR_LEX = lexer/
-SRCS_LEX =	lexer.c lexer_list_manage.c create_lexer_list.c is_bracket.c is_other_operator.c \
+SRCS_LEX =	lexer.c lexer_list_manage.c create_lexer_list.c is_bracket.c is_other_operator.c is_quote.c \
 
 PATH_PARS = $(addprefix $(DIR_PARS), $(SRCS_PARS))
 DIR_PARS = parser/
