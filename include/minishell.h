@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:28:44 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/18 12:24:32 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 
 void	exit_new_line(void);
 void	clean_msh(t_msh *msh);
-void	exit_synthax_error(t_msh *msh, char cara);
+
+// error
+void	exit_synthax_error(t_msh *msh, char *str);
 
 #endif
