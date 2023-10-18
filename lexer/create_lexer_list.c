@@ -6,25 +6,13 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:07:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 10:18:54 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/18 12:26:01 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int is_pipe(t_msh *msh, char *prompt, int *i)
-{
-	if (*i == 0 || prompt[*i + 1] == '|' || prompt[ft_strlen(prompt) - 1] == '|')
-	{
-		exit_synthax_error(msh, '|');
-		return (258);
-	}
-	else
-		lexer_push(msh, "|", PIPE);
-	return (0);
-}
-
-int is_blank(t_msh *msh, char *prompt, int *i)
+int	is_blank(t_msh *msh, char *prompt, int *i)
 {
 	lexer_push(msh, " ", BLANK);
 	if (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t')
@@ -39,10 +27,49 @@ int is_blank(t_msh *msh, char *prompt, int *i)
 	return (0);
 }
 
-int lexer_create_list(t_msh *msh, char *prompt)
+int	is_pipe(t_msh *msh, char *prompt, int *i)
 {
-	int i;
-	int return_code;
+	if (*i == 0 || prompt[*i + 1] == '|'
+		|| prompt[ft_strlen(prompt) - 1] == '|')
+	{
+		exit_synthax_error(msh, "|");
+		return (258);
+	}
+	else
+		lexer_push(msh, "|", PIPE);
+	return (0);
+}
+
+int	is_right_bracket(t_msh *msh, char *prompt, int *i)
+{
+	if (prompt[*i + 1] != '>' && prompt[*i + 1] != '|')
+		lexer_push(msh, ">", W_REDIRECT);
+	if (prompt[*i + 1] == '|')
+	{
+		exit_synthax_error(msh, "newline");
+		return (258);
+	}
+	if (prompt[*i + 1] == '>')
+	{
+		if (prompt[*i + 2] == '>' || prompt[*i + 2] == '|')
+		{
+			if (prompt[*i + 2] == '>')
+				exit_synthax_error(msh, ">");
+			else if (prompt[*i + 2] == '|')
+				exit_synthax_error(msh, "|");
+			return (258);
+		}
+		else
+			lexer_push(msh, ">", W_APPEND_REDIRECT);
+		*i += 2;
+	}
+	return (0);
+}
+
+int	lexer_create_list(t_msh *msh, char *prompt)
+{
+	int	i;
+	int	return_code;
 
 	i = 0;
 	return_code = 0;
@@ -53,10 +80,12 @@ int lexer_create_list(t_msh *msh, char *prompt)
 			return_code = is_pipe(msh, prompt, &i);
 		else if (prompt[i] == ' ' || prompt[i] == '\t')
 			return_code = is_blank(msh, prompt, &i);
+		else if (prompt[i] == '>')
+			return_code = is_right_bracket(msh, prompt, &i);
 		if (return_code != 0)
 		{
 			msh->return_code = return_code;
-			break;
+			break ;
 		}
 		i++;
 	}
