@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:49:53 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 14:36:18 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:46:53 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ int		is_pipe(t_msh *msh, char *prompt, int *i);
 int		is_right_bracket(t_msh *msh, char *prompt, int *i);
 int		is_left_bracket(t_msh *msh, char *prompt, int *i);
 int		is_simple_quote(t_msh *msh, char *prompt, int *i);
+int		is_double_quote(t_msh *msh, char *prompt, int *i);
 
 #endif
