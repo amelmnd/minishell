@@ -6,6 +6,8 @@
 typedef struct timeval	t_timestamp;
 
 void	print_exp_list(t_msh *msh);
+void	print_exp_list_one_line(t_msh *msh);
+void	print_exec_list(t_msh *msh);
 char *gen_random_str(t_msh *msh);
 
 int	msh_random_0_99(t_msh *msh);
