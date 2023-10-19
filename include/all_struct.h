@@ -19,15 +19,15 @@
 typedef struct timeval t_timestamp;
 // bloc à supprimer à terme
 
-typedef enum e_bool				t_bool;
-typedef enum e_lexer_type		t_lexer_type;
-typedef struct s_lexer_list		t_lexer_list;
-typedef enum e_expander_type		t_exp_type;
-typedef struct s_expander_list		t_exp_list;
-typedef struct s_redirect		t_redirect;
-typedef struct s_exec_list		t_exec_list;
-typedef struct s_msh			t_msh;
-
+typedef enum e_bool						t_bool;
+typedef enum e_lexer_type				t_lexer_type;
+typedef struct s_lexer_list				t_lexer_list;
+typedef enum e_expander_type			t_exp_type;
+typedef struct s_expander_list			t_exp_list;
+typedef struct s_redirect				t_redirect;
+typedef struct s_exec_list				t_exec_list;
+typedef struct s_msh					t_msh;
+typedef struct s_exec_list_node_data	t_exec_list_node_data;
 
 enum	e_bool
 {
@@ -90,17 +90,21 @@ struct	s_exec_list
 	t_exec_list	*previous;
 	t_exec_list	*next;
 	t_redirect	*redirect_array;
+	int			nb_redirects;
 	char		*cmd;
-	char		**arg_array;
+	char		**args_array;
+	int 		nb_args;
+	int			next_pipe;
+	int			nb_pipes;
 };
 
 struct s_msh
 {
-	int			return_code;
-	t_lexer_list		*lexer_list;
-	t_exp_list		*exp_list;
-	t_exec_list		*exec_list;
-	t_timestamp		*timestamp;
+	int						return_code;
+	t_lexer_list			*lexer_list;
+	t_exp_list				*exp_list;
+	t_exec_list				*exec_list;
+	t_timestamp				*timestamp;
 };
 
 #endif
