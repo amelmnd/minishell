@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 12:24:32 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 15:12:03 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 // TODO DELETE END
 
 # include "lexer.h"
+# include "parser.h"
 
 # include <errno.h>
 # include <fcntl.h>
