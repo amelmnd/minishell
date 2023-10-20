@@ -6,11 +6,56 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:40:38 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 19:56:12 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+void    print_exp_type_one_line(int exp_type)
+{
+	switch (exp_type)
+	{
+		case 0:
+			printf("type -> PIPE");
+			break;
+		case 1:
+			printf("type -> WORD");
+			break;
+		case 2:
+			printf("type -> S_QUOTE");
+			break;
+		case 3:
+			printf("type -> D_QUOTE");
+			break;
+		case 4:
+			printf("type -> R_REDIRECT");
+			break;
+		case 5:
+			printf("type -> HEREDOC");
+			break;
+		case 6:
+			printf("type -> W_REDIRECT");
+			break;
+		case 7:
+			printf("type -> W_APPEND_REDIRECT");
+			break;
+		case 8:
+			printf("type -> BLANK");
+			break;
+		case 9:
+			printf("type -> VARIABLE");
+			break;
+		case 10:
+			printf("type -> RETURN_VALUE");
+			break;
+		case 11:
+			printf("type -> SPECIAL_VAR");
+			break;
+		default:
+			break;
+	}
+	printf("\n");
+}
 
 void	print_list(t_lexer_list *list)
 {
@@ -36,7 +81,7 @@ void	print_list(t_lexer_list *list)
 				printf("v_name -> [%s]\n", list->var_name);
 			}
 			cyan();
-			printf("type -> [%u]\n", list->lexer_type);
+			print_exp_type_one_line(list->lexer_type);
 			list = list->next;
 		}
 		reset();
