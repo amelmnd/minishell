@@ -68,7 +68,8 @@ enum	e_expander_type
 	LIMITER_HEREDOC,
 	W_DEST_REDIRECT,
 	WA_DEST_REDIRECT,
-	PIPE_EXPANDED
+	PIPE_EXPANDED,
+	CMD
 };
 
 struct	s_expander_list
@@ -93,7 +94,7 @@ struct	s_exec_list
 	int			nb_redirects;
 	char		*cmd;
 	char		**args_array;
-	int 		nb_args;
+	int 		nb_words;
 	int			next_pipe;
 	int			nb_pipes;
 };

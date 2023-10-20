@@ -73,11 +73,11 @@ void	print_node_one_line(t_exp_list *exp_list_node)
 
 void	print_exp_list_one_line(t_msh *msh)
 {
-	//printf("")
 	t_exp_list *node = msh->exp_list;
 	while (node)
 	{
 		print_node_one_line(node);
 		node = node->next;
 	}
+	printf("\n");
 }

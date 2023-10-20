@@ -52,7 +52,9 @@ PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
 SRCS_EXEC = exec.c\
 			build_exec_list_del.c \
-			
+			print_exec_list_del.c \
+			init_exec_list_node_management_del.c \
+			exec_list_node_data_del.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
