@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:19:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 15:20:53 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 15:23:13 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	parser(t_msh *msh)
 		return ;
 	}
 	return_code = limit_is_valid(msh);
+	return_code = check_valid_next(msh);
 	msh->return_code = return_code;
 }

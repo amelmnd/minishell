@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/20 15:10:56 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/20 15:30:45 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS_LEX =	lexer.c lexer_list_manage.c create_lexer_list.c is_bracket.c is_other
 
 PATH_PARS = $(addprefix $(DIR_PARS), $(SRCS_PARS))
 DIR_PARS = parser/
-SRCS_PARS = parser.c limit_is_valid.c\
+SRCS_PARS = parser.c limit_is_valid.c check_valide_next.c\
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
