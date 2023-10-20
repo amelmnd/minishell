@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:03:23 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 12:09:26 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:33:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ int	is_world_end(char *prompt, int i)
 	while (prompt[i] && prompt[i] != ' ' && prompt[i] != '\t'
 		&& prompt[i] != '\0' && prompt[i] != '>' && prompt[i] != '<'
 		&& prompt[i] != '>' && prompt[i] != '<'
-		&& prompt[i] != '|' && prompt[i] != '$')
+		&& prompt[i] != '|' && prompt[i] != '$'
+		&& prompt[i] != 34 && prompt[i] != 39)
 	{
 		world_len++;
 		i++;
