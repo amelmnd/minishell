@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 11:58:04 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:42:01 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_var_end(char *prompt, int i)
 	var_len = 0;
 	while (prompt[i] && prompt[i] != ' ' && prompt[i] != '\t'
 		&& prompt[i] != '\0' && prompt[i] != '>' && prompt[i] != '<'
-		&& prompt[i] != '|')
+		&& prompt[i] != '|' && prompt[i] != '"' && prompt[i] != 39)
 	{
 		var_len++;
 		i++;
@@ -44,7 +44,7 @@ void	var_name_isalpha(t_msh *msh, char *prompt, int *i)
 	var_len = is_var_end(prompt, *i);
 	var_name = ft_substr(prompt, *i, var_len);
 	lexer_push(msh, var_name, VARIABLE);
-	*i += var_len;
+	*i += var_len - 1;
 }
 
 void	var_name_not_isalpha(t_msh *msh, char *prompt, int *i)
@@ -79,6 +79,6 @@ int	is_dollar(t_msh *msh, char *prompt, int *i)
 		var_name_isalpha(msh, prompt, i);
 	else if (!ft_isalpha(prompt[*i + 1]) && prompt[*i + 1] != 60
 		&& prompt[*i + 1] != 62 && prompt[*i + 1] != '|')
-		var_name_not_isalpha(msh, prompt, i);
+		var_name_is_return_value(msh, prompt, i);
 	return (0);
 }
