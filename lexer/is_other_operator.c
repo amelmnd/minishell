@@ -1,40 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   is_other_operator.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:04:16 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/18 14:12:31 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/18 15:31:43 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	prompt_isempty(char **prompt)
+int	is_blank(t_msh *msh, char *prompt, int *i)
 {
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(*prompt);
-	while (i < len)
+	lexer_push(msh, " ", BLANK);
+	if (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t')
 	{
-		if ((*prompt)[i] != ' ' && (*prompt)[i] != '\t')
+		while (prompt[*i] == ' ' || prompt[*i] == '\t')
 		{
-			*prompt = ft_substr(*prompt, i, (len - i));
-			return (FALSE);
+			*i += 1;
 		}
-		i++;
+		*i -= 1;
 	}
-	return (TRUE);
+	return (0);
 }
 
-void	lexer_check(t_msh *msh, char *prompt)
+int	is_pipe(t_msh *msh, char *prompt, int *i)
 {
-	if (prompt_isempty(&prompt) == TRUE)
-		exit_new_line();
+	if (*i == 0 || prompt[*i + 1] == '|'
+		|| prompt[ft_strlen(prompt) - 1] == '|')
+	{
+		exit_synthax_error(msh, "|");
+		return (258);
+	}
 	else
-		lexer_create_list(msh, prompt);
+		lexer_push(msh, "|", PIPE);
+	return (0);
 }

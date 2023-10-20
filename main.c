@@ -6,23 +6,29 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/12 15:44:17 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:40:03 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void generate_prompt(void)
+void	generate_prompt(void)
 {
-	char *user;
-	char *prompt;
+	t_msh	*msh;
+	char	*user;
+	char	*prompt;
 
+	msh = (t_msh *)malloc(sizeof(t_msh));
 	user = getenv("USER");
 	user = ft_strjoin(user, " $> ");
+	if (!msh)
+		return ;
 	while (1)
 	{
 		prompt = readline(user);
-		printf("%s\n", prompt);
+		lexer_check(msh, prompt);
+		print_debug_list(msh->lexer_list, "main");
+		clean_msh(msh);
 	}
 }
 

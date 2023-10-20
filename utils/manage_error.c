@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   manage_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 11:20:49 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/18 12:24:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_new_line(void)
+//TODO add here other error type
+
+void	exit_synthax_error(t_msh *msh, char *str)
 {
+	clean_msh(msh);
 	rl_on_new_line();
+	rl_replace_line("", 1);
+	printf("bash: erreur de syntaxe près du symbole inattendu « %s »\n", str);
 }
