@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/12 23:27:27 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/10/16 15:38:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 typedef enum e_bool				t_bool;
 typedef enum e_lexer_type		t_lexer_type;
 typedef struct s_lexer_list		t_lexer_list;
-typedef enum e_expander_type		t_exp_type;
-typedef struct s_expander_list		t_exp_list;
+typedef enum e_expander_type	t_exp_type;
+typedef struct s_expander_list	t_exp_list;
 typedef struct s_redirect		t_redirect;
 typedef struct s_exec_list		t_exec_list;
 typedef struct s_msh			t_msh;
@@ -88,8 +88,8 @@ struct	s_exec_list
 
 struct s_msh
 {
-	int			return_code;
-	t_lexer_list		*lexer_list;
+	int				return_code;
+	t_lexer_list	*lexer_list;
 	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
 };
