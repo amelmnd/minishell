@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 19:10:06 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 11:58:04 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,55 +17,68 @@ int	is_var_end(char *prompt, int i)
 	int	var_len;
 
 	var_len = 0;
-	while (prompt[i] && (prompt[++i] != ' '
-	|| prompt[++i] != '\t' || prompt[++i] != '\0'
-	|| prompt[++i] != '>' || prompt[++i] != '<'
-	|| prompt[++i] != '|'))
+	while (prompt[i] && prompt[i] != ' ' && prompt[i] != '\t'
+		&& prompt[i] != '\0' && prompt[i] != '>' && prompt[i] != '<'
+		&& prompt[i] != '|')
+	{
 		var_len++;
+		i++;
+	}
 	return (var_len);
+}
+
+void	var_name_is_return_value(t_msh *msh, char *prompt, int *i)
+{
+	char	*var_name;
+
+	var_name = ft_substr(prompt, *i, 2);
+	lexer_push(msh, var_name, RETURN_VALUE);
+	*i += 1;
+}
+
+void	var_name_isalpha(t_msh *msh, char *prompt, int *i)
+{
+	int		var_len;
+	char	*var_name;
+
+	var_len = is_var_end(prompt, *i);
+	var_name = ft_substr(prompt, *i, var_len);
+	lexer_push(msh, var_name, VARIABLE);
+	*i += var_len;
+}
+
+void	var_name_not_isalpha(t_msh *msh, char *prompt, int *i)
+{
+	int		var_len;
+	char	*var_name;
+
+	var_len = is_var_end(prompt, *i);
+	var_name = ft_substr(prompt, *i, var_len);
+	lexer_push(msh, var_name, SPECIAL_VAR);
+	*i += var_len - 1;
 }
 
 int	is_dollar(t_msh *msh, char *prompt, int *i)
 {
-	char	c_before;
-	char	c_after;
-	int		len_var;
-	char	*var_name;
-
-	c_before = prompt[*i - 1];
-	c_after = prompt[*i + 1];
-
-	if ((*i == 0 && (c_after == ' ' || c_after == '\t' || c_after == '\0')) || ft_isalnum(c_before))
+	if ((*i == 0 && (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t'
+				|| prompt[*i + 1] == '\0')) || ft_isalnum(prompt[*i - 1]))
 	{
-		//TODO creat error commande not found
 		exit_synthax_error(msh, "COMMANDE NOT FOUND");
 		return (258);
 	}
-
-	len_var = is_var_end(prompt, *i);
-	var_name = ft_substr(prompt, *i, len_var);
-
-	if (c_after == '?')
-	{
-		lexer_push(msh, var_name, RETURN_VALUE);
-		*i += len_var;
-	}
-	else if ((c_before == ' ' || c_before == '\t')
-		&& (c_after == ' ' || c_after == '\t'))
-	{
+	if (prompt[*i + 1] == '?')
+		var_name_is_return_value(msh, prompt, i);
+	else if (((prompt[*i - 1] == ' ' || prompt[*i - 1] == '\t')
+			&& (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t'
+				|| prompt[*i + 1] == '\0')) || (!ft_isalpha(prompt[*i + 1])
+			&& (prompt[*i + 1] == '>' || prompt[*i + 1] == '<'
+				|| prompt[*i + 1] == '|')))
 		lexer_push(msh, "$", WORD);
-		*i += 2;
-	}
-	else if (!ft_isalpha(c_after))
-	{
-		lexer_push(msh, var_name, SPECIAL_VAR);
-		*i += len_var;
-	}
-	else if (ft_isalpha(c_after))
-	{
-		lexer_push(msh, var_name, VARIABLE);
-		*i += len_var;
-	}
-
+	else if (ft_isalpha(prompt[*i + 1]) || (!ft_isalpha(prompt[*i + 1])
+			&& prompt[*i + 1] == '_'))
+		var_name_isalpha(msh, prompt, i);
+	else if (!ft_isalpha(prompt[*i + 1]) && prompt[*i + 1] != 60
+		&& prompt[*i + 1] != 62 && prompt[*i + 1] != '|')
+		var_name_not_isalpha(msh, prompt, i);
 	return (0);
 }
