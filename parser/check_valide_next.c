@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   check_valide_next.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 14:19:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 15:23:13 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/20 15:23:31 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/20 15:32:51 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parser(t_msh *msh)
+int	check_valid_next(t_msh *msh)
 {
+	t_lexer_list	*list;
 	int				return_code;
 
-	if (msh->lexer_list == NULL)
+	list = msh->lexer_list;
+	return_code = 0;
+	while (list != NULL)
 	{
-		exit_new_line();
-		return ;
+		printf("type -> [%u]\n", list->lexer_type);
+		if (list->lexer_type == PIPE && list->next->lexer_type == BLANK
+			&& list->next->next->lexer_type == PIPE)
+		{
+			exit_synthax_error(msh, "|");
+			return (258);
+		}
+		list = list->next;
 	}
-	return_code = limit_is_valid(msh);
-	return_code = check_valid_next(msh);
-	msh->return_code = return_code;
+	return (return_code);
 }
