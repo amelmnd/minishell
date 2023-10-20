@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 19:54:56 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 20:08:04 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,15 +58,9 @@ void	var_name_not_isalpha(t_msh *msh, char *prompt, int *i)
 
 int	is_dollar(t_msh *msh, char *prompt, int *i)
 {
-	if ((*i == 0 && (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t'
-				|| prompt[*i + 1] == '\0')) || ft_isalnum(prompt[*i - 1]))
-	{
-		exit_command_not_foud(msh, "$");
-		return (258);
-	}
 	if (prompt[*i + 1] == '?')
 		var_name_is_return_value(msh, prompt, i);
-	else if (((prompt[*i - 1] == ' ' || prompt[*i - 1] == '\t')
+	else if (prompt[*i + 1] == '\0' || ((prompt[*i - 1] == ' ' || prompt[*i - 1] == '\t')
 			&& (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t'
 				|| prompt[*i + 1] == '\0')) || (!ft_isalpha(prompt[*i + 1])
 			&& (prompt[*i + 1] == '>' || prompt[*i + 1] == '<'
