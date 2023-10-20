@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:40:03 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 15:13:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	generate_prompt(void)
 	{
 		prompt = readline(user);
 		lexer_check(msh, prompt);
+		parser(msh);
 		print_debug_list(msh->lexer_list, "main");
 		clean_msh(msh);
 	}
