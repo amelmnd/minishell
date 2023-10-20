@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:07:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 18:07:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:05:02 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	is_lexer_cara(t_msh *msh, char *prompt, int *i, char c)
 		return_code = is_double_quote(msh, prompt, i);
 	else if (c == '$')
 		return_code = is_dollar(msh, prompt, i);
+	else
+		return_code = is_word(msh, prompt, i);
 	return (return_code);
 }
 
