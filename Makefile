@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/12 09:34:37 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/20 12:07:30 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ DCFLAGS_FSA = $(CFLAGS) -g3 -fsanitize=address
 
 PATH_LEX = $(addprefix $(DIR_LEX), $(SRCS_LEX))
 DIR_LEX = lexer/
-SRCS_LEX = lexer.c\
+SRCS_LEX =	lexer.c lexer_list_manage.c create_lexer_list.c is_bracket.c is_other_operator.c is_quote.c is_dollar.c is_word.c\
 
 PATH_PARS = $(addprefix $(DIR_PARS), $(SRCS_PARS))
 DIR_PARS = parser/
@@ -52,9 +52,16 @@ SRCS_BUIL = builtins.c\
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
-SRCS_UTILS = utils.c\
+SRCS_UTILS =	utils.c\
+				manage_error.c\
+				free_list.c\
 
-SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL)  $(ORIGIN)
+# TODO DELETE
+PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
+DIR_DEV = for_dev/
+SRCS_DEV = for_dev.c dev_color.c\
+
+SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
 OBJS = $(SRCS:.c=.o)
 
@@ -66,11 +73,11 @@ libft:
 	@make -C ./include/libft
 
 $(NAME): $(OBJS) libft
-	@$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
+	@$(CC) $(INCLUDE) $(CFLAGS)  $(OBJS) -o $(NAME)
 	@echo "$(COLOR_MAGENTA)objs & $(NAME) generate 🌸$(END_COLOR)"
 
 run: libft
-	@$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INCLUDE) $(SRCS) -o $(NAME)
 	@echo "$(COLOR_GREEN)$(NAME) generate 🍀$(END_COLOR)"
 
 # Debug
