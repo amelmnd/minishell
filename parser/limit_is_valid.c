@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:51:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 15:13:55 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/23 15:17:26 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	limit_is_valid(t_msh *msh)
 	return_code = 0;
 	while (list != NULL)
 	{
-		printf("type -> [%u]\n", list->lexer_type);
 		if (list->previous == NULL && list->lexer_type == PIPE)
 			return_code = check_start(msh);
 		if (list->next == NULL)
