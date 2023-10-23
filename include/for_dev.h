@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:51:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:43:37 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/23 15:07:43 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ void	green(void);
 void	reset(void);
 
 // FN
-void	print_list(t_lexer_list *list);
-void	print_debug_list(t_lexer_list *list, char *name);
+void	print_lexer_list(t_lexer_list *list);
+void	print_debug_lexer_list(t_lexer_list *list, char *name);
+void	print_exp_list(t_exp_list *list);
+void	print_debug_exp_list(t_exp_list *list, char *name);
 
 #endif
