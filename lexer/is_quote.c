@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 12:48:09 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/23 15:17:08 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	is_double_quote(t_msh *msh, char *prompt, int *i)
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
 	*i = *i + quote_len + 1;
-	printf("as_var => %u\n", as_var);
 	if (as_var == TRUE)
 		lexer_push(msh, str, D_QUOTE_VAR);
 	else
