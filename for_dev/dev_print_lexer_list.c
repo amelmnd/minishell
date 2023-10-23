@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   for_dev.c                                          :+:      :+:    :+:   */
+/*   dev_print_lexer_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 12:42:17 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/23 15:09:48 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-void    print_exp_type_one_line(int exp_type)
+
+void    print_lexer_type_one_line(int lexer_type)
 {
-	switch (exp_type)
+	switch (lexer_type)
 	{
 		case 0:
 			printf("type -> PIPE");
@@ -60,7 +61,7 @@ void    print_exp_type_one_line(int exp_type)
 	printf("\n");
 }
 
-void	print_list(t_lexer_list *list)
+void	print_lexer_list(t_lexer_list *list)
 {
 	if (list == NULL)
 	{
@@ -84,18 +85,18 @@ void	print_list(t_lexer_list *list)
 				printf("v_name -> [%s]\n", list->var_name);
 			}
 			cyan();
-			print_exp_type_one_line(list->lexer_type);
+			print_lexer_type_one_line(list->lexer_type);
 			list = list->next;
 		}
 		reset();
 	}
 }
 
-void	print_debug_list(t_lexer_list *list, char *name)
+void	print_debug_lexer_list(t_lexer_list *list, char *name)
 {
 	red();
 	printf("\n______ %s ______\n", name);
-	print_list(list);
+	print_lexer_list(list);
 	red();
 	printf("***********\n");
 	reset();
