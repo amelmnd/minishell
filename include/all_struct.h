@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/16 15:38:34 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/23 12:41:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ enum	e_lexer_type
 	BLANK,
 	VARIABLE,
 	RETURN_VALUE,
-	SPECIAL_VAR
+	SPECIAL_VAR,
+	D_QUOTE_VAR
 };
 
 struct	s_lexer_list
