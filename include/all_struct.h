@@ -101,7 +101,13 @@ struct	s_exec_list
 
 struct s_msh
 {
-	int						return_code;
+	int						ac;
+	char					**av;
+	char					**envp;
+	int						path_defined;
+	char					*path_from_envp;
+	char					**paths_from_path;
+	int						return_value;
 	t_lexer_list			*lexer_list;
 	t_exp_list				*exp_list;
 	t_exec_list				*exec_list;

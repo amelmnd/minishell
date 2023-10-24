@@ -47,6 +47,7 @@ SRCS_EXP = expander.c\
 		   msh_random_del.c \
 		   exp_list_node_management_del.c \
 		   msh_del.c \
+		   feed_msh_acavenvp_del.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
