@@ -100,6 +100,7 @@ void	add_r(int *red, t_exp_list *exp, t_exec_list *ex)
 
 void	feed_exec_list_node(t_msh *msh)
 {
+	//printf("feed_exec_list_node : Entrée\n");
 	t_exp_list	*exp_list_node;
 	t_exec_list	*exec_list_node;
 	int			redirect_i;
@@ -111,6 +112,7 @@ void	feed_exec_list_node(t_msh *msh)
 	args_i = 0;
 	while (exp_list_node)
 	{
+		//printf("feed_exec_list_node : Nouvelle itération\n");
 		if (exp_list_node->exp_type == WORD_EXPANDED)
 			add_a(&args_i, exp_list_node->str, exec_list_node);
 		else if (exp_list_node->exp_type != PIPE_EXPANDED
@@ -123,13 +125,13 @@ void	feed_exec_list_node(t_msh *msh)
 		}
 		exp_list_node = exp_list_node->next;
 	}
+	//printf("feed_exec_list_node : Sortie\n");
 }
 
 void	build_exec_list(t_msh *msh)
 {
 	msh->exec_list = new_exec_list_node();
 	init_exec_list_node(msh->exec_list);
-
 	get_nb_pipes_in_exp_list(msh);
 	if (msh->exec_list->nb_pipes)
 	{
@@ -144,7 +146,5 @@ void	build_exec_list(t_msh *msh)
 		feed_exec_list_node_cmd(msh);
 	else
 		feed_the_only_exec_list_node_cmd(msh);
-
-	//init_exec_list_node_arrays(msh);
 	feed_exec_list_node(msh);
 }

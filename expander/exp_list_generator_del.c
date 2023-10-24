@@ -38,6 +38,7 @@ int	main(void)
 	
 	msh = new_msh();
 	init_msh(msh);
+	
 	init_node_exp_list(msh);
 	exp_list_generator(msh);
 	print_exp_list(msh);
@@ -45,6 +46,9 @@ int	main(void)
 	
 	build_exec_list(msh);
 	print_exec_list(msh);
+
+	execution(msh);
+
 	free_msh(msh);
 	return (0);
 }
