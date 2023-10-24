@@ -5,7 +5,9 @@
 
 // partie pré fin expander
 
+/*
 void execution(t_msh *msh)
 {
 	
 }
+*/

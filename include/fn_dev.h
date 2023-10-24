@@ -42,4 +42,11 @@ void	feed_exec_list_node_data(t_msh *msh);
 void	feed_last_exec_list_node_data(t_msh *msh);
 void	feed_the_only_exec_list_node_data(t_msh *msh);
 
+int	    get_size_ntcharss(char **ntcharss);
+char	**ntcharss_copy(char **ntcharss_to_copy);
+void	get_path_from_envp(t_msh *msh);
+void	get_paths_from_path(t_msh *msh);
+void	feed_msh_acavenvp(t_msh *msh, int ac, char **av, char **envp);
+void	print_paths_from_path(t_msh *msh);
+
 #endif

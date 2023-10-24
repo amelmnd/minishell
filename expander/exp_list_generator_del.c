@@ -1,4 +1,4 @@
-#include "../include/minishell.h"
+#include "minishell.h"
 
 void	exp_list_generator(t_msh *msh)
 {
@@ -32,13 +32,19 @@ void	exp_list_generator(t_msh *msh)
 	fill_the_first_node(msh);
 }
 
-int	main(void)
+int	main(int ac, char **av, char **envp)
 {
 	t_msh	*msh;
+	//int		return_value;
 	
 	msh = new_msh();
 	init_msh(msh);
 	
+	feed_msh_acavenvp(msh, ac, av, envp);
+
+	print_paths_from_path(msh);
+
+	/*
 	init_node_exp_list(msh);
 	exp_list_generator(msh);
 	print_exp_list(msh);
@@ -46,9 +52,15 @@ int	main(void)
 	
 	build_exec_list(msh);
 	print_exec_list(msh);
+	*/
 
-	execution(msh);
+	//execution(msh);
 
-	free_msh(msh);
+	/*
+	while (waitpid(-1, &return_value, 0) != -1)
+	;
+	*/
+
+	//free_msh(msh);
 	return (0);
 }

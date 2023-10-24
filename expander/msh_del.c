@@ -48,9 +48,15 @@ t_timestamp	*new_timestamp(void)
 
 void	init_msh(t_msh *msh)
 {
+	msh->ac = 0;
+	msh->av= NULL;
+	msh->envp = NULL;
+	msh->return_value = 0;
+	msh->path_defined = 1;
+	msh->path_from_envp = NULL;
+	msh->paths_from_path = NULL;
 	msh->lexer_list = NULL;
-	msh->exec_list = NULL;
 	msh->exp_list = new_exp_list_node();
-	init_node_exp_list(msh);
+	msh->exec_list = NULL;
 	msh->timestamp = new_timestamp();
 }
