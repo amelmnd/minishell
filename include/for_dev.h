@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 11:51:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:04:09 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 11:05:16 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	reset(void);
 
 // FN
 void	print_lexer_list(t_lexer_list *list);
-void	print_lexer_type_one_line(int lexer_type);
 void	print_debug_lexer_list(t_lexer_list *list, char *name);
 void	print_exp_list(t_exp_list *list);
 void	print_debug_exp_list(t_exp_list *list, char *name);

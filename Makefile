@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/20 19:59:50 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/26 11:08:40 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS_PARS = parser.c limit_is_valid.c check_valide_next.c\
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c\
+SRCS_EXP = expander.c check_var_value.c\
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
@@ -55,11 +55,13 @@ DIR_UTILS = utils/
 SRCS_UTILS =	utils.c\
 				manage_error.c\
 				free_list.c\
+				fn_env.c\
+				fn_env_list.c\
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
 DIR_DEV = for_dev/
-SRCS_DEV = for_dev.c dev_color.c\
+SRCS_DEV = dev_color.c dev_print_lexer_list.c dev_print_exp_list.c dev_print_env_list.c\
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
