@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:39:41 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 09:39:55 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_lexer_list(t_lexer_list *lexer_list)
 	}
 }
 
-void	clean_msh(t_msh *msh)
+void	clean_msh_list(t_msh *msh)
 {
 	if (msh->lexer_list)
 	{

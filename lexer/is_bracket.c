@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/18 14:14:44 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 09:36:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_right_bracket(t_msh *msh, char *prompt, int *i)
 		lexer_push(msh, ">", W_REDIRECT);
 	if (prompt[*i + 1] == '|')
 	{
-		exit_synthax_error(msh, "newline");
+		exit_synthax_error("newline");
 		return (258);
 	}
 	if (prompt[*i + 1] == '>')
@@ -26,9 +26,9 @@ int	is_right_bracket(t_msh *msh, char *prompt, int *i)
 		if (prompt[*i + 2] == '>' || prompt[*i + 2] == '|')
 		{
 			if (prompt[*i + 2] == '>')
-				exit_synthax_error(msh, ">");
+				exit_synthax_error(">");
 			else if (prompt[*i + 2] == '|')
-				exit_synthax_error(msh, "|");
+				exit_synthax_error("|");
 			return (258);
 		}
 		else
@@ -44,7 +44,7 @@ int	is_left_bracket(t_msh *msh, char *prompt, int *i)
 		lexer_push(msh, "<", R_REDIRECT);
 	if (prompt[*i + 1] == '|')
 	{
-		exit_synthax_error(msh, "|");
+		exit_synthax_error("|");
 		return (258);
 	}
 	if (prompt[*i + 1] == '<')
@@ -52,9 +52,9 @@ int	is_left_bracket(t_msh *msh, char *prompt, int *i)
 		if (prompt[*i + 2] == '<' || prompt[*i + 2] == '|')
 		{
 			if (prompt[*i + 2] == '<')
-				exit_synthax_error(msh, "<");
+				exit_synthax_error("<");
 			else if (prompt[*i + 2] == '|')
-				exit_synthax_error(msh, "|");
+				exit_synthax_error("|");
 			return (258);
 		}
 		else
