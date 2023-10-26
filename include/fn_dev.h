@@ -42,6 +42,25 @@ void	feed_exec_list_node_data(t_msh *msh);
 void	feed_last_exec_list_node_data(t_msh *msh);
 void	feed_the_only_exec_list_node_data(t_msh *msh);
 
+void	ft_pipe(t_msh *msh);
+void	ft_fork(t_msh *msh);
+void	ft_close(int fd);
+void	ft_duptwo(int pretender, int to_replace);
+
+int	ft_strcmp(char *s1, char *s2);
+
+# define BUFFER_SIZE 3
+char	*get_next_line(int fd);
+size_t	gnl_strlen(char *s);
+char	*gnl_strchr(char *s, int c);
+char	*gnl_strdup(char *s);
+char	*gnl_strjoin(char *s1, char *s2);
+char	*gnl_substr(char *s, unsigned int start, size_t len);
+
+t_exec	*new_exec(void);
+t_hd	*new_hd(void);
+void	execution(t_msh *msh, int ac, char **av, char **envp);
+void	init_exec(t_msh *msh);
 int	    get_size_ntcharss(char **ntcharss);
 char	**ntcharss_copy(char **ntcharss_to_copy);
 void	get_path_from_envp(t_msh *msh);

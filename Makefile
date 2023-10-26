@@ -56,6 +56,8 @@ SRCS_EXEC = exec.c\
 			print_exec_list_del.c \
 			init_exec_list_node_management_del.c \
 			exec_list_node_data_del.c \
+			pipe_fork_close_dup2_del.c \
+			new_exec.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
@@ -63,7 +65,10 @@ SRCS_BUIL = builtins.c\
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
-SRCS_UTILS = utils.c\
+SRCS_UTILS = utils.c \
+			 get_next_line.c \
+			 get_next_line_utils.c \
+			 ft_strcmp.c \
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL)  $(ORIGIN)
 

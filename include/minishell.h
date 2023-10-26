@@ -9,10 +9,14 @@
 // selon les besoins du projet, ajouter les includes nécessaires
 # include <errno.h>
 # include <fcntl.h>
+# include <string.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
 # include <readline/readline.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+
 
 
 #endif
