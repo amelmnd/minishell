@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 15:17:08 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 09:34:31 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 	quote_len = is_closed_quotes(prompt, *i, 39, NULL);
 	if (quote_len == -1)
 	{
-		exit_synthax_error(msh, "'");
+		exit_synthax_error("'");
 		return (258);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
@@ -56,7 +56,7 @@ int	is_double_quote(t_msh *msh, char *prompt, int *i)
 	quote_len = is_closed_quotes(prompt, *i, 34, &as_var);
 	if (quote_len == -1)
 	{
-		exit_synthax_error(msh, "\"");
+		exit_synthax_error("\"");
 		return (258);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
