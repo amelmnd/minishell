@@ -35,32 +35,33 @@ void	get_path_from_envp(t_msh *msh)
 	
 	temp = NULL;
 	i = 0;
-	while (msh->envp[i] && ft_strncmp(msh->envp[i], "PATH=", 5))
+	while (msh->exec->envp[i] && ft_strncmp(msh->exec->envp[i], "PATH=", 5))
 		i++;
-	if (!(msh->envp[i]))
-		msh->path_defined = 0;
-	else if (!ft_strncmp(msh->envp[i], "PATH=", 5))
+	if (!(msh->exec->envp[i]))
+		msh->exec->path_defined = 0;
+	else if (!ft_strncmp(msh->exec->envp[i], "PATH=", 5))
 	{
-		temp = ft_strdup(msh->envp[i]);
-		msh->path_from_envp = ft_substr(temp, 5, ft_strlen(temp));
-		msh->path_defined = 1;
+		temp = ft_strdup(msh->exec->envp[i]);
+		msh->exec->path_from_envp = ft_substr(temp, 5, ft_strlen(temp));
+		msh->exec->path_defined = 1;
 	}
 	else
-		msh->path_defined = 0;
+		msh->exec->path_defined = 0;
 	free(temp);
 }
 
 void	get_paths_from_path(t_msh *msh)
 {
-	if (msh->path_from_envp)
-		msh->paths_from_path = ft_split(msh->path_from_envp, ':');
+	if (msh->exec->path_from_envp)
+		msh->exec->paths_from_path = ft_split(msh->exec->path_from_envp, ':');
 }
 
 void	feed_msh_acavenvp(t_msh *msh, int ac, char **av, char **envp)
 {
-	msh->ac = ac;
-	msh->av = ntcharss_copy(av);
-	msh->envp = ntcharss_copy(envp);
+	msh->exec->ac = ac;
+	printf("feed_msh_acavenvp : Entrée\n");
+	msh->exec->av = ntcharss_copy(av);
+	msh->exec->envp = ntcharss_copy(envp);
 	if (envp)
 	{
 		get_path_from_envp(msh);
@@ -73,7 +74,7 @@ void	print_paths_from_path(t_msh *msh)
 	char 	**path;
 	int		i;
 
-	path = msh->paths_from_path;
+	path = msh->exec->paths_from_path;
 	i = -1;
 	while (path[++i])
 		printf("%s\n", path[i]);

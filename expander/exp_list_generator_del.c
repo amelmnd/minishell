@@ -39,27 +39,16 @@ int	main(int ac, char **av, char **envp)
 	
 	msh = new_msh();
 	init_msh(msh);
-	
-	feed_msh_acavenvp(msh, ac, av, envp);
 
-	print_paths_from_path(msh);
-
-	/*
 	init_node_exp_list(msh);
 	exp_list_generator(msh);
-	print_exp_list(msh);
+	//print_exp_list(msh);
 	print_exp_list_one_line(msh);
 	
 	build_exec_list(msh);
-	print_exec_list(msh);
-	*/
+	//print_exec_list(msh);
 
-	//execution(msh);
-
-	/*
-	while (waitpid(-1, &return_value, 0) != -1)
-	;
-	*/
+	execution(msh, ac, av, envp);
 
 	//free_msh(msh);
 	return (0);

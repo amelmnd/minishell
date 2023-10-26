@@ -54,7 +54,7 @@ void	print_args_array(t_exec_list *exec_list_node)
 
 void	print_exec_list_node(t_exec_list *exec_list_node)
 {
-	printf("exec_list_node->nb_redirects = %d\n", exec_list_node->nb_redirects);
+	printf("\nexec_list_node->nb_redirects = %d\n", exec_list_node->nb_redirects);
 	printf("exec_list_node->nb_words = %d\n", exec_list_node->nb_words);
 	printf("exec_list_node->next_pipe = %d\n", exec_list_node->next_pipe);
 	printf("exec_list_node->nb_pipes = %d\n", exec_list_node->nb_pipes);

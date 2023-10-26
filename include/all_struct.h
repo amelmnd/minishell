@@ -15,10 +15,6 @@
 
 # include "minishell.h"
 
-# include <sys/time.h>
-typedef struct timeval t_timestamp;
-// bloc à supprimer à terme
-
 typedef enum e_bool						t_bool;
 typedef enum e_lexer_type				t_lexer_type;
 typedef struct s_lexer_list				t_lexer_list;
@@ -28,6 +24,14 @@ typedef struct s_redirect				t_redirect;
 typedef struct s_exec_list				t_exec_list;
 typedef struct s_msh					t_msh;
 typedef struct s_exec_list_node_data	t_exec_list_node_data;
+typedef enum e_read_write				t_read_write;
+typedef struct s_exec					t_exec;
+typedef struct s_hd						t_hd;
+
+
+# include <sys/time.h>
+typedef struct timeval t_timestamp;
+// bloc à supprimer à terme
 
 enum	e_bool
 {
@@ -86,6 +90,18 @@ struct	s_redirect
 	char			*str;
 };
 
+enum	e_read_write
+{
+	READ,
+	WRITE
+};
+
+struct s_hd
+{
+	char	*str;
+	t_hd	*next;
+};
+
 struct	s_exec_list
 {
 	t_exec_list	*previous;
@@ -97,9 +113,10 @@ struct	s_exec_list
 	int 		nb_words;
 	int			next_pipe;
 	int			nb_pipes;
+	t_hd		*hd;
 };
 
-struct s_msh
+struct s_exec
 {
 	int						ac;
 	char					**av;
@@ -107,11 +124,22 @@ struct s_msh
 	int						path_defined;
 	char					*path_from_envp;
 	char					**paths_from_path;
-	int						return_value;
+	pid_t					child;
+	int						pipefd[2];
+	int						fd_temp;
+	int						fd_read_redirect;
+	int						fd_write_redirect;
+};
+
+struct s_msh
+{
 	t_lexer_list			*lexer_list;
 	t_exp_list				*exp_list;
 	t_exec_list				*exec_list;
-	t_timestamp				*timestamp;
+	t_exec					*exec;
+	int						return_value;
+
+	t_timestamp				*timestamp; // à virer à terme
 };
 
 #endif
