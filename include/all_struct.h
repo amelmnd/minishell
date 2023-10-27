@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/25 13:25:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:45:08 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ enum	e_expander_type
 	R_ORIGIN_REDIRECT,
 	LIMITER_HEREDOC,
 	W_DEST_REDIRECT,
-	WA_DEST_REDIRECT
+	WA_DEST_REDIRECT,
+	PIPE_EXPANDED
 };
 
 struct	s_expander_list

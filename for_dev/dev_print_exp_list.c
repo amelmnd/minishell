@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 15:16:32 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:45:11 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ void    print_exp_type_one_line(int exp_type)
 			break;
 		case 4:
 			printf("type -> WA_DEST_REDIRECT");
+			break;
+		case 5:
+			printf("type -> PIPE_EXPANDED");
 			break;
 		default:
 			break;

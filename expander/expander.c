@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:26:16 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 11:00:32 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 11:15:22 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 void	expander(t_msh *msh)
 {
 	check_var_value(msh);
+	create_expander_list(msh);
 	print_debug_lexer_list(msh->lexer_list, "expander");
 }
