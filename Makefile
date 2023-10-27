@@ -58,6 +58,7 @@ SRCS_EXEC = exec.c\
 			exec_list_node_data_del.c \
 			pipe_fork_close_dup2_del.c \
 			new_exec.c \
+			hd.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/

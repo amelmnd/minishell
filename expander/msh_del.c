@@ -46,19 +46,6 @@ t_timestamp	*new_timestamp(void)
 	return (new);
 }
 
-t_hd	*new_hd(void)
-{
-	t_hd	*new;
-
-	new = NULL;
-	new = (t_hd *)malloc(sizeof(t_hd));
-	if (!new)
-		return (NULL);
-	new->next = NULL;
-	new->str = NULL;
-	return (new);
-}
-
 void	init_exec(t_msh *msh)
 {
 	msh->exec->ac = 0;
