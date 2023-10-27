@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 10:53:48 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/27 16:35:19 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,28 +29,28 @@ void    print_lexer_type_one_line(int lexer_type)
 			printf("type -> D_QUOTE");
 			break;
 		case 4:
-			printf("type -> R_REDIRECT");
+			printf("type -> SPECIAL_VAR");
 			break;
 		case 5:
-			printf("type -> HEREDOC");
+			printf("type -> R_REDIRECT");
 			break;
 		case 6:
-			printf("type -> W_REDIRECT");
+			printf("type -> HEREDOC");
 			break;
 		case 7:
-			printf("type -> W_APPEND_REDIRECT");
+			printf("type -> W_REDIRECT");
 			break;
 		case 8:
-			printf("type -> BLANK");
+			printf("type -> W_APPEND_REDIRECT");
 			break;
 		case 9:
-			printf("type -> VARIABLE");
+			printf("type -> BLANK");
 			break;
 		case 10:
-			printf("type -> RETURN_VALUE");
+			printf("type -> VARIABLE");
 			break;
 		case 11:
-			printf("type -> SPECIAL_VAR");
+			printf("type -> RETURN_VALUE");
 			break;
 		case 12:
 			printf("type -> D_QUOTE_VAR");
