@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/26 11:08:40 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/26 14:10:22 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS_PARS = parser.c limit_is_valid.c check_valide_next.c\
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c check_var_value.c\
+SRCS_EXP = expander.c check_var_value.c expander_list_manage.c create_expander_list.c\
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/

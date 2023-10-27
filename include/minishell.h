@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 11:05:55 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 11:12:07 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 
 # include "lexer.h"
 # include "parser.h"
+# include "expander.h"
 
 # include <errno.h>
 # include <fcntl.h>
@@ -44,6 +45,6 @@ void	env_first_node(t_env_list *node);
 void	env_push_new_node(t_msh *msh, t_env_list *new_node);
 void	env_push(t_msh *msh, char *name, char *value);
 void	env_list_generate(t_msh *msh, char *envp[]);
-char *ft_getenv(t_msh *msh, char *env_var);
+char	*ft_getenv(t_msh *msh, char *env_var);
 
 #endif
