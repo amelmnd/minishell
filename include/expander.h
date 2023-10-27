@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:39:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 13:35:51 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/27 15:18:52 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ void	expander_push(t_msh *msh, char *str, t_exp_type type);
 void	dq_var_exist(t_msh *msh, t_lexer_list *tmp);
 void	check_var_value(t_msh *msh);
 void	create_expander_list(t_msh *msh);
+char	*ft_join_word(char *s1, char *s2);
+char	*ft_one_word(char *s1);
 
 #endif
