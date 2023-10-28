@@ -6,13 +6,13 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:51:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:35:23 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:05:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_start()
+int	check_start(void)
 {
 	exit_synthax_error("|");
 	return (258);

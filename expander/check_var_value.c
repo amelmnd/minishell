@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:58:49 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 15:55:03 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:10:03 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	check_var_value(t_msh *msh)
 		}
 		else if (tmp->lexer_type == RETURN_VALUE)
 		{
-
 			tmp->var_value = ft_itoa(msh->return_code);
 		}
 		tmp = tmp->next;

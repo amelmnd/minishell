@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/27 15:18:22 by amennad          ###   ########.fr        #
+#    Updated: 2023/10/28 16:18:28 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ SRCS_PARS = parser.c limit_is_valid.c check_valide_next.c\
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c check_var_value.c expander_list_manage.c create_expander_list.c ft_join_words.c\
+SRCS_EXP = expander.c check_var_value.c expander_list_manage.c create_expander_list.c ft_join_words.c var_transform.c\
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
@@ -52,11 +52,7 @@ SRCS_BUIL = builtins.c\
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
-SRCS_UTILS =	utils.c\
-				manage_error.c\
-				free_list.c\
-				fn_env.c\
-				fn_env_list.c\
+SRCS_UTILS =	utils.c manage_error.c free_list.c fn_env.c fn_env_list.c adapt_libft.c\
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))

@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:39:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/27 15:18:52 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:25:02 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,7 @@ void	check_var_value(t_msh *msh);
 void	create_expander_list(t_msh *msh);
 char	*ft_join_word(char *s1, char *s2);
 char	*ft_one_word(char *s1);
+t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
+		t_exp_type type);
 
 #endif
