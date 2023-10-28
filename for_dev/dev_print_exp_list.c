@@ -1,58 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   for_dev.c                                          :+:      :+:    :+:   */
+/*   dev_print_exp_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 12:42:17 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/26 14:45:11 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 void    print_exp_type_one_line(int exp_type)
 {
 	switch (exp_type)
 	{
 		case 0:
-			printf("type -> PIPE");
+			printf("type -> WORD_EXPANDED");
 			break;
 		case 1:
-			printf("type -> WORD");
+			printf("type -> R_ORIGIN_REDIRECT");
 			break;
 		case 2:
-			printf("type -> S_QUOTE");
+			printf("type -> LIMITER_HEREDOC");
 			break;
 		case 3:
-			printf("type -> D_QUOTE");
+			printf("type -> W_DEST_REDIRECT");
 			break;
 		case 4:
-			printf("type -> R_REDIRECT");
+			printf("type -> WA_DEST_REDIRECT");
 			break;
 		case 5:
-			printf("type -> HEREDOC");
-			break;
-		case 6:
-			printf("type -> W_REDIRECT");
-			break;
-		case 7:
-			printf("type -> W_APPEND_REDIRECT");
-			break;
-		case 8:
-			printf("type -> BLANK");
-			break;
-		case 9:
-			printf("type -> VARIABLE");
-			break;
-		case 10:
-			printf("type -> RETURN_VALUE");
-			break;
-		case 11:
-			printf("type -> SPECIAL_VAR");
-			break;
-		case 12:
-			printf("type -> D_QUOTE_VAR");
+			printf("type -> PIPE_EXPANDED");
 			break;
 		default:
 			break;
@@ -60,7 +40,7 @@ void    print_exp_type_one_line(int exp_type)
 	printf("\n");
 }
 
-void	print_list(t_lexer_list *list)
+void	print_exp_list(t_exp_list *list)
 {
 	if (list == NULL)
 	{
@@ -78,24 +58,24 @@ void	print_list(t_lexer_list *list)
 				green();
 				printf("str -> [%s]\n", list->str);
 			}
-			else if (list->var_name)
+			else if (list->str)
 			{
 				blue();
-				printf("v_name -> [%s]\n", list->var_name);
+				printf("v_name -> [%s]\n", list->str);
 			}
 			cyan();
-			print_exp_type_one_line(list->lexer_type);
+			print_exp_type_one_line(list->exp_type);
 			list = list->next;
 		}
 		reset();
 	}
 }
 
-void	print_debug_list(t_lexer_list *list, char *name)
+void	print_debug_exp_list(t_exp_list *list, char *name)
 {
 	red();
 	printf("\n______ %s ______\n", name);
-	print_list(list);
+	print_exp_list(list);
 	red();
 	printf("***********\n");
 	reset();

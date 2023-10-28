@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_error.c                                     :+:      :+:    :+:   */
+/*   fn_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:53:25 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/28 16:04:41 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO add here other error type
-
-void	exit_synthax_error(char *str)
+char	*ft_getenv(t_msh *msh, char *env_var)
 {
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	printf("bash: syntax error near unexpected token '%s'\n", str);
-}
+	t_env_list	*tmp;
 
-void	exit_command_not_foud(char *str)
-{
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	printf("-bash: %s: command not found\n", str);
+	tmp = msh->env_list;
+	while (tmp->next != NULL)
+	{
+		if (ft_strncmp(tmp->name, &env_var[1], ft_strlen(env_var)) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

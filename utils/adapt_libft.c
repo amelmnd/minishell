@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   manage_error.c                                     :+:      :+:    :+:   */
+/*   adapt_libft.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:53:25 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/28 16:13:51 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/28 16:38:42 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-//TODO add here other error type
-
-void	exit_synthax_error(char *str)
+int	ft_msh_strchr(const char *s, int c)
 {
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	printf("bash: syntax error near unexpected token '%s'\n", str);
-}
+	int	i;
 
-void	exit_command_not_foud(char *str)
-{
-	rl_on_new_line();
-	rl_replace_line("", 1);
-	printf("-bash: %s: command not found\n", str);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return (i);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return (i);
+	return (-1);
 }
