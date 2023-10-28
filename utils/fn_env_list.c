@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:06:12 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:38:58 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,7 @@ void	env_push(t_msh *msh, char *name, char *value)
 		msh->env_list = new_node;
 	}
 	else
-	{
 		env_push_new_node(msh, new_node);
-	}
 }
 
 void	env_list_generate(t_msh *msh, char *envp[])

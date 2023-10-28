@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/28 15:06:04 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:35:03 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ enum	e_bool
 
 enum	e_lexer_type
 {
-	PIPE, //0
-	WORD, //1
-	S_QUOTE, //2
-	D_QUOTE, //3
-	SPECIAL_VAR, //4
-	R_REDIRECT, //5
-	HEREDOC, //6
-	W_REDIRECT, //7
-	W_APPEND_REDIRECT, //8
-	BLANK, //9
-	VARIABLE, //10
-	RETURN_VALUE, //11
-	D_QUOTE_VAR //12
+	PIPE,
+	WORD,
+	S_QUOTE,
+	D_QUOTE,
+	SPECIAL_VAR,
+	R_REDIRECT,
+	HEREDOC,
+	W_REDIRECT,
+	W_APPEND_REDIRECT,
+	BLANK,
+	VARIABLE,
+	RETURN_VALUE,
+	D_QUOTE_VAR
 };
 
 struct	s_lexer_list

@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:30:50 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:34:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ void	all_in_str(char **str, char *str_value)
 void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str)
 {
 	if (msh->exp_current_type == LIMITER_HEREDOC)
-	{
 		all_in_str(str, tmp->var_name);
-	}
 	else if (tmp->lexer_type == VARIABLE)
 	{
 		if (tmp->var_value)

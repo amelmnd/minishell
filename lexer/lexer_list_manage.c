@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:40:04 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:41:24 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:38:13 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,5 @@ void	lexer_push(t_msh *msh, char *str, t_lexer_type type)
 		msh->lexer_list = new_node;
 	}
 	else
-	{
 		lexer_push_new_node(msh, new_node);
-	}
 }
