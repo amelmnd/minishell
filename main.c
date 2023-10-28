@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:52:08 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 11:49:57 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ void	generate_prompt(char *envp[])
 			// print_debug_lexer_list(msh->lexer_list, "lexer -> main");
 		}
 		if (msh->return_code == 0)
-		{	expander(msh);
+		{
+			msh->exp_current_type = WORD_EXPANDED;
+			expander(msh);
 			// print_debug_exp_list(msh->exp_list, "expander -> main");
 		}
 

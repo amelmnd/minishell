@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/27 16:36:48 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 11:36:43 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ struct s_msh
 	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
 	t_env_list		*env_list;
+	t_exp_type		exp_current_type;
 };
 
 #endif
