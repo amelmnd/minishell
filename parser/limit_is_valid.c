@@ -6,28 +6,28 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:51:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 15:13:55 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:05:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_start(t_msh *msh)
+int	check_start(void)
 {
-	exit_synthax_error(msh, "|");
+	exit_synthax_error("|");
 	return (258);
 }
 
-int	check_end(t_msh *msh, t_lexer_list *list)
+int	check_end(t_lexer_list *list)
 {
 	if (list->lexer_type == PIPE)
 	{
-		exit_synthax_error(msh, "|");
+		exit_synthax_error("|");
 		return (258);
 	}
 	else if (list->lexer_type >= 4 && list->lexer_type <= 7)
 	{
-		exit_synthax_error(msh, "newline");
+		exit_synthax_error("newline");
 		return (258);
 	}
 	return (0);
@@ -42,11 +42,10 @@ int	limit_is_valid(t_msh *msh)
 	return_code = 0;
 	while (list != NULL)
 	{
-		printf("type -> [%u]\n", list->lexer_type);
 		if (list->previous == NULL && list->lexer_type == PIPE)
-			return_code = check_start(msh);
+			return_code = check_start();
 		if (list->next == NULL)
-			return_code = check_end(msh, list);
+			return_code = check_end(list);
 		if (return_code != 0)
 			break ;
 		list = list->next;
