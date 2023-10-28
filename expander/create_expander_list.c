@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:17:47 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:40:24 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,4 @@ void	create_expander_list(t_msh *msh)
 		tmp = check_lexer_list(msh, tmp);
 		tmp = tmp->next;
 	}
-	print_debug_exp_list(msh->exp_list, "exp list");
 }

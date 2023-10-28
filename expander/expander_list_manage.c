@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:18:22 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:10:37 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:33:55 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,5 @@ void	expander_push(t_msh *msh, char *str, t_exp_type type)
 		msh->exp_list = new_node;
 	}
 	else
-	{
 		expander_push_new_node(msh, new_node);
-	}
 }
