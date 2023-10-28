@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:12:03 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:49:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,14 @@ void	generate_prompt(char *envp[])
 	{
 		prompt = readline(user);
 		lexer_check(msh, prompt);
+		print_debug_lexer_list(msh->lexer_list, "main lexer_list");
 		if (msh->return_code == 0 && msh->lexer_list)
 			parser(msh);
 		if (msh->return_code == 0)
+		{
 			expander(msh);
+			print_debug_exp_list(msh->exp_list, "main expander_list");
+		}
 		clean_msh_list(msh);
 	}
 }
