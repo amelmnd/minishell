@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 12:48:09 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:09:44 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_closed_quotes(char *prompt, int i, char quote_type, t_bool *as_var)
 	while (prompt[i] && prompt[++i] != quote_type)
 	{
 		if (prompt[i] == '$' && (ft_isalpha(prompt[i + 1])
-		|| prompt[i + 1] == '_'))
+				|| prompt[i + 1] == '_'))
 			*as_var = TRUE;
 		quote_len++;
 	}
@@ -37,7 +37,7 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 	quote_len = is_closed_quotes(prompt, *i, 39, NULL);
 	if (quote_len == -1)
 	{
-		exit_synthax_error(msh, "'");
+		exit_synthax_error("'");
 		return (258);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
@@ -50,18 +50,17 @@ int	is_double_quote(t_msh *msh, char *prompt, int *i)
 {
 	int		quote_len;
 	char	*str;
-	t_bool as_var;
+	t_bool	as_var;
 
 	as_var = FALSE;
 	quote_len = is_closed_quotes(prompt, *i, 34, &as_var);
 	if (quote_len == -1)
 	{
-		exit_synthax_error(msh, "\"");
+		exit_synthax_error("\"");
 		return (258);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
 	*i = *i + quote_len + 1;
-	printf("as_var => %u\n", as_var);
 	if (as_var == TRUE)
 		lexer_push(msh, str, D_QUOTE_VAR);
 	else
