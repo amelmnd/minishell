@@ -6,10 +6,9 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:18:22 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 15:18:27 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:10:37 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -54,4 +53,3 @@ void	expander_push(t_msh *msh, char *str, t_exp_type type)
 		expander_push_new_node(msh, new_node);
 	}
 }
-

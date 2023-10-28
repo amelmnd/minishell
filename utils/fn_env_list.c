@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/25 13:37:38 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/28 16:06:12 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	env_push(t_msh *msh, char *name, char *value)
 
 void	env_list_generate(t_msh *msh, char *envp[])
 {
-	int	index;
-	char **env_var;
+	int		index;
+	char	**env_var;
 
 	index = 0;
 	while (envp[index])
@@ -67,5 +67,4 @@ void	env_list_generate(t_msh *msh, char *envp[])
 		index++;
 		free(env_var);
 	}
-	// print_env_list(msh->env_list);
 }
