@@ -56,9 +56,9 @@ void	init_exec(t_msh *msh)
 	msh->exec->paths_from_path = NULL;
 	msh->exec->pipefd[0] = 0;
 	msh->exec->pipefd[1] = 0;
-	msh->exec->fd_temp = -1;
-	msh->exec->fd_read_redirect = -1;
-	msh->exec->fd_write_redirect = -1;
+	msh->exec->fd_temp = 0;
+	msh->exec->fd_read_redirect = 0;
+	msh->exec->fd_write_redirect = 0;
 }
 
 void	init_msh(t_msh *msh)
