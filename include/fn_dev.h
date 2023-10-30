@@ -57,7 +57,9 @@ char	*gnl_strdup(char *s);
 char	*gnl_strjoin(char *s1, char *s2);
 char	*gnl_substr(char *s, unsigned int start, size_t len);
 
-
+void	print_hd_in_exec_list_node(t_exec_list *exec_list_node);
+void	mark_all_erased_hd(t_msh *msh);
+void	send_hd_through_pipe(t_exec_list *exec_list_node, int i);
 t_bool	hd_strcmp(char *limiter, char *line);
 void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line);
 void	get_hd(t_exec_list *exec_list_node, int i);

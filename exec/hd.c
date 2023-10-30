@@ -126,6 +126,7 @@ void	get_all_hd_content(t_msh *msh)
 		if (hd_in_exec_list_node(exec_list_node))
 		{
 			exec_list_node->hd = new_hd();
+			exec_list_node->contains_hd = TRUE;
 			get_hd_in_exec_list_node(exec_list_node);
 		}
 		exec_list_node = exec_list_node->next;
@@ -155,3 +156,82 @@ void	print_all_hd_remaining(t_msh *msh)
 	}
 }
 
+void	write_hd_content_in_the_pipe(t_exec_list *exec_list_node)
+{
+	printf("write_hd_content_in_the_pipe : Entrée\n");
+	t_hd	*hd_node;
+
+	hd_node = exec_list_node->hd;
+	while (hd_node)
+	{
+		printf("write_hd_content_in_the_pipe(while) : début itération\n");
+		if (!(hd_node->str))
+		{
+			printf("write_hd_content_in_the_pipe(while) : entrée dans le if\n");
+			write(exec_list_node->hd_pipe[WRITE], "\n", 1);
+		}
+		else
+		{
+			printf("write_hd_content_in_the_pipe(while) : entrée dans le else\n");
+			write(exec_list_node->hd_pipe[WRITE],
+				hd_node->str, ft_strlen(hd_node->str));
+		}
+		hd_node = hd_node->next;
+		printf("write_hd_content_in_the_pipe(while) : début itération\n");
+	}
+	printf("write_hd_content_in_the_pipe : Sortie\n");
+}
+
+void	send_hd_through_pipe(t_exec_list *exec_list_node, int j)
+{
+	if (exec_list_node->contains_hd)
+	{
+		printf("send_hd_through_pipe AVANT LE PIPE ; PROCESSUS n°%d ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", j, exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
+		int ret = pipe(exec_list_node->hd_pipe);
+		if (ret == -1)
+			perror("pipe error");
+		printf("send_hd_through_pipe APRES LE PIPE ; PROCESSUS n°%d ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", j, exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
+		int flags_read = fcntl(exec_list_node->hd_pipe[READ], F_GETFD);
+		int flags_write = fcntl(exec_list_node->hd_pipe[READ], F_GETFD);
+		if (flags_read == -1)
+			perror("fcntl pour read");
+		if (flags_write == -1)		
+			perror("fcntl pour write");
+		
+		
+		write_hd_content_in_the_pipe(exec_list_node);
+		close(exec_list_node->hd_pipe[READ]);
+		close(exec_list_node->hd_pipe[WRITE]);
+	}
+	exec_list_node = exec_list_node->next;
+}
+
+void	mark_erased_hd(t_exec_list *exec_list_node)
+{
+	int	i;
+	int	nb_hd;
+
+	i = exec_list_node->nb_redirects;
+	nb_hd = 0;
+	while (--i >= 0)
+	{
+		if (exec_list_node->redirect_array[i].exp_type == LIMITER_HEREDOC)
+		{
+			nb_hd++;
+			if (nb_hd >= 2)
+				exec_list_node->redirect_array[i].exp_type = HEREDOC_ERASED;
+		}
+	}
+}
+
+void	mark_all_erased_hd(t_msh *msh)
+{
+	t_exec_list	*exec_list_node;
+
+	exec_list_node = msh->exec_list;
+	while (exec_list_node)
+	{
+		mark_erased_hd(exec_list_node);
+		exec_list_node = exec_list_node->next;
+	}
+}

@@ -21,6 +21,9 @@ void	init_exec_list_node(t_exec_list *exec_list_node)
 	exec_list_node->nb_words = 0;
 	exec_list_node->next_pipe = 0;
 	exec_list_node->nb_pipes = 0;
+	exec_list_node->hd_pipe[READ] = -1;
+	exec_list_node->hd_pipe[WRITE] = -1;
+	exec_list_node->contains_hd = FALSE;
 }
 
 void	plug_exec_list_node(t_msh *msh, t_exec_list *exec_list_node)

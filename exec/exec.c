@@ -135,50 +135,77 @@ void	do_read_redir(t_msh *msh, char *origin)
 	ft_close(msh->exec->fd_read_redirect); // a tester en commentant
 }
 
-void	do_redir(t_msh *msh, t_redirect redir_box)
+void	retrieve_hd_content_through_hdpipe(t_exec_list *exec_list_node, int j)
 {
-	if (redir_box.exp_type == R_ORIGIN_REDIRECT)
-		do_read_redir(msh, redir_box.str);
-	/*
-	else if (redir_box.exp_type == LIMITER_HEREDOC)
+	printf("retrieve_hd_content_through_hdpipe AVANT LE DUP2 ; PROCESSUS n°%d ; hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);
+	int ret = dup2(exec_list_node->hd_pipe[READ], STDIN_FILENO);
+	if (ret == -1)
+		perror("dup2 error");
+	printf("retrieve_hd_content_through_hdpipe APRES LE DUP2 ; PROCESSUS n°%d ; hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);
+
+	//ft_duptwo(exec_list_node->hd_pipe[READ], STDIN_FILENO);
+	close(exec_list_node->hd_pipe[WRITE]);
+	close(exec_list_node->hd_pipe[READ]);
+	printf("retrieve_hd_content_through_hdpipe ; PROCESSUS numéro %d : Sortie\n", j);
+}
+
+void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
+{
+	printf("do_redir : Entrée\n");
+	t_redirect	redir_box;
+
+	redir_box = exec_list_node->redirect_array[i];
+	if (redir_box.exp_type == LIMITER_HEREDOC)
 	{
-		clear_hd(msh);
-		msh->exec->hd = new_hd();
-		redir_hd_content(msh, redir_box.str);
+		retrieve_hd_content_through_hdpipe(exec_list_node, j);
+		printf("do_redir ; execve cat imminent\n");
+		execve("/bin/cat", (char *[]){ "cat", NULL }, msh->exec->envp);
+		//redir_hd_content(msh, redir_box.str);
 	}
+	/*
+	else if (redir_box.exp_type == R_ORIGIN_REDIRECT)
+		do_read_redir(msh, redir_box.str);
+	*/
+
+	/*
 	else if (redir_box.exp_type == W_DEST_REDIRECT)
 		do_write_redir(ex_lst_nde, redir_box.str);
 	else if (redir_box.exp_type == WA_DEST_REDIRECT)
 		do_wapp_redir(ex_lst_nde, redir_box.str);
 	*/
+	printf("do_redir : Sortie\n");
 }
 
-
-void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node)
+void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 {
+	printf("do_all_redirections : Entrée\n");
 	int	i;
 
 	i = -1;
 	while (++i < exec_list_node->nb_redirects)
-		do_redir(msh, exec_list_node->redirect_array[i]);
+		do_redir(msh, exec_list_node, i, j);
+	printf("do_all_redirections : Sortie\n");
 }
 
-void	pipex_loop(t_msh *msh)
+void	exec_loop(t_msh *msh)
 {
+	printf("exec_loop : Entrée\n");
 	t_exec_list	*exec_list_node;
 
 	exec_list_node = msh->exec_list;
-	//int i = 0;
+	int j = 0;
 	while (exec_list_node)
 	{
 		ft_pipe(msh);
 		ft_fork(msh);
 		if (!(msh->exec->child))
 		{
-			//printf("%d\n", i);
-			//print_exec_list_node(exec_list_node);
-			ft_close(msh->exec->pipefd[READ]);
-			do_all_redirections(msh, exec_list_node);
+			printf("PROCESSUS numéro %d\n", j);
+			print_exec_list_node(exec_list_node);
+			
+			if (exec_list_node->contains_hd)
+				close(exec_list_node->hd_pipe[WRITE]);
+			do_all_redirections(msh, exec_list_node, j);
 		/*
 			if (exec_list_node->next)
 				pipe_redirect();
@@ -190,7 +217,7 @@ void	pipex_loop(t_msh *msh)
 			exit(EXIT_SUCCESS);
 
 		}
-		ft_close(msh->exec->pipefd[WRITE]);
+		send_hd_through_pipe(exec_list_node, j);
 		ft_close(msh->exec->fd_temp);
 		ft_duptwo(msh->exec->pipefd[READ], msh->exec->fd_temp);
 		close(msh->exec->pipefd[READ]);
@@ -198,7 +225,7 @@ void	pipex_loop(t_msh *msh)
 
 
 		exec_list_node = exec_list_node->next;
-		//i++;
+		j++;
 		sleep(1);
 	}
 }
@@ -208,21 +235,25 @@ void execution(t_msh *msh, int ac, char **av, char **envp)
 	msh->exec = new_exec();
 	init_exec(msh);
 
-	feed_msh_acavenvp(msh, ac, av, envp);
 
 	get_all_hd_content(msh);
-
-	print_all_hd_remaining(msh);
+	//print_all_hd_remaining(msh);
+	//send_hd_through_pipe(msh); //déplacé dans l'exec_loop, pendant le fork
+	mark_all_erased_hd(msh);
+	print_exec_list(msh);
 
 	//print_paths_from_path(msh);
 
+	
+	feed_msh_acavenvp(msh, ac, av, envp);
+	exec_loop(msh);
 	/*
-	pipex_loop(msh);
 	close(ppx->fd_temp);
 	close(ppx->pipefd[READ]);
 	close(ppx->pipefd[WRITE]);
+	*/
 
 	while (waitpid(-1, &(msh->return_value), 0) != -1)
 		;
-	*/
+	
 }
