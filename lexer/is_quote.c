@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/30 14:54:38 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/30 15:57:21 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 {
 	int		quote_len;
 	char	*str;
-	printf("mmsh->return_code %d\n", msh->return_code);
+
 	quote_len = is_closed_quotes(prompt, *i, 39, NULL);
 	if (quote_len == -1)
 	{

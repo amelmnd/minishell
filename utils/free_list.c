@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:48:40 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/30 15:58:07 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	free_lexer_list(t_lexer_list *lexer_list)
 		current = next;
 	}
 }
+
 void	free_exp_list(t_exp_list *exp_list)
 {
 	t_exp_list	*current;
