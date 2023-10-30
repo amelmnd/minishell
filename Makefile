@@ -32,15 +32,29 @@ DCFLAGS_FSA = $(CFLAGS) -g3 -fsanitize=address
 
 PATH_LEX = $(addprefix $(DIR_LEX), $(SRCS_LEX))
 DIR_LEX = lexer/
-SRCS_LEX =	lexer.c lexer_list_manage.c create_lexer_list.c is_bracket.c is_other_operator.c is_quote.c is_dollar.c is_word.c\
+SRCS_LEX =	lexer.c \
+			lexer_list_manage.c \
+			create_lexer_list.c \
+			is_bracket.c \
+			is_other_operator.c \
+			is_quote.c \
+			is_dollar.c \
+			is_word.c \
 
 PATH_PARS = $(addprefix $(DIR_PARS), $(SRCS_PARS))
 DIR_PARS = parser/
-SRCS_PARS = parser.c limit_is_valid.c check_valide_next.c\
+SRCS_PARS = parser.c \
+			limit_is_valid.c \
+			check_valide_next.c \
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c check_var_value.c expander_list_manage.c create_expander_list.c ft_join_words.c var_transform.c\
+SRCS_EXP = expander.c \
+		   check_var_value.c \
+		   expander_list_manage.c \
+		   create_expander_list.c \
+		   ft_join_words.c \
+		   var_transform.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
@@ -52,12 +66,20 @@ SRCS_BUIL = builtins.c\
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
-SRCS_UTILS =	utils.c manage_error.c free_list.c fn_env.c fn_env_list.c adapt_libft.c\
+SRCS_UTILS = utils.c \
+			 manage_error.c \
+			 free_list.c \
+			 fn_env.c \
+			 fn_env_list.c \
+			 adapt_libft.c\
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
 DIR_DEV = for_dev/
-SRCS_DEV = dev_color.c dev_print_lexer_list.c dev_print_exp_list.c dev_print_env_list.c\
+SRCS_DEV = dev_color.c \
+		   dev_print_lexer_list.c \
+		   dev_print_exp_list.c \
+		   dev_print_env_list.c\
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
@@ -71,11 +93,11 @@ libft:
 	@make -C ./include/libft
 
 $(NAME): $(OBJS) libft
-	@$(CC) $(INCLUDE) $(CFLAGS)  $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
 	@echo "$(COLOR_MAGENTA)objs & $(NAME) generate 🌸$(END_COLOR)"
 
 run: libft
-	@$(CC) $(CFLAGS) $(INCLUDE) $(SRCS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) $(INCLUDE) -o $(NAME)
 	@echo "$(COLOR_GREEN)$(NAME) generate 🍀$(END_COLOR)"
 
 norme:
