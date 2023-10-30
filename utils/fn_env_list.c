@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:38:58 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:00:18 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,14 @@ void	env_push_new_node(t_msh *msh, t_env_list *new_node)
 	new_node->previous = tmp;
 }
 
-void	env_push(t_msh *msh, char *name, char *value)
+void	env_push(t_msh *msh, char *envp)
 {
 	t_env_list	*new_node;
 
 	new_node = (t_env_list *)malloc(sizeof(t_env_list));
-	new_node->name = name;
-	new_node->value = value;
+	if (!new_node)
+		return ;
+	split_env_value(envp, &new_node->name, &new_node->value);
 	if (env_list_is_empty(msh->env_list) == TRUE)
 	{
 		env_first_node(new_node);
@@ -55,14 +56,11 @@ void	env_push(t_msh *msh, char *name, char *value)
 void	env_list_generate(t_msh *msh, char *envp[])
 {
 	int		index;
-	char	**env_var;
 
 	index = 0;
 	while (envp[index])
 	{
-		env_var = ft_split(envp[index], '=');
-		env_push(msh, env_var[0], env_var[1]);
+		env_push(msh, envp[index]);
 		index++;
-		free(env_var);
 	}
 }
