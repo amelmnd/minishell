@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:09:44 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/30 14:54:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	is_closed_quotes(char *prompt, int i, char quote_type, t_bool *as_var)
 	while (prompt[i] && prompt[++i] != quote_type)
 	{
 		if (prompt[i] == '$' && (ft_isalpha(prompt[i + 1])
-				|| prompt[i + 1] == '_'))
+				|| prompt[i + 1] == '_') && quote_type == 34)
 			*as_var = TRUE;
 		quote_len++;
 	}
@@ -33,7 +33,7 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 {
 	int		quote_len;
 	char	*str;
-
+	printf("mmsh->return_code %d\n", msh->return_code);
 	quote_len = is_closed_quotes(prompt, *i, 39, NULL);
 	if (quote_len == -1)
 	{
@@ -41,7 +41,8 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 		return (258);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
-	*i = *i + quote_len + 1;
+	printf("str = %s\n", str);
+	*i = *i + quote_len + 2;
 	lexer_push(msh, str, S_QUOTE);
 	return (0);
 }
