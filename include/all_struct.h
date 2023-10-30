@@ -73,7 +73,8 @@ enum	e_expander_type
 	W_DEST_REDIRECT,
 	WA_DEST_REDIRECT,
 	PIPE_EXPANDED,
-	CMD
+	CMD,
+	HEREDOC_ERASED
 };
 
 struct	s_expander_list
@@ -114,6 +115,8 @@ struct	s_exec_list
 	int			next_pipe;
 	int			nb_pipes;
 	t_hd		*hd;
+	int			hd_pipe[2];
+	t_bool		contains_hd;
 };
 
 struct s_exec

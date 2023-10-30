@@ -18,6 +18,8 @@ void	print_exp_type_in_exec_array(t_exec_list *exec_list_node, int i)
 		printf("(PIPE_EXPANDED)");
 	else if (exp_type == CMD)
 		printf("(CMD)");
+	else if (exp_type == HEREDOC_ERASED)
+		printf("(HEREDOC_ERASED)");
 }
 
 void	print_redirect_array(t_exec_list *exec_list_node)
@@ -61,6 +63,7 @@ void	print_exec_list_node(t_exec_list *exec_list_node)
 	print_redirect_array(exec_list_node);
 	printf("exec_list_node->cmd = %s\n", exec_list_node->cmd);
 	print_args_array(exec_list_node);
+	print_hd_in_exec_list_node(exec_list_node);
 }
 
 void	print_exec_list(t_msh *msh)

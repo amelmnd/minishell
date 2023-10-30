@@ -37,11 +37,6 @@ void	ft_close(int fd)
 
 void	ft_duptwo(int pretender, int to_replace)
 {
-	/*
 	if (dup2(pretender, to_replace) == -1)
-		errormsg_free_exit(ppx, "bash");
-	*/
-	// penser à prévoir les cas d'erreur avec le bloc ci-dessus
-
-	dup2(pretender, to_replace);
+		perror("dup2 error");
 }
