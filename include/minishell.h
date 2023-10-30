@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:15:10 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/30 15:59:57 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ void	exit_command_not_foud(char *str);
 int		env_list_is_empty(t_env_list *list);
 void	env_first_node(t_env_list *node);
 void	env_push_new_node(t_msh *msh, t_env_list *new_node);
-void	env_push(t_msh *msh, char *name, char *value);
+void	env_push(t_msh *msh, char *envp);
 void	env_list_generate(t_msh *msh, char *envp[]);
 char	*ft_getenv(t_msh *msh, char *env_var);
+void	split_env_value(char *env_var, char **name, char **value);
 
 #endif
