@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/30 15:57:37 by amennad          ###   ########.fr       */
+/*   Updated: 2023/10/31 18:24:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@ void	generate_prompt(char *envp[])
 	t_msh	*msh;
 	char	*user;
 	char	*prompt;
-
-	(void)user;
-	(void)prompt;
 
 	msh = (t_msh *)malloc(sizeof(t_msh));
 	if (!msh)
