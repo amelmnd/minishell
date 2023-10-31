@@ -18,10 +18,14 @@ void	generate_prompt(char *envp[])
 	char	*user;
 	char	*prompt;
 
+	(void)user;
+	(void)prompt;
+
 	msh = (t_msh *)malloc(sizeof(t_msh));
 	if (!msh)
 		return ;
 	env_list_generate(msh, envp);
+	
 	user = getenv("USER");
 	user = ft_strjoin(user, " $> ");
 	while (1)
@@ -38,6 +42,7 @@ void	generate_prompt(char *envp[])
 		}
 		clean_msh_list(msh);
 	}
+	
 }
 
 int	main(int argc, char *argv[], char *envp[])
