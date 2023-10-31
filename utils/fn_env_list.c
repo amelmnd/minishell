@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/31 18:24:36 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:58:06 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,5 @@ void	env_list_generate(t_msh *msh, char *envp[])
 		else
 			append_new_fed_list_node(msh, envp[i]);
 	}
-	print_env_list(msh->env_list);
+	//print_env_list(msh->env_list);
 }
