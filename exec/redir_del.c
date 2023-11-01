@@ -64,15 +64,40 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
 	printf("do_redir : Sortie\n");
 }
 
+/*
+void	redir_stdout_to_the_pipe(t_msh *msh, t_exec_list *exec_list_node)
+{
+
+}
+*/
+
+void	manage_stdin(t_exec_list *exec_list_node)
+{
+	if (exec_list_node->pos_ppl == MIDDLE
+		|| exec_list_node->pos_ppl == LAST)
+
+}
+
+void	manage_stdout(t_exec_list *exec_list_node)
+{
+	if (exec_list_node->pos_ppl == FIRST
+		|| exec_list_node->pos_ppl == MIDDLE)
+
+
+}
+
 void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 {
 	printf("do_all_redirections : Entrée\n");
 	int	i;
 
+	manage_stdin(exec_list_node);
 	i = -1;
 	if (exec_list_node->contains_hd)
 		close(exec_list_node->hd_pipe[WRITE]);
 	while (++i < exec_list_node->nb_redirects)
 		do_redir(msh, exec_list_node, i, j);
+	manage_stdout(exec_list_node);
+
 	printf("do_all_redirections : Sortie\n");
 }

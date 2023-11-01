@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/10/13 15:05:38 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/01 19:21:07 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ typedef struct s_exec_list_node_data	t_exec_list_node_data;
 typedef enum e_read_write				t_read_write;
 typedef struct s_exec					t_exec;
 typedef struct s_hd						t_hd;
+typedef enum e_pos_ppl					t_pos_ppl;
+
 
 
 # include <sys/time.h>
@@ -103,6 +105,15 @@ struct s_hd
 	t_hd	*next;
 };
 
+enum	e_pos_ppl
+{
+	INIT_POS_PPL_VALUE,
+	FIRST,
+	MIDDLE,
+	LAST,
+	SOLO
+};
+
 struct	s_exec_list
 {
 	t_exec_list	*previous;
@@ -117,6 +128,7 @@ struct	s_exec_list
 	t_hd		*hd;
 	int			hd_pipe[2];
 	t_bool		contains_hd;
+	t_pos_ppl	pos_ppl;
 };
 
 struct s_exec
