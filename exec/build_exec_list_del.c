@@ -128,6 +128,36 @@ void	feed_exec_list_node(t_msh *msh)
 	//printf("feed_exec_list_node : Sortie\n");
 }
 
+void	set_pos_ppl(t_exec_list *exec_list_node, int i)
+{
+	if (!i)
+		exec_list_node->pos_ppl = FIRST;
+	if (i == exec_list_node->nb_pipes + 1)
+		exec_list_node->pos_ppl = LAST;
+	else
+		exec_list_node->pos_ppl = MIDDLE;
+}
+
+void	assign_pos_ppl_exec_list(t_msh *msh)
+{
+	t_exec_list	*exec_list_node;
+	int			i;
+
+	exec_list_node = msh->exec_list;
+	if (!(exec_list_node->nb_pipes))
+	{
+		exec_list_node->pos_ppl = SOLO;
+		return ;
+	}
+	i = 0;
+	while (exec_list_node)
+	{
+		set_pos_ppl(exec_list_node, i);
+		i++;
+		exec_list_node = exec_list_node->next;
+	}
+}
+
 void	build_exec_list(t_msh *msh)
 {
 	msh->exec_list = new_exec_list_node();
@@ -147,4 +177,5 @@ void	build_exec_list(t_msh *msh)
 	else
 		feed_the_only_exec_list_node_cmd(msh);
 	feed_exec_list_node(msh);
+	assign_pos_ppl_exec_list(msh);
 }
