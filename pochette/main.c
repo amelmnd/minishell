@@ -56,6 +56,7 @@ int main() {
     if (pid == 0) {  // Child
         close(pipefd[1]);
         dup2(pipefd[0], STDIN_FILENO);
+        //close(pipefd[0]); // modification ici
         execve("/bin/cat", (char *[]){ "cat", NULL }, NULL);
         perror("execve");  // execve() only returns on error
         exit(EXIT_FAILURE);
