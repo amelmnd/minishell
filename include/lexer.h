@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:49:53 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 12:07:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/02 18:22:52 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	lexer_check(t_msh *msh, char *prompt);
 int		lexer_create_list(t_msh *msh, char *prompt);
 
 // LIST
-int		lexer_list_is_empty(t_lexer_list *list);
-void	lexer_first_node(t_lexer_list *node);
+int	lexer_list_is_empty(t_msh *msh);
+void	init_lexer_node(t_lexer_list *node);
 void	lexer_push_new_node(t_msh *msh, t_lexer_list	*new_node);
 void	lexer_push(t_msh *msh, char *str, t_lexer_type type);
 
