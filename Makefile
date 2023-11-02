@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/02 12:34:52 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/02 22:04:06 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRCS_UTILS = utils.c \
 			 get_next_line.c \
 			 get_next_line_utils.c \
 			 ft_strcmp.c \
+			 free_chars.c \
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL)  $(ORIGIN)
 
