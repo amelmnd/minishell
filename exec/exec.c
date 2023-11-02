@@ -90,7 +90,7 @@ void	exec_loop(t_msh *msh)
 	int j = 0;
 	while (exec_list_node)
 	{
-		ft_pipe(msh);
+		pipe(msh->exec->pipefd);
 		ft_fork(msh);
 		if (!(msh->exec->child))
 		{
@@ -112,13 +112,11 @@ void	exec_loop(t_msh *msh)
 
 		}
 		send_hd_through_pipe(exec_list_node, j);
-		/*
-		ft_close(msh->exec->fd_temp);
-		ft_duptwo(msh->exec->pipefd[READ], msh->exec->fd_temp);
-		close(msh->exec->pipefd[READ]);
-		//free_after_iteration(ppx); // a tester en commentant
-		*/
 
+		close(msh->exec->pipefd[WRITE]);
+		close(msh->exec->fd_temp);
+		dup2(msh->exec->pipefd[READ], msh->exec->fd_temp);
+		close(msh->exec->pipefd[READ]);
 
 		exec_list_node = exec_list_node->next;
 		j++;

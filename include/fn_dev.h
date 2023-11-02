@@ -74,6 +74,7 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j);
 int	is_a_builtin(char *exec_list_node_cmd);
 int	use_builtin_code(int num_builtin);
 
+void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j);
 void	create_pipes_for_hd(t_msh *msh);
 t_exec	*new_exec(void);
 t_hd	*new_hd(void);

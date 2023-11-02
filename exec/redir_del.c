@@ -1,6 +1,5 @@
 #include "minishell.h"
 
-
 void	do_read_redir(t_msh *msh, char *origin)
 {
 	msh->exec->fd_read_redirect = open(origin, O_RDONLY);
@@ -8,18 +7,6 @@ void	do_read_redir(t_msh *msh, char *origin)
 		printf("minishell : %s\n", strerror(errno)); // message à ajuster plus tard
 	else
 		ft_duptwo(msh->exec->fd_read_redirect, STDIN_FILENO);
-}
-
-void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j)
-{
-	printf("retrieve_hd_through_hdpipe ; PROCESSUS n°%d ; hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);
-	printf("retrieve_hd_through_hdpipe ; PROCESSUS n°%d ; hd_pipe[WRITE] = %d\n", j, exec_list_node->hd_pipe[WRITE]);
-	close(exec_list_node->hd_pipe[WRITE]);
-	printf("retrieve_hd_through_hdpipe AVANT LE DUP2 ; PROCESSUS n°%d ; hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);
-	int ret = dup2(exec_list_node->hd_pipe[READ], STDIN_FILENO);
-	if (ret == -1)
-		perror("dup2 error");
-	printf("retrieve_hd_through_hdpipe APRES LE DUP2 ; PROCESSUS n°%d ; hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);
 }
 
 void	do_write_redir(t_msh *msh, char *dest)
@@ -48,13 +35,7 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
 
 	redir_box = exec_list_node->redirect_array[i];
 	if (redir_box.exp_type == LIMITER_HEREDOC)
-	{
 		retrieve_hd_through_hdpipe(exec_list_node, j);
-		/*
-		printf("do_redir ; execve cat imminent\n");
-		execve("/bin/cat", (char *[]){ "cat", NULL }, msh->exec->envp);
-		*/
-	}
 	else if (redir_box.exp_type == R_ORIGIN_REDIRECT)
 		do_read_redir(msh, redir_box.str);
 	else if (redir_box.exp_type == W_DEST_REDIRECT)
@@ -64,26 +45,19 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
 	printf("do_redir : Sortie\n");
 }
 
-/*
-void	redir_stdout_to_the_pipe(t_msh *msh, t_exec_list *exec_list_node)
-{
-
-}
-*/
-
-void	manage_stdin(t_exec_list *exec_list_node)
+void	manage_stdin(t_msh *msh, t_exec_list *exec_list_node)
 {
 	if (exec_list_node->pos_ppl == MIDDLE
 		|| exec_list_node->pos_ppl == LAST)
-
+		dup2(msh->exec->fd_temp, STDIN_FILENO);
 }
 
-void	manage_stdout(t_exec_list *exec_list_node)
+void	manage_stdout(t_msh *msh, t_exec_list *exec_list_node)
 {
-	if (exec_list_node->pos_ppl == FIRST
+	if ((exec_list_node->pos_ppl == FIRST
 		|| exec_list_node->pos_ppl == MIDDLE)
-
-
+		&& exec_list_node->contains_write_redirect == FALSE)
+		dup2(msh->exec->pipefd[WRITE], STDOUT_FILENO);
 }
 
 void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
@@ -91,13 +65,18 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 	printf("do_all_redirections : Entrée\n");
 	int	i;
 
-	manage_stdin(exec_list_node);
-	i = -1;
+	close(msh->exec->pipefd[READ]);
+	manage_stdin(msh, exec_list_node);
 	if (exec_list_node->contains_hd)
 		close(exec_list_node->hd_pipe[WRITE]);
+	i = -1;
 	while (++i < exec_list_node->nb_redirects)
 		do_redir(msh, exec_list_node, i, j);
-	manage_stdout(exec_list_node);
+	manage_stdout(msh, exec_list_node);
+	close(msh->exec->fd_temp);
+	close(msh->exec->fd_read_redirect);
+	close(msh->exec->fd_write_redirect);
+	close(msh->exec->pipefd[WRITE]);
 
 	printf("do_all_redirections : Sortie\n");
 }

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/01 19:21:07 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/02 10:16:25 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ struct	s_exec_list
 	int			hd_pipe[2];
 	t_bool		contains_hd;
 	t_pos_ppl	pos_ppl;
+	t_bool		contains_write_redirect;
 };
 
 struct s_exec

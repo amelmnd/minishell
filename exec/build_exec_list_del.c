@@ -158,6 +158,31 @@ void	assign_pos_ppl_exec_list(t_msh *msh)
 	}
 }
 
+void	check_wredir_in_exec_list_node(t_exec_list *exec_list_node)
+{
+	int	i;
+
+	i = -1;
+	while (++i < exec_list_node->nb_redirects)
+	{
+		if (exec_list_node->redirect_array[i].exp_type == W_DEST_REDIRECT
+			|| exec_list_node->redirect_array[i].exp_type == WA_DEST_REDIRECT)
+			exec_list_node->contains_write_redirect = TRUE;
+	}
+}
+
+void	scan_write_redirect(t_msh *msh)
+{
+	t_exec_list	*exec_list_node;
+
+	exec_list_node = msh->exec_list;
+	while (exec_list_node)
+	{
+		check_wredir_in_exec_list_node(exec_list_node);
+		exec_list_node = exec_list_node->next;
+	}
+}
+
 void	build_exec_list(t_msh *msh)
 {
 	msh->exec_list = new_exec_list_node();
@@ -178,4 +203,5 @@ void	build_exec_list(t_msh *msh)
 		feed_the_only_exec_list_node_cmd(msh);
 	feed_exec_list_node(msh);
 	assign_pos_ppl_exec_list(msh);
+	scan_write_redirect(msh);
 }
