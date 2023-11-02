@@ -27,20 +27,8 @@ int	search_cmd_among_paths(t_ppx *ppx)
 	return (!access_value);
 }
 
-char	*get_only_the_cmd(t_ppx *ppx, char *abs_path_to_cmd)
-{
-	char	**relics;
-	int		ntcharss_size;
-	char	*only_the_cmd;
-
-	relics = ft_split(ppx, abs_path_to_cmd, '/');
-	ntcharss_size = get_size_ntcharss(relics);
-	only_the_cmd = ft_strdup(ppx, relics[ntcharss_size -1]);
-	free_charss(&relics);
-	return (only_the_cmd);
-}
-
-static int	check_valid_cmd_abs_path(char *path)
+/*
+t_bool	check_valid_cmd_abs_path(t_msh *msh, char *cmd)
 {
 	int		access_value;
 
@@ -59,16 +47,50 @@ static int	check_valid_cmd_abs_path(char *path)
 	return (0);
 }
 
-int	cmd_parsing(t_msh *msh, t_exec_list *exec_list_node)
+*/
+
+t_bool	ft_access(t_msh *msh, char *path)
 {
-	if (!ft_strlen(exec_list_node->cmd))
-	{
-		write(2, "bash: '': command not found\n", 28);
-		return (0);
-	}
-	if (!check_valid_cmd_abs_path(msh, exec_list_node->cmd))
-		return (search_cmd_among_paths(msh, exec_list_node->cmd));
-	else
-		return (1);
-	return (0);
+
 }
+
+void ft_execve(t_msh *msh, t_exec_list *exec_list_node)
+{
+	t_exec	*exec;
+
+	exec = msh->exec;
+	execve(exec->cmd_path_ready, exec_list_node->args_array, exec->envp);
+	perror("execve");
+	exit(EXIT_FAILURE);
+}
+
+void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
+{
+	msh->exec->cmd_path_ready = ft_strdup(exec_list_node->cmd);
+	if (ft_access(msh, exec_list_node->cmd))
+		ft_execve(msh, exec_list_node);
+	if (exists_in_paths(msh, exec_list_node))
+	/*
+	si exec_list_node->cmd est un nom de fichier existant dans les paths
+	ft_execve()
+	nsfod_msg()
+	exit(EXIT_FAILURE);
+
+	*/
+
+}
+
+/*
+si exec_list_node->cmd est un path pour lequel acces renvoie 0 :
+	packés dans une fonction (ft_execve() ?)
+	{
+		execve (exit si aucun problème, renvoie -1 avec errno défini s'il y a un problème)
+		perror("execve");
+		exit(EXIT_FAILURE);
+	}
+si exec_list_node->cmd est un nom de fichier existant dans les paths
+	ft_execve()
+nsfod_msg()
+exit(EXIT_FAILURE);
+
+*/
