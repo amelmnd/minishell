@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/01 15:46:50 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/02 12:34:52 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,6 +60,7 @@ SRCS_EXEC = exec.c\
 			new_exec.c \
 			hd.c \
 			redir_del.c \
+			cmd_parsing_del.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/

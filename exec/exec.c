@@ -5,8 +5,7 @@
 
 // partie pré fin expander
 
-/*
-static int	search_cmd_among_paths(t_ppx *ppx)
+int	search_cmd_among_paths(t_ppx *ppx)
 {
 	char	*abs_path_cmd;
 	int		access_value;
@@ -33,7 +32,7 @@ static int	search_cmd_among_paths(t_ppx *ppx)
 	return (!access_value);
 }
 
-static char	*get_only_the_cmd(t_ppx *ppx, char *abs_path_to_cmd)
+char	*get_only_the_cmd(t_ppx *ppx, char *abs_path_to_cmd)
 {
 	char	**relics;
 	int		ntcharss_size;
@@ -65,21 +64,19 @@ static int	check_valid_cmd_abs_path(char *path)
 	return (0);
 }
 
-int	cmd_parsing(t_ppx *ppx)
+int	cmd_parsing(t_msh *msh, t_exec_list *exec_list_node)
 {
-	if (!ft_strlen(ppx->av[ppx->num_cmd]))
+	if (!ft_strlen(exec_list_node->cmd))
 	{
 		write(2, "bash: '': command not found\n", 28);
 		return (0);
 	}
-	if (!check_valid_cmd_abs_path(str))
-		return (search_cmd_among_paths(ppx));
+	if (!check_valid_cmd_abs_path(msh, exec_list_node->cmd))
+		return (search_cmd_among_paths(msh, exec_list_node->cmd));
 	else
 		return (1);
 	return (0);
 }
-
-*/
 
 void	exec_loop(t_msh *msh)
 {
@@ -97,19 +94,14 @@ void	exec_loop(t_msh *msh)
 			printf("PROCESSUS numéro %d\n", j);
 			do_all_redirections(msh, exec_list_node, j);
 
-		/*
-			close_all_fd();
+			//close_all_fd();
 
-			si builtin :
-				use builtin code ; contient un exit
-			parsing commande
+			builtin_way(msh, exec_list_node);
+			
+			if (cmd_parsing(msh, exec_list_node))
+				ft_execve(msh, exec_list_node);
 
-			if (!use_builtin_code(is_a_builtin(exec_list_node->cmd)))
-				ft_execve(ppx);
-			else
-		*/
 			exit(EXIT_FAILURE);
-
 		}
 		send_hd_through_pipe(exec_list_node, j);
 
@@ -124,53 +116,20 @@ void	exec_loop(t_msh *msh)
 	}
 }
 
-/*
-void	pipex_loop(t_ppx *ppx)
-{
-	while (++(ppx->num_cmd) < ppx->ac - 1)
-	{
-		ft_pipe(ppx);
-		ft_fork(ppx);
-		if (!ppx->child)
-		{
-			set_redirect(ppx);
-			if (cmd_parsing(ppx))
-				ft_execve(ppx);
-			else
-				exit(EXIT_FAILURE);
-		}
-		ft_close(ppx, ppx->pipefd[WRITE]);
-		ft_close(ppx, ppx->fd_temp);
-		ft_duptwo(ppx, ppx->pipefd[READ], ppx->fd_temp);
-		close(ppx->pipefd[READ]);
-		free_after_iteration(ppx); // a tester en commentant
-	}
-}
-
-*/
-
 void execution(t_msh *msh, int ac, char **av, char **envp)
 {
 	msh->exec = new_exec();
 	init_exec(msh);
 
-
 	get_all_hd_content(msh);
-	//print_all_hd_remaining(msh);
-	//send_hd_through_pipe(msh); //déplacé dans l'exec_loop, pendant le fork
 	mark_all_erased_hd(msh);
-
 	create_pipes_for_hd(msh);
-
-
-	print_exec_list(msh);
-
-	//print_paths_from_path(msh);
-
-	
-	feed_msh_acavenvp(msh, ac, av, envp);
+	scan_cmd_nature(msh);
+	feed_msh_acavenvp(msh, ac, av, envp); // sera remplacé par l'env d'Amel
 	exec_loop(msh);
 	/*
+	Peut-être mettre des close finaux
+	Ou peut-être que les close dans l'execloop suffisent
 	close(ppx->fd_temp);
 	close(ppx->pipefd[READ]);
 	close(ppx->pipefd[WRITE]);
