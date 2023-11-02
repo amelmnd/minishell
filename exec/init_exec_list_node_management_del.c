@@ -25,6 +25,7 @@ void	init_exec_list_node(t_exec_list *exec_list_node)
 	exec_list_node->hd_pipe[WRITE] = -1;
 	exec_list_node->contains_hd = FALSE;
 	exec_list_node->pos_ppl = INIT_POS_PPL_VALUE;
+	exec_list_node->contains_write_redirect = FALSE;
 }
 
 void	plug_exec_list_node(t_msh *msh, t_exec_list *exec_list_node)
