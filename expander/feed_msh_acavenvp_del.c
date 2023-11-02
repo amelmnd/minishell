@@ -50,10 +50,27 @@ void	get_path_from_envp(t_msh *msh)
 	free(temp);
 }
 
+void	append_slash_to_paths(t_msh *msh)
+{
+	char	*unslashed_path;
+	int		i;
+
+	unslashed_path = NULL;
+	i = -1;
+	while (msh->exec->paths_from_path[++i])
+	{
+		unslashed_path = ft_strdup(msh->exec->paths_from_path[i]);
+		free_chars(msh->exec->paths_from_path[i]);
+		msh->exec->paths_from_path[i] = ft_strjoin(unslashed_path, "/");
+		free_chars(unslashed_path);
+	}
+}
+
 void	get_paths_from_path(t_msh *msh)
 {
 	if (msh->exec->path_from_envp)
 		msh->exec->paths_from_path = ft_split(msh->exec->path_from_envp, ':');
+	append_slash_to_paths(msh);
 }
 
 void	feed_msh_acavenvp(t_msh *msh, int ac, char **av, char **envp)
@@ -69,6 +86,7 @@ void	feed_msh_acavenvp(t_msh *msh, int ac, char **av, char **envp)
 	}
 }
 
+// à virer !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void	print_paths_from_path(t_msh *msh)
 {
 	char 	**path;

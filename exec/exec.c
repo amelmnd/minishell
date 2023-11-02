@@ -26,8 +26,6 @@ void	exec_loop(t_msh *msh)
 			builtin_way(msh, exec_list_node);
 			
 			check_cmd_path_n_exec(msh, exec_list_node);
-
-			exit(EXIT_FAILURE);
 		}
 		send_hd_through_pipe(exec_list_node, j);
 
