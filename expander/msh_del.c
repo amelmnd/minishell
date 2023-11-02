@@ -59,6 +59,7 @@ void	init_exec(t_msh *msh)
 	msh->exec->fd_temp = -1;
 	msh->exec->fd_read_redirect = -1;
 	msh->exec->fd_write_redirect = -1;
+	msh->exec->cmd_path_ready = NULL;
 }
 
 void	init_msh(t_msh *msh)

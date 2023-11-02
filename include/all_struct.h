@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/02 12:22:31 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:14:12 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ struct s_exec
 	int						fd_temp;
 	int						fd_read_redirect;
 	int						fd_write_redirect;
+	char					*cmd_path_ready;
 };
 
 struct s_msh
