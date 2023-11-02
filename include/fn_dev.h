@@ -26,6 +26,8 @@ t_timestamp	*new_timestamp(void);
 void	init_msh(t_msh *msh);
 void	free_msh(t_msh *msh);
 
+void	free_chars(char **dust);
+
 void	build_exec_list(t_msh *msh);
 
 void	print_exec_list_node(t_exec_list *exec_list_node);

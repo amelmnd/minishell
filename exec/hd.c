@@ -245,6 +245,7 @@ void	create_pipes_for_hd(t_msh *msh)
 
 void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j)
 {
+	(void)j;
 	close(exec_list_node->hd_pipe[WRITE]);
 	int ret = dup2(exec_list_node->hd_pipe[READ], STDIN_FILENO);
 	if (ret == -1)

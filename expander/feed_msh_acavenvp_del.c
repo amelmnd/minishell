@@ -60,9 +60,9 @@ void	append_slash_to_paths(t_msh *msh)
 	while (msh->exec->paths_from_path[++i])
 	{
 		unslashed_path = ft_strdup(msh->exec->paths_from_path[i]);
-		free_chars(msh->exec->paths_from_path[i]);
+		free_chars(&(msh->exec->paths_from_path[i]));
 		msh->exec->paths_from_path[i] = ft_strjoin(unslashed_path, "/");
-		free_chars(unslashed_path);
+		free_chars(&unslashed_path);
 	}
 }
 
