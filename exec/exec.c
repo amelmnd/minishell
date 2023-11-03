@@ -53,8 +53,8 @@ void execution(t_msh *msh, int ac, char **av, char **envp)
 
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
-	feed_msh_acavenvp(msh, ac, av, envp); // sera remplacé par l'env d'Amel (pour l'env entier)
-	// conserver le path et paths
+	feed_msh_acavenvp(msh, ac, av, envp); // différent du path d'Amel, sous la forme d'une liste chainée
+	// cette fonction reste nécessaire, même avec le travail d'Amel
 	create_pipes_for_hd(msh);
 	print_exec_list(msh);
 	exec_loop(msh);
