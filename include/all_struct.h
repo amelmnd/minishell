@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/02 19:52:15 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 07:14:49 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ enum	e_expander_type
 	W_DEST_REDIRECT,
 	WA_DEST_REDIRECT,
 	PIPE_EXPANDED,
-	CMD,
 	HEREDOC_ERASED
 };
 
