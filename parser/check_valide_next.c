@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:23:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 15:08:40 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 15:28:39 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,9 @@ int	redirect_next_valide(t_msh *msh, t_lexer_list *list)
 {
 	(void)msh;
 	(void)list;
-
-	if ( list->next == NULL)
+	if (list->next == NULL)
 		exit_synthax_error(msh, list->str);
-	else if ( list->next == NULL
+	else if (list->next == NULL
 		|| list->next->lexer_type == R_REDIRECT
 		|| list->next->lexer_type == HEREDOC
 		|| list->next->lexer_type == W_REDIRECT
@@ -40,11 +39,13 @@ int	check_valid_next(t_msh *msh)
 {
 	t_lexer_list	*list;
 	int				return_code;
+
 	list = msh->lexer_list;
 	return_code = 0;
 	while (list != NULL)
 	{
-		if (list->lexer_type == PIPE && list->next->lexer_type == BLANK && list->next->next->lexer_type == PIPE)
+		if (list->lexer_type == PIPE && list->next->lexer_type == BLANK
+			&& list->next->next->lexer_type == PIPE)
 		{
 			exit_synthax_error(msh, "|");
 			return (2);
