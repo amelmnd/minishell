@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_close_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/06/17 10:47:49 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/06/25 15:29:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../pipex.h"
 
-void	exit_new_line(void)
+void	ft_close(t_ppx *ppx, int fd)
 {
-	rl_on_new_line();
+	if (fd != -1)
+	{
+		if (close(fd) == -1)
+			errormsg_free_exit(ppx, "bash");
+	}
 }

@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   errormsg_free_exit.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/06/20 14:28:30 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/06/29 19:46:36 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../pipex.h"
 
-void	exit_new_line(void)
+void	errormsg_free_exit(t_ppx *ppx, char *errormsg)
 {
-	rl_on_new_line();
+	if (!ft_strlen(ppx->av[ppx->num_cmd]))
+		perror(errormsg);
+	free_ppx(ppx);
+	exit(EXIT_FAILURE);
 }
+	//system("leaks pipex_bonus");

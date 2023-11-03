@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   free_charss.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/06/16 12:26:07 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/06/29 19:46:47 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../pipex.h"
 
-void	exit_new_line(void)
+void	free_charss(char ***dust)
 {
-	rl_on_new_line();
+	int	i;
+
+	if (*dust && (*dust)[0])
+	{
+		i = -1;
+		while ((*dust)[++i])
+		{
+			free((*dust)[i]);
+			(*dust)[i] = NULL;
+		}
+		free(*dust);
+	}
+	*dust = NULL;
 }

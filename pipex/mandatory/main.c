@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/06/08 17:18:58 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/07/01 21:28:54 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../pipex.h"
 
-void	exit_new_line(void)
+int	main(int ac, char **av, char **envp)
 {
-	rl_on_new_line();
+	if (ac != 5)
+		invalid_number_of_argument_msg();
+	else
+		pipex(ac, av, envp);
+	return (0);
 }
+
+/*
+	system("lsof -c pipex_bonus");
+	system("leaks pipex_bonus");	
+*/

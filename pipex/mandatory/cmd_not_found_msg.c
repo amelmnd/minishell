@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   cmd_not_found_msg.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/06/29 17:55:31 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/06/29 19:46:29 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../pipex.h"
 
-void	exit_new_line(void)
+void	cmd_not_found_msg(t_ppx *ppx)
 {
-	rl_on_new_line();
+	write(2, "bash: ", 6);
+	write(2, ppx->av[ppx->num_cmd], ft_strlen(ppx->av[ppx->num_cmd]));
+	write(2, ": command not found\n", 20);
+	exit(EXIT_FAILURE);
 }

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   invalid_number_of_argument_msg.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/06/28 17:32:28 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/06/29 19:58:06 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <unistd.h>
 
-void	exit_new_line(void)
+void	invalid_number_of_argument_msg(void)
 {
-	rl_on_new_line();
+	write(2, "Error : exactly four arguments needed.\n", 39);
+	write(2, "Example : ./pipex_bonus infile cmd1 cmd2 outfile\n", 49);
 }

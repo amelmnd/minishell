@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   feed_ppx_with_acavenvp_bonus.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/07/01 17:34:25 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/07/01 17:35:06 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../pipex.h"
 
-void	exit_new_line(void)
+void	feed_ppx_with_acavenvp(t_ppx *ppx, int ac, char **av, char **envp)
 {
-	rl_on_new_line();
+	get_ac_av_envp_into_ppx(ppx, ac, av, envp);
+	if (envp)
+	{
+		get_path_from_envp(ppx);
+		get_paths_from_path(ppx);
+	}
 }
