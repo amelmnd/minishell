@@ -51,11 +51,10 @@ void execution(t_msh *msh, int ac, char **av, char **envp)
 	msh->exec = new_exec();
 	init_exec(msh);
 
-	/*
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
 	create_pipes_for_hd(msh);
-	scan_cmd_nature(msh);
+	/*
 	feed_msh_acavenvp(msh, ac, av, envp); // sera remplacé par l'env d'Amel
 	exec_loop(msh);
 
