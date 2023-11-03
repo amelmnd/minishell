@@ -37,8 +37,8 @@ void	malloc_exec_list_node_arrays(t_msh *msh)
 	{
 		if (node->nb_redirects)
 			node->redirect_array = malloc_redirects_array(node->nb_redirects);
-		if (node->nb_words - 1)
-			node->args_array = malloc_charss(node->nb_words - 1);
+		if (node->nb_words)
+			node->args_array = malloc_charss(node->nb_words);
 		node = node->next;
 	}
 }
@@ -57,7 +57,7 @@ void	feed_exec_list_node_cmd(t_msh *msh)
 		else if (exp_list_node->exp_type == WORD_EXPANDED)
 		{
 			exec_list_node->cmd = ft_strdup(exp_list_node->str);
-			exp_list_node->exp_type = CMD;
+			//exec_list_node->args_array[0] = ft_strdup(exp_list_node->str);
 			exec_list_node = exec_list_node->next;
 			while (exp_list_node && exp_list_node->exp_type != PIPE_EXPANDED)
 				exp_list_node = exp_list_node->next;
@@ -115,8 +115,7 @@ void	feed_exec_list_node(t_msh *msh)
 		//printf("feed_exec_list_node : Nouvelle itération\n");
 		if (exp_list_node->exp_type == WORD_EXPANDED)
 			add_a(&args_i, exp_list_node->str, exec_list_node);
-		else if (exp_list_node->exp_type != PIPE_EXPANDED
-			&& exp_list_node->exp_type != CMD)
+		else if (exp_list_node->exp_type != PIPE_EXPANDED)
 			add_r(&redirect_i, exp_list_node, exec_list_node);
 		else if (exp_list_node->exp_type == PIPE_EXPANDED)
 		{
@@ -132,7 +131,7 @@ void	set_pos_ppl(t_exec_list *exec_list_node, int i)
 {
 	if (!i)
 		exec_list_node->pos_ppl = FIRST;
-	if (i == exec_list_node->nb_pipes + 1)
+	else if (i == exec_list_node->nb_pipes)
 		exec_list_node->pos_ppl = LAST;
 	else
 		exec_list_node->pos_ppl = MIDDLE;
@@ -160,15 +159,27 @@ void	assign_pos_ppl_exec_list(t_msh *msh)
 
 void	check_wredir_in_exec_list_node(t_exec_list *exec_list_node)
 {
+	//printf("check_wredir_in_exec_list_node : Entrée\n");
 	int	i;
 
 	i = -1;
 	while (++i < exec_list_node->nb_redirects)
 	{
+		//printf("check_wredir_in_exec_list_node(while) : nouvelle itération\n");
+
+		//printf("check_wredir_in_exec_list_node : exec_list_node->redirect_array[%d].exp_type = %d\n", i, exec_list_node->redirect_array[i].exp_type);
+
+		if (exec_list_node->redirect_array[i].exp_type == W_DEST_REDIRECT)
+			//printf("check_wredir_in_exec_list_node ; exec_list_node->redirect_array[%d].exp_type == W_DEST_REDIRECT\n", i);
+		
 		if (exec_list_node->redirect_array[i].exp_type == W_DEST_REDIRECT
 			|| exec_list_node->redirect_array[i].exp_type == WA_DEST_REDIRECT)
+		{
+			//printf("check_wredir_in_exec_list_node(while) : entrée dans le if\n");
 			exec_list_node->contains_write_redirect = TRUE;
+		}
 	}
+	//printf("check_wredir_in_exec_list_node : Sortie\n");
 }
 
 void	scan_write_redirect(t_msh *msh)
@@ -201,7 +212,7 @@ void	build_exec_list(t_msh *msh)
 		feed_exec_list_node_cmd(msh);
 	else
 		feed_the_only_exec_list_node_cmd(msh);
-	feed_exec_list_node(msh);
 	assign_pos_ppl_exec_list(msh);
+	feed_exec_list_node(msh);
 	scan_write_redirect(msh);
 }

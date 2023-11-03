@@ -16,8 +16,6 @@ void	print_exp_type_in_exec_array(t_exec_list *exec_list_node, int i)
 		printf("(WA_DEST_REDIRECT)");
 	else if (exp_type == PIPE_EXPANDED)
 		printf("(PIPE_EXPANDED)");
-	else if (exp_type == CMD)
-		printf("(CMD)");
 	else if (exp_type == HEREDOC_ERASED)
 		printf("(HEREDOC_ERASED)");
 }
@@ -38,18 +36,18 @@ void	print_redirect_array(t_exec_list *exec_list_node)
 		printf("Le tableau des redirections est vide.\n");
 }
 
-void	print_charss_exexln(t_exec_list *exec_list_node)
+void	print_charss_execln(t_exec_list *exec_list_node)
 {
 	int	i = -1;
 
-	while (++i < exec_list_node->nb_words - 1)
+	while (++i < exec_list_node->nb_words)
 		printf("exec_list_node->args_array[%d] = %s\n", i, exec_list_node->args_array[i]);
 }
 
 void	print_args_array(t_exec_list *exec_list_node)
 {
 	if (exec_list_node->args_array)
-		print_charss_exexln(exec_list_node);
+		print_charss_execln(exec_list_node);
 	else
 		printf("Le tableau des arguments est vide.\n");
 }
