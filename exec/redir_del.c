@@ -4,7 +4,10 @@ void	do_read_redir(t_msh *msh, char *origin)
 {
 	msh->exec->fd_read_redirect = open(origin, O_RDONLY);
 	if (msh->exec->fd_read_redirect == -1)
+	{
 		printf("minishell : %s\n", strerror(errno)); // message à ajuster plus tard
+		exit(EXIT_FAILURE); // code à ajuster plus tard
+	}
 	else
 		ft_duptwo(msh->exec->fd_read_redirect, STDIN_FILENO);
 }
@@ -13,9 +16,12 @@ void	do_write_redir(t_msh *msh, char *dest)
 {
 	msh->exec->fd_write_redirect = open(dest, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (msh->exec->fd_write_redirect == -1)
+	{
 		printf("minishell : %s\n", strerror(errno)); // message à ajuster plus tard
+		exit(EXIT_FAILURE); // code à ajuster plus tard
+	}
 	else
-		ft_duptwo(msh->exec->fd_write_redirect, STDIN_FILENO);
+		ft_duptwo(msh->exec->fd_write_redirect, STDOUT_FILENO);
 }
 
 void	do_wapp_redir(t_msh *msh, char *dest)
@@ -23,9 +29,12 @@ void	do_wapp_redir(t_msh *msh, char *dest)
 	msh->exec->fd_write_redirect = open(dest, O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 
 	if (msh->exec->fd_write_redirect == -1)
+	{
 		printf("minishell : %s\n", strerror(errno)); // message à ajuster plus tard
+		exit(EXIT_FAILURE); // code à ajuster plus tard
+	}
 	else
-		ft_duptwo(msh->exec->fd_write_redirect, STDIN_FILENO);
+		ft_duptwo(msh->exec->fd_write_redirect, STDOUT_FILENO);
 }
 
 void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)

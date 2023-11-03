@@ -35,11 +35,12 @@ void	exp_list_generator(t_msh *msh)
 int	main(int ac, char **av, char **envp)
 {
 	t_msh	*msh;
-	//int		return_value;
 
+	/*
 	(void)ac;
 	(void)av;
 	(void)envp;
+	*/
 	
 	msh = new_msh();
 	init_msh(msh);
@@ -50,9 +51,9 @@ int	main(int ac, char **av, char **envp)
 	print_exp_list_one_line(msh);
 	
 	build_exec_list(msh);
-	print_exec_list(msh);
+	//print_exec_list(msh);
 
-	//execution(msh, ac, av, envp);
+	execution(msh, ac, av, envp);
 
 	//free_msh(msh);
 	return (0);
