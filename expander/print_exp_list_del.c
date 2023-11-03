@@ -28,7 +28,7 @@ void	print_node(t_exp_list *node)
 		printf("====\n");
 	}
 }
-
+/*
 void	print_exp_list(t_msh *msh)
 {
 	printf("===== print_explist : Entrée =====\n");
@@ -40,6 +40,7 @@ void	print_exp_list(t_msh *msh)
 	}
 	printf("===== print_explist : Sortie =====\n");
 }
+*/
 
 void	print_exp_type_one_line(int exp_type)
 {
