@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/30 15:57:21 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:37:32 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 	quote_len = is_closed_quotes(prompt, *i, 39, NULL);
 	if (quote_len == -1)
 	{
-		exit_synthax_error("'");
-		return (258);
+		exit_synthax_error(msh, "'");
+		return (2);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
 	printf("str = %s\n", str);
@@ -57,8 +57,8 @@ int	is_double_quote(t_msh *msh, char *prompt, int *i)
 	quote_len = is_closed_quotes(prompt, *i, 34, &as_var);
 	if (quote_len == -1)
 	{
-		exit_synthax_error("\"");
-		return (258);
+		exit_synthax_error(msh, "\"");
+		return (2);
 	}
 	str = ft_substr(prompt, *i + 1, quote_len);
 	*i = *i + quote_len + 1;
