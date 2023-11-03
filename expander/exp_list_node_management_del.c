@@ -1,5 +1,6 @@
 #include "minishell.h"
 
+/*
 void	fill_the_first_node(t_msh *msh)
 {
 	t_exp_list *first_node = NULL;
@@ -65,3 +66,4 @@ void	add_pipe_exp_list_node(t_msh *msh)
 	feed_exp_list_node(pipe_exp_list_node, NULL, 5);
 	add_exp_list_node(msh, pipe_exp_list_node);
 }
+*/

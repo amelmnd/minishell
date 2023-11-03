@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 13:25:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:16:57 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	generate_prompt(char *envp[])
 	msh = (t_msh *)malloc(sizeof(t_msh));
 	if (!msh)
 		return ;
+	init_msh(msh);
 	env_list_generate(msh, envp);
 	// print_env_list(msh->env_list);
 	user = getenv("USER");
@@ -32,21 +33,31 @@ void	generate_prompt(char *envp[])
 		print_debug_lexer_list(msh->lexer_list, "main lexer_list");
 		if (msh->return_code == 0 && msh->lexer_list)
 			parser(msh);
-		printf("msh->return_code = %d\n", msh->return_code);
+		printf("msh->return_code = %d\n\n", msh->return_code);
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh);
 			if (msh->exp_list)
-				print_debug_exp_list(msh->exp_list, "main expander_list");
+			{
+				print_exp_list_one_line(msh);
+				//print_debug_exp_list(msh->exp_list, "main expander_list");
+			}
 		}
+
+		
+
 		clean_msh_list(msh);
 	}
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	(void)argc;
 	(void)argv;
+	if (argc != 1)
+	{
+		//show_no_args_for_minishell_msg();
+		return (0);
+	}
 	generate_prompt(envp);
 	return (0);
 }

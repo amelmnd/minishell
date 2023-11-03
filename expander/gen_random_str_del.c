@@ -1,6 +1,6 @@
 #include "../include/minishell.h"
 
-
+/*
 char gen_random_printable_char_ascii(t_msh *msh)
 {
 	char	random_char = 0;
@@ -26,3 +26,4 @@ char *gen_random_str(t_msh *msh)
 		random_str[i] = gen_random_printable_char_ascii(msh);
 	return (random_str);
 }
+*/
