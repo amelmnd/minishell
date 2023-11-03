@@ -25,6 +25,7 @@ char	**malloc_charss(int size)
 		if (!array)
 			return (NULL);
 	}
+	array[size] = NULL;
 	return (array);
 }
 
