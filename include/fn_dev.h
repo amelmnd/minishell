@@ -70,13 +70,13 @@ void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j);
 void	create_pipes_for_hd(t_msh *msh);
 t_exec	*new_exec(void);
 t_hd	*new_hd(void);
-void	execution(t_msh *msh, int ac, char **av, char **envp);
+void	execution(t_msh *msh, char **envp);
 void	init_exec(t_msh *msh);
 int	    get_size_ntcharss(char **ntcharss);
 char	**ntcharss_copy(char **ntcharss_to_copy);
 void	get_path_from_envp(t_msh *msh);
 void	get_paths_from_path(t_msh *msh);
-void	feed_msh_acavenvp(t_msh *msh, int ac, char **av, char **envp);
+void	feed_msh_with_envp(t_msh *msh, char **envp);
 void	print_paths_from_path(t_msh *msh);
 
 #endif

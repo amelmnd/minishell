@@ -73,11 +73,9 @@ void	get_paths_from_path(t_msh *msh)
 	append_slash_to_paths(msh);
 }
 
-void	feed_msh_acavenvp(t_msh *msh, int ac, char **av, char **envp)
+void	feed_msh_with_envp(t_msh *msh, char **envp)
 {
-	msh->exec->ac = ac;
 	printf("feed_msh_acavenvp : Entrée\n");
-	msh->exec->av = ntcharss_copy(av);
 	msh->exec->envp = ntcharss_copy(envp);
 	if (envp)
 	{

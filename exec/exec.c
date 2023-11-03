@@ -40,23 +40,18 @@ void	exec_loop(t_msh *msh)
 	}
 }
 
-void execution(t_msh *msh, int ac, char **av, char **envp)
+void execution(t_msh *msh, char **envp)
 {
-	/*
-	(void)ac;
-	(void)av;
-	(void)envp;
-	*/
 
 	msh->exec = new_exec();
 	init_exec(msh);
 
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
-	feed_msh_acavenvp(msh, ac, av, envp); // différent du path d'Amel, sous la forme d'une liste chainée
+	feed_msh_with_envp(msh, envp); // différent du path d'Amel, sous la forme d'une liste chainée
 	// cette fonction reste nécessaire, même avec le travail d'Amel
 	create_pipes_for_hd(msh);
-	print_exec_list(msh);
+	//print_exec_list(msh);
 	exec_loop(msh);
 	/*
 
