@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 17:04:16 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/02 18:46:57 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_bool	prompt_isempty(char **prompt)
 void	lexer_check(t_msh *msh, char *prompt)
 {
 	if (prompt_isempty(&prompt) == TRUE)
+	{
+		msh->return_code = 0;
 		exit_new_line();
+	}
 	else
 		lexer_create_list(msh, prompt);
 }
