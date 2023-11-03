@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:07:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 12:31:08 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:37:03 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,12 @@ int	lexer_create_list(t_msh *msh, char *prompt)
 	int	return_code;
 
 	i = 0;
-	return_code = 0;
 	while (i < ft_strlen(prompt))
 	{
 		return_code = is_lexer_cara(msh, prompt, &i, prompt[i]);
+		msh->return_code = return_code;
 		if (return_code != 0)
 		{
-			msh->return_code = return_code;
 			break ;
 		}
 		i++;

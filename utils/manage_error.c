@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:53:25 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:11:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 //TODO add here other error type
 
-void	exit_synthax_error(char *str)
+void	exit_synthax_error(t_msh *msh, char *str)
 {
+	msh->return_code = 2;
 	rl_on_new_line();
 	rl_replace_line("", 1);
 	printf("bash: syntax error near unexpected token '%s'\n", str);
