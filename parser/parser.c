@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:19:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 19:36:27 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:44:40 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	parser(t_msh *msh)
 
 	if (msh->lexer_list == NULL)
 	{
-		exit_new_line();
+		exit_new_line(msh);
 		return ;
 	}
 	return_code = limit_is_valid(msh);

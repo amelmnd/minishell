@@ -7,7 +7,7 @@
 
 void	exec_loop(t_msh *msh)
 {
-	printf("exec_loop : Entrée\n");
+	//printf("exec_loop : Entrée\n");
 	t_exec_list	*exec_list_node;
 
 	exec_list_node = msh->exec_list;
@@ -40,6 +40,14 @@ void	exec_loop(t_msh *msh)
 	}
 }
 
+void	print_charss(char **str_array)
+{
+	int	i = -1;
+
+	while (str_array[++i])
+		printf("%s\n", str_array[i]);
+}
+
 void execution(t_msh *msh, char **envp)
 {
 
@@ -51,6 +59,7 @@ void execution(t_msh *msh, char **envp)
 	feed_msh_with_envp(msh, envp); // différent du path d'Amel, sous la forme d'une liste chainée
 	// cette fonction reste nécessaire, même avec le travail d'Amel
 	create_pipes_for_hd(msh);
+	//print_charss(msh->exec->envp);
 	//print_exec_list(msh);
 	exec_loop(msh);
 	/*

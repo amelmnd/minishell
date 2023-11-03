@@ -39,7 +39,7 @@ void	do_wapp_redir(t_msh *msh, char *dest)
 
 void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
 {
-	printf("do_redir : Entrée\n");
+	//printf("do_redir : Entrée\n");
 	t_redirect	redir_box;
 
 	redir_box = exec_list_node->redirect_array[i];
@@ -51,7 +51,7 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
 		do_write_redir(msh, redir_box.str);
 	else if (redir_box.exp_type == WA_DEST_REDIRECT)
 		do_wapp_redir(msh, redir_box.str);
-	printf("do_redir : Sortie\n");
+	//printf("do_redir : Sortie\n");
 }
 
 void	manage_stdin(t_msh *msh, t_exec_list *exec_list_node)
@@ -71,7 +71,7 @@ void	manage_stdout(t_msh *msh, t_exec_list *exec_list_node)
 
 void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 {
-	printf("do_all_redirections : Entrée\n");
+	//printf("do_all_redirections : Entrée\n");
 	int	i;
 
 	close(msh->exec->pipefd[READ]);
@@ -87,5 +87,5 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 	close(msh->exec->fd_write_redirect);
 	close(msh->exec->pipefd[WRITE]);
 
-	printf("do_all_redirections : Sortie\n");
+	//printf("do_all_redirections : Sortie\n");
 }

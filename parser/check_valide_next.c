@@ -6,32 +6,33 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:23:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/26 09:40:44 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 15:33:35 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	redirect_next_valide(t_lexer_list *list)
+int	redirect_next_valide(t_msh *msh, t_lexer_list *list)
 {
-	if (list->next->lexer_type == R_REDIRECT
+	(void)msh;
+	(void)list;
+	if (list->next == NULL || (list->next->lexer_type == BLANK && list->next->next == NULL))
+		exit_synthax_error(msh, list->str);
+	else if (list->next == NULL
+		|| list->next->lexer_type == R_REDIRECT
 		|| list->next->lexer_type == HEREDOC
 		|| list->next->lexer_type == W_REDIRECT
 		|| list->next->lexer_type == W_APPEND_REDIRECT)
-	{
-		exit_synthax_error(list->next->str);
-		return (258);
-	}
+		exit_synthax_error(msh, list->next->str);
 	else if ((list->next->lexer_type == BLANK
 			&& (list->next->next->lexer_type == R_REDIRECT
 				|| list->next->next->lexer_type == HEREDOC
 				|| list->next->next->lexer_type == W_REDIRECT
 				|| list->next->next->lexer_type == W_APPEND_REDIRECT)))
-	{
-		exit_synthax_error(list->next->next->str);
-		return (258);
-	}
-	return (0);
+		exit_synthax_error(msh, list->next->next->str);
+	else
+		return (0);
+	return (2);
 }
 
 int	check_valid_next(t_msh *msh)
@@ -46,15 +47,17 @@ int	check_valid_next(t_msh *msh)
 		if (list->lexer_type == PIPE && list->next->lexer_type == BLANK
 			&& list->next->next->lexer_type == PIPE)
 		{
-			exit_synthax_error("|");
-			return (258);
+			exit_synthax_error(msh, "|");
+			return (2);
 		}
 		else if (list->lexer_type == R_REDIRECT
 			|| list->lexer_type == HEREDOC
 			||list->lexer_type == W_REDIRECT
 			|| list->lexer_type == W_APPEND_REDIRECT)
 		{
-			redirect_next_valide(list);
+			return_code = redirect_next_valide(msh, list);
+			if (return_code == 2)
+				break ;
 		}
 		list = list->next;
 	}

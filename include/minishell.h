@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 13:38:29 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:59:57 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,12 @@
 # include <sys/stat.h>
 
 
-void	exit_new_line(void);
+void	exit_new_line(t_msh *msh);
 void	clean_msh_list(t_msh *msh);
 int		ft_msh_strchr(const char *s, int c);
 
 // error
-void	exit_synthax_error(char *str);
+void	exit_synthax_error(t_msh *msh, char *str);
 void	exit_command_not_foud(char *str);
 
 // env
