@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:30:29 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 10:51:40 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	generate_prompt(char *envp[])
 	if (!msh)
 		return ;
 	env_list_generate(msh, envp);
-	print_env_list(msh->env_list);
+	// print_env_list(msh->env_list);
 	user = getenv("USER");
 	user = ft_strjoin(user, " $> ");
 	while (1)
@@ -34,16 +34,13 @@ void	generate_prompt(char *envp[])
 			parser(msh);
 		printf("msh->return_code = %d\n", msh->return_code);
 		if (msh->return_code == 0 && msh->lexer_list)
-        {
-            expander(msh);
-			/*
-            if (msh->exp_list)
-                print_debug_exp_list(msh->exp_list, "main expander_list");
-			*/
-        }
+		{
+			expander(msh);
+			if (msh->exp_list)
+				print_debug_exp_list(msh->exp_list, "main expander_list");
+		}
 		clean_msh_list(msh);
 	}
-	
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -69,7 +66,8 @@ Segmentation fault (core dumped)
 Hypothèse : s'il y a plus de deux mots dans le premier prompt : segfault
 
 
-// un seul chevron ouvert provoque une segfault, même après plusieurs saisies d'autres prompts précédents
+// un seul chevron ouvert provoque une segfault,
+	même après plusieurs saisies d'autres prompts précédents
 spardaspirit $> <
 
 ______ main lexer_list ______
@@ -118,12 +116,15 @@ type -> BLANK
 Segmentation fault (core dumped)
 
 
-Après de nombreux tests durant une même exécution (donc après plusieurs saisies successives de prompts), les chevrons tout seul fonctionnent
+Après de nombreux tests durant une même exécution (donc après plusieurs saisies successives de prompts),
+	les chevrons tout seul fonctionnent
 
 
 Je remarque aussi que l'expander ne s'affiche plus.
-En regardant le main.c, je remarque que le parser et l'expander ne se déclenchent que selon la valeur d'une variable dans msh qui ne semble pas initialisée.
-La valeur de cette variable n'est ajustée que dans le lexer (lexer_create_list), et dans le parser. Elle n'est pas initialisée à la création de la structure msh.
+En regardant le main.c,
+	je remarque que le parser et l'expander ne se déclenchent que selon la valeur d'une variable dans msh qui ne semble pas initialisée.
+La valeur de cette variable n'est ajustée que dans le lexer (lexer_create_list),
+	et dans le parser. Elle n'est pas initialisée à la création de la structure msh.
 
 
 spardaspirit $> cd lol $coucou 'cou'$lol <hou >>lol <d <j>l  (#) | allo 'cou$tata' "agrougrou$pouah$akiya"
@@ -152,7 +153,7 @@ type -> BLANK
 str -> [cou]
 type -> S_QUOTE
 
-str -> [lol] 
+str -> [lol]
 type -> WORD //ne devrait pas plutôt être une variable ?
 
 str -> [ ]
