@@ -40,6 +40,40 @@ void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line)
 	last_hd_node->next = new_hd_node;
 }
 
+void	write_the_proper_number(int n)
+{
+	if (n == 0)
+		write(STDOUT_FILENO, "0", 1);
+	else if (n == 1)
+		write(STDOUT_FILENO, "1", 1);
+	else if (n == 2)
+		write(STDOUT_FILENO, "2", 1);
+	else if (n == 3)
+		write(STDOUT_FILENO, "3", 1);
+	else if (n == 4)
+		write(STDOUT_FILENO, "4", 1);
+	else if (n == 5)
+		write(STDOUT_FILENO, "5", 1);
+	else if (n == 6)
+		write(STDOUT_FILENO, "6", 1);
+	else if (n == 7)
+		write(STDOUT_FILENO, "7", 1);
+	else if (n == 8)
+		write(STDOUT_FILENO, "8", 1);
+	else if (n == 9)
+		write(STDOUT_FILENO, "9", 1);
+	else if (n == 10)
+		write(STDOUT_FILENO, "10", 2);
+	else if (n == 11)
+		write(STDOUT_FILENO, "11", 2);
+	else if (n == 12)
+		write(STDOUT_FILENO, "12", 2);
+	else if (n == 13)
+		write(STDOUT_FILENO, "13", 2);
+	else if (n == 14)
+		write(STDOUT_FILENO, "14", 2);
+}
+
 void	get_hd(t_exec_list *exec_list_node, int i)
 {
 	char	*line;
@@ -50,7 +84,9 @@ void	get_hd(t_exec_list *exec_list_node, int i)
 	while (42)
 	{
 		write(STDOUT_FILENO, exec_list_node->redirect_array[i].str, ft_strlen(exec_list_node->redirect_array[i].str));
-		write(STDOUT_FILENO, "> ", 2);
+		write(STDOUT_FILENO, "(", 1);
+		write_the_proper_number(ft_strlen(exec_list_node->redirect_array[i].str));
+		write(STDOUT_FILENO, ")> ", 3);
 		line = get_next_line(STDIN_FILENO);
 		if (hd_strcmp(exec_list_node->redirect_array[i].str, line))
 			break ;

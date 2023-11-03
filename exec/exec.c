@@ -5,7 +5,6 @@
 
 // partie pré fin expander
 
-/*
 void	exec_loop(t_msh *msh)
 {
 	printf("exec_loop : Entrée\n");
@@ -24,7 +23,7 @@ void	exec_loop(t_msh *msh)
 
 			//close_all_fd();
 
-			builtin_way(msh, exec_list_node);
+			//builtin_way(msh, exec_list_node);
 			
 			check_cmd_path_n_exec(msh, exec_list_node);
 		}
@@ -40,23 +39,26 @@ void	exec_loop(t_msh *msh)
 		sleep(1);
 	}
 }
-*/
 
 void execution(t_msh *msh, int ac, char **av, char **envp)
 {
+	/*
 	(void)ac;
 	(void)av;
 	(void)envp;
+	*/
 
 	msh->exec = new_exec();
 	init_exec(msh);
 
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
+	feed_msh_acavenvp(msh, ac, av, envp); // sera remplacé par l'env d'Amel (pour l'env entier)
+	// conserver le path et paths
 	create_pipes_for_hd(msh);
-	/*
-	feed_msh_acavenvp(msh, ac, av, envp); // sera remplacé par l'env d'Amel
+	print_exec_list(msh);
 	exec_loop(msh);
+	/*
 
 	Peut-être mettre des close finaux
 	Ou peut-être que les close dans l'execloop suffisent
