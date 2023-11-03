@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/31 18:58:06 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:39:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,6 @@ t_env_list	*new_env_list(void)
 	new->previous = NULL;
 	new->value = NULL;
 	return (new);
-}
-
-void	free_chars(char **dust)
-{
-	if (*dust)
-	{
-		free(*dust);
-		*dust = NULL;
-	}
 }
 
 int	get_index_first_equal(char *str)

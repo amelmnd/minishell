@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/03 12:20:13 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/03 13:33:59 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,6 @@ SRCS_EXP = expander.c\
 		   exp_list_generator_del.c \
 		   print_exp_list_del.c \
 		   gen_random_str_del.c \
-		   msh_random_del.c \
 		   exp_list_node_management_del.c \
 		   msh_del.c \
 		   feed_msh_acavenvp_del.c \
