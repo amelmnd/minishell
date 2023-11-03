@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 15:16:57 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 15:34:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,11 @@ void	generate_prompt(char *envp[])
 				//print_debug_exp_list(msh->exp_list, "main expander_list");
 			}
 		}
-
+		build_exec_list(msh);
+		print_exec_list(msh);
 		
+		execution(msh, envp);
+
 
 		clean_msh_list(msh);
 	}
