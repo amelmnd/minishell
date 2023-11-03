@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/27 16:35:19 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:35:54 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void    print_lexer_type_one_line(int lexer_type)
 		default:
 			break;
 	}
-	printf("\n");
+
 }
 
 void	print_lexer_list(t_lexer_list *list)
@@ -77,15 +77,15 @@ void	print_lexer_list(t_lexer_list *list)
 			if (list->str)
 			{
 				green();
-				printf("str -> [%s]\n", list->str);
+				printf("str -> [%s]	", list->str);
 			}
 			cyan();
 			print_lexer_type_one_line(list->lexer_type);
 			if (list->var_name)
 			{
 				blue();
-				printf("var_name -> [%s]\n", list->var_name);
-				printf("var_value -> [%s]\n", list->var_value);
+				printf("var_name -> [%s]	", list->var_name);
+				printf("var_value -> [%s]	", list->var_value);
 			}
 			printf("\n");
 			list = list->next;

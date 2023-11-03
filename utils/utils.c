@@ -6,13 +6,14 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:06:50 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_new_line(void)
+void	exit_new_line(t_msh *msh)
 {
+	msh->return_code = 0;
 	rl_on_new_line();
 }
