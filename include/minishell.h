@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/30 15:59:57 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 14:11:11 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,12 @@
 // IMP : readline.h is last include to avoid errors
 # include <readline/readline.h>
 
-void	exit_new_line(void);
+void	exit_new_line(t_msh *msh);
 void	clean_msh_list(t_msh *msh);
 int		ft_msh_strchr(const char *s, int c);
 
 // error
-void	exit_synthax_error(char *str);
+void	exit_synthax_error(t_msh *msh, char *str);
 void	exit_command_not_foud(char *str);
 
 // env
