@@ -1,7 +1,6 @@
 {
 	"C_Cpp.errorSquiggles": "enabled",
 	"files.associations": {
-		"all_struct.h": "c",
-		"fn_dev.h": "c"
+		"readline.h": "c"
 	}
 }

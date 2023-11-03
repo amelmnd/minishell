@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   fn_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/28 16:04:41 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_new_line(void)
+char	*ft_getenv(t_msh *msh, char *env_var)
 {
-	rl_on_new_line();
+	t_env_list	*tmp;
+
+	tmp = msh->env_list;
+	while (tmp->next != NULL)
+	{
+		if (ft_strncmp(tmp->name, &env_var[1], ft_strlen(env_var)) == 0)
+			return (tmp->value);
+		tmp = tmp->next;
+	}
+	return (NULL);
 }

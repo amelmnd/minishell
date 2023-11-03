@@ -1,18 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:23 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/20 14:54:12 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/20 15:32:57 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef PARSER_H
+# define PARSER_H
 
-void	exit_new_line(void)
-{
-	rl_on_new_line();
-}
+# include "minishell.h"
+
+void	parser(t_msh *msh);
+int		limit_is_valid(t_msh *msh);
+int		check_valid_next(t_msh *msh);
+
+#endif

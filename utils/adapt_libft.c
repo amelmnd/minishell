@@ -1,43 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   adapt_libft.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/02 18:46:57 by amennad          ###   ########.fr       */
+/*   Created: 2023/10/28 16:13:51 by amennad           #+#    #+#             */
+/*   Updated: 2023/10/30 16:00:14 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	prompt_isempty(char **prompt)
+int	ft_msh_strchr(const char *s, int c)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = ft_strlen(*prompt);
-	while (i < len)
+	while (s[i])
 	{
-		if ((*prompt)[i] != ' ' && (*prompt)[i] != '\t')
-		{
-			*prompt = ft_substr(*prompt, i, (len - i));
-			return (FALSE);
-		}
+		if (s[i] == (char)c)
+			return (i);
 		i++;
 	}
-	return (TRUE);
+	if (s[i] == (char)c)
+		return (i);
+	return (-1);
 }
 
-void	lexer_check(t_msh *msh, char *prompt)
+void	split_env_value(char *env_var, char **name, char **value)
 {
-	if (prompt_isempty(&prompt) == TRUE)
-	{
-		msh->return_code = 0;
-		exit_new_line();
-	}
-	else
-		lexer_create_list(msh, prompt);
+	int		index;
+	char	*tmp;
+
+	index = 0;
+	while (env_var[index] != '=')
+		index++;
+	*name = ft_substr(env_var, 0, index);
+	tmp = ft_substr(env_var, index + 1, ft_strlen(env_var));
+	*value = ft_strdup(tmp);
+	free(tmp);
 }
