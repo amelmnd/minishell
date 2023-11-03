@@ -6,13 +6,12 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 12:20:33 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 13:25:30 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
 void	generate_prompt(char *envp[])
 {
 	t_msh	*msh;
