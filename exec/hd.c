@@ -40,6 +40,7 @@ void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line)
 	last_hd_node->next = new_hd_node;
 }
 
+// à supprimer !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void	write_the_proper_number(int n)
 {
 	if (n == 0)

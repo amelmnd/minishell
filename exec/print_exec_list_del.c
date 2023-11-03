@@ -40,8 +40,11 @@ void	print_charss_execln(t_exec_list *exec_list_node)
 {
 	int	i = -1;
 
-	while (++i < exec_list_node->nb_words)
-		printf("exec_list_node->args_array[%d] = %s\n", i, exec_list_node->args_array[i]);
+	if (exec_list_node->args_array)
+	{
+		while (++i < exec_list_node->nb_words)
+			printf("exec_list_node->args_array[%d] = %s\n", i, exec_list_node->args_array[i]);
+	}
 }
 
 void	print_args_array(t_exec_list *exec_list_node)
@@ -77,7 +80,8 @@ void	print_exec_list_node(t_exec_list *exec_list_node)
 	printf("exec_list_node->cmd = %s\n", exec_list_node->cmd);
 	print_args_array(exec_list_node);
 	printf("exec_list_node->contains_hd = %d\n", exec_list_node->contains_hd);
-	print_hd_in_exec_list_node(exec_list_node);
+	if (exec_list_node->contains_hd)
+		print_hd_in_exec_list_node(exec_list_node);
 	printf("exec_list_node->contains_write_redirects = %d\n", exec_list_node->contains_write_redirect);
 	print_pos_ppl_in_exec_list_node(exec_list_node);
 }

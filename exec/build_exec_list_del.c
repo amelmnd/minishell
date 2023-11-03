@@ -16,15 +16,19 @@ t_redirect	*malloc_redirects_array(int size)
 
 char	**malloc_charss(int size)
 {
-	char **array;
+	char	**array;
+	int		i;
 
 	array = NULL;
+	i = -1;
 	if (size)
 	{
-		array = (char **)malloc(sizeof(char *) * size);
+		array = (char **)malloc(sizeof(char *) * (size + 1));
 		if (!array)
 			return (NULL);
 	}
+	while (++i < size)
+		array[i] = NULL;
 	array[size] = NULL;
 	return (array);
 }
@@ -70,18 +74,24 @@ void	feed_exec_list_node_cmd(t_msh *msh)
 
 void	feed_the_only_exec_list_node_cmd(t_msh *msh)
 {
+	printf("feed_the_only_exec_list_node_cmd : Entrée\n");
 	t_exp_list	*exp_list_node;
 
 	exp_list_node = msh->exp_list;
 	while (exp_list_node)
 	{
+		printf("feed_the_only_exec_list_node_cmd(while) : début itération\n");
 		if (exp_list_node->exp_type == WORD_EXPANDED)
 		{
+			printf("feed_the_only_exec_list_node_cmd(while) : msh->exec_list->cmd avant le strdup = %s\n", msh->exec_list->cmd);
+			printf("feed_the_only_exec_list_node_cmd(while) : exp_list_node->str = %s\n", exp_list_node->str);
+			
 			msh->exec_list->cmd = ft_strdup(exp_list_node->str);
 			break ;
 		}
 		exp_list_node = exp_list_node->next;
 	}
+	printf("feed_the_only_exec_list_node_cmd : Sortie\n");
 }
 
 void	add_a(int *arg_i, char *arg, t_exec_list *ex)
@@ -210,10 +220,19 @@ void	build_exec_list(t_msh *msh)
 		feed_the_only_exec_list_node_data(msh);
 	malloc_exec_list_node_arrays(msh);
 	if (msh->exec_list->nb_pipes)
+	{
+		printf("build_exec_list : deuxième if\n");
 		feed_exec_list_node_cmd(msh);
+	}
 	else
+	{
+		printf("build_exec_list : deuxième else\n");
 		feed_the_only_exec_list_node_cmd(msh);
+	}
+		
+	printf("build_exec_list : PROBE\n");
 	assign_pos_ppl_exec_list(msh);
 	feed_exec_list_node(msh);
 	scan_write_redirect(msh);
+	print_exec_list(msh);
 }
