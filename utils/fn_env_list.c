@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/31 18:58:06 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/03 21:55:11 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,15 +82,6 @@ t_env_list	*new_env_list(void)
 	return (new);
 }
 
-void	free_chars(char **dust)
-{
-	if (*dust)
-	{
-		free(*dust);
-		*dust = NULL;
-	}
-}
-
 int	get_index_first_equal(char *str)
 {
 	int	index_first_equal;
@@ -101,7 +92,7 @@ int	get_index_first_equal(char *str)
 		if (str[index_first_equal] == '=')
 			return (index_first_equal);
 	}
-	return (index_first_equal);
+	return (0);
 }
 
 char	*get_name_var(char *var_n_value)
@@ -114,7 +105,7 @@ char	*get_name_var(char *var_n_value)
 	index_first_equal = get_index_first_equal(var_n_value);
 	if (index_first_equal == -1)
 		return (NULL);
-	name_var = (char *)malloc(sizeof(char) * index_first_equal);
+	name_var = (char *)malloc(sizeof(char) * (index_first_equal + 1));
 	if (!name_var)
 		return (NULL);
 	i = -1;
