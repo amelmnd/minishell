@@ -1,6 +1,7 @@
 {
 	"C_Cpp.errorSquiggles": "enabled",
 	"files.associations": {
-		"readline.h": "c"
+		"readline.h": "c",
+		"minishell.h": "c"
 	}
 }
