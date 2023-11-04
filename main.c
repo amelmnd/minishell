@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 15:29:00 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/03 22:15:43 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	generate_prompt(char *envp[])
 	msh = (t_msh *)malloc(sizeof(t_msh));
 	if (!msh)
 		return ;
+	init_msh(msh);
 	env_list_generate(msh, envp);
 	// print_env_list(msh->env_list);
 	user = getenv("USER");
@@ -38,18 +39,30 @@ void	generate_prompt(char *envp[])
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh);
-			// if (msh->exp_list)
-				// print_debug_exp_list(msh->exp_list, "main expander_list");
+			if (msh->exp_list)
+			{
+				print_exp_list_one_line(msh);
+				//print_debug_exp_list(msh->exp_list, "main expander_list");
+			}
 		}
-		// printf("return code %d\n", msh->return_code);
+		build_exec_list(msh);
+		//print_exec_list(msh);
+		
+		execution(msh, envp);
+
+
 		clean_msh_list(msh);
 	}
 }
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	(void)argc;
 	(void)argv;
+	if (argc != 1)
+	{
+		//show_no_args_for_minishell_msg();
+		return (0);
+	}
 	generate_prompt(envp);
 	return (0);
 }
