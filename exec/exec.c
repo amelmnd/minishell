@@ -62,8 +62,8 @@ void execution(t_msh *msh, char **envp)
 	close(ppx->pipefd[READ]);
 	close(ppx->pipefd[WRITE]);
 
-	while (waitpid(-1, &(msh->return_value), 0) != -1)
-		;
 	*/
+	while (waitpid(-1, &(msh->return_code), 0) != -1)
+		;
 	
 }

@@ -33,21 +33,12 @@ void ft_execve(t_msh *msh, t_exec_list *exec_list_node)
 	t_exec	*exec;
 
 	exec = msh->exec;
-	//printf("ft_execve : Entrée\n");
+	printf("ft_execve : Entrée\n");
 	//printf("ft_execve : exec->cmd_path_ready = %s\n", exec->cmd_path_ready);
 	//printf("ft_execve : exec_list_node->args_array[0] = %s ; exec_list_node->args_array[1] = %s\n", exec_list_node->args_array[0], exec_list_node->args_array[1]);
 	execve(exec->cmd_path_ready, exec_list_node->args_array, exec->envp);
 
-/*
-	char **ls_charss;
-	ls_charss = NULL;
-	ls_charss = (char **)malloc(sizeof(char *) * 2);
-	ls_charss[0] = ft_strdup("ls");
-	ls_charss[1] = NULL;
-	execve("/bin/ls", ls_charss, msh->exec->envp);
-*/	
-	
-
+	printf("ft_execve : après le execve ; perror puis exit imminent\n");
 
 	perror("execve");
 	exit(EXIT_FAILURE);
@@ -97,13 +88,13 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 	msh->exec->cmd_path_ready = ft_strdup(exec_list_node->cmd);
 	if (!access(exec_list_node->cmd, X_OK))
 	{
-		//printf("check_cmd_path_n_exec : entrée dans le premier if\n");
+		printf("check_cmd_path_n_exec : entrée dans le premier if\n");
 		get_cmd_without_path_in_args(msh, exec_list_node);
 		ft_execve(msh, exec_list_node);
 	}
 	if (exists_in_paths(msh, exec_list_node)) // assigne msh->exec->cmd_path_ready si succès
 	{
-		//printf("check_cmd_path_n_exec : entrée dans le deuxième if\n");
+		printf("check_cmd_path_n_exec : entrée dans le deuxième if\n");
 		ft_execve(msh, exec_list_node);
 		//nsfod_msg();
 		exit(EXIT_FAILURE);
