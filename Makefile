@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/10/28 16:18:28 by amennad          ###   ########.fr        #
+#    Updated: 2023/11/04 07:56:23 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,13 @@ SRCS_PARS = parser.c \
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c \
+SRCS_EXP = expander.c\
+		   exp_list_generator_del.c \
+		   print_exp_list_del.c \
+		   gen_random_str_del.c \
+		   exp_list_node_management_del.c \
+		   msh_del.c \
+		   feed_msh_acavenvp_del.c \
 		   check_var_value.c \
 		   expander_list_manage.c \
 		   create_expander_list.c \
@@ -59,6 +65,15 @@ SRCS_EXP = expander.c \
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
 SRCS_EXEC = exec.c\
+			build_exec_list_del.c \
+			print_exec_list_del.c \
+			init_exec_list_node_management_del.c \
+			exec_list_node_data_del.c \
+			pipe_fork_close_dup2_del.c \
+			new_exec.c \
+			hd.c \
+			redir_del.c \
+			cmd_parsing_del.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
@@ -67,11 +82,16 @@ SRCS_BUIL = builtins.c\
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
 SRCS_UTILS = utils.c \
+			 get_next_line.c \
+			 get_next_line_utils.c \
+			 ft_strcmp.c \
+			 free_chars.c \
 			 manage_error.c \
 			 free_list.c \
 			 fn_env.c \
 			 fn_env_list.c \
-			 adapt_libft.c\
+			 adapt_libft.c \
+			 print_charss_del.c \
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
