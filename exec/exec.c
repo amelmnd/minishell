@@ -40,14 +40,6 @@ void	exec_loop(t_msh *msh)
 	}
 }
 
-void	print_charss(char **str_array)
-{
-	int	i = -1;
-
-	while (str_array[++i])
-		printf("%s\n", str_array[i]);
-}
-
 void execution(t_msh *msh, char **envp)
 {
 

@@ -79,4 +79,6 @@ void	get_paths_from_path(t_msh *msh);
 void	feed_msh_with_envp(t_msh *msh, char **envp);
 void	print_paths_from_path(t_msh *msh);
 
+void	print_charss(char **str_array);
+
 #endif
