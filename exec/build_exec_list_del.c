@@ -221,16 +221,16 @@ void	build_exec_list(t_msh *msh)
 	malloc_exec_list_node_arrays(msh);
 	if (msh->exec_list->nb_pipes)
 	{
-		printf("build_exec_list : deuxième if\n");
+		//printf("build_exec_list : deuxième if\n");
 		feed_exec_list_node_cmd(msh);
 	}
 	else
 	{
-		printf("build_exec_list : deuxième else\n");
+		//printf("build_exec_list : deuxième else\n");
 		feed_the_only_exec_list_node_cmd(msh);
 	}
 		
-	printf("build_exec_list : PROBE\n");
+	//printf("build_exec_list : PROBE\n");
 	assign_pos_ppl_exec_list(msh);
 	feed_exec_list_node(msh);
 	scan_write_redirect(msh);
