@@ -58,5 +58,6 @@ dkms.conf
 .history
 a.out
 minishell
+pipex
 .vscode
 pipex
