@@ -287,4 +287,5 @@ void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j)
 	int ret = dup2(exec_list_node->hd_pipe[READ], STDIN_FILENO);
 	if (ret == -1)
 		perror("dup2 error");
+	close(exec_list_node->hd_pipe[READ]);
 }

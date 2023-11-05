@@ -33,7 +33,7 @@ void ft_execve(t_msh *msh, t_exec_list *exec_list_node)
 	t_exec	*exec;
 
 	exec = msh->exec;
-	dprintf(2, "ft_execve : Entrée\n");
+	//dprintf(2, "ft_execve : Entrée\n");
 	//dprintf(2, "ft_execve : exec->cmd_path_ready = %s\n", exec->cmd_path_ready);
 	//dprintf(2, "ft_execve : exec_list_node->args_array[0] = %s ; exec_list_node->args_array[1] = %s\n", exec_list_node->args_array[0], exec_list_node->args_array[1]);
 	execve(exec->cmd_path_ready, exec_list_node->args_array, exec->envp);

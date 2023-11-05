@@ -11,7 +11,8 @@ void	exec_loop(t_msh *msh)
 	int j = 0;
 	while (exec_list_node)
 	{
-		pipe(msh->exec->pipefd);
+		if (exec_list_node->pos_ppl != SOLO)
+			pipe(msh->exec->pipefd);
 		ft_fork(msh);
 		if (!(msh->exec->child))
 		{
@@ -50,7 +51,11 @@ void execution(t_msh *msh, char **envp)
 	create_pipes_for_hd(msh);
 	//print_charss(msh->exec->envp);
 	//print_exec_list(msh);
+	if (msh->exec_list->pos_ppl != SOLO)
+		msh->exec->fd_temp = open(".temp", O_CREAT | O_RDWR | O_TRUNC, 0644);
 	exec_loop(msh);
+	if (access(".temp", 0644))
+		unlink(".temp"); // a placer dans les fonctions de free
 	
 
 	//Peut-être mettre des close finaux;
