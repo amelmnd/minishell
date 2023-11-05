@@ -210,8 +210,10 @@ void	build_exec_list(t_msh *msh)
 	msh->exec_list = new_exec_list_node();
 	init_exec_list_node(msh->exec_list);
 	get_nb_pipes_in_exp_list(msh);
+	if (print) {dprintf(2, "build_exec_list : msh->exec_list->nb_pipes = %d\n", msh->exec_list->nb_pipes);}
 	if (msh->exec_list->nb_pipes)
 	{
+		if (print) {dprintf(2, "build_exec_list : entrée dans le premier if\n");}
 		create_and_plug_all_empty_exec_list_nodes(msh);
 		feed_exec_list_node_data(msh);
 		feed_last_exec_list_node_data(msh);
@@ -235,5 +237,5 @@ void	build_exec_list(t_msh *msh)
 	feed_exec_list_node(msh);
 	scan_write_redirect(msh);
 	
-	//print_exec_list(msh);
+	print_exec_list(msh);
 }
