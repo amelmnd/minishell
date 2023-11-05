@@ -1,10 +1,12 @@
 #include "minishell.h"
 
-// version personnelle
+static int print = 0;
 
 void	exec_loop(t_msh *msh)
 {
-	//dprintf(2, "exec_loop : Entrée\n");
+	static int nb_function_call = 0;
+	if (print) {dprintf(2, "exec_loop (appel numéro : %d) : Entrée\n", nb_function_call);}
+	nb_function_call++;
 	t_exec_list	*exec_list_node;
 
 	exec_list_node = msh->exec_list;
@@ -16,7 +18,7 @@ void	exec_loop(t_msh *msh)
 		ft_fork(msh);
 		if (!(msh->exec->child))
 		{
-			dprintf(2, "\nPROCESSUS numéro %d\n", j);
+			if (print) {dprintf(2, "\nPROCESSUS numéro %d\n", j);}
 			do_all_redirections(msh, exec_list_node, j);
 
 			//close_all_fd();
@@ -44,7 +46,6 @@ void	exec_loop(t_msh *msh)
 
 void execution(t_msh *msh, char **envp)
 {
-
 	msh->exec = new_exec();
 	init_exec(msh);
 
@@ -100,7 +101,7 @@ void exec_loop(t_msh *msh)
 		ft_fork(msh);
 		if (!(msh->exec->child))
 		{
-			dprintf(2, "\nPROCESSUS numéro %d\n", j);
+			if (print) {dprintf(2, "\nPROCESSUS numéro %d\n", j);}
 			do_all_redirections(msh, exec_list_node, j);
 
 			close(msh->exec->pipefd[READ]);

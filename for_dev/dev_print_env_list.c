@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dev_print_env_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/25 13:20:50 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/05 12:14:58 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	print_env_list(t_env_list *list)
 	if (list == NULL)
 	{
 		pink();
-		printf("list is empty\n");
+		dprintf(2, "list is empty\n");
 		reset();
 		return ;
 	}
@@ -26,9 +26,9 @@ void	print_env_list(t_env_list *list)
 		while (list != NULL)
 		{
 			green();
-			printf("name -> [%s]\n", list->name);
+			dprintf(2, "name -> [%s]\n", list->name);
 			blue();
-			printf("value -> [%s]\n", list->value);
+			dprintf(2, "value -> [%s]\n", list->value);
 			list = list->next;
 		}
 		reset();
@@ -38,9 +38,9 @@ void	print_env_list(t_env_list *list)
 void	print_debug_env_list(t_env_list *list, char *name)
 {
 	red();
-	printf("\n______ %s ______\n", name);
+	dprintf(2, "\n______ %s ______\n", name);
 	print_env_list(list);
 	red();
-	printf("***********\n");
+	dprintf(2, "***********\n");
 	reset();
 }
