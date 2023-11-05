@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 22:15:43 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/05 10:03:48 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,3 +66,9 @@ int	main(int argc, char *argv[], char *envp[])
 	generate_prompt(envp);
 	return (0);
 }
+
+/*
+ls|cat ne fonctionne pas :
+	le pipe n'est pas pris en compte
+	l'expander sort juste deux mots d'affilée
+*/
