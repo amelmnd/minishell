@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/04 07:56:23 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/05 16:39:02 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,6 +92,7 @@ SRCS_UTILS = utils.c \
 			 fn_env_list.c \
 			 adapt_libft.c \
 			 print_charss_del.c \
+			 free_ntcharss.c \
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
