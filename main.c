@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 10:03:48 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/05 12:41:18 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	generate_prompt(char *envp[])
 			expander(msh);
 			if (msh->exp_list)
 			{
-				print_exp_list_one_line(msh);
+				//print_exp_list_one_line(msh);
 				//print_debug_exp_list(msh->exp_list, "main expander_list");
 			}
 		}
@@ -71,4 +71,21 @@ int	main(int argc, char *argv[], char *envp[])
 ls|cat ne fonctionne pas :
 	le pipe n'est pas pris en compte
 	l'expander sort juste deux mots d'affilée
+
+Les commandes suivantes :
+
+- première commande : ls > lol
+spardaspirit $> ls > lol
+(WORD_EXPANDED)ls (W_DEST_REDIRECT)lol 
+spardaspirit $> Segmentation fault (core dumped)
+// le Segmentation fault (core dumped) s'affiche tout seul dans le prompt,
+// je ne l'ai pas saisi
+
+- deuxième commande : echo coucou > mdr
+(même erreur)
+
+provoquent une segfault au moment du réaffichage du prompt
+valgrind indique une anomalie du ft_strlen (ah ouais, à ce point ???)
+cela semble être uniquement le cas des lignes ne contenant aucun pipe
+dès qu'il y au moins un pipe, la segfault n'apparait plus
 */
