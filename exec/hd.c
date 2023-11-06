@@ -176,7 +176,7 @@ void	print_hd_in_exec_list_node(t_exec_list *exec_list_node)
 
 	while (hd_node)
 	{
-		printf("hd_node->str = %s", hd_node->str);
+		dprintf(2, "hd_node->str = %s", hd_node->str);
 		hd_node = hd_node->next;
 	}
 }
@@ -188,35 +188,35 @@ void	print_all_hd_remaining(t_msh *msh)
 	while (exec_list_node)
 	{
 		print_hd_in_exec_list_node(exec_list_node);
-		printf("\n== Passage à l'exec_list_node suivant (ce printf contient une nl au début) ==\n");
+		dprintf(2, "\n== Passage à l'exec_list_node suivant (ce dprintf 2, contient une nl au début) ==\n");
 		exec_list_node = exec_list_node->next;
 	}
 }
 
 void	write_hd_in_the_pipe(t_exec_list *exec_list_node)
 {
-	printf("write_hd_in_the_pipe : Entrée\n");
+	dprintf(2, "write_hd_in_the_pipe : Entrée\n");
 	t_hd	*hd_node;
 
 	hd_node = exec_list_node->hd;
 	while (hd_node)
 	{
-		printf("write_hd_in_the_pipe(while) : début itération\n");
+		dprintf(2, "write_hd_in_the_pipe(while) : début itération\n");
 		if (!(hd_node->str))
 		{
-			printf("write_hd_in_the_pipe(while) : entrée dans le if\n");
+			dprintf(2, "write_hd_in_the_pipe(while) : entrée dans le if\n");
 			write(exec_list_node->hd_pipe[WRITE], "\n", 1);
 		}
 		else
 		{
-			printf("write_hd_in_the_pipe(while) : entrée dans le else\n");
+			dprintf(2, "write_hd_in_the_pipe(while) : entrée dans le else\n");
 			write(exec_list_node->hd_pipe[WRITE],
 				hd_node->str, ft_strlen(hd_node->str));
 		}
 		hd_node = hd_node->next;
-		printf("write_hd_in_the_pipe(while) : début itération\n");
+		dprintf(2, "write_hd_in_the_pipe(while) : début itération\n");
 	}
-	printf("write_hd_in_the_pipe : Sortie\n");
+	dprintf(2, "write_hd_in_the_pipe : Sortie\n");
 }
 
 void	send_hd_through_pipe(t_exec_list *exec_list_node, int j)
@@ -270,11 +270,11 @@ void	create_pipes_for_hd(t_msh *msh)
 	{
 		if (exec_list_node->contains_hd)
 		{
-			printf("create_pipes_for_hd AVANT LE PIPE ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
+			dprintf(2, "create_pipes_for_hd AVANT LE PIPE ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
 			int ret = pipe(exec_list_node->hd_pipe);
 			if (ret == -1)
 			perror("pipe error");
-			printf("create_pipes_for_hd APRES LE PIPE ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
+			dprintf(2, "create_pipes_for_hd APRES LE PIPE ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
 		}
 		exec_list_node = exec_list_node->next;
 	}
@@ -287,4 +287,5 @@ void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j)
 	int ret = dup2(exec_list_node->hd_pipe[READ], STDIN_FILENO);
 	if (ret == -1)
 		perror("dup2 error");
+	close(exec_list_node->hd_pipe[READ]);
 }

@@ -75,7 +75,7 @@ void	get_paths_from_path(t_msh *msh)
 
 void	feed_msh_with_envp(t_msh *msh, char **envp)
 {
-	//printf("feed_msh_acavenvp : Entrée\n");
+	//dprintf(2, "feed_msh_acavenvp : Entrée\n");
 	msh->exec->envp = ntcharss_copy(envp);
 	if (envp)
 	{
@@ -93,5 +93,5 @@ void	print_paths_from_path(t_msh *msh)
 	path = msh->exec->paths_from_path;
 	i = -1;
 	while (path[++i])
-		printf("%s\n", path[i]);
+		dprintf(2, "%s\n", path[i]);
 }
