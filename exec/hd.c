@@ -268,7 +268,7 @@ void	create_pipes_for_hd(t_msh *msh)
 	exec_list_node = msh->exec_list;
 	while (exec_list_node)
 	{
-		if (exec_list_node->contains_hd)
+		if (exec_list_node->contains_hd == TRUE)
 		{
 			dprintf(2, "create_pipes_for_hd AVANT LE PIPE ; hd_pipe[READ] = %d ; hd_pipe[WRITE] = %d\n", exec_list_node->hd_pipe[READ], exec_list_node->hd_pipe[WRITE]);
 			int ret = pipe(exec_list_node->hd_pipe);

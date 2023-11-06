@@ -100,8 +100,8 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_write_redirect = %d\n", j, msh->exec->fd_write_redirect);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_read_redirect = %d\n", j, msh->exec->fd_read_redirect);}
 
-
-	close(msh->exec->pipefd[READ]);
+	if (exec_list_node->pos_ppl != SOLO || exec_list_node->pos_ppl != FIRST)
+		close(msh->exec->pipefd[READ]);
 	manage_stdin(msh, exec_list_node, j);
 	if (exec_list_node->contains_hd)
 		close(exec_list_node->hd_pipe[WRITE]);
@@ -109,10 +109,15 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 	while (++i < exec_list_node->nb_redirects)
 		do_redir(msh, exec_list_node, i, j);
 	manage_stdout(msh, exec_list_node, j);
-	close(msh->exec->fd_temp);
-	close(msh->exec->fd_read_redirect);
-	close(msh->exec->fd_write_redirect);
-	close(msh->exec->pipefd[WRITE]);
+	if (exec_list_node->pos_ppl == MIDDLE || exec_list_node->pos_ppl == LAST)
+	{
+		close(msh->exec->fd_temp);
+		close(msh->exec->pipefd[WRITE]);
+	}
+	if (exec_list_node->contains_read_redirect)
+		close(msh->exec->fd_read_redirect);
+	if (exec_list_node->contains_write_redirect)
+		close(msh->exec->fd_write_redirect);
 
 	if (print) {dprintf(2, "do_all_redirections(%d) : état des fd APRES tous les redir et close\n", j);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->pipefd[READ] = %d\n", j, msh->exec->pipefd[READ]);}

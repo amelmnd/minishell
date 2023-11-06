@@ -27,17 +27,19 @@ void	exec_loop(t_msh *msh)
 			
 			check_cmd_path_n_exec(msh, exec_list_node);
 		}
-		send_hd_through_pipe(exec_list_node, j);
+		send_hd_through_pipe(exec_list_node, j); // attention aux builtin solo qui ne fork pas
 
-		close(msh->exec->pipefd[WRITE]);
 		if (exec_list_node->pos_ppl == MIDDLE || exec_list_node->pos_ppl == LAST)
 			close(msh->exec->fd_temp);
 		
 		if (exec_list_node->pos_ppl == FIRST || exec_list_node->pos_ppl == MIDDLE)
 			msh->exec->fd_temp = dup(msh->exec->pipefd[READ]);
-		//dup2(msh->exec->pipefd[READ], msh->exec->fd_temp);
 		
-		close(msh->exec->pipefd[READ]);
+		if (exec_list_node->pos_ppl != SOLO)
+		{
+			close(msh->exec->pipefd[READ]);
+			close(msh->exec->pipefd[WRITE]);
+		}
 
 		exec_list_node = exec_list_node->next;
 		j++;
@@ -52,9 +54,12 @@ void execution(t_msh *msh, char **envp)
 
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
-	feed_msh_with_envp(msh, envp); // différent du path d'Amel, sous la forme d'une liste chainée
-	// cette fonction reste nécessaire, même avec le travail d'Amel
-	create_pipes_for_hd(msh);
+
+	// ATTENTION !!!!
+	feed_msh_with_envp(msh, envp); // il faut récupérer l'env_list et la convertir en char **
+	// pour enfin l'assigner (malloc) à msh->exec->envp
+
+	create_pipes_for_hd(msh); // attention aux builtin solo qui ne forkent pas
 	//print_charss(msh->exec->envp);
 	//print_exec_list(msh);
 
