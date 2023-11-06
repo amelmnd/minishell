@@ -6,13 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/06 13:08:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/06 21:46:48 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int print = 1;
+static int print = 0;
 
 void	generate_prompt(char *envp[])
 {
@@ -74,13 +74,13 @@ void	generate_prompt(char *envp[])
 			/*
 			if (msh->exp_list)
 			{
-				//print_exp_list_one_line(msh);
-				//print_debug_exp_list(msh->exp_list, "main expander_list");
+				print_exp_list_one_line(msh);
+				print_debug_exp_list(msh->exp_list, "main expander_list");
 			}
 			*/
+			
 		}
 		
-		/*
 		if (print) {dprintf(2,"generate_prompt(while) : 11 ; build_exec_list imminent\n");}
 		build_exec_list(msh);
 		if (print) {dprintf(2,"generate_prompt(while) : 12 ; build_exec_list DONE\n");}
@@ -89,6 +89,7 @@ void	generate_prompt(char *envp[])
 		if (print) {dprintf(2,"generate_prompt(while) : 13 ; execution imminent\n");}
 		execution(msh, envp);
 		if (print) {dprintf(2,"generate_prompt(while) : 14 ; execution DONE\n");}
+		/*
 		*/
 		
 
@@ -100,7 +101,7 @@ void	generate_prompt(char *envp[])
 		free_chars(&prompt);
 		if (print) {dprintf(2,"generate_prompt(while) : 18 ; free_chars(&prompt) DONE\n");}
 		
-		break ;
+		//break ;
 	}
 	if (print) {dprintf(2,"generate_prompt : 19 ; free_envlist(msh) imminent\n");}
 	free_envlist(msh);

@@ -168,7 +168,7 @@ void	assign_pos_ppl_exec_list(t_msh *msh)
 	}
 }
 
-void	check_wredir_in_exec_list_node(t_exec_list *exec_list_node)
+void	check_redir_in_exec_list_node(t_exec_list *exec_list_node)
 {
 	if (print) {dprintf(2, "check_wredir_in_exec_list_node : Entrée\n");}
 	int	i;
@@ -189,6 +189,12 @@ void	check_wredir_in_exec_list_node(t_exec_list *exec_list_node)
 			if (print) {dprintf(2, "check_wredir_in_exec_list_node(while) : entrée dans le if\n");}
 			exec_list_node->contains_write_redirect = TRUE;
 		}
+		if (exec_list_node->redirect_array[i].exp_type == R_ORIGIN_REDIRECT
+			|| exec_list_node->redirect_array[i].exp_type == LIMITER_HEREDOC)
+		{
+			if (print) {dprintf(2, "check_wredir_in_exec_list_node(while) : entrée dans le if\n");}
+			exec_list_node->contains_read_redirect = TRUE;
+		}
 	}
 	if (print) {dprintf(2, "check_wredir_in_exec_list_node : Sortie\n");}
 }
@@ -200,7 +206,7 @@ void	scan_write_redirect(t_msh *msh)
 	exec_list_node = msh->exec_list;
 	while (exec_list_node)
 	{
-		check_wredir_in_exec_list_node(exec_list_node);
+		check_redir_in_exec_list_node(exec_list_node);
 		exec_list_node = exec_list_node->next;
 	}
 }
@@ -236,6 +242,4 @@ void	build_exec_list(t_msh *msh)
 	assign_pos_ppl_exec_list(msh);
 	feed_exec_list_node(msh);
 	scan_write_redirect(msh);
-	
-	print_exec_list(msh);
 }
