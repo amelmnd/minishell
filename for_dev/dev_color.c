@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dev_color.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:50:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/17 09:54:42 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/05 12:14:37 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,35 @@
 
 void	blue(void)
 {
-	printf("\033[1;34m");
+	dprintf(2, "\033[1;34m");
 }
 
 void	cyan(void)
 {
-	printf("\033[1;36m");
+	dprintf(2, "\033[1;36m");
 }
 
 void	pink(void)
 {
-	printf("\033[1;35m");
+	dprintf(2, "\033[1;35m");
 }
 
 void	red(void)
 {
-	printf("\033[1;31m");
+	dprintf(2, "\033[1;31m");
 }
 
 void	yellow(void)
 {
-	printf("\033[1;33m");
+	dprintf(2, "\033[1;33m");
 }
 
 void	green(void)
 {
-	printf("\033[1;32m");
+	dprintf(2, "\033[1;32m");
 }
 
 void	reset(void)
 {
-	printf("\033[0m");
+	dprintf(2, "\033[0m");
 }

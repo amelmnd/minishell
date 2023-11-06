@@ -84,3 +84,32 @@ void	feed_the_only_exec_list_node_data(t_msh *msh)
 		exp_list_node_i = exp_list_node_i->next;
 	}
 }
+
+/*
+void	feed_exec_list_node_data(t_msh *msh)
+{
+	t_exp_list	*exp_list_node;
+	t_exec_list	*exec_list_node;
+	int			nb_w;
+	int			nb_r;
+
+	exp_list_node = msh->exp_list;
+	exec_list_node = msh->exec_list;
+	nb_w = 0;
+	nb_r = 0;
+	while (exp_list_node)
+	{
+		if (exp_list_node->exp_type == WORD_EXPANDED)
+			nb_w++;
+		else if (exp_list_node->exp_type != PIPE_EXPANDED)
+			nb_r++;
+		else
+		{
+			exec_list_node->nb_words = nb_w;
+			exec_list_node->nb_redirects = nb_r;
+			exec_list_node = exec_list_node->next;
+			reset_counts(&nb_w, &nb_r);
+		}
+		exp_list_node = exp_list_node->next;
+	}
+}*/

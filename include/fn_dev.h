@@ -16,6 +16,8 @@ void	init_msh(t_msh *msh);
 void	free_msh(t_msh *msh);
 
 void	free_chars(char **dust);
+void	free_ntcharss(char ***dust);
+void	free_envlist(t_msh *msh);
 
 void	build_exec_list(t_msh *msh);
 
