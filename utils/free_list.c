@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 17:22:18 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:22:39 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,4 +130,34 @@ void	clean_msh_list(t_msh *msh)
 	free_exp_list(msh);
 	free_exec_list(msh);
 	free_exec(msh);
+}
+
+/*
+struct	s_env_list
+{
+	t_env_list	*previous;
+	t_env_list	*next;
+	char		*name;
+	char		*value;
+};
+*/
+
+void	free_envlist(t_msh *msh)
+{
+	t_env_list	*current;
+	t_env_list	*next;
+
+	if (msh->env_list)
+	{
+		current = msh->env_list;
+		while (current)
+		{
+			next = current->next;
+			free_chars(&(current->name));
+			free_chars(&(current->value));
+			free(current);
+			current = NULL;
+			current = next;
+		}
+	}
 }
