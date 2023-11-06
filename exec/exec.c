@@ -33,7 +33,8 @@ void	exec_loop(t_msh *msh)
 		if (exec_list_node->pos_ppl == MIDDLE || exec_list_node->pos_ppl == LAST)
 			close(msh->exec->fd_temp);
 		
-		msh->exec->fd_temp = dup(msh->exec->pipefd[READ]);
+		if (exec_list_node->pos_ppl == FIRST || exec_list_node->pos_ppl == MIDDLE)
+			msh->exec->fd_temp = dup(msh->exec->pipefd[READ]);
 		//dup2(msh->exec->pipefd[READ], msh->exec->fd_temp);
 		
 		close(msh->exec->pipefd[READ]);
