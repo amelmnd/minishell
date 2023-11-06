@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/06 12:13:50 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/06 13:08:30 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ void	generate_prompt(char *envp[])
 	{
 		if (print) {dprintf(2,"generate_prompt(while) : 6 ; début nouvelle itération\n");}
 
+		/*
 		if (print) {dprintf(2,"generate_prompt(while) : 6,1 ; sleep 2 imminent\n");}
 		sleep(2);
 		if (print) {dprintf(2,"generate_prompt(while) : 6,2 ; sleep 2 DONE\n");}
+		*/
 		
 		prompt = readline(user);
 		if (print) {dprintf(2,"generate_prompt(while) : 7 ; prompt assigned with readline\n");}
@@ -78,6 +80,7 @@ void	generate_prompt(char *envp[])
 			*/
 		}
 		
+		/*
 		if (print) {dprintf(2,"generate_prompt(while) : 11 ; build_exec_list imminent\n");}
 		build_exec_list(msh);
 		if (print) {dprintf(2,"generate_prompt(while) : 12 ; build_exec_list DONE\n");}
@@ -86,6 +89,7 @@ void	generate_prompt(char *envp[])
 		if (print) {dprintf(2,"generate_prompt(while) : 13 ; execution imminent\n");}
 		execution(msh, envp);
 		if (print) {dprintf(2,"generate_prompt(while) : 14 ; execution DONE\n");}
+		*/
 		
 
 		if (print) {dprintf(2,"generate_prompt(while) : 15 ; clean_msh_list imminent\n");}
