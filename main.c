@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 16:16:38 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/06 12:13:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	generate_prompt(char *envp[])
 			}
 			*/
 		}
+		
 		if (print) {dprintf(2,"generate_prompt(while) : 11 ; build_exec_list imminent\n");}
 		build_exec_list(msh);
 		if (print) {dprintf(2,"generate_prompt(while) : 12 ; build_exec_list DONE\n");}
@@ -85,6 +86,7 @@ void	generate_prompt(char *envp[])
 		if (print) {dprintf(2,"generate_prompt(while) : 13 ; execution imminent\n");}
 		execution(msh, envp);
 		if (print) {dprintf(2,"generate_prompt(while) : 14 ; execution DONE\n");}
+		
 
 		if (print) {dprintf(2,"generate_prompt(while) : 15 ; clean_msh_list imminent\n");}
 		clean_msh_list(msh);
@@ -93,8 +95,17 @@ void	generate_prompt(char *envp[])
 		if (print) {dprintf(2,"generate_prompt(while) : 17 ; free_chars(&prompt) imminent\n");}
 		free_chars(&prompt);
 		if (print) {dprintf(2,"generate_prompt(while) : 18 ; free_chars(&prompt) DONE\n");}
-
+		
+		break ;
 	}
+	if (print) {dprintf(2,"generate_prompt : 19 ; free_envlist(msh) imminent\n");}
+	free_envlist(msh);
+	if (print) {dprintf(2,"generate_prompt : 20 ; free_envlist(msh) DONE\n");}
+	
+	if (print) {dprintf(2,"generate_prompt : 21 ; free(msh) imminent\n");}
+	free(msh);
+	if (print) {dprintf(2,"generate_prompt : 22 ; free(msh) DONE\n");}
+	msh = NULL;
 }
 
 int	main(int argc, char *argv[], char *envp[])
