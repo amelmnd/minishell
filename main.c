@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/06 21:46:48 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:56:30 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	generate_prompt(char *envp[])
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			if (print) {dprintf(2,"generate_prompt(while) : 9.1 ; entrée dans le premier if du while\n");}
-			// print_debug_lexer_list(msh->lexer_list, "main lexer_list");
+			print_debug_lexer_list(msh->lexer_list, "main lexer_list");
 			parser(msh);
 			if (print) {dprintf(2,"generate_prompt(while) : 9.2 ; parser DONE\n");}
 		}
@@ -71,24 +71,25 @@ void	generate_prompt(char *envp[])
 			expander(msh);
 			if (print) {dprintf(2,"generate_prompt(while) : 10.2 ; expander DONE\n");}
 
-			/*
 			if (msh->exp_list)
 			{
 				print_exp_list_one_line(msh);
-				print_debug_exp_list(msh->exp_list, "main expander_list");
+				//print_debug_exp_list(msh->exp_list, "main expander_list");
 			}
-			*/
 			
 		}
 		
-		if (print) {dprintf(2,"generate_prompt(while) : 11 ; build_exec_list imminent\n");}
-		build_exec_list(msh);
-		if (print) {dprintf(2,"generate_prompt(while) : 12 ; build_exec_list DONE\n");}
-		//print_exec_list(msh);
-		
-		if (print) {dprintf(2,"generate_prompt(while) : 13 ; execution imminent\n");}
-		execution(msh, envp);
-		if (print) {dprintf(2,"generate_prompt(while) : 14 ; execution DONE\n");}
+		if (msh->return_code == 0 && msh->lexer_list)
+		{
+			if (print) {dprintf(2,"generate_prompt(while) : 11 ; build_exec_list imminent\n");}
+			build_exec_list(msh);
+			if (print) {dprintf(2,"generate_prompt(while) : 12 ; build_exec_list DONE\n");}
+			//print_exec_list(msh);
+			
+			if (print) {dprintf(2,"generate_prompt(while) : 13 ; execution imminent\n");}
+			execution(msh, envp);
+			if (print) {dprintf(2,"generate_prompt(while) : 14 ; execution DONE\n");}
+		}
 		/*
 		*/
 		
