@@ -79,7 +79,7 @@ void	feed_msh_with_envp(t_msh *msh, char **envp)
 	msh->exec->envp = ntcharss_copy(envp);
 	if (envp)
 	{
-		get_path_from_envp(msh);
+		get_path_from_envp(msh); // récupérer l'env du minishell !!
 		get_paths_from_path(msh);
 	}
 }
