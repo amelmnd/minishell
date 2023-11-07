@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/05 16:39:02 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/07 18:51:33 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -65,10 +65,17 @@ SRCS_EXP = expander.c\
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
 SRCS_EXEC = exec.c\
+			malloc_exec_list_node_arrays.c \
+			feed_the_only_exec_list_node_data.c \
+			get_nb_pipes_in_exp_list.c \
 			build_exec_list_del.c \
 			print_exec_list_del.c \
-			init_exec_list_node_management_del.c \
-			exec_list_node_data_del.c \
+			exec_list_node_management.c \
+			scan_redirects.c \
+			assign_pos_ppl_exec_list.c \
+			feed_exec_list_node.c \
+			feed_exec_list_nodes_data.c \
+			feed_exec_list_nodes_cmd.c \
 			pipe_fork_close_dup2_del.c \
 			new_exec.c \
 			hd.c \
@@ -82,6 +89,7 @@ SRCS_BUIL = builtins.c\
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
 SRCS_UTILS = utils.c \
+			 reset_counts.c \
 			 get_next_line.c \
 			 get_next_line_utils.c \
 			 ft_strcmp.c \

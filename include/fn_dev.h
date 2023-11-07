@@ -3,9 +3,6 @@
 
 # include "minishell.h"
 
-typedef struct timeval	t_timestamp;
-
-//void	print_exp_list(t_msh *msh);
 void	print_exp_list_one_line(t_msh *msh);
 void	print_exec_list(t_msh *msh);
 
@@ -19,21 +16,8 @@ void	free_chars(char **dust);
 void	free_ntcharss(char ***dust);
 void	free_envlist(t_msh *msh);
 
-void	build_exec_list(t_msh *msh);
-
 void	print_exec_list_node(t_exec_list *exec_list_node);
 void	print_exec_list(t_msh *msh);
-
-t_exec_list *new_exec_list_node(void);
-void	init_exec_list_node(t_exec_list *exec_list_node);
-void	plug_exec_list_node(t_msh *msh, t_exec_list *exec_list_node);
-void	create_and_plug_all_empty_exec_list_nodes(t_msh *msh);
-
-void	get_nb_pipes_in_exp_list(t_msh *msh);
-void	reset_counts(int *nb_w, int *nb_r);
-void	feed_exec_list_node_data(t_msh *msh);
-void	feed_last_exec_list_node_data(t_msh *msh);
-void	feed_the_only_exec_list_node_data(t_msh *msh);
 
 void	ft_pipe(t_msh *msh);
 void	ft_fork(t_msh *msh);
