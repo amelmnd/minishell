@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/05 16:44:08 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/06 22:06:48 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ struct	s_exec_list
 	t_bool		contains_hd;
 	t_pos_ppl	pos_ppl;
 	t_bool		contains_write_redirect;
+	t_bool		contains_read_redirect;
 };
 
 struct s_exec
