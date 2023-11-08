@@ -1,4 +1,6 @@
 <> est un opérateur de redirection "lecture-écriture" ; après relecture attentive du sujet, il n'est pas à implémenter, contrairement à ce que les tests des pages github peuvent sous-entendre
 Ainsi, <> doit provoquer une syntax error chez nous
+Je crois que nous l'avions déjà noté, mais au cas où, un rappel (vu que je suis tombé dessus dans les tests sur github).
+
 
 
