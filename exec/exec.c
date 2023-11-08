@@ -21,6 +21,8 @@ void	exec_loop(t_msh *msh)
 			
 			check_cmd_path_n_exec(msh, exec_list_node); // contient tous les exit
 		}
+		if (exec_list_node->pos_ppl == SOLO || exec_list_node->pos_ppl == LAST)
+			msh->exec->last_child = msh->exec->child;
 		send_hd_through_pipe(exec_list_node, j); // attention aux builtin solo qui ne fork pas
 
 		if (exec_list_node->pos_ppl == MIDDLE || exec_list_node->pos_ppl == LAST)
@@ -41,6 +43,28 @@ void	exec_loop(t_msh *msh)
 	}
 }
 
+void	wait_and_get_the_last_return_code(t_msh *msh)
+{
+	int		status;
+	pid_t	pid;
+	int		last_exit_status;
+
+	if (msh) // à compléter ?
+	{
+		pid = waitpid(-1, &status, 0);
+		while (pid != -1)
+		{
+			if (WIFEXITED(status))
+			{
+				if (pid == msh->exec->last_child)
+					last_exit_status = WEXITSTATUS(status);
+			}
+			pid = waitpid(-1, &status, 0);
+		}
+		msh->return_code = last_exit_status;
+	}
+}
+
 void execution(t_msh *msh, char **envp)
 {
 	msh->exec = new_exec();
@@ -49,9 +73,9 @@ void execution(t_msh *msh, char **envp)
 
 	// ATTENTION !!!!
 	feed_msh_with_envp(msh, envp); // il faut récupérer l'env_list et la convertir en char **
-	// pour enfin l'assigner (malloc) à msh->exec->envp
+	// pour enfin l'assigner (malloc) à msh->exec->envp (quand le builtin env sera prêt)
 
-	create_pipes_for_hd(msh); // attention aux builtin solo qui ne forkent pas
+	create_pipes_for_hd(msh);
 
 	/*
 	// cd ; export ; unset ; exit
@@ -66,6 +90,8 @@ void execution(t_msh *msh, char **envp)
 		while (waitpid(-1, &(msh->return_code), 0) != -1)
 			;
 		// il faut récupérer les codes d'exit pour assigner la valeur de retour
+		// surtout celui du dernier exec_list_node, qui doit permettre d'assigner
+		// msh->return_code
 	}
 	*/
 
@@ -78,7 +104,9 @@ void execution(t_msh *msh, char **envp)
 	if (msh->exec_list->nb_pipes)
 		close(msh->exec->fd_temp);
 
-	while (waitpid(-1, &(msh->return_code), 0) != -1)
-		;
+	wait_and_get_the_last_return_code(msh);
+
 	// il faut récupérer les codes d'exit pour assigner la valeur de retour
+	// surtout celui du dernier exec_list_node, qui doit permettre d'assigner
+	// msh->return_code
 }

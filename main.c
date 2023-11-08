@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/08 19:26:24 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 22:29:45 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,9 @@ void	generate_prompt(char *envp[])
 int	main(int argc, char *argv[], char *envp[])
 {
 	(void)argv;
-	if (argc != 1)
-	{
+	if (argc == 1)
+		generate_prompt(envp);
+	else
 		show_no_args_for_minishell_error_msg();
-		return (0);
-	}
-	generate_prompt(envp);
 	return (0);
 }
