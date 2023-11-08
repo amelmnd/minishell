@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:45:43 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 17:46:28 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 14:30:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,25 +23,6 @@ static t_redirect	*malloc_redir_array(int size)
 		if (!array)
 			return (NULL);
 	}
-	return (array);
-}
-
-static char	**malloc_full_null_charss(int size)
-{
-	char	**array;
-	int		i;
-
-	array = NULL;
-	i = -1;
-	if (size)
-	{
-		array = (char **)malloc(sizeof(char *) * (size + 1));
-		if (!array)
-			return (NULL);
-	}
-	while (++i < size)
-		array[i] = NULL;
-	array[size] = NULL;
 	return (array);
 }
 

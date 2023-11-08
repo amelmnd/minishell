@@ -2,8 +2,6 @@
 
 void	exec_loop(t_msh *msh)
 {
-	static int nb_function_call = 0;
-	nb_function_call++;
 	t_exec_list	*exec_list_node;
 
 	exec_list_node = msh->exec_list;
@@ -18,8 +16,10 @@ void	exec_loop(t_msh *msh)
 			do_all_redirections(msh, exec_list_node, j);
 
 			//builtin_way(msh, exec_list_node);
+			// la fonction builtin_way contient un exit
+			// les builtins en eux_mêmes ne contiennent pas d'exit
 			
-			check_cmd_path_n_exec(msh, exec_list_node);
+			check_cmd_path_n_exec(msh, exec_list_node); // contient tous les exit
 		}
 		send_hd_through_pipe(exec_list_node, j); // attention aux builtin solo qui ne fork pas
 
@@ -54,7 +54,8 @@ void execution(t_msh *msh, char **envp)
 	create_pipes_for_hd(msh); // attention aux builtin solo qui ne forkent pas
 
 	/*
-	if (builtin_solo_needs_not_to_fork(msh))
+	// cd ; export ; unset ; exit
+	if (no_fork_solo_builtin(msh))
 		builtin_solo_without_fork(msh);
 	else
 	{
