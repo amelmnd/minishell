@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   show_no_args_for_minishell_error_msg.c             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 19:20:59 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/08 15:15:22 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/08 15:15:39 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-void	reset_counts(int *x, int *y);
-char	**malloc_full_null_charss(int size);
-
-//before prompt_loop
-void	generate_msh_env(t_msh *msh);
-void	show_no_args_for_minishell_error_msg(void);
-void	build_user_for_prompt(t_msh *msh);
-t_msh	*new_msh(void);
-
-#endif
+void	show_no_args_for_minishell_error_msg(void)
+{
+	ft_putstr_fd("Error: minishell does not take any argument.\n", 2);
+	ft_putstr_fd("In order to run minishell, please proceed that way :\n", 2);
+	ft_putstr_fd("\n./minishell\n", 2);
+	ft_putstr_fd("\nnothing more.\n", 2);
+}

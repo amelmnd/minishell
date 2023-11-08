@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/06 22:06:48 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 19:23:41 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ struct	s_lexer_list
 
 enum	e_expander_type
 {
+	INIT_VALUE_EXP_CURRENT_TYPE,
 	WORD_EXPANDED,
 	R_ORIGIN_REDIRECT,
 	LIMITER_HEREDOC,
@@ -156,6 +157,9 @@ struct s_msh
 {
 	int				return_code;
 	t_env_list		*env_list;
+	char			**msh_env;
+	char			*user;
+	char			*prompt;
 	t_exp_type		exp_current_type;
 	t_lexer_list	*lexer_list;
 	t_exp_list		*exp_list;

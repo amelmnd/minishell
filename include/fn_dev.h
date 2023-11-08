@@ -8,10 +8,6 @@ void	print_exec_list(t_msh *msh);
 
 void	print_node(t_exp_list *node);
 
-t_msh *new_msh(void);
-void	init_msh(t_msh *msh);
-void	free_msh(t_msh *msh);
-
 void	free_chars(char **dust);
 void	free_ntcharss(char ***dust);
 void	free_envlist(t_msh *msh);
