@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 19:23:41 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 23:04:44 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ struct s_exec
 	char					*path_from_envp;
 	char					**paths_from_path;
 	pid_t					child;
+	pid_t					last_child;
 	int						pipefd[2];
 	int						fd_temp;
 	int						fd_read_redirect;
