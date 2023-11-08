@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 18:56:39 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 07:50:43 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,20 @@ void	scan_redirects(t_msh *msh);
 void	assign_pos_ppl_exec_list(t_msh *msh);
 void	feed_exec_list_node(t_msh *msh);
 void	build_exec_list(t_msh *msh);
+
+//exec
+// hd
+void	mark_all_erased_hd(t_msh *msh);
+t_hd	*new_hd(void);
+void	get_hd(t_exec_list *exec_list_node, int i);
+void	get_hd_in_exec_list_node(t_exec_list *exec_list_node);
+void	get_all_hd_content(t_msh *msh);
+void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line);
+// hd_pipe
+void	create_pipes_for_hd(t_msh *msh);
+void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j);
+void	send_hd_through_pipe(t_exec_list *exec_list_node, int j);
+
+t_exec	*new_exec(void);
 
 #endif

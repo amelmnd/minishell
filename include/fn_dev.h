@@ -34,17 +34,8 @@ char	*gnl_strdup(char *s);
 char	*gnl_strjoin(char *s1, char *s2);
 char	*gnl_substr(char *s, unsigned int start, size_t len);
 
-void	print_hd_in_exec_list_node(t_exec_list *exec_list_node);
-void	mark_all_erased_hd(t_msh *msh);
-void	send_hd_through_pipe(t_exec_list *exec_list_node, int i);
-t_bool	hd_strcmp(char *limiter, char *line);
-void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line);
-void	get_hd(t_exec_list *exec_list_node, int i);
-void	clear_hd(t_exec_list *exec_list_node);
-void	get_hd_in_exec_list_node(t_exec_list *exec_list_node);
-t_bool	hd_in_exec_list_node(t_exec_list *exec_list_node);
-void	get_all_hd_content(t_msh *msh);
-void	print_all_hd_remaining(t_msh *msh);
+void	print_hd_in_exec_list_node(t_exec_list *exec_list_node); //dev
+void	print_all_hd_remaining(t_msh *msh); //dev
 
 void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j);
 
@@ -52,12 +43,8 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node);
 
 void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node);
 
-void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j);
-void	create_pipes_for_hd(t_msh *msh);
 t_exec	*new_exec(void);
-t_hd	*new_hd(void);
 void	execution(t_msh *msh, char **envp);
-void	init_exec(t_msh *msh);
 int	    get_size_ntcharss(char **ntcharss);
 char	**ntcharss_copy(char **ntcharss_to_copy);
 void	get_path_from_envp(t_msh *msh);

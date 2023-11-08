@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/07 18:51:33 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/08 08:32:21 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,15 @@ SRCS_EXP = expander.c\
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
-SRCS_EXEC = exec.c\
+SRCS_EXEC = here_doc/hd_pipe.c \
+			here_doc/mark_all_erased_hd.c \
+			here_doc/new_hd.c \
+			here_doc/get_hd.c \
+			here_doc/get_hd_in_exec_list_node.c \
+			here_doc/get_all_hd_content.c \
+			here_doc/feed_append_new_hd_node.c \
+			here_doc/hd_del.c \
+			exec.c\
 			malloc_exec_list_node_arrays.c \
 			feed_the_only_exec_list_node_data.c \
 			get_nb_pipes_in_exp_list.c \
@@ -78,7 +86,6 @@ SRCS_EXEC = exec.c\
 			feed_exec_list_nodes_cmd.c \
 			pipe_fork_close_dup2_del.c \
 			new_exec.c \
-			hd.c \
 			redir_del.c \
 			cmd_parsing_del.c \
 
