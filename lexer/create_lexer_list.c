@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_lexer_list.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:07:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/06 11:32:52 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:10:04 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_lexer_cara(t_msh *msh, char *prompt, int *i, char c)
 {
 	int	return_code;
 
-	return_code = 0;
+	return_code = msh->return_code;
 	if (c == ' ' || c == '\t')
 		return_code = is_blank(msh, prompt, i);
 	else if (c == 39)
