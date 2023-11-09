@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dev_print_lexer_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 14:35:54 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/05 12:15:29 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,43 @@ void    print_lexer_type_one_line(int lexer_type)
 	switch (lexer_type)
 	{
 		case 0:
-			printf("type -> PIPE");
+			dprintf(2, "type -> PIPE");
 			break;
 		case 1:
-			printf("type -> WORD");
+			dprintf(2, "type -> WORD");
 			break;
 		case 2:
-			printf("type -> S_QUOTE");
+			dprintf(2, "type -> S_QUOTE");
 			break;
 		case 3:
-			printf("type -> D_QUOTE");
+			dprintf(2, "type -> D_QUOTE");
 			break;
 		case 4:
-			printf("type -> SPECIAL_VAR");
+			dprintf(2, "type -> SPECIAL_VAR");
 			break;
 		case 5:
-			printf("type -> R_REDIRECT");
+			dprintf(2, "type -> R_REDIRECT");
 			break;
 		case 6:
-			printf("type -> HEREDOC");
+			dprintf(2, "type -> HEREDOC");
 			break;
 		case 7:
-			printf("type -> W_REDIRECT");
+			dprintf(2, "type -> W_REDIRECT");
 			break;
 		case 8:
-			printf("type -> W_APPEND_REDIRECT");
+			dprintf(2, "type -> W_APPEND_REDIRECT");
 			break;
 		case 9:
-			printf("type -> BLANK");
+			dprintf(2, "type -> BLANK");
 			break;
 		case 10:
-			printf("type -> VARIABLE");
+			dprintf(2, "type -> VARIABLE");
 			break;
 		case 11:
-			printf("type -> RETURN_VALUE");
+			dprintf(2, "type -> RETURN_VALUE");
 			break;
 		case 12:
-			printf("type -> D_QUOTE_VAR");
+			dprintf(2, "type -> D_QUOTE_VAR");
 			break;
 		default:
 			break;
@@ -66,7 +66,7 @@ void	print_lexer_list(t_lexer_list *list)
 	if (list == NULL)
 	{
 		pink();
-		printf("list is empty\n");
+		dprintf(2, "list is empty\n");
 		reset();
 		return ;
 	}
@@ -77,17 +77,17 @@ void	print_lexer_list(t_lexer_list *list)
 			if (list->str)
 			{
 				green();
-				printf("str -> [%s]	", list->str);
+				dprintf(2, "str -> [%s]	", list->str);
 			}
 			cyan();
 			print_lexer_type_one_line(list->lexer_type);
 			if (list->var_name)
 			{
 				blue();
-				printf("var_name -> [%s]	", list->var_name);
-				printf("var_value -> [%s]	", list->var_value);
+				dprintf(2, "var_name -> [%s]	", list->var_name);
+				dprintf(2, "var_value -> [%s]	", list->var_value);
 			}
-			printf("\n");
+			dprintf(2, "\n");
 			list = list->next;
 		}
 		reset();
@@ -97,9 +97,9 @@ void	print_lexer_list(t_lexer_list *list)
 void	print_debug_lexer_list(t_lexer_list *list, char *name)
 {
 	red();
-	printf("\n______ %s ______\n", name);
+	dprintf(2, "\n______ %s ______\n", name);
 	print_lexer_list(list);
 	red();
-	printf("***********\n");
+	dprintf(2, "***********\n");
 	reset();
 }

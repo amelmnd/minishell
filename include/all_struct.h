@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/03 12:24:04 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 23:04:44 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,7 @@ typedef enum e_read_write				t_read_write;
 typedef struct s_exec					t_exec;
 typedef struct s_hd						t_hd;
 typedef enum e_pos_ppl					t_pos_ppl;
-
-
-
-# include <sys/time.h>
-typedef struct timeval t_timestamp;
-// bloc à supprimer à terme
-typedef enum e_bool				t_bool;
-typedef enum e_lexer_type		t_lexer_type;
-typedef struct s_lexer_list		t_lexer_list;
-typedef enum e_expander_type	t_exp_type;
-typedef struct s_expander_list	t_exp_list;
-typedef struct s_redirect		t_redirect;
-typedef struct s_exec_list		t_exec_list;
-typedef struct s_env_list		t_env_list;
-typedef struct s_msh			t_msh;
+typedef struct s_env_list				t_env_list;
 
 enum	e_bool
 {
@@ -79,6 +65,7 @@ struct	s_lexer_list
 
 enum	e_expander_type
 {
+	INIT_VALUE_EXP_CURRENT_TYPE,
 	WORD_EXPANDED,
 	R_ORIGIN_REDIRECT,
 	LIMITER_HEREDOC,
@@ -139,6 +126,7 @@ struct	s_exec_list
 	t_bool		contains_hd;
 	t_pos_ppl	pos_ppl;
 	t_bool		contains_write_redirect;
+	t_bool		contains_read_redirect;
 };
 
 struct s_exec
@@ -150,6 +138,7 @@ struct s_exec
 	char					*path_from_envp;
 	char					**paths_from_path;
 	pid_t					child;
+	pid_t					last_child;
 	int						pipefd[2];
 	int						fd_temp;
 	int						fd_read_redirect;
@@ -167,13 +156,16 @@ struct	s_env_list
 
 struct s_msh
 {
-	t_exec			*exec;
 	int				return_code;
+	t_env_list		*env_list;
+	char			**msh_env;
+	char			*user;
+	char			*prompt;
+	t_exp_type		exp_current_type;
 	t_lexer_list	*lexer_list;
 	t_exp_list		*exp_list;
 	t_exec_list		*exec_list;
-	t_env_list		*env_list;
-	t_exp_type		exp_current_type;
+	t_exec			*exec;
 };
 
 #endif

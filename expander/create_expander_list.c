@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_expander_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:40:24 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/06 11:40:34 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,37 @@ void	defined_type(t_msh *msh, t_lexer_list *tmp)
 		msh->exp_current_type = WA_DEST_REDIRECT;
 }
 
+t_lexer_list    *check_lexer_list(t_msh *msh, t_lexer_list *tmp)
+{
+    char *pipe_cara;
+
+    defined_type(msh, tmp);
+    if (tmp && tmp->lexer_type == PIPE)
+    {
+		pipe_cara = ft_strdup("|");
+		free_chars(&(pipe_cara));
+		pipe_cara = ft_strdup("|");
+		/*
+        pipe_cara = (char *)malloc(sizeof(char) * 2);
+        pipe_cara[0] = '|';
+		pipe_cara[1] = '\0';
+		*/
+        expander_push(msh, pipe_cara, PIPE_EXPANDED);
+        tmp = generate_str(msh, tmp, WORD_EXPANDED);
+    }
+    else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
+        tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
+    else if (msh->exp_current_type == LIMITER_HEREDOC)
+        tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
+    else if (msh->exp_current_type == W_DEST_REDIRECT)
+        tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
+    else if (msh->exp_current_type == WA_DEST_REDIRECT)
+        tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
+    else if (msh->exp_current_type == WORD_EXPANDED)
+        tmp = generate_str(msh, tmp, WORD_EXPANDED);
+    return (tmp);
+}
+/*
 //NO TUCH
 t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 {
@@ -47,6 +78,7 @@ t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 		tmp = generate_str(msh, tmp, WORD_EXPANDED);
 	return (tmp);
 }
+*/
 
 void	create_expander_list(t_msh *msh)
 {

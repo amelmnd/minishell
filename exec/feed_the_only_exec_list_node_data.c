@@ -1,48 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dev_color.c                                        :+:      :+:    :+:   */
+/*   feed_the_only_exec_list_node_data.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 09:50:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 12:14:37 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/07 18:21:21 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/07 18:22:54 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	blue(void)
+void	feed_the_only_exec_list_node_data(t_msh *msh)
 {
-	dprintf(2, "\033[1;34m");
-}
+	t_exp_list	*exp_list_node_i;
 
-void	cyan(void)
-{
-	dprintf(2, "\033[1;36m");
-}
-
-void	pink(void)
-{
-	dprintf(2, "\033[1;35m");
-}
-
-void	red(void)
-{
-	dprintf(2, "\033[1;31m");
-}
-
-void	yellow(void)
-{
-	dprintf(2, "\033[1;33m");
-}
-
-void	green(void)
-{
-	dprintf(2, "\033[1;32m");
-}
-
-void	reset(void)
-{
-	dprintf(2, "\033[0m");
+	if (msh && msh->exp_list && msh->exec_list)
+	{
+		exp_list_node_i = msh->exp_list;
+		while (exp_list_node_i)
+		{
+			if (exp_list_node_i->exp_type == WORD_EXPANDED)
+				msh->exec_list->nb_words++;
+			else
+				msh->exec_list->nb_redirects++;
+			exp_list_node_i = exp_list_node_i->next;
+		}
+	}
 }

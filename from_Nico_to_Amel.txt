@@ -1,3 +1,67 @@
+9/11/2023 : Signaux
+En mode interactif, le sujet précise déjà les comportements des trois signaux ;
+Ctrl + C :
+	(free entre deux itérations)
+	affiche à nouveau le prompt
+	msh->return_code assigné à 130
+Ctrl + D :
+	(free de TOUT)
+	quitte minishell
+	(question du msh->return_code non pertinente)
+Ctrl + \ :
+	RIEN
+	msh->return_code laissé à 0
+
+Pendant l'exécution :
+Ctrl + C : 
+	(free entre deux itérations)
+	interrompt (kill certainement) tous les processus en cours
+	affiche à nouveau le prompt
+	msh->return_code assigné à 130
+Ctrl + D :
+	RIEN
+	msh->return_code laissé à 0
+Ctrl + \ :
+	même chose que Ctrl + C, sauf le msh->return_code assigné à 131
+
+Pendant la saisie d'un heredoc :
+Ctrl + C :
+	Même chose que pendant l'exécution
+Ctrl + D :
+	Même chose que Ctrl + C, sauf le msh->return_code laissé à 0
+Ctrl + \ :
+	RIEN (la saisie du heredoc est maintenue, sans nouvelle ligne)
+	Après la saisie du limiter, msh->return_code est toujours à 0
+
+
+
+<> est un opérateur de redirection "lecture-écriture" ; après relecture attentive du sujet, il n'est pas à implémenter, contrairement à ce que les tests des pages github peuvent sous-entendre
+Ainsi, <> doit provoquer une syntax error chez nous
+Je crois que nous l'avions déjà noté, mais au cas où, un rappel (vu que je suis tombé dessus dans les tests sur github).
+
+ls|cat ne fonctionne pas :
+	le pipe n'est pas pris en compte
+	l'expander sort juste deux mots d'affilée
+
+Les commandes suivantes :
+
+- première commande : ls > lol
+spardaspirit $> ls > lol
+(WORD_EXPANDED)ls (W_DEST_REDIRECT)lol 
+spardaspirit $> Segmentation fault (core dumped)
+// le Segmentation fault (core dumped) s'affiche tout seul dans le prompt,
+// je ne l'ai pas saisi
+
+- deuxième commande : echo coucou > mdr
+(même erreur)
+
+provoquent une segfault au moment du réaffichage du prompt
+valgrind indique une anomalie du ft_strlen (ah ouais, à ce point ???)
+cela semble être uniquement le cas des lignes ne contenant aucun pipe
+dès qu'il y au moins un pipe, la segfault n'apparait plus
+
+
+Contenu de notes.txt (fichier maintenant supprimé) collé ici :
 A adapter et incure dans chaque fichier
 
 #include "minishell.h"

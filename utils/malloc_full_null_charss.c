@@ -1,48 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dev_color.c                                        :+:      :+:    :+:   */
+/*   malloc_full_null_charss.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/17 09:50:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 12:14:37 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/08 14:29:05 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/08 14:29:38 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	blue(void)
+char	**malloc_full_null_charss(int size)
 {
-	dprintf(2, "\033[1;34m");
-}
+	char	**array;
+	int		i;
 
-void	cyan(void)
-{
-	dprintf(2, "\033[1;36m");
-}
-
-void	pink(void)
-{
-	dprintf(2, "\033[1;35m");
-}
-
-void	red(void)
-{
-	dprintf(2, "\033[1;31m");
-}
-
-void	yellow(void)
-{
-	dprintf(2, "\033[1;33m");
-}
-
-void	green(void)
-{
-	dprintf(2, "\033[1;32m");
-}
-
-void	reset(void)
-{
-	dprintf(2, "\033[0m");
+	array = NULL;
+	i = -1;
+	if (size)
+	{
+		array = (char **)malloc(sizeof(char *) * (size + 1));
+		if (!array)
+			return (NULL);
+	}
+	while (++i < size)
+		array[i] = NULL;
+	array[size] = NULL;
+	return (array);
 }
