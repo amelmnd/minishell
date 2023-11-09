@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   is_word.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:03:23 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/20 12:33:20 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 15:22:18 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	is_word(t_msh *msh, char *prompt, int *i)
 	world_len = is_world_end(prompt, *i);
 	world = ft_substr(prompt, *i, world_len);
 	lexer_push(msh, world, WORD);
+	free_chars(&world);
 	*i += world_len - 1;
 	return (0);
 }

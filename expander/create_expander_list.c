@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/06 11:40:34 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:49:48 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,14 @@ void	defined_type(t_msh *msh, t_lexer_list *tmp)
 
 t_lexer_list    *check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 {
-    char *pipe_cara;
+    char	*pipe_cara;
 
     defined_type(msh, tmp);
     if (tmp && tmp->lexer_type == PIPE)
     {
 		pipe_cara = ft_strdup("|");
-		free_chars(&(pipe_cara));
-		pipe_cara = ft_strdup("|");
-		/*
-        pipe_cara = (char *)malloc(sizeof(char) * 2);
-        pipe_cara[0] = '|';
-		pipe_cara[1] = '\0';
-		*/
         expander_push(msh, pipe_cara, PIPE_EXPANDED);
+		free_chars(&pipe_cara);
         tmp = generate_str(msh, tmp, WORD_EXPANDED);
     }
     else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
