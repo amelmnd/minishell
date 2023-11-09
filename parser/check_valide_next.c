@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:23:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 15:33:35 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:10:28 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_valid_next(t_msh *msh)
 	int				return_code;
 
 	list = msh->lexer_list;
-	return_code = 0;
+	return_code = msh->return_code;
 	while (list != NULL)
 	{
 		if (list->lexer_type == PIPE && list->next->lexer_type == BLANK
