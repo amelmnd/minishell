@@ -1,3 +1,8 @@
+9/11/2023 à 16h05
+Certes, << $toto entraine une erreur qui fait crash
+mais $toto aussi :/
+
+
 9/11/2023 : Signaux
 En mode interactif, le sujet précise déjà les comportements des trois signaux ;
 Ctrl + C :
