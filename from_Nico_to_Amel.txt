@@ -1,3 +1,26 @@
+9/11/2023 à 18h38
+
+au démarrage : msh->return_code est à 0
+lexer :
+	si erreur :
+		msh->return_code est modifié à 2
+		pas de parser, expander ni executor
+		à la nouvelle itération msh->return_code est donc toujours à 2
+	sinon
+		msh->return_code laissé à 0
+parser :
+	même chose que le lexer
+expander :
+	si on parvient jusqu'à l'expander, alors, $? est remplacé par sa valeur
+executor :
+	si erreur :
+		affichage de l'erreur (qui peut contenir l'actuelle valeur de msh->return_code)
+		msh->return_code est assigné à l'erreur correspondante
+
+
+
+
+
 9/11/2023 à 16h05
 Certes, << $toto entraine une erreur qui fait crash
 mais $toto aussi :/

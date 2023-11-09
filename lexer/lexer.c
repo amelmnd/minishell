@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 15:31:20 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:01:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ void	lexer_check(t_msh *msh, char *prompt)
 		exit_new_line(msh);
 	else
 		lexer_create_list(msh, prompt);
-	free_chars(&prompt);
+	//free_chars(&prompt);
 }
