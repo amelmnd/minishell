@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 15:38:41 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 16:44:04 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	free_exp_list(t_msh *msh)
 		while (current != NULL)
 		{
 			next = current->next;
-			free_chars(&(current->str));
+			//free_chars(&(current->str));
 			free(current);
 			current = next;
 		}
@@ -119,7 +119,6 @@ void	free_exec_list(t_msh *msh)
 			current = next;
 		}
 		msh->exec_list = NULL;
-		msh->exp_current_type = 0;
 	}
 }
 
