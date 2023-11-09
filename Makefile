@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/05 16:39:02 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/08 19:33:29 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,12 +49,11 @@ SRCS_PARS = parser.c \
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c\
+SRCS_EXP = expander.c \
 		   exp_list_generator_del.c \
 		   print_exp_list_del.c \
 		   gen_random_str_del.c \
 		   exp_list_node_management_del.c \
-		   msh_del.c \
 		   feed_msh_acavenvp_del.c \
 		   check_var_value.c \
 		   expander_list_manage.c \
@@ -64,14 +63,29 @@ SRCS_EXP = expander.c\
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
-SRCS_EXEC = exec.c\
+SRCS_EXEC = here_doc/hd_pipe.c \
+			here_doc/mark_all_erased_hd.c \
+			here_doc/new_hd.c \
+			here_doc/get_hd.c \
+			here_doc/get_hd_in_exec_list_node.c \
+			here_doc/get_all_hd_content.c \
+			here_doc/feed_append_new_hd_node.c \
+			here_doc/hd_del.c \
+			solo_builtin/solo_builtin_del.c \
+			exec.c \
+			malloc_exec_list_node_arrays.c \
+			feed_the_only_exec_list_node_data.c \
+			get_nb_pipes_in_exp_list.c \
 			build_exec_list_del.c \
 			print_exec_list_del.c \
-			init_exec_list_node_management_del.c \
-			exec_list_node_data_del.c \
+			exec_list_node_management.c \
+			scan_redirects.c \
+			assign_pos_ppl_exec_list.c \
+			feed_exec_list_node.c \
+			feed_exec_list_nodes_data.c \
+			feed_exec_list_nodes_cmd.c \
 			pipe_fork_close_dup2_del.c \
 			new_exec.c \
-			hd.c \
 			redir_del.c \
 			cmd_parsing_del.c \
 
@@ -82,11 +96,17 @@ SRCS_BUIL = builtins.c\
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
 SRCS_UTILS = utils.c \
+			 malloc_full_null_charss.c \
+			 generate_msh_env.c \
+			 show_no_args_for_minishell_error_msg.c \
+			 reset_counts.c \
 			 get_next_line.c \
 			 get_next_line_utils.c \
 			 ft_strcmp.c \
 			 free_chars.c \
 			 manage_error.c \
+			 build_user_for_prompt.c \
+			 new_msh.c \
 			 free_list.c \
 			 fn_env.c \
 			 fn_env_list.c \

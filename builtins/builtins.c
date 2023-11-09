@@ -1,6 +1,11 @@
 #include "minishell.h"
 
-//les builtins doivent contenir les exit appropriés (SUCCESS ou FAILURE)
+//Les builtins, lorsqu'ils ne sont pas exécutés dans le processus parent,
+// assignent msh->return_code, lequel est est ensuite utilisé pour ajuster la
+// valeur de l'exit, et ainsi, récupérer sa valeur à la fin de l'exec_loop (dans la
+// fonction exec, lors du waitpid.)
+//A noter que seule la commande du dernier exec_list_node assigne la valeur de
+// msh->return_code !
 /*
 void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 {
@@ -20,5 +25,14 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 		env_builtin(msh, exec_list_node);
 	else if (ft_strcmp(exec_list_node->cmd, "exit"))
 		exit_builtin(msh, exec_list_node);
+	//L'exit_builtin contient un free de TOUT, ABSOLUMENT TOUT
+	// si elle (la fonction) est appelée depuis un exec_list_node solo,
+	// la mémoire du processus parent est libérée,
+	// ce qui est indispensable pour éviter les leaks
+	// Si elle est appelée depuis un processus enfant, la mémoire du processus enfant
+	// sera libérée ; ce qui peut être bien, mais pas indispensable à ce qu'il parait
+	// Procéder à la libération de TOUTE la mémoire allouée par ./minishell, que
+	// ce soit dans le processus parent, ou un processus enfant, semble dans tous les cas
+	// préférable
 }
 */

@@ -1,44 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_exec.c                                         :+:      :+:    :+:   */
+/*   new_msh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 22:25:54 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 23:05:29 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/08 19:20:10 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/08 23:05:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_exec(t_exec *exec)
+static void	init_msh(t_msh *msh)
 {
-	if (exec)
-	{
-		exec->ac = 0;
-		exec->av = NULL;
-		exec->envp = NULL;
-		exec->path_defined = 1;
-		exec->path_from_envp = NULL;
-		exec->paths_from_path = NULL;
-		exec->pipefd[0] = 0;
-		exec->pipefd[1] = 0;
-		exec->fd_temp = -1;
-		exec->fd_read_redirect = -1;
-		exec->fd_write_redirect = -1;
-		exec->cmd_path_ready = NULL;
-	}
+	msh->return_code = 0;
+	msh->env_list = NULL;
+	msh->msh_env = NULL;
+	msh->user = NULL;
+	msh->prompt = NULL;
+	msh->lexer_list = NULL;
+	msh->exp_current_type = INIT_VALUE_EXP_CURRENT_TYPE;
+	msh->exp_list = NULL;
+	msh->exec_list = NULL;
+	msh->exec = NULL;
 }
 
-t_exec	*new_exec(void)
+t_msh *new_msh(void)
 {
-	t_exec	*new;
+	t_msh	*new;
 
 	new = NULL;
-	new = (t_exec *)malloc(sizeof(t_exec));
+	new = (t_msh *)malloc(sizeof(t_msh));
 	if (!new)
 		return (NULL);
-	init_exec(new);
+	init_msh(new);
 	return (new);
 }

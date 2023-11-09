@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 21:55:11 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/08 15:22:24 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,14 +180,16 @@ void	env_list_generate(t_msh *msh, char *envp[])
 	int	i;
 
 	i = -1;
-	if (envp)
-		msh->env_list = new_env_list();
-	while (envp && envp[++i])
+	if (msh)
 	{
-		if (!i)
-			fill_first_env_list_node(msh, envp[i]);
-		else
-			append_new_fed_list_node(msh, envp[i]);
+		if (envp)
+			msh->env_list = new_env_list();
+		while (envp && envp[++i])
+		{
+			if (!i)
+				fill_first_env_list_node(msh, envp[i]);
+			else
+				append_new_fed_list_node(msh, envp[i]);
+		}
 	}
-	//print_env_list(msh->env_list);
 }
