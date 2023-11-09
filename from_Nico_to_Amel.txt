@@ -1,3 +1,29 @@
+9/11/2023 : Signaux
+En mode interactif, le sujet précise déjà
+
+Pendant l'exécution :
+Ctrl + C : 
+	(free entre deux itérations)
+	interrompt (kill certainement) tous les processus en cours
+	affiche à nouveau le prompt
+	msh->return_code assigné à 130
+Ctrl + D :
+	RIEN
+	msh->return_code laissé à 0
+Ctrl + \ :
+	même chose que Ctrl + C, sauf le msh->return_code assigné à 131
+
+Pendant la saisie d'un heredoc :
+Ctrl + C :
+	Même chose que pendant l'exécution
+Ctrl + D :
+	Même chose que Ctrl + C, sauf le msh->return_code laissé à 0
+Ctrl + \ :
+	RIEN (la saisie du heredoc est maintenue, sans nouvelle ligne)
+	Après la saisie du limiter, msh->return_code est toujours à 0
+
+
+
 <> est un opérateur de redirection "lecture-écriture" ; après relecture attentive du sujet, il n'est pas à implémenter, contrairement à ce que les tests des pages github peuvent sous-entendre
 Ainsi, <> doit provoquer une syntax error chez nous
 Je crois que nous l'avions déjà noté, mais au cas où, un rappel (vu que je suis tombé dessus dans les tests sur github).
