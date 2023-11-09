@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/08 19:31:18 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:38:41 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	free_exec_list(t_msh *msh)
 	t_exec_list	*current;
 	t_exec_list	*next;
 	
-	if (msh->exec_list)
+	if (msh && msh->exec_list)
 	{
 		current = msh->exec_list;
 		while (current)
@@ -118,7 +118,7 @@ void	free_exec_list(t_msh *msh)
 			free(current);
 			current = next;
 		}
-		msh->exp_list = NULL;
+		msh->exec_list = NULL;
 		msh->exp_current_type = 0;
 	}
 }
@@ -132,7 +132,7 @@ void	clean_msh_list(t_msh *msh)
 	free_exp_list(msh);
 	free_exec_list(msh);
 	free_exec(msh);
-	free_chars(&(msh->prompt));
+	//free_chars(&(msh->prompt));
 }
 
 void	free_envlist(t_msh *msh)
