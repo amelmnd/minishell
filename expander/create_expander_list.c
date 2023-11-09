@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_expander_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 16:49:48 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:56:41 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,11 @@ void	defined_type(t_msh *msh, t_lexer_list *tmp)
 
 t_lexer_list    *check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 {
-    char	*pipe_cara;
 
     defined_type(msh, tmp);
     if (tmp && tmp->lexer_type == PIPE)
     {
-		pipe_cara = ft_strdup("|");
-        expander_push(msh, pipe_cara, PIPE_EXPANDED);
-		free_chars(&pipe_cara);
+        expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
         tmp = generate_str(msh, tmp, WORD_EXPANDED);
     }
     else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
