@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_list_manage.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:18:22 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 10:54:07 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:42:47 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_expander_node(t_exp_list *node)
 	node->exp_type = 0;
 }
 
-void	expander_push_new_node(t_msh *msh, t_exp_list	*new_node)
+void	expander_push_new_node(t_msh *msh, t_exp_list *new_node)
 {
 	t_exp_list	*tmp;
 
