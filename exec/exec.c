@@ -62,6 +62,7 @@ void	wait_and_get_the_last_return_code(t_msh *msh)
 			pid = waitpid(-1, &status, 0);
 		}
 		msh->return_code = last_exit_status;
+		printf("msh->return_code = %d\n", msh->return_code);
 	}
 }
 
