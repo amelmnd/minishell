@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:28:22 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 17:40:57 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	is_dollar(t_msh *msh, char *prompt, int *i)
 			&& prompt[*i + 1] == '_'))
 		var_name_isalpha(msh, prompt, i);
 	else if (!ft_isalpha(prompt[*i + 1]) && prompt[*i + 1] != 60
-		&& prompt[*i + 1] != 62 && prompt[*i + 1] != '|')
+		&& prompt[*i + 1] != 62 && prompt[*i + 1] != '|' && prompt[*i + 1])
 		var_name_not_isalpha(msh, prompt, i);
 	return (0);
 }
