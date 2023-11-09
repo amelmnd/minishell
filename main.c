@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 16:17:45 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 17:46:25 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	generate_prompt(char *envp[])
 		//msh->return_code est conservé d'une itération à la suivante (ce que l'on veut)
 		// une instruction dans la suite de la boucle réassigne la valeur à 0 avant l'expander
 		// ce qui empêche de pouvoir l'afficher avec un echo $? par exemple
-		
+
 		//generate_msh_env(msh); // ne pas supprimer
 		//assigne à msh->(char **)msh_env un char ** généré à partir de msh->env_list
 		// qui est modifiée et conservée au fur et à mesure de cette boucle (generate_prompt)
-		
+
 		msh->prompt = readline(msh->user);
 		lexer_check(msh, msh->prompt);
 		if (msh->return_code == 0 && msh->lexer_list)
