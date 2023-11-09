@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:51:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 14:37:32 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:10:48 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	limit_is_valid(t_msh *msh)
 	int				return_code;
 
 	list = msh->lexer_list;
-	return_code = 0;
+	return_code = msh->return_code;
 	while (list != NULL)
 	{
 		if (list->previous == NULL && list->lexer_type == PIPE)
