@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/23 12:10:35 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:39:45 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,13 @@ int	is_dollar(t_msh *msh, char *prompt, int *i)
 {
 	if (prompt[*i + 1] == '?')
 		var_name_is_return_value(msh, prompt, i);
-	else if (prompt[*i + 1] == 34 || prompt[*i + 1] == 39)
-		return (0);
-	else if (prompt[*i + 1] == '\0' || ((prompt[*i - 1] == ' '
+	else if (prompt[*i + 1] == 34 || prompt[*i + 1] == 39
+		|| prompt[*i + 1] == '\0' || ((prompt[*i - 1] == ' '
 				|| prompt[*i - 1] == '\t') && (prompt[*i + 1] == ' '
 				|| prompt[*i + 1] == '\t' || prompt[*i + 1] == '\0'))
 		|| (!ft_isalpha(prompt[*i + 1]) && (prompt[*i + 1] == '>'
 				|| prompt[*i + 1] == '<' || prompt[*i + 1] == '|')))
-		lexer_push(msh, "$", WORD);
+		lexer_push(msh, ft_strdup("$"), WORD);
 	else if (ft_isalpha(prompt[*i + 1]) || (!ft_isalpha(prompt[*i + 1])
 			&& prompt[*i + 1] == '_'))
 		var_name_isalpha(msh, prompt, i);
