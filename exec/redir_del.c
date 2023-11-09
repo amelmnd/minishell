@@ -3,8 +3,6 @@
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 static int print = 0;
 
-//Version personnelle
-
 void	do_read_redir(t_msh *msh, char *origin, int j)
 {
 	if (print) {dprintf(2, "do_read_redir(%d) ; Entrée\n", j);}
@@ -12,7 +10,9 @@ void	do_read_redir(t_msh *msh, char *origin, int j)
 	if (msh->exec->fd_read_redirect == -1)
 	{
 		if (print) {dprintf(2, "minishell : %s\n", strerror(errno));} // message à ajuster plus tard
-		exit(EXIT_FAILURE); // code à ajuster plus tard
+		if (1) {dprintf(2, "minishell : %s\n", strerror(errno));} // message à ajuster plus tard
+		//exit(EXIT_FAILURE); // code à ajuster plus tard
+		exit(1); // code convenant à l'inexistence et aux droits insuffisants
 	}
 	else
 		ft_duptwo(msh->exec->fd_read_redirect, STDIN_FILENO);
