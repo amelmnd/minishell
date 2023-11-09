@@ -1,5 +1,16 @@
 9/11/2023 : Signaux
-En mode interactif, le sujet précise déjà
+En mode interactif, le sujet précise déjà les comportements des trois signaux ;
+Ctrl + C :
+	(free entre deux itérations)
+	affiche à nouveau le prompt
+	msh->return_code assigné à 130
+Ctrl + D :
+	(free de TOUT)
+	quitte minishell
+	(question du msh->return_code non pertinente)
+Ctrl + \ :
+	RIEN
+	msh->return_code laissé à 0
 
 Pendant l'exécution :
 Ctrl + C : 
