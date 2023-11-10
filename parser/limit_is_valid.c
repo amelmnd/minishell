@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:51:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 16:10:48 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/10 10:25:47 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	check_end(t_msh *msh, t_lexer_list *list)
 		exit_synthax_error(msh, "|");
 		return (2);
 	}
-	else if (list->lexer_type >= 4 && list->lexer_type <= 7)
+	else if (list->lexer_type >= 4 && list->lexer_type <= 8)
 	{
 		exit_synthax_error(msh, "newline");
 		return (2);
@@ -44,7 +44,7 @@ int	limit_is_valid(t_msh *msh)
 	{
 		if (list->previous == NULL && list->lexer_type == PIPE)
 			return_code = check_start(msh);
-		if (list->next == NULL)
+		if ((list->previous == NULL && list->next == NULL) || list->next == NULL)
 			return_code = check_end(msh, list);
 		if (return_code != 0)
 			break ;
