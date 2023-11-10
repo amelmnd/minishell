@@ -32,7 +32,7 @@ void	get_path_from_envp(t_msh *msh)
 {
 	char	*temp;
 	int		i;
-	
+
 	temp = NULL;
 	i = 0;
 	while (msh->exec->envp[i] && ft_strncmp(msh->exec->envp[i], "PATH=", 5))

@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   dev_print_exp_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 12:15:16 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/10 11:54:23 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-void    print_exp_type_one_line(int exp_type)
+void    print_exp_type_ls(int exp_type)
 {
 	switch (exp_type)
 	{
@@ -40,7 +39,7 @@ void    print_exp_type_one_line(int exp_type)
 	}
 	dprintf(2, "\n");
 }
-*/
+
 
 void	print_exp_list(t_exp_list *list)
 {
@@ -66,7 +65,7 @@ void	print_exp_list(t_exp_list *list)
 				dprintf(2, "v_name -> [%s]\n", list->str);
 			}
 			cyan();
-			//print_exp_type_one_line(list->exp_type);
+			print_exp_type_ls(list->exp_type);
 			list = list->next;
 		}
 		reset();

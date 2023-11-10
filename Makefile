@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
+#    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/08 19:33:29 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/10 12:01:07 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,6 @@ SRCS_PARS = parser.c \
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
 SRCS_EXP = expander.c \
-		   exp_list_generator_del.c \
-		   print_exp_list_del.c \
-		   gen_random_str_del.c \
-		   exp_list_node_management_del.c \
-		   feed_msh_acavenvp_del.c \
 		   check_var_value.c \
 		   expander_list_manage.c \
 		   create_expander_list.c \
@@ -73,6 +68,7 @@ SRCS_EXEC = here_doc/hd_pipe.c \
 			here_doc/hd_del.c \
 			solo_builtin/solo_builtin_del.c \
 			exec.c \
+		   feed_msh_acavenvp_del.c \
 			malloc_exec_list_node_arrays.c \
 			feed_the_only_exec_list_node_data.c \
 			get_nb_pipes_in_exp_list.c \
@@ -118,6 +114,7 @@ SRCS_UTILS = utils.c \
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
 DIR_DEV = for_dev/
 SRCS_DEV = dev_color.c \
+		   print_exp_list_del.c \
 		   dev_print_lexer_list.c \
 		   dev_print_exp_list.c \
 		   dev_print_env_list.c\

@@ -6,13 +6,15 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:46:25 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/10 11:52:08 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int print = 1;
+static int print = 0;
+
+
 
 void	generate_prompt(char *envp[])
 {
@@ -26,7 +28,7 @@ void	generate_prompt(char *envp[])
 	while (42)
 	{
 		if (print) {printf("generate_prompt(while) : début itération ; msh->return_code = %d\n", msh->return_code);}
-		//msh->return_code est conservé d'une itération à la suivante (ce que l'on veut)
+		//msh->return_code est conservé d'une itération à la suivante (ce que l'on <veut)
 		// une instruction dans la suite de la boucle réassigne la valeur à 0 avant l'expander
 		// ce qui empêche de pouvoir l'afficher avec un echo $? par exemple
 
@@ -39,22 +41,28 @@ void	generate_prompt(char *envp[])
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
+			printf("BP msh->return_code = %d\n", msh->return_code);
 			parser(msh);
+			// if (msh->return_code == 0) // to delete
+			// {
+			// 	printf("AP msh->return_code = %d\n", msh->return_code);
+			// 	print_debug_lexer_list(msh->lexer_list, "main parser_lexer_list"); // à supprimer à terme
+			// }
 		}
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell
-			if (msh->exp_list)
-			{
-				print_exp_list_one_line(msh); // à supprimer à terme
-				//print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
-			}
+			// if (msh->exp_list)
+			// {
+				// print_exp_list_one_line(msh); // à supprimer à terme
+				print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
+			// }
 		}
-		if (msh->return_code == 0 && msh->lexer_list)
-		{
-			build_exec_list(msh);
-			execution(msh, envp);
-		}
+		// if (msh->return_code == 0 && msh->lexer_list)
+		// {
+		// 	build_exec_list(msh);
+		// 	execution(msh, envp);
+		// }
 		clean_msh_list(msh);
 		//break ;
 	}

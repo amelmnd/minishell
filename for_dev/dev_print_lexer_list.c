@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dev_print_lexer_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 12:15:29 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/10 10:40:11 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,12 @@ void	print_lexer_list(t_lexer_list *list)
 			}
 			cyan();
 			print_lexer_type_one_line(list->lexer_type);
-			if (list->var_name)
-			{
-				blue();
-				dprintf(2, "var_name -> [%s]	", list->var_name);
-				dprintf(2, "var_value -> [%s]	", list->var_value);
-			}
+			// // if (list->var_name)
+			// // {
+			// 	blue();
+			// 	dprintf(2, "	var_name -> [%s]	", list->var_name);
+			// 	dprintf(2, "	var_value -> [%s]	", list->var_value);
+			// // }
 			dprintf(2, "\n");
 			list = list->next;
 		}
