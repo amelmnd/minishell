@@ -1,3 +1,84 @@
+10/11/2023 à 18h35
+Les erreurs classiques des redirections sont maintenant gérées
+Il manque cependant les erreurs provoquées par les variables inexistantes ou spéciales
+Je réalise que je perds une information lors de l'expander (que je ne peux pas récupérer
+à l'exécuteur, vu que la fusion est passée par là)
+En fait, il me faudrait une nouvelle entrée dans l'e_expander_type :
+enum	e_expander_type
+{
+	INIT_VALUE_EXP_CURRENT_TYPE,
+	WORD_EXPANDED,
+	R_ORIGIN_REDIRECT,
+	LIMITER_HEREDOC,
+	W_DEST_REDIRECT,
+	WA_DEST_REDIRECT,
+	PIPE_EXPANDED,
+	HEREDOC_ERASED,
+->	AMBIGUOUS_REDIRECT <-
+};
+Cette valeur de l'enum serait attribuée au noeud de l'exp_list correspondant dans le cas
+suivant :
+une fusion n'est le produit que d'une seule variable qui n'existe pas.
+Dans ce cas, le nom de la variable doit être conservée (ce qui est déjà le cas, et tant mieux),
+mais je ne sais pas, dans le cas d'une redirection, s'il s'agit d'un nom de variable
+inexistante, ou si c'était le contenu d'une s_quote, ou encore le résultat d'une fusion de
+plusieurs mots/caractères
+
+Tests autour des variables inexistantes et des ambiguous_redirect :
+bash 3.2: > $lol                                                                    
+bash: $lol: ambiguous redirect
+bash 3.2: < $lol$mdr                                                                
+bash: $lol$mdr: ambiguous redirect
+bash 3.2: < $lol""$mdr                                                              
+bash: : No such file or directory
+bash 3.2: < "$lol"                                                                  
+bash: : No such file or directory
+bash 3.2: < $lol                                                                    
+bash: $lol: ambiguous redirect
+bash 3.2: < $lol$mdr                                                                
+bash: $lol$mdr: ambiguous redirect
+bash 3.2: < $"lol"$mdr                                                              
+bash: lol: No such file or directory
+bash 3.2: < "$lol"$mdr                                                              
+bash: : No such file or directory
+bash 3.2: < "$lol$mdr"                                                              
+bash: : No such file or directory
+bash 3.2: < $lol""                                                                  
+bash: : No such file or directory
+bash 3.2: < ""$lol                                                                  
+bash: : No such file or directory
+bash 3.2: < ''$lol                                                                  
+bash: : No such file or directory
+bash 3.2: < $lol''                                                                  
+bash: : No such file or directory
+
+(copié collé des messages discords explicatifs)
+En fait, tu as fait en sorte que les variables inexistantes disparaissent lorsqu'elles ne 
+sont pas l'objet de redirection. Aucun problème de ce côté là, c'est ce qu'o navait prévu, 
+et rien à retoucher là-dessus
+On avait aussi prévu de conserver le nom de la variable dans le cas où elle n'existe pas,
+ et qu'elle est l'objet d'une redirection ; ça aussi c'est ce que l'on avait prévu,
+  et c'est comme ça que ça foncitonne, et tant mieux aussi
+Là où j'ai un problème, c'est qu'une fois à l'exécutor, je ne sais pas distinguer 
+les deux cas suivants (par exemple) :
+(la variable lol n'existe pas)
+< '$lol'
+ET
+< $lol
+l'expander me sort la même chose en terme de texte, et c'est ce que l'on veut
+Par contre, dans le premier cas, l'executor doit lire à partir du fichier nommé $lol
+Alors que dans le deuxième cas, l'executor doit retourner une erreur "ambiguous redirect"
+(Je me suis fait un peu mieux comprendre ?)
+Donc, dans le cas où tu reçois < $lol dans l'expander, 
+tu conserves toujours le nom de la variable inexistante (rien à changer de ce côté-là),
+ mais au lieu de mettre l'enum     R_ORIGIN_REDIRECT, 
+ tu mettrais un nouveau AMBIGUOUS_REDIRECT
+amel — Aujourd’hui à 18:55
+Ok mais c'est pour quel chevrons qu'on dooit faire ca ?
+Spardaspirit — Aujourd’hui à 18:55
+tous sauf <<
+
+
 9/11/2023 à 18h38
 
 au démarrage : msh->return_code est à 0
