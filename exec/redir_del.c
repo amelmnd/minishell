@@ -9,9 +9,7 @@ void	do_read_redir(t_msh *msh, char *origin, int j)
 	msh->exec->fd_read_redirect = open(origin, O_RDONLY);
 	if (msh->exec->fd_read_redirect == -1)
 	{
-		if (print) {dprintf(2, "minishell : %s\n", strerror(errno));} // message à ajuster plus tard
-		if (1) {dprintf(2, "minishell : %s\n", strerror(errno));} // message à ajuster plus tard
-		//exit(EXIT_FAILURE); // code à ajuster plus tard
+		printf("minishell: %s: %s\n", origin, strerror(errno));
 		exit(1); // code convenant à l'inexistence et aux droits insuffisants
 	}
 	else
@@ -25,8 +23,8 @@ void	do_write_redir(t_msh *msh, char *dest, int j)
 	msh->exec->fd_write_redirect = open(dest, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 	if (msh->exec->fd_write_redirect == -1)
 	{
-		if (print) {dprintf(2, "minishell : %s\n", strerror(errno));} // message à ajuster plus tard
-		exit(EXIT_FAILURE); // code à ajuster plus tard
+		printf("minishell: %s: %s\n", dest, strerror(errno));
+		exit(1);
 	}
 	else
 		ft_duptwo(msh->exec->fd_write_redirect, STDOUT_FILENO);
@@ -40,8 +38,8 @@ void	do_wapp_redir(t_msh *msh, char *dest, int j)
 
 	if (msh->exec->fd_write_redirect == -1)
 	{
-		if (print) {dprintf(2, "minishell : %s\n", strerror(errno));} // message à ajuster plus tard
-		exit(EXIT_FAILURE); // code à ajuster plus tard
+		printf("minishell: %s: %s\n", dest, strerror(errno));
+		exit(1);
 	}
 	else
 		ft_duptwo(msh->exec->fd_write_redirect, STDOUT_FILENO);
