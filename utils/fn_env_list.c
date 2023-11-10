@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/08 15:22:24 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/09 19:05:04 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,11 @@ void	feed_env_list_node(t_env_list *env_list_node, char *var_n_value)
 	env_list_node->value = ft_strdup(value_var);
 	free_chars(&name_var);
 	free_chars(&value_var);
+	/*
+	Nico : il y a peut-être moyen de faire plus simple (c'est mon code) :
+	env_list_node->name = get_name_var(var_n_value);
+	env_list_node->value = get_value_var(var_n_value);
+	*/
 }
 
 void	fill_first_env_list_node(t_msh *msh, char *var_n_value)
