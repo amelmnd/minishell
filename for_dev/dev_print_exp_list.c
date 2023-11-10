@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/10 11:54:23 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/10 15:17:05 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ void    print_exp_type_ls(int exp_type)
 {
 	switch (exp_type)
 	{
-		case 0:
+		case 1:
 			dprintf(2, "type -> WORD_EXPANDED");
 			break;
-		case 1:
+		case 2:
 			dprintf(2, "type -> R_ORIGIN_REDIRECT");
 			break;
-		case 2:
+		case 3:
 			dprintf(2, "type -> LIMITER_HEREDOC");
 			break;
-		case 3:
+		case 4:
 			dprintf(2, "type -> W_DEST_REDIRECT");
 			break;
-		case 4:
+		case 5:
 			dprintf(2, "type -> WA_DEST_REDIRECT");
 			break;
-		case 5:
+		case 6:
 			dprintf(2, "type -> PIPE_EXPANDED");
 			break;
 		default:
@@ -58,11 +58,6 @@ void	print_exp_list(t_exp_list *list)
 			{
 				green();
 				dprintf(2, "str -> [%s]\n", list->str);
-			}
-			else if (list->str)
-			{
-				blue();
-				dprintf(2, "v_name -> [%s]\n", list->str);
 			}
 			cyan();
 			print_exp_type_ls(list->exp_type);

@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/10 12:01:07 by amennad          ###   ########.fr        #
+#    Updated: 2023/11/10 12:27:30 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -118,6 +118,7 @@ SRCS_DEV = dev_color.c \
 		   dev_print_lexer_list.c \
 		   dev_print_exp_list.c \
 		   dev_print_env_list.c\
+		   dev_free_list.c
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 

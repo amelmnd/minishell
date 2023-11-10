@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:04:39 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/10 17:05:23 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,21 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 	str = NULL;
 	while (tmp)
 	{
-		if ((tmp->lexer_type > 4 && tmp->lexer_type < 10)
-			|| tmp->lexer_type == 0)
+		if (tmp->lexer_type == PIPE)
+		{
+			expander_push(msh, "|", PIPE_EXPANDED);
 			break ;
-		else if (tmp->lexer_type == VARIABLE || tmp->lexer_type == RETURN_VALUE)
+		}
+		else
+		if (tmp->lexer_type == VARIABLE || tmp->lexer_type == RETURN_VALUE)
 			that_is_variable(msh, tmp, &str);
 		else if (tmp->lexer_type == D_QUOTE_VAR)
 			db_quote_var_trans(tmp, &str);
 		else if (tmp && tmp->lexer_type > 0 && tmp->lexer_type < 5)
 			all_in_str(&str, tmp->str);
+		if (tmp->next && ((tmp->next->lexer_type > 4 && tmp->next->lexer_type < 10)
+			|| tmp->next->lexer_type == 0))
+			break ;
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;
@@ -86,7 +92,8 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 	if (str)
 	{
 		expander_push(msh, str, type_name);
-		msh->exp_current_type = WORD_EXPANDED;
+		if (tmp->lexer_type == PIPE)
+			expander_push(msh, "|", PIPE_EXPANDED);
 	}
 	//free_chars(&str);
 	return (tmp);

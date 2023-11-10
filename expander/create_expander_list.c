@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/10 11:46:06 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/10 16:49:41 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ t_lexer_list    *check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 {
 
     defined_type(msh, tmp);
-    if (tmp && tmp->lexer_type == PIPE)
-    {
-        expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
-        tmp = generate_str(msh, tmp, WORD_EXPANDED);
-    }
-    else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
+	printf("check_lexer_list : msh->exp_current_type = %d\n", msh->exp_current_type);
+	if (tmp->previous == NULL)
+		tmp = generate_str(msh, tmp, WORD_EXPANDED);
+	else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
         tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
     else if (msh->exp_current_type == LIMITER_HEREDOC)
         tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
@@ -55,7 +53,9 @@ void	create_expander_list(t_msh *msh)
 	tmp = msh->lexer_list;
 	while (tmp)
 	{
+		printf("1 = %s\n", tmp->str);
 		tmp = check_lexer_list(msh, tmp);
+		printf("2 = %s\n", tmp->str);
 		tmp = tmp->next;
 	}
 }
