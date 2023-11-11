@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/07 18:54:25 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:56:57 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 
 // IMP : readline.h is last include to avoid errors
 #include <readline/readline.h>
