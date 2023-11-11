@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 16:44:04 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/11 15:09:37 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	free_exec(t_msh *msh)
 		free_chars(&(msh->exec->path_from_envp));
 		free_ntcharss(&(msh->exec->paths_from_path));
 		free_chars(&(msh->exec->cmd_path_ready));
+		free_ints(&(msh->exec->pid_t_array));
 		free(msh->exec);
 		msh->exec = NULL;
 	}

@@ -21,6 +21,7 @@ void	exec_loop(t_msh *msh)
 			
 			check_cmd_path_n_exec(msh, exec_list_node); // contient tous les exit
 		}
+		//msh->exec->pid_t_array[j] = msh->exec->child; à réactiver pour tester
 		if (exec_list_node->pos_ppl == SOLO || exec_list_node->pos_ppl == LAST)
 			msh->exec->last_child = msh->exec->child;
 		send_hd_through_pipe(exec_list_node, j); // attention aux builtin solo qui ne fork pas
@@ -67,6 +68,21 @@ void	wait_and_get_the_last_return_code(t_msh *msh)
 	}
 }
 
+void	create_pid_t_array(t_msh *msh)
+{
+	int	nb_childs;
+
+	if (msh && msh->exec && msh->exec_list)
+	{
+		nb_childs = msh->exec_list->nb_pipes + 1;
+		msh->exec->pid_t_array = (pid_t *)malloc(sizeof(pid_t) * nb_childs);
+		if (!(msh->exec->pid_t_array))
+			return ;
+		while (--nb_childs >= 0)
+			msh->exec->pid_t_array[nb_childs] = 0;
+	}
+}
+
 void execution(t_msh *msh, char **envp)
 {
 	print_exec_list(msh);
@@ -91,6 +107,7 @@ void execution(t_msh *msh, char **envp)
 	else
 	{
 		create_pipes_for_hd(msh);
+		create_pid_t_array(msh);
 		exec_loop(msh);
 		if (msh->exec_list->nb_pipes)
 			close(msh->exec->fd_temp);

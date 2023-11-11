@@ -10,7 +10,7 @@ void	do_read_redir(t_msh *msh, char *origin, int j)
 	if (msh->exec->fd_read_redirect == -1)
 	{
 		printf("minishell: %s: %s\n", origin, strerror(errno));
-		exit(1); // code convenant à l'inexistence et aux droits insuffisants
+		exit(1);
 	}
 	else
 		ft_duptwo(msh->exec->fd_read_redirect, STDIN_FILENO);
