@@ -34,5 +34,7 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 	// Procéder à la libération de TOUTE la mémoire allouée par ./minishell, que
 	// ce soit dans le processus parent, ou un processus enfant, semble dans tous les cas
 	// préférable
+
+	exit(msh->return_code);
 }
 */

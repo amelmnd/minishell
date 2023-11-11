@@ -1,3 +1,7 @@
+11/11/2023 à 9h04
+L'expander conserve les s_quote et d_quote vides, ce qui est un très bonne chose
+Pendant les retouches de l'expander, il faut que ça soit toujours le cas !
+
 11/11/2023 à 06h49
 Deux sujets au niveau de l'expander :
 - Pour les ambiguous_redirect, il faut non seulement prendre en compte les variables
