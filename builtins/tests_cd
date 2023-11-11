@@ -1,0 +1,10 @@
+chdir("exec/here_doc/../solo_builtin/../here_doc/../solo_builtin");
+	if (access("solo_builtin_del.c", R_OK))
+		printf("problem access\n");
+	else
+	{
+		printf("on est bien dans le répertoire solo_builtin\n");
+		char *path = (char *)malloc(sizeof(char) * PATH_MAX);
+		getcwd(path, PATH_MAX);
+		printf("path = %s\n", path);
+	}
