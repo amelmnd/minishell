@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 22:25:54 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 23:05:29 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:57:28 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	init_exec(t_exec *exec)
 		exec->fd_read_redirect = -1;
 		exec->fd_write_redirect = -1;
 		exec->cmd_path_ready = NULL;
+		exec->pid_t_array = NULL;
 	}
 }
 
