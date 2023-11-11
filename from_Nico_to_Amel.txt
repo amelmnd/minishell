@@ -1,3 +1,26 @@
+11/11/2023 à 06h49
+Deux sujets au niveau de l'expander :
+- Pour les ambiguous_redirect, il faut non seulement prendre en compte les variables
+inexistantes, mais aussi les variables spéciales
+- En réfléchissant aux fonctions env, export et unset, puis à l'expander, je me suis dit
+qu'il valait mieux régler ces trois builtins avant de retoucher l'expander ; je m'explique :
+L'expander va, notamment pour (tenter de) remplacer les variables par leur valeur,
+interroger l'environnement de minishell, lequel sera (potentiellement) modifié au fil
+des itérations successives après un même démarrage du programme.
+L'environnement doit également pouvoir être affiché de deux manières différentes :
+	- avec le builtin env ; les variables affichées dans un ordre un peu aléatoire
+	- avec le builtin export (sans argument) ; avec :
+		- les variables natives en premier, triées dans l'ordre lexicographique
+		- les variables ajoutées (par export), en second, triées dans l'ordre lexicographique
+Il faut donc être capable de distinguer les deux types de variable : natives et ajoutées.
+Tu avais proposé l'utilisation de deux listes chainées différentes ; ce qui permettrait
+aisément la distinction entre natives et ajoutées ; je pense que cette solution à deux
+listes est une bonne idée.
+Cependant, elle a une implication au niveau de l'expander :
+	l'expander devra donc interroger ces deux listes pour tenter de remplacer les variables
+	par leur valeur.
+Concernant unset : il faudra interroger les deux listes aussi.
+
 10/11/2023 à 18h35
 Les erreurs classiques des redirections sont maintenant gérées
 Il manque cependant les erreurs provoquées par les variables inexistantes ou spéciales
