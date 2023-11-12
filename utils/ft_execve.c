@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 12:29:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/12 12:31:10 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/12 12:53:04 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int print = 0; // à supprimer !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-void ft_execve(t_msh *msh, t_exec_list *exec_list_node)
+void	ft_execve(t_msh *msh, t_exec_list *exec_list_node)
 {
 	t_exec	*exec;
 
