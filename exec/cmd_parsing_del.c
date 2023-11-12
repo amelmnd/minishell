@@ -80,7 +80,7 @@ void	get_cmd_without_path_in_args(t_msh *msh, t_exec_list *exec_list_node)
 
 void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 {
-	if (msh && msh->exec_list && exec_list_node && exec_list_node->cmd)
+	if (msh && msh->exec_list && exec_list_node)
 	{
 		msh->exec->cmd_path_ready = ft_strdup(exec_list_node->cmd);
 		if (!access(exec_list_node->cmd, X_OK))
@@ -89,20 +89,13 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 			get_cmd_without_path_in_args(msh, exec_list_node);
 			ft_execve(msh, exec_list_node);
 		}
-		/*
-		exists_in_paths assigne msh->exec->cmd_path_ready si succès
-		*/
+		//exists_in_paths assigne msh->exec->cmd_path_ready si succès
 		if (exists_in_paths(msh, exec_list_node))
 		{
 			if (print) {dprintf(2, "check_cmd_path_n_exec : entrée dans le deuxième if\n");}
 			ft_execve(msh, exec_list_node);
-			/*
-			nsfod_msg();
-			*/
-			exit(EXIT_FAILURE);
 		}
-		perror("access");
-		exit(EXIT_FAILURE);
+		printf("minishell: %s: command not found\n", exec_list_node->cmd);
 	}
-	exit(EXIT_SUCCESS); // à ajuster peut-être
+	exit(EXIT_FAILURE);
 }
