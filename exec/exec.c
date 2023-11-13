@@ -21,6 +21,7 @@ void	exec_loop(t_msh *msh)
 			
 			check_cmd_path_n_exec(msh, exec_list_node); // contient tous les exit
 		}
+		//msh->exec->pid_t_array[j] = msh->exec->child; à réactiver pour tester
 		if (exec_list_node->pos_ppl == SOLO || exec_list_node->pos_ppl == LAST)
 			msh->exec->last_child = msh->exec->child;
 		send_hd_through_pipe(exec_list_node, j); // attention aux builtin solo qui ne fork pas
@@ -43,13 +44,14 @@ void	exec_loop(t_msh *msh)
 	}
 }
 
+// récupérer la version printée de chatgpt pour mieux comprendre cette fonction
 void	wait_and_get_the_last_return_code(t_msh *msh)
 {
 	int		status;
 	pid_t	pid;
 	int		last_exit_status;
 
-	if (msh) // à compléter ?
+	if (msh && msh->exec)
 	{
 		pid = waitpid(-1, &status, 0);
 		while (pid != -1)
@@ -66,8 +68,24 @@ void	wait_and_get_the_last_return_code(t_msh *msh)
 	}
 }
 
+void	create_pid_t_array(t_msh *msh)
+{
+	int	nb_childs;
+
+	if (msh && msh->exec && msh->exec_list)
+	{
+		nb_childs = msh->exec_list->nb_pipes + 1;
+		msh->exec->pid_t_array = (pid_t *)malloc(sizeof(pid_t) * nb_childs);
+		if (!(msh->exec->pid_t_array))
+			return ;
+		while (--nb_childs >= 0)
+			msh->exec->pid_t_array[nb_childs] = -1;
+	}
+}
+
 void execution(t_msh *msh, char **envp)
 {
+	print_exec_list(msh);
 	msh->exec = new_exec();
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
@@ -75,9 +93,13 @@ void execution(t_msh *msh, char **envp)
 	// ATTENTION !!!!
 	feed_msh_with_envp(msh, envp); // il faut récupérer l'env_list et la convertir en char **
 	// pour enfin l'assigner (malloc) à msh->exec->envp (quand le builtin env sera prêt)
+	// cette instruction sera certainement supprimée car remplacée en amont 
+	// (dans main generate_prompt)
 
+
+	// une fois que le bloc de code ci-dessous (actuellement commenté) sera activé
+	// cette instruction sera supprimée (car conditionnée dans ledit bloc de code)
 	create_pipes_for_hd(msh);
-
 	/*
 	// cd ; export ; unset ; exit
 	if (no_fork_solo_builtin(msh))
@@ -85,6 +107,7 @@ void execution(t_msh *msh, char **envp)
 	else
 	{
 		create_pipes_for_hd(msh);
+		create_pid_t_array(msh);
 		exec_loop(msh);
 		if (msh->exec_list->nb_pipes)
 			close(msh->exec->fd_temp);
@@ -101,13 +124,11 @@ void execution(t_msh *msh, char **envp)
 	//Peut-être mettre des close finaux;
 	//Ou peut-être que les close dans l'execloop suffisent;
 	// vérifier avec lsof
-	
 	if (msh->exec_list->nb_pipes)
 		close(msh->exec->fd_temp);
 
 	wait_and_get_the_last_return_code(msh);
 
-	// il faut récupérer les codes d'exit pour assigner la valeur de retour
-	// surtout celui du dernier exec_list_node, qui doit permettre d'assigner
-	// msh->return_code
+	//il y a moyen qu'il faille stocker tous les pid_t afin de pouvoir les kill en
+	//cas de signal (par exemple Ctrl + C)
 }

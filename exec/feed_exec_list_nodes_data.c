@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:26:50 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 18:55:24 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:31:04 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,14 @@ static void	feed_last_exec_list_node_data(t_msh *msh)
 
 void	feed_exec_list_nodes_data(t_msh *msh)
 {
-	if (msh->exec_list->nb_pipes)
+	if (msh)
 	{
-		feed_exec_list_node_data(msh);
-		feed_last_exec_list_node_data(msh);
+		if (msh->exec_list->nb_pipes)
+		{
+			feed_exec_list_node_data(msh);
+			feed_last_exec_list_node_data(msh);
+		}
+		else
+			feed_the_only_exec_list_node_data(msh);
 	}
-	else
-		feed_the_only_exec_list_node_data(msh);
 }
