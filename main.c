@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/13 14:36:31 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:08:02 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	generate_prompt(char *envp[])
 		//assigne à msh->(char **)msh_env un char ** généré à partir de msh->env_list
 		// qui est modifiée et conservée au fur et à mesure de cette boucle (generate_prompt)
 
+		msh->program_status = INTERACTIVE_STATUS;
 		msh->prompt = readline(msh->user);
+		msh->program_status = EXECUTION_STATUS;
 		lexer_check(msh, msh->prompt);
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
