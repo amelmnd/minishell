@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/11 15:21:26 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 14:36:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,9 @@ void	generate_prompt(char *envp[])
 	t_msh	*msh;
 
 	msh = new_msh();
-	if (!msh)
-		return ;
 	env_list_generate(msh, envp);
 	build_user_for_prompt(msh);
-	while (42)
+	while (42 && msh)
 	{
 		if (print) {printf("generate_prompt(while) : début itération ; msh->return_code = %d\n", msh->return_code);}
 
