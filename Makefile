@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/12 12:29:49 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/13 11:07:20 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,6 +106,7 @@ SRCS_UTILS = utils.c \
 			 free_chars.c \
 			 manage_error.c \
 			 ft_execve.c \
+			 free_ints.c \
 			 build_user_for_prompt.c \
 			 new_msh.c \
 			 free_list.c \
