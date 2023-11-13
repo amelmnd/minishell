@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fn_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:04:41 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/11 08:06:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,3 +25,8 @@ char	*ft_getenv(t_msh *msh, char *env_var)
 	}
 	return (NULL);
 }
+
+/*
+vérifier s'il n'est pas mieux de return un ft_strdup (en cas de variable trouvée)
+pour éviter des problèmes de free ensuite
+*/

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 08:33:41 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:13:28 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static t_bool	hd_strcmp(char *limiter, char *line)
 	return (return_value);
 }
 
-void	get_hd(t_exec_list *exec_list_node, int i)
+void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 {
 	char	*line;
 	int		j;
@@ -53,7 +53,9 @@ void	get_hd(t_exec_list *exec_list_node, int i)
 			write(STDOUT_FILENO, ")", 1);
 			*/
 			write(STDOUT_FILENO, " > ", 2);
+			msh->program_status = HEREDOC_STATUS;
 			line = get_next_line(STDIN_FILENO);
+			msh->program_status = EXECUTION_STATUS;
 			if (hd_strcmp(exec_list_node->redirect_array[i].str, line))
 				break ;
 			if (j)

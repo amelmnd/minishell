@@ -29,6 +29,7 @@ void	ft_close(int fd)
 		if (close(fd) == -1)
 			errormsg_free_exit(ppx, "bash");
 	}
+	// vérifier la valeur du fd avant de le close
 	*/
 	// penser à prévoir les cas d'erreur avec le bloc ci-dessus
 
