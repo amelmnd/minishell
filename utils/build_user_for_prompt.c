@@ -6,12 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:50:08 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 19:30:37 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/11 08:07:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+// il faudra certainement passer cette fonction en non static
 static char	*msh_getenv(t_msh *msh, char *var_name)
 {
 	t_env_list	*env_list;
