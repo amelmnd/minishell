@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:29:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 18:29:40 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 09:41:06 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ static void	feed_exec_list_node_cmd(t_msh *msh)
 	t_exp_list	*exp_list_node;
 	t_exec_list	*exec_list_node;
 
-	exp_list_node = msh->exp_list;
-	exec_list_node = msh->exec_list;
 	if (msh && msh->exp_list && msh->exec_list)
 	{
+		exp_list_node = msh->exp_list;
+		exec_list_node = msh->exec_list;
 		while (exp_list_node)
 		{
 			if (exp_list_node->exp_type == PIPE_EXPANDED)
@@ -42,9 +42,9 @@ static void	feed_the_only_exec_list_node_cmd(t_msh *msh)
 {
 	t_exp_list	*exp_list_node;
 
-	exp_list_node = msh->exp_list;
 	if (msh && msh->exp_list && msh->exec_list)
 	{
+		exp_list_node = msh->exp_list;
 		while (exp_list_node)
 		{
 			if (exp_list_node->exp_type == WORD_EXPANDED)
@@ -59,8 +59,11 @@ static void	feed_the_only_exec_list_node_cmd(t_msh *msh)
 
 void	feed_exec_list_nodes_cmd(t_msh *msh)
 {
-	if (msh && msh->exec_list && msh->exec_list->nb_pipes)
-		feed_exec_list_node_cmd(msh);
-	else
-		feed_the_only_exec_list_node_cmd(msh);
+	if (msh)
+	{
+		if (msh->exec_list && msh->exec_list->nb_pipes)
+			feed_exec_list_node_cmd(msh);
+		else
+			feed_the_only_exec_list_node_cmd(msh);
+	}
 }

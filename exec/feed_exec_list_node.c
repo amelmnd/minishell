@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:48:14 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 18:49:35 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/12 13:12:14 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,21 @@
 
 static void	add_a(int *arg_i, char *arg, t_exec_list *ex)
 {
-	ex->args_array[*arg_i] = ft_strdup(arg);
-	(*arg_i)++;
+	if (ex)
+	{
+		ex->args_array[*arg_i] = ft_strdup(arg);
+		(*arg_i)++;
+	}
 }
 
 static void	add_r(int *red, t_exp_list *exp, t_exec_list *ex)
 {
-	ex->redirect_array[*red].exp_type = exp->exp_type;
-	ex->redirect_array[*red].str = ft_strdup(exp->str);
-	(*red)++;
+	if (exp && ex)
+	{
+		ex->redirect_array[*red].exp_type = exp->exp_type;
+		ex->redirect_array[*red].str = ft_strdup(exp->str);
+		(*red)++;
+	}
 }
 
 static t_bool	feln_check_and_init(t_msh *msh, int *red_i, int *args_i)

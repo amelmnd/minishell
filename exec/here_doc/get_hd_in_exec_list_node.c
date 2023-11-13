@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:21:53 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 08:15:57 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:11:20 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	clear_hd(t_exec_list *exec_list_node)
 	}
 }
 
-void	get_hd_in_exec_list_node(t_exec_list *exec_list_node)
+void	get_hd_in_exec_list_node(t_msh *msh, t_exec_list *exec_list_node)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ void	get_hd_in_exec_list_node(t_exec_list *exec_list_node)
 					clear_hd(exec_list_node);
 					exec_list_node->hd = new_hd();
 				}
-				get_hd(exec_list_node, i);
+				get_hd(msh, exec_list_node, i);
 			}
 		}
 	}
