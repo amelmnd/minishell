@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/13 15:08:02 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 16:44:45 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,3 +68,12 @@ int	main(int argc, char *argv[], char *envp[])
 		show_no_args_for_minishell_error_msg();
 	return (0);
 }
+
+/*
+il est possible d'export des variables sans valeur
+export les affiche
+env ne les affiche pas
+
+'export lol' ajoute une variable sans valeur
+'export lol=' ajoute une variable avec valeur
+*/
