@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   free_ints.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 11:07:08 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/13 11:05:45 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/13 11:06:39 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "minishell.h"
 
-# include "minishell.h"
-
-void	reset_counts(int *x, int *y);
-char	**malloc_full_null_charss(int size);
-
-//before prompt_loop
-void	generate_msh_env(t_msh *msh);
-void	show_no_args_for_minishell_error_msg(void);
-void	build_user_for_prompt(t_msh *msh);
-t_msh	*new_msh(void);
-void	ft_execve(t_msh *msh, t_exec_list *exec_list_node);
-void	free_ints(int **dust);
-
-#endif
+void	free_ints(int **dust)
+{
+	if (*dust)
+	{
+		free(*dust);
+		*dust = NULL;
+	}
+}
