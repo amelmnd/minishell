@@ -79,7 +79,7 @@ void	create_pid_t_array(t_msh *msh)
 		if (!(msh->exec->pid_t_array))
 			return ;
 		while (--nb_childs >= 0)
-			msh->exec->pid_t_array[nb_childs] = 0;
+			msh->exec->pid_t_array[nb_childs] = -1;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/11 14:57:08 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/13 15:06:46 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_exec					t_exec;
 typedef struct s_hd						t_hd;
 typedef enum e_pos_ppl					t_pos_ppl;
 typedef struct s_env_list				t_env_list;
+typedef enum e_program_status			t_program_status;
 
 enum	e_bool
 {
@@ -155,18 +156,26 @@ struct	s_env_list
 	char		*value;
 };
 
+enum	e_program_status
+{
+	INTERACTIVE_STATUS,
+	EXECUTION_STATUS,
+	HEREDOC_STATUS
+};
+
 struct s_msh
 {
-	int				return_code;
-	t_env_list		*env_list;
-	char			**msh_env;
-	char			*user;
-	char			*prompt;
-	t_exp_type		exp_current_type;
-	t_lexer_list	*lexer_list;
-	t_exp_list		*exp_list;
-	t_exec_list		*exec_list;
-	t_exec			*exec;
+	t_program_status	program_status;
+	int					return_code;
+	t_env_list			*env_list;
+	char				**msh_env;
+	char				*user;
+	char				*prompt;
+	t_exp_type			exp_current_type;
+	t_lexer_list		*lexer_list;
+	t_exp_list			*exp_list;
+	t_exec_list			*exec_list;
+	t_exec				*exec;
 };
 
 #endif
