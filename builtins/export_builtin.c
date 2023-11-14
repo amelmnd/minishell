@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:09:57 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 01:35:32 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:35:52 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,7 @@ char	*get_var_value(char *var_name, char *arg)
 	return (ft_strdup(""));
 }
 
-void	update_variable(t_msh *msh, char var_name, char *arg)
+void	update_variable(t_msh *msh, char *var_name, char *arg)
 {
 	char		*var_value;
 	t_env_list	*env_list_node;
@@ -190,7 +190,7 @@ void	update_variable(t_msh *msh, char var_name, char *arg)
 		env_list_node = msh->env_list;
 		while (env_list_node)
 		{
-			if (ft_strcmp(env_list_node->next, var_name))
+			if (ft_strcmp(env_list_node->name, var_name))
 			{
 				free_chars(&(env_list_node->value));
 				env_list_node->value = ft_strdup(var_value);
@@ -243,7 +243,6 @@ t_bool	is_not_a_valid_chr(char c)
 
 t_bool	is_a_valid_identifier(char *var_name)
 {
-	char	*name_var;
 	int		i;
 
 	if (ft_strlen(var_name))
@@ -266,9 +265,9 @@ void inv_ident_errormsg(t_msh *msh, char *str)
 {
 	if (msh)
 	{
-		printf("minishell: export: `");
-		printf("%s", str);
-		printf("': not a valid identifier\n");
+		ft_putstr_fd("minishell: export: `", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd("': not a valid identifier\n", 2);
 		msh->return_code = 1;
 	}
 }

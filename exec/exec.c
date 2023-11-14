@@ -15,7 +15,7 @@ void	exec_loop(t_msh *msh)
 		{
 			do_all_redirections(msh, exec_list_node, j);
 
-			//builtin_way(msh, exec_list_node);
+			builtin_way(msh, exec_list_node);
 			// la fonction builtin_way contient un exit
 			// les builtins en eux_mêmes ne contiennent pas d'exit
 			
@@ -64,7 +64,7 @@ void	wait_and_get_the_last_return_code(t_msh *msh)
 			pid = waitpid(-1, &status, 0);
 		}
 		msh->return_code = last_exit_status;
-		printf("msh->return_code = %d\n", msh->return_code);
+		printf("msh->return_code = %d\n", msh->return_code); // à supprimer à terme
 	}
 }
 

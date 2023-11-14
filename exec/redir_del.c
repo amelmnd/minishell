@@ -11,7 +11,11 @@ void	do_read_redir(t_msh *msh, char *origin, int j)
 		msh->exec->fd_read_redirect = open(origin, O_RDONLY);
 		if (msh->exec->fd_read_redirect == -1)
 		{
-			printf("minishell: %s: %s\n", origin, strerror(errno));
+			ft_putstr_fd("minishell : ", 2);
+			ft_putstr_fd(origin, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			exit(1);
 		}
 		else
@@ -30,6 +34,11 @@ void	do_write_redir(t_msh *msh, char *dest, int j)
 		if (msh->exec->fd_write_redirect == -1)
 		{
 			printf("minishell: %s: %s\n", dest, strerror(errno));
+			ft_putstr_fd("minishell : ", 2);
+			ft_putstr_fd(dest, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			exit(1);
 		}
 		else
@@ -47,7 +56,11 @@ void	do_wapp_redir(t_msh *msh, char *dest, int j)
 			O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 		if (msh->exec->fd_write_redirect == -1)
 		{
-			printf("minishell: %s: %s\n", dest, strerror(errno));
+			ft_putstr_fd("minishell : ", 2);
+			ft_putstr_fd(dest, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			exit(1);
 		}
 		else
@@ -76,7 +89,10 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i, int j)
 		// à activer quand l'enum AMBIGUOUS_REDIRECT sera assigné dans l'expander
 		else if (redir_box.exp_type == AMBIGUOUS_REDIRECT)
 		{
-			printf("minishell: %s: ambiguous redirect\n", redir_box.str);
+			ft_putstr_fd("minishell : ", 2);
+			ft_putstr_fd(redir_box.str, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd("ambiguous redirect\n", 2);
 			exit(1);
 		}
 		*/
