@@ -1,12 +1,11 @@
 #include "minishell.h"
 
-/*
 // les deux fonctions ci-dessous doivent rester solidaires
 static void	norminette_pleasing(t_exec_list *exec_list_node, t_bool *bool)
 {
 	if (exec_list_node)
 	{
-		if (exec_list_node->args_array)
+		if (get_size_ntcharss(exec_list_node->args_array) > 1)
 			*bool = TRUE;
 	}
 	else
@@ -41,9 +40,7 @@ t_bool	is_cmd_in_nfsolobuiltin_list(t_exec_list *exec_list_node)
 t_bool	no_fork_solo_builtin(t_msh *msh)
 {
 	t_exec_list	*exec_list_node;
-	t_bool		return_value;
 
-	return_value = FALSE;
 	if (msh && msh->exec_list)
 	{
 		exec_list_node = msh->exec_list;
@@ -60,7 +57,11 @@ void	do_read_redirect_solo_builtin(t_msh *msh, char *origin)
 	{
 		if (access(origin, R_OK))
 		{
-			printf("minishell: %s: %s\n", origin, strerror(errno));
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(origin, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			msh->return_code = 1;
 		}
 	}
@@ -74,7 +75,11 @@ void	do_write_redirect_solo_builtin(t_msh *msh, char *dest)
 			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
 		if (msh->exec->fd_write_redirect == -1)
 		{
-			printf("minishell: %s: %s\n", origin, strerror(errno));
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(dest, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			msh->return_code = 1;
 		}
 		else
@@ -90,7 +95,11 @@ void	do_wapp_redirect_solo_builtin(t_msh *msh, char *dest)
 			O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 		if (msh->exec->fd_write_redirect == -1)
 		{
-			printf("minishell: %s: %s\n", origin, strerror(errno));
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(dest, 2);
+			ft_putstr_fd(": ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			msh->return_code = 1;
 		}
 		else
@@ -115,8 +124,10 @@ void	do_all_redir_solo_builtin(t_msh *msh)
 				do_write_redirect_solo_builtin(msh, redirect[i].str);
 			else if (redirect[i].exp_type == WA_DEST_REDIRECT)
 				do_wapp_redirect_solo_builtin(msh, redirect[i].str);
-			else if (redirect[i].exp_type == AMBIGUOUS_REDIRECT)
-				printf("minishell: %s: ambiguous redirect\n", redirect[i].str);
+			//else if (redirect[i].exp_type == AMBIGUOUS_REDIRECT)
+			//	printf("minishell: %s: ambiguous redirect\n", redirect[i].str);
+			// ce bloc sera activé quand l'expander assignera l'enum AMBIGUOUS_REDIRECT
+			
 			//aucun exit dans ces redirections (car elles s'effectuent dans le parent)
 		}
 	}
@@ -124,18 +135,34 @@ void	do_all_redir_solo_builtin(t_msh *msh)
 
 void	do_nf_solo_builtin(t_msh *msh)
 {
+	dprintf(2, "do_nf_solo_builtin ; Entrée\n");
 	if (msh && msh->exec_list && msh->exec_list->cmd)
 	{
+		dprintf(2, "do_nf_solo_builtin ; entrée dans le if de sécurité\n");
+		dprintf(2, "do_nf_solo_builtin(if sécu) ; msh->exec_list->cmd = %s\n", msh->exec_list->cmd);
+
 		if (ft_strcmp(msh->exec_list->cmd, "cd"))
+		{
+			dprintf(2, "do_nf_solo_builtin : entrée 1\n");
 			cd_builtin(msh, msh->exec_list);
-		else if (ft_strcmp(msh->exec_list->cmd, "export")
-			&& !(msh->exec_list->args_array))
+		}
+		else if (ft_strcmp(msh->exec_list->cmd, "export"))
+		{
+			dprintf(2, "do_nf_solo_builtin : entrée 2\n");
 			export_builtin(msh, msh->exec_list);
+		}
 		else if (ft_strcmp(msh->exec_list->cmd, "unset"))
+		{
+			dprintf(2, "do_nf_solo_builtin : entrée 3\n");
 			unset_builtin(msh, msh->exec_list);
+		}
 		else if (ft_strcmp(msh->exec_list->cmd, "exit"))
+		{
+			dprintf(2, "do_nf_solo_builtin : entrée 4\n");
 			exit_builtin(msh, msh->exec_list);
+		}
 	}
+	dprintf(2, "do_nf_solo_builtin ; Sortie\n");
 }
 
 void	builtin_solo_without_fork(t_msh *msh)
@@ -144,4 +171,3 @@ void	builtin_solo_without_fork(t_msh *msh)
 	if (!(msh->return_code))
 		do_nf_solo_builtin(msh);
 }
-*/
