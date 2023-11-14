@@ -85,7 +85,7 @@ void	create_pid_t_array(t_msh *msh)
 
 void execution(t_msh *msh, char **envp)
 {
-	print_exec_list(msh);
+	//print_exec_list(msh);
 	msh->exec = new_exec();
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
