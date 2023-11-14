@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:09:57 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 18:02:49 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:02:43 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	export_swap(char ***sorted_var_names_array, int i)
 	free_chars(&((*sorted_var_names_array)[i + 1]));
 	(*sorted_var_names_array)[i] = ft_strdup(next);
 	(*sorted_var_names_array)[i + 1] = ft_strdup(current);
+	free_chars(&current);
+	free_chars(&next);
 	//dprintf(2, "export_swap : sortie\n");
 }
 
@@ -108,7 +110,7 @@ char	**get_sorted_var_names_array(t_msh *msh)
 
 	sorted_var_names_array = get_raw_var_name_array(msh);
 	//dprintf(2, "get_sorted_var_names_array : sorted_var_names_array : \n");
-	print_charss(sorted_var_names_array);
+	//print_charss(sorted_var_names_array);
 	//dprintf(2, "get_sorted_var_names_array : FIN PRINT\n");
 	size_array = get_size_ntcharss(sorted_var_names_array);
 	swap = TRUE;
@@ -136,7 +138,8 @@ char	**get_sorted_var_names_array(t_msh *msh)
 
 void	print_sorted_var_names_array(t_msh *msh, char **sorted_var_names_array)
 {
-	int	i;
+	int		i;
+	char	*var_value;
 
 	if (sorted_var_names_array)
 	{
@@ -146,8 +149,10 @@ void	print_sorted_var_names_array(t_msh *msh, char **sorted_var_names_array)
 			if (ft_strlen(sorted_var_names_array[i]) > 1
 				|| sorted_var_names_array[i][0] != '_')
 			{
+				var_value = msh_getenv(msh, sorted_var_names_array[i]);
 				printf("declare -x %s=", sorted_var_names_array[i]);
-				printf("\"%s\"\n", msh_getenv(msh, sorted_var_names_array[i]));
+				printf("\"%s\"\n", var_value);
+				free_chars(&var_value);
 			}
 		}
 	}
@@ -374,12 +379,12 @@ void	export_with_args(t_msh *msh, t_exec_list *exec_list_node)
 
 void	export_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
-	dprintf(2, "export_builtin : Entrée\n");
+	//dprintf(2, "export_builtin : Entrée\n");
 	if (msh && exec_list_node)
 	{
 		if (exec_list_node->nb_words == 1)
 		{
-			dprintf(2, "export_builtin : entrée dans le if\n");
+			//dprintf(2, "export_builtin : entrée dans le if\n");
 			print_env_list_export_way(msh);
 		}
 		else
