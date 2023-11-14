@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:09:57 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 20:02:43 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/14 20:40:44 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -379,15 +379,16 @@ void	export_with_args(t_msh *msh, t_exec_list *exec_list_node)
 
 void	export_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
-	//dprintf(2, "export_builtin : Entrée\n");
+	dprintf(2, "export_builtin : Entrée\n");
 	if (msh && exec_list_node)
 	{
 		if (exec_list_node->nb_words == 1)
 		{
-			//dprintf(2, "export_builtin : entrée dans le if\n");
+			dprintf(2, "export_builtin : entrée dans le if\n");
 			print_env_list_export_way(msh);
 		}
 		else
 			export_with_args(msh, exec_list_node);
 	}
+	dprintf(2, "export_builtin : Sortie\n");
 }
