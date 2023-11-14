@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/10 20:56:57 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:22:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "expander.h"
 # include "executor.h"
 # include "utils.h"
+# include "builtins.h"
 
 # include <errno.h>
 # include <fcntl.h>

@@ -6,7 +6,6 @@
 // fonction exec, lors du waitpid.)
 //A noter que seule la commande du dernier exec_list_node assigne la valeur de
 // msh->return_code !
-/*
 void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 {
 	if (ft_strcmp(exec_list_node->cmd, "echo")
@@ -37,4 +36,5 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 
 	exit(msh->return_code);
 }
+/*
 */
