@@ -3,13 +3,26 @@
 // les deux fonctions ci-dessous doivent rester solidaires
 static void	norminette_pleasing(t_exec_list *exec_list_node, t_bool *bool)
 {
+	dprintf(2, "norminette_pleasing : Entrée\n");
 	if (exec_list_node)
 	{
+		dprintf(2, "norminette_pleasing : entrée dans le if\n");
 		if (get_size_ntcharss(exec_list_node->args_array) > 1)
+		{
+			dprintf(2, "norminette_pleasing : entrée dans le if interne\n");
 			*bool = TRUE;
+		}
+		else
+		{
+			dprintf(2, "norminette_pleasing : entrée dans le else interne\n");
+			*bool = FALSE;
+		}
 	}
 	else
+	{
+		dprintf(2, "norminette_pleasing : entrée dans le else\n");
 		*bool = FALSE;
+	}
 }
 
 t_bool	is_cmd_in_nfsolobuiltin_list(t_exec_list *exec_list_node)
@@ -24,7 +37,14 @@ t_bool	is_cmd_in_nfsolobuiltin_list(t_exec_list *exec_list_node)
 			|| ft_strcmp(cmd, "unset") || ft_strcmp(cmd, "exit"))
 		{
 			if (ft_strcmp(cmd, "export"))
+			{
+				dprintf(2, "is_cmd_in_nfsolobuiltin_list : entrée dans le ft_strcmp specifique à export\n");
 				norminette_pleasing(exec_list_node, &bool);
+				if (bool == TRUE)
+					dprintf(2, "is_cmd_in_nfsolobuiltin_list : bool après norminette pleasing : TRUE\n");
+				else if (bool == FALSE)
+					dprintf(2, "is_cmd_in_nfsolobuiltin_list : bool après norminette pleasing : FALSE\n");
+			}
 			else
 				bool = TRUE;
 		}

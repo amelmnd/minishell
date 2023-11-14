@@ -104,7 +104,7 @@ void execution(t_msh *msh, char **envp)
 	create_pipes_for_hd(msh);
 	*/
 	
-	/*
+	
 	// cd ; export ; unset ; exit
 	if (no_fork_solo_builtin(msh))
 		builtin_solo_without_fork(msh);
@@ -120,9 +120,9 @@ void execution(t_msh *msh, char **envp)
 		// surtout celui du dernier exec_list_node, qui doit permettre d'assigner
 		// msh->return_code
 	}
-	*/
+	
 
-	exec_loop(msh); // à commenter (puis supprimer à terme) quand le bloc ci-dessus
+	//exec_loop(msh); // à commenter (puis supprimer à terme) quand le bloc ci-dessus
 	// (no_fork_solo_builtin) est activé
 
 	//Peut-être mettre des close finaux;
@@ -131,7 +131,8 @@ void execution(t_msh *msh, char **envp)
 	if (msh->exec_list->nb_pipes)
 		close(msh->exec->fd_temp);
 
-	wait_and_get_the_last_return_code(msh);
+	//wait_and_get_the_last_return_code(msh);
+	// à désactiver quand le bloc de code nfsolobuiltin est activé
 
 	//il y a moyen qu'il faille stocker tous les pid_t afin de pouvoir les kill en
 	//cas de signal (par exemple Ctrl + C)
