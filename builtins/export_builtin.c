@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:09:57 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 14:35:52 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/14 18:02:49 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	get_size_env_list(t_msh *msh)
 	return (size);
 }
 
-void	feed_var_names_array(t_msh *msh, char ***sort_var_names_array)
+void	feed_var_names_array(t_msh *msh, char ***raw)
 {
 	t_env_list	*env_list_node;
 	int			i;
@@ -41,58 +41,95 @@ void	feed_var_names_array(t_msh *msh, char ***sort_var_names_array)
 		i = -1;
 		while (env_list_node)
 		{
-			(*sort_var_names_array)[++i] = ft_strdup(env_list_node->name);
+			(*raw)[++i] = ft_strdup(env_list_node->name);
 			env_list_node = env_list_node->next;
 		}
 	}
 }
 
-int	export_strcmp(const char *s1, const char *s2)
+char	**get_raw_var_name_array(t_msh *msh)
 {
-	while (*s1 && (*s1 == *s2))
+	char	**raw;
+	int		size_env_list;
+
+	raw = NULL;
+	if (msh && msh->env_list)
 	{
-		s1++;
-		s2++;
+		size_env_list = get_size_env_list(msh);
+		raw = malloc_full_null_charss(size_env_list);
+		feed_var_names_array(msh, &raw);
 	}
-	return (*(const unsigned char *)s1 - *(const unsigned char *)s2);
+	return (raw);
 }
 
-void	sort_var_names_array(char ***sorted_var_names_array, int size)
+t_bool	next_smaller_than_current(char **sorted_var_names_array, int i)
 {
-	char	**arr;
-	char	*temp;
-	int		i;
+	char	*current;
+	char	*next;
 	int		j;
+	t_bool	ret;
+	
+	current = ft_strdup(sorted_var_names_array[i]);
+	next = ft_strdup(sorted_var_names_array[i + 1]);
+	j = -1;
+	while (current[++j] && current[j] == next[j])
+		;
+	if (next[j] < current[j])
+		ret = TRUE;
+	else
+		ret = FALSE;
+	free_chars(&(current));
+	free_chars(&(next));
+	return (ret);
+}
 
-	arr = *sorted_var_names_array;
-	i = -1;
-	while (++i < size)
-	{
-		j = -1;
-		while (++j < size - i)
-		{
-			if (export_strcmp(arr[j], arr[j + 1]) > 0)
-			{
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-		}
-	}
+void	export_swap(char ***sorted_var_names_array, int i)
+{
+	//dprintf(2, "export_swap : Entrée\n");
+	char	*current;
+	char	*next;
+	
+	current = ft_strdup((*sorted_var_names_array)[i]);
+	next = ft_strdup((*sorted_var_names_array)[i + 1]);
+	//dprintf(2, "export_swap : current = %s ; next = %s\n", current, next);
+	free_chars(&((*sorted_var_names_array)[i]));
+	free_chars(&((*sorted_var_names_array)[i + 1]));
+	(*sorted_var_names_array)[i] = ft_strdup(next);
+	(*sorted_var_names_array)[i + 1] = ft_strdup(current);
+	//dprintf(2, "export_swap : sortie\n");
 }
 
 char	**get_sorted_var_names_array(t_msh *msh)
 {
-	int		size_env_list;
 	char	**sorted_var_names_array;
+	t_bool	swap;
+	int		i;
+	int		size_array;
 
-	sorted_var_names_array = NULL;
-	if (msh && msh->env_list)
+	sorted_var_names_array = get_raw_var_name_array(msh);
+	//dprintf(2, "get_sorted_var_names_array : sorted_var_names_array : \n");
+	print_charss(sorted_var_names_array);
+	//dprintf(2, "get_sorted_var_names_array : FIN PRINT\n");
+	size_array = get_size_ntcharss(sorted_var_names_array);
+	swap = TRUE;
+	while (swap)
 	{
-		size_env_list = get_size_env_list(msh);
-		sorted_var_names_array = malloc_full_null_charss(size_env_list);
-		feed_var_names_array(msh, &sorted_var_names_array);
-		sort_var_names_array(&sorted_var_names_array, size_env_list);
+		swap = FALSE;
+		i = -1;
+		while (++i < size_array - 1)
+		{
+			if (next_smaller_than_current(sorted_var_names_array, i))
+			{
+				//dprintf(2, "get_sorted_var_names_array(while ; if)\n");
+				swap = TRUE;
+				export_swap(&sorted_var_names_array, i);
+			}
+		}
+		//dprintf(2, "get_sorted_var_names_array(fin while) : sorted_var_names_array : \n");
+		//print_charss(sorted_var_names_array);
+		//dprintf(2, "get_sorted_var_names_array : FIN PRINT\n");
+		//usleep(100000);
+		//sleep(1);
 	}
 	return (sorted_var_names_array);
 }
@@ -106,14 +143,19 @@ void	print_sorted_var_names_array(t_msh *msh, char **sorted_var_names_array)
 		i = -1;
 		while (sorted_var_names_array[++i])
 		{
-			printf("declare -x %s", sorted_var_names_array[i]);
-			printf("\"%s\"\n", msh_getenv(msh, sorted_var_names_array[i]));
+			if (ft_strlen(sorted_var_names_array[i]) > 1
+				|| sorted_var_names_array[i][0] != '_')
+			{
+				printf("declare -x %s=", sorted_var_names_array[i]);
+				printf("\"%s\"\n", msh_getenv(msh, sorted_var_names_array[i]));
+			}
 		}
 	}
 }
 
 void	print_env_list_export_way(t_msh *msh)
 {
+	//dprintf(2, "print_env_list_export_way : Entrée\n");
 	char	**sorted_var_names_array;
 
 	if (msh && msh->env_list)
@@ -332,10 +374,14 @@ void	export_with_args(t_msh *msh, t_exec_list *exec_list_node)
 
 void	export_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
+	dprintf(2, "export_builtin : Entrée\n");
 	if (msh && exec_list_node)
 	{
 		if (exec_list_node->nb_words == 1)
+		{
+			dprintf(2, "export_builtin : entrée dans le if\n");
 			print_env_list_export_way(msh);
+		}
 		else
 			export_with_args(msh, exec_list_node);
 	}
