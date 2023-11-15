@@ -1,5 +1,8 @@
 #include "minishell.h"
 
+//les fonctions de ce fichier servent encore (et serviront jusqu'au bout)
+//il faudra donc renommer le fichier, ou déplacer les fonctions dans des fichiers définitifs
+
 //à transférer vers utils
 int	get_size_ntcharss(char **ntcharss)
 {
