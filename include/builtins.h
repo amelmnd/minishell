@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 20:09:58 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 10:55:13 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,15 @@ void	pwd_builtin(t_msh *msh, t_exec_list *exec_list_node);
 
 // export
 void	export_builtin(t_msh *msh, t_exec_list *exec_list_node);
+void	export_without_args(t_msh *msh);
+char	**get_sorted_var_names_array(t_msh *msh);
+char	*export_get_var_name(char *arg);
+t_bool	is_a_valid_identifier(char *var_name);
+void	add_new_couple_name_value(t_msh *msh, char *var_name, char *arg);
+void	update_variable(t_msh *msh, char *var_name, char *arg);
+char	*export_get_var_value(char *var_name, char *arg);
+void	add_var_to_env_list(t_msh *msh, char *var_name, char *arg);
+void	export_with_args(t_msh *msh, t_exec_list *exec_list_node);
 
 // unset
 void	unset_builtin(t_msh *msh, t_exec_list *exec_list_node);
