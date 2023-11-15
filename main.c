@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 01:40:18 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 09:08:30 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,9 @@ env ne les affiche pas
 
 la variable d'environnement _ est affichée par env, mais pas part export
 
-==143525== 12,167 (1,592 direct, 10,575 indirect) bytes in 3 blocks are definitely lost in loss record 93 of 96
-==143525==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
-==143525==    by 0x109483: malloc_full_null_charss (in /home/spardaspirit/Desktop/minishell/minishell)
-==143525==    by 0x1096AD: generate_msh_env (in /home/spardaspirit/Desktop/minishell/minishell)
-==143525==    by 0x112C07: generate_prompt (in /home/spardaspirit/Desktop/minishell/minishell)
-==143525==    by 0x112D06: main (in /home/spardaspirit/Desktop/minishell/minishell)
+au moment de l'export : s'il y a un =, une chaine vide est associée au nom
+la variable est affichée par export tel que : nom_var=""
+la variable est affichée par env tel que : nom_var=
 
+fsanitize change les msh->return_code
 */

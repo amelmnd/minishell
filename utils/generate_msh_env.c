@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:03:55 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 01:35:18 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:54:14 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ void	generate_msh_env(t_msh *msh)
 		i = -1;
 		while (env_list)
 		{
-			msh->msh_env[++i] = join_var_equal_value(env_list);
+			if (env_list->value)
+				msh->msh_env[++i] = join_var_equal_value(env_list);
 			env_list = env_list->next;
 		}
 	}
