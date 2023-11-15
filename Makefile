@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/14 14:33:02 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/15 10:53:50 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,16 @@ SRCS_EXEC = here_doc/hd_pipe.c \
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
 SRCS_BUIL = builtins.c \
-			export_builtin.c \
+			export/export_builtin.c \
+			export/export_without_args.c \
+			export/export_without_args_utils.c \
+			export/export_get_var_name.c \
+			export/is_a_valid_identifier.c \
+			export/add_new_couple_name_value.c \
+			export/update_variable.c \
+			export/export_get_var_value.c \
+			export/add_var_to_env_list.c \
+			export/export_with_args.c \
 			echo_builtin.c \
 			cd_builtin.c \
 			pwd_builtin.c \
@@ -108,8 +117,10 @@ SRCS_UTILS = utils.c \
 			 show_no_args_for_minishell_error_msg.c \
 			 reset_counts.c \
 			 get_next_line.c \
+			 is_chr_in_str.c \
 			 get_next_line_utils.c \
 			 ft_strcmp.c \
+			 get_size_env_list.c \
 			 free_chars.c \
 			 manage_error.c \
 			 ft_execve.c \
