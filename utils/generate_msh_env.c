@@ -6,11 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:03:55 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 01:05:21 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:35:18 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//minishell tourne avec son propre environnement  grâce à, entre autres, ces fonctions
 
 static int	get_size_env_list(t_msh *msh)
 {

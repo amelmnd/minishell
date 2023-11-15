@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 01:22:25 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:44:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void	clean_msh_list(t_msh *msh)
 	free_exp_list(msh);
 	free_exec_list(msh);
 	free_exec(msh);
+	free_ntcharss(&(msh->msh_env));
 	//free_chars(&(msh->prompt));
 }
 
