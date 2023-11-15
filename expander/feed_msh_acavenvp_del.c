@@ -1,5 +1,9 @@
 #include "minishell.h"
 
+//les fonctions de ce fichier servent encore (et serviront jusqu'au bout)
+//il faudra donc renommer le fichier, ou déplacer les fonctions dans des fichiers définitifs
+
+//à transférer vers utils
 int	get_size_ntcharss(char **ntcharss)
 {
 	int	i;
@@ -10,6 +14,7 @@ int	get_size_ntcharss(char **ntcharss)
 	return (i);
 }
 
+//à transférer vers utils
 char	**ntcharss_copy(char **ntcharss_to_copy)
 {
 	char	**copy;
@@ -28,25 +33,25 @@ char	**ntcharss_copy(char **ntcharss_to_copy)
 	return (copy);
 }
 
-void	get_path_from_envp(t_msh *msh)
+void	get_path_from_mshenv(t_msh *msh)
 {
 	char	*temp;
 	int		i;
 	
 	temp = NULL;
 	i = 0;
-	while (msh->exec->envp[i] && ft_strncmp(msh->exec->envp[i], "PATH=", 5))
+	while (msh->msh_env[i] && ft_strncmp(msh->msh_env[i], "PATH=", 5))
 		i++;
-	if (!(msh->exec->envp[i]))
-		msh->exec->path_defined = 0;
-	else if (!ft_strncmp(msh->exec->envp[i], "PATH=", 5))
+	if (!(msh->msh_env[i]))
+		msh->exec->path_defined = FALSE;
+	else if (!ft_strncmp(msh->msh_env[i], "PATH=", 5))
 	{
-		temp = ft_strdup(msh->exec->envp[i]);
-		msh->exec->path_from_envp = ft_substr(temp, 5, ft_strlen(temp));
-		msh->exec->path_defined = 1;
+		temp = ft_strdup(msh->msh_env[i]);
+		msh->exec->path_from_mshenv = ft_substr(temp, 5, ft_strlen(temp));
+		msh->exec->path_defined = TRUE;
 	}
 	else
-		msh->exec->path_defined = 0;
+		msh->exec->path_defined = FALSE;
 	free(temp);
 }
 
@@ -68,11 +73,15 @@ void	append_slash_to_paths(t_msh *msh)
 
 void	get_paths_from_path(t_msh *msh)
 {
-	if (msh->exec->path_from_envp)
-		msh->exec->paths_from_path = ft_split(msh->exec->path_from_envp, ':');
+	get_path_from_mshenv(msh); // récupérer l'env du minishell !!
+	if (msh->exec->path_from_mshenv)
+		msh->exec->paths_from_path = ft_split(msh->exec->path_from_mshenv,
+			':');
 	append_slash_to_paths(msh);
 }
 
+/*
+//ancien
 void	feed_msh_with_envp(t_msh *msh, char **envp)
 {
 	//dprintf(2, "feed_msh_acavenvp : Entrée\n");
@@ -83,6 +92,24 @@ void	feed_msh_with_envp(t_msh *msh, char **envp)
 		get_paths_from_path(msh);
 	}
 }
+*/
+
+
+
+/*
+//futur
+void	feed_msh_with_envp(t_msh *msh, char **envp)
+{
+	(void)envp; // à supprimer du prototype dès que msh->msh_env fonctionne
+	//dprintf(2, "feed_msh_acavenvp : Entrée\n");
+	if (envp)
+	{
+		get_path_from_envp(msh); // récupérer l'env du minishell !!
+		get_paths_from_path(msh);
+	}
+}
+*/
+
 
 // à virer !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 void	print_paths_from_path(t_msh *msh)
