@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+void	print_pid_t_array(t_msh *msh)
+{
+	int	size_pid_t_array;
+	int	i;
+
+	if (msh && msh->exec && msh->exec_list)
+	{
+		size_pid_t_array = msh->exec_list->nb_pipes + 1;
+		i = -1;
+		while (++i < size_pid_t_array)
+			dprintf(2, "[%d] ", msh->exec->pid_t_array[i]);
+		dprintf(2, "\n");
+	}
+}
+
 void	exec_loop(t_msh *msh)
 {
 	dprintf(2, "exec_loop ; Entrée\n");
@@ -22,7 +37,7 @@ void	exec_loop(t_msh *msh)
 			// les builtins en eux_mêmes ne contiennent pas d'exit
 			check_cmd_path_n_exec(msh, exec_list_node); // contient tous les exit
 		}
-		//msh->exec->pid_t_array[j] = msh->exec->child; à réactiver pour tester
+		msh->exec->pid_t_array[j] = msh->exec->child; //à réactiver pour tester
 		if (exec_list_node->pos_ppl == SOLO || exec_list_node->pos_ppl == LAST)
 			msh->exec->last_child = msh->exec->child;
 		send_hd_through_pipe(exec_list_node, j); // attention aux builtin solo qui ne fork pas
@@ -38,11 +53,11 @@ void	exec_loop(t_msh *msh)
 			close(msh->exec->pipefd[READ]);
 			close(msh->exec->pipefd[WRITE]);
 		}
-
 		exec_list_node = exec_list_node->next;
 		j++;
 		sleep(1);
 	}
+	print_pid_t_array(msh);
 }
 
 // récupérer la version printée de chatgpt pour mieux comprendre cette fonction
@@ -86,7 +101,7 @@ void	create_pid_t_array(t_msh *msh)
 
 void execution(t_msh *msh)
 {
-	print_exec_list(msh);
+	//print_exec_list(msh);
 	msh->exec = new_exec();
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
