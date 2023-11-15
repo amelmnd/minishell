@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 00:55:47 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 09:58:39 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,7 @@ t_env_list	*new_env_list(void);
 void		ft_execve(t_msh *msh, t_exec_list *exec_list_node);
 void		free_ints(int **dust);
 char		*msh_getenv(t_msh *msh, char *var_name);
+int			get_size_env_list(t_msh *msh);
+int			is_chr_in_str(char *s, char c);
 
 #endif

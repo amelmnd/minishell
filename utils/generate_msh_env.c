@@ -6,31 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:03:55 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 08:54:14 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 11:00:43 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //minishell tourne avec son propre environnement  grâce à, entre autres, ces fonctions
-
-static int	get_size_env_list(t_msh *msh)
-{
-	int			size;
-	t_env_list	*env_list;
-
-	size = 0;
-	if (msh && msh->env_list)
-	{
-		env_list = msh->env_list;
-		while (env_list)
-		{
-			env_list = env_list->next;
-			size++;
-		}
-	}
-	return (size);
-}
 
 static char	*join_var_equal_value(t_env_list *env_list)
 {
