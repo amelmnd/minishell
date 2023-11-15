@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 15:06:46 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:16:30 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,11 +132,8 @@ struct	s_exec_list
 
 struct s_exec
 {
-	int						ac;
-	char					**av;
-	char					**envp;
-	int						path_defined;
-	char					*path_from_envp;
+	t_bool					path_defined;
+	char					*path_from_mshenv;
 	char					**paths_from_path;
 	pid_t					child;
 	pid_t					last_child;
