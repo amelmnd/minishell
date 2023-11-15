@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 22:25:54 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/11 14:57:28 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:17:24 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@ static void	init_exec(t_exec *exec)
 {
 	if (exec)
 	{
-		exec->ac = 0;
-		exec->av = NULL;
-		exec->envp = NULL;
-		exec->path_defined = 1;
-		exec->path_from_envp = NULL;
+		exec->path_defined = TRUE;
+		exec->path_from_mshenv = NULL;
 		exec->paths_from_path = NULL;
 		exec->pipefd[0] = 0;
 		exec->pipefd[1] = 0;

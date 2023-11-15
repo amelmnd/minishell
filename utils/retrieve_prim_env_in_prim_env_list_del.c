@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   retrieve_prim_env_in_prim_env_list.c               :+:      :+:    :+:   */
+/*   retrieve_prim_env_in_prim_env_list_del.c           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/13 11:58:47 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 00:53:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/*
 #include "minishell.h"
-
 //les deux fonctions ci-dessous doivent rester solidaires
 static void	init_prim_env_list(t_env_list *prim_env_list)
 {
@@ -133,3 +133,4 @@ void	retrieve_env_in_env_list(t_msh *msh, char *envp[])
 		}
 	}
 }
+*/

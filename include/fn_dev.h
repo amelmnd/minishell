@@ -40,7 +40,7 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node);
 void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node);
 
 t_exec	*new_exec(void);
-void	execution(t_msh *msh, char **envp);
+void	execution(t_msh *msh);
 int	    get_size_ntcharss(char **ntcharss);
 char	**ntcharss_copy(char **ntcharss_to_copy);
 void	get_path_from_envp(t_msh *msh);
