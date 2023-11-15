@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/14 19:55:36 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:27:10 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@ void	generate_prompt(char *envp[])
 	{
 		if (print) {printf("generate_prompt(while) : début itération ; msh->return_code = %d\n", msh->return_code);}
 
-		//generate_msh_env(msh); // ne pas supprimer
+		generate_msh_env(msh); // ne pas supprimer
 		//assigne à msh->(char **)msh_env un char ** généré à partir de msh->env_list
 		// qui est modifiée et conservée au fur et à mesure de cette boucle (generate_prompt)
+		//print_charss(msh->msh_env);
 
 		msh->program_status = INTERACTIVE_STATUS;
 		msh->prompt = readline(msh->user);
@@ -52,7 +53,7 @@ void	generate_prompt(char *envp[])
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			build_exec_list(msh);
-			execution(msh, envp);
+			execution(msh);
 		}
 		clean_msh_list(msh);
 		//break ;

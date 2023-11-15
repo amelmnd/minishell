@@ -84,7 +84,7 @@ void	create_pid_t_array(t_msh *msh)
 	}
 }
 
-void execution(t_msh *msh, char **envp)
+void execution(t_msh *msh)
 {
 	print_exec_list(msh);
 	msh->exec = new_exec();
@@ -92,11 +92,14 @@ void execution(t_msh *msh, char **envp)
 	mark_all_erased_hd(msh);
 
 	// ATTENTION !!!!
-	feed_msh_with_envp(msh, envp); // il faut récupérer l'env_list et la convertir en char **
+	//feed_msh_with_envp(msh, envp); // il faut récupérer l'env_list et la convertir en char **
 	// pour enfin l'assigner (malloc) à msh->exec->envp (quand le builtin env sera prêt)
 	// cette instruction sera certainement supprimée car remplacée en amont 
 	// (dans main generate_prompt)
+	// feed_msh_with_envp(msh, envp); maintenant désactivé, au profit de get_paths_from_path
+	// directement
 
+	get_paths_from_path(msh);
 
 	/*
 	// une fois que le bloc de code ci-dessous (actuellement commenté) sera activé

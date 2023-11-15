@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 15:12:18 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 01:26:41 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line);
 void	create_pipes_for_hd(t_msh *msh);
 void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j);
 void	send_hd_through_pipe(t_exec_list *exec_list_node, int j);
-
+// execution
+void	execution(t_msh *msh);
 t_exec	*new_exec(void);
 
 #endif
