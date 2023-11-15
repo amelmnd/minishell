@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 16:09:57 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 20:40:44 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 09:03:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,8 +150,10 @@ void	print_sorted_var_names_array(t_msh *msh, char **sorted_var_names_array)
 				|| sorted_var_names_array[i][0] != '_')
 			{
 				var_value = msh_getenv(msh, sorted_var_names_array[i]);
-				printf("declare -x %s=", sorted_var_names_array[i]);
-				printf("\"%s\"\n", var_value);
+				printf("declare -x %s", sorted_var_names_array[i]);
+				if (var_value)
+					printf("=\"%s\"", var_value);
+				printf("\n");
 				free_chars(&var_value);
 			}
 		}
@@ -261,7 +263,8 @@ void	add_new_couple_name_value(t_msh *msh, char *var_name, char *arg)
 	{
 		new_env_list_node = new_env_list();
 		new_env_list_node->name = ft_strdup(var_name);
-		new_env_list_node->value = get_var_value(var_name, arg);
+		if (is_c_in_s(arg, '='))
+			new_env_list_node->value = get_var_value(var_name, arg);
 		last_env_list_node = msh->env_list;
 		while (last_env_list_node->next)
 			last_env_list_node = last_env_list_node->next;

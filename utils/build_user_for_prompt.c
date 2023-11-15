@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:50:08 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 00:55:33 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:57:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*msh_getenv(t_msh *msh, char *var_name)
 		env_list = msh->env_list;
 		while (env_list)
 		{
-			if (ft_strcmp(env_list->name, var_name))
+			if (ft_strcmp(env_list->name, var_name) && env_list->value)
 				var_value = ft_strdup(env_list->value);
 			env_list = env_list->next;
 		}
