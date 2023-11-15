@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/13 11:07:20 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/14 14:33:02 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,7 +91,14 @@ SRCS_EXEC = here_doc/hd_pipe.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
-SRCS_BUIL = builtins.c\
+SRCS_BUIL = builtins.c \
+			export_builtin.c \
+			echo_builtin.c \
+			cd_builtin.c \
+			pwd_builtin.c \
+			unset_builtin.c \
+			env_builtin.c \
+			exit_builtin.c \
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/

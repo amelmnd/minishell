@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 07:13:15 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/11 11:29:15 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:38:00 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Dans le cas d'un solo, (le processus parent va donc exécuter le builtin cd),
 	processus parent ; ces changements vont donc persister (ce qui est voulu)
 */
 
+/*
 static char	*set_path_arg(t_msh *msh, t_exec_list *exec_list_node)
 {
 	char	*path_arg;
@@ -81,9 +82,13 @@ static void	update_oldpwd_n_pwd(t_msh *msh, char *oldpwd, char *pwd)
 		msh->return_code = 0;
 	}
 }
+*/
 
 void	cd_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
+	(void)msh;
+	(void)exec_list_node;
+	/*
 	char	*path_arg;
 	char	*pwd;
 	char	*oldpwd;
@@ -106,4 +111,5 @@ void	cd_builtin(t_msh *msh, t_exec_list *exec_list_node)
 		free_chars(&pwd);
 		free_chars(&oldpwd);
 	}
+	*/
 }

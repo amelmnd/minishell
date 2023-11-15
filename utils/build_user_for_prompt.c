@@ -6,14 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:50:08 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/11 08:07:51 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 08:57:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// il faudra certainement passer cette fonction en non static
-static char	*msh_getenv(t_msh *msh, char *var_name)
+char	*msh_getenv(t_msh *msh, char *var_name)
 {
 	t_env_list	*env_list;
 	char		*var_value;
@@ -25,7 +24,7 @@ static char	*msh_getenv(t_msh *msh, char *var_name)
 		env_list = msh->env_list;
 		while (env_list)
 		{
-			if (ft_strcmp(env_list->name, var_name))
+			if (ft_strcmp(env_list->name, var_name) && env_list->value)
 				var_value = ft_strdup(env_list->value);
 			env_list = env_list->next;
 		}
