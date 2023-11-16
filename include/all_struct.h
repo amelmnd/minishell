@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 01:16:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:36:32 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,9 @@ struct	s_exec_list
 	int			next_pipe;
 	int			nb_pipes;
 	t_hd		*hd;
-	int			hd_pipe[2];
+	int			hd_send_pipe[2];
+	int			hd_get_pipe[2];
+	pid_t		hd_get_child;
 	t_bool		contains_hd;
 	t_pos_ppl	pos_ppl;
 	t_bool		contains_write_redirect;

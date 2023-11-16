@@ -30,6 +30,7 @@ t_bool	is_cmd_in_nfsolobuiltin_list(t_exec_list *exec_list_node)
 	char	*cmd;
 	t_bool	bool;
 
+	cmd = NULL;
 	if (exec_list_node && exec_list_node->cmd)
 	{
 		cmd = ft_strdup(exec_list_node->cmd);

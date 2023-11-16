@@ -19,7 +19,7 @@ void	print_pid_t_array(t_msh *msh)
 
 void	exec_loop(t_msh *msh)
 {
-	dprintf(2, "exec_loop ; Entrée\n");
+	//dprintf(2, "exec_loop ; Entrée\n");
 	t_exec_list	*exec_list_node;
 
 	exec_list_node = msh->exec_list;
@@ -34,7 +34,7 @@ void	exec_loop(t_msh *msh)
 			do_all_redirections(msh, exec_list_node, j);
 
 			builtin_way(msh, exec_list_node);
-			dprintf(2, "exec_loop ; entrée dans le processus enfant\n");
+			//dprintf(2, "exec_loop ; entrée dans le processus enfant\n");
 			// la fonction builtin_way contient un exit
 			// les builtins en eux_mêmes ne contiennent pas d'exit
 			check_cmd_path_n_exec(msh, exec_list_node); // contient tous les exit
@@ -57,9 +57,9 @@ void	exec_loop(t_msh *msh)
 		}
 		exec_list_node = exec_list_node->next;
 		j++;
-		sleep(1);
+		sleep(1); // à supprimer à terme
 	}
-	print_pid_t_array(msh);
+	//print_pid_t_array(msh);
 }
 
 // récupérer la version printée de chatgpt pour mieux comprendre cette fonction
@@ -82,7 +82,7 @@ void	wait_and_get_the_last_return_code(t_msh *msh)
 			pid = waitpid(-1, &status, 0);
 		}
 		msh->return_code = last_exit_status;
-		printf("wait_and_get_the_last_return_code : msh->return_code = %d\n", msh->return_code); // à supprimer à terme
+		//printf("wait_and_get_the_last_return_code : msh->return_code = %d\n", msh->return_code); // à supprimer à terme
 	}
 }
 
@@ -103,9 +103,11 @@ void	create_pid_t_array(t_msh *msh)
 
 void execution(t_msh *msh)
 {
+	//dprintf(2, "execution : Entrée\n");
 	//print_exec_list(msh);
 	msh->exec = new_exec();
 	get_all_hd_content(msh);
+	//print_hd_in_exec_list_node(msh->exec_list);
 	mark_all_erased_hd(msh);
 
 	get_paths_from_path(msh);
@@ -142,4 +144,5 @@ void execution(t_msh *msh)
 	// vérifier avec lsof
 	if (msh->exec_list->nb_pipes)
 		close(msh->exec->fd_temp);
+	//dprintf(2, "execution : Sortie\n");
 }
