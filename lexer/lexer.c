@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 19:01:50 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:57:42 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ void	lexer_check(t_msh *msh, char *prompt)
 	if (prompt_isempty(&prompt) == TRUE)
 		exit_new_line(msh);
 	else
+	{
+		add_history(msh->prompt); // TODO verifier le fonctionnement avec les signaux et le heredoc fini
+
 		lexer_create_list(msh, prompt);
+	}
 	//free_chars(&prompt);
 }
