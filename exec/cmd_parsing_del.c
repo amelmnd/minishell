@@ -80,7 +80,8 @@ void	get_cmd_without_path_in_args(t_msh *msh, t_exec_list *exec_list_node)
 
 void	print_cmd_not_found_errormsg(char *cmdnf)
 {
-	ft_putstr_fd("minishell : ", 2);
+	//ft_putstr_fd("minishell: (print_cmd_not_found_errormsg) ", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmdnf, 2);
 	ft_putstr_fd(": command not found\n", 2);
 }
@@ -102,7 +103,8 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 			if (print) {dprintf(2, "check_cmd_path_n_exec : entrée dans le deuxième if\n");}
 			ft_execve(msh, exec_list_node);
 		}
-		print_cmd_not_found_errormsg(exec_list_node->cmd);
+		if (exec_list_node->cmd)
+			print_cmd_not_found_errormsg(exec_list_node->cmd);
 	}
 	exit(EXIT_FAILURE);
 }
