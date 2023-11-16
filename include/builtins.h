@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 10:55:13 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 13:31:27 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	export_with_args(t_msh *msh, t_exec_list *exec_list_node);
 
 // unset
 void	unset_builtin(t_msh *msh, t_exec_list *exec_list_node);
+void	remove_from_env_list(t_msh *msh, char *var_name);
 
 // env
 void	env_builtin(t_msh *msh, t_exec_list *exec_list_node);
