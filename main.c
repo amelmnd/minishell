@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 09:08:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 12:11:30 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	main(int argc, char *argv[], char *envp[])
 }
 
 /*
+il faudra penser à retirer gnl lorsqu'il ne sera plus utilisé
+(ou pas, comme beaucoup de fichiers de la libft non utilisés dans minishell)
+
 il est possible d'export des variables sans valeur
 export les affiche
 env ne les affiche pas
