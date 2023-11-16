@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 01:36:27 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 11:20:49 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include <signal.h>
 
 // IMP : readline.h is last include to avoid errors
 #include <readline/readline.h>
@@ -56,5 +57,9 @@ void	exit_command_not_foud(char *str);
 void	env_list_generate(t_msh *msh, char *envp[]);
 char	*ft_getenv(t_msh *msh, char *env_var);
 void	split_env_value(char *env_var, char **name, char **value);
+
+// signal
+void	ft_signal(t_msh *msh);
+void	sig_handler(int sig);
 
 #endif
