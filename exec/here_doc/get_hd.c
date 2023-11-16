@@ -6,11 +6,12 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 15:13:28 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/15 18:24:23 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+#include "signal.h"
 
 static t_bool	hd_strcmp(char *limiter, char *line)
 {
@@ -35,27 +36,38 @@ static t_bool	hd_strcmp(char *limiter, char *line)
 
 void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 {
+	//kill(0, SIGKILL);
 	char	*line;
 	int		j;
 
-	line = NULL;
+	//line = NULL;
 	j = 0;
 	if (exec_list_node && exec_list_node->redirect_array
 		&& exec_list_node->redirect_array[i].str && exec_list_node->hd)
 	{
 		while (42)
 		{
-			//dev
-			/*
-			write(STDOUT_FILENO, exec_list_node->redirect_array[i].str, ft_strlen(exec_list_node->redirect_array[i].str));
-			write(STDOUT_FILENO, "(", 1);
-			write_the_proper_number(ft_strlen(exec_list_node->redirect_array[i].str));
-			write(STDOUT_FILENO, ")", 1);
-			*/
 			write(STDOUT_FILENO, " > ", 2);
 			msh->program_status = HEREDOC_STATUS;
 			line = get_next_line(STDIN_FILENO);
+			if (feof(stdin))
+				printf("Fin du fichier (Ctrl+D) détectée.\n");
+			else
+				printf("Erreur de lecture.\n");
 			msh->program_status = EXECUTION_STATUS;
+			if (ft_strlen(line) == 0)
+			{	
+				/*
+				rl_on_new_line();
+				rl_replace_line("", 0);
+				printf("\n");
+				rl_redisplay();
+				*/
+				kill(0, SIGKILL);
+				printf("vide\n");
+				break ;
+			}
+			printf("sortie de la structure conditionnelle if/else\n");
 			if (hd_strcmp(exec_list_node->redirect_array[i].str, line))
 				break ;
 			if (j)
@@ -67,4 +79,5 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 		}
 	}
 	free_chars(&line);
+	printf("get_hd : sortie\n");
 }

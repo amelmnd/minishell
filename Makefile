@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/15 10:53:50 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/16 13:32:08 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -105,7 +105,8 @@ SRCS_BUIL = builtins.c \
 			echo_builtin.c \
 			cd_builtin.c \
 			pwd_builtin.c \
-			unset_builtin.c \
+			unset/unset_builtin.c \
+			unset/remove_from_env_list.c \
 			env_builtin.c \
 			exit_builtin.c \
 
