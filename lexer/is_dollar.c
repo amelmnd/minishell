@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:40:57 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:07:40 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	var_name_is_return_value(t_msh *msh, char *prompt, int *i)
 
 	var_name = ft_substr(prompt, *i, 2);
 	lexer_push(msh, var_name, RETURN_VALUE);
+	free_chars(&var_name);
 	*i += 1;
 }
 
@@ -44,6 +45,7 @@ void	var_name_isalpha(t_msh *msh, char *prompt, int *i)
 	var_len = is_var_end(prompt, *i);
 	var_name = ft_substr(prompt, *i, var_len);
 	lexer_push(msh, var_name, VARIABLE);
+	free_chars(&var_name);
 	*i += var_len - 1;
 }
 
@@ -53,11 +55,14 @@ void	var_name_not_isalpha(t_msh *msh, char *prompt, int *i)
 
 	var_name = ft_substr(prompt, *i, 2);
 	lexer_push(msh, var_name, SPECIAL_VAR);
+	free_chars(&var_name);
 	*i += 1;
 }
 
 int	is_dollar(t_msh *msh, char *prompt, int *i)
 {
+		char *str;
+
 	if (prompt[*i + 1] == '?')
 		var_name_is_return_value(msh, prompt, i);
 	else if (prompt[*i + 1] == 34 || prompt[*i + 1] == 39
@@ -66,7 +71,11 @@ int	is_dollar(t_msh *msh, char *prompt, int *i)
 				|| prompt[*i + 1] == '\t' || prompt[*i + 1] == '\0'))
 		|| (!ft_isalpha(prompt[*i + 1]) && (prompt[*i + 1] == '>'
 				|| prompt[*i + 1] == '<' || prompt[*i + 1] == '|')))
-		lexer_push(msh, ft_strdup("$"), WORD);
+	{
+		str = ft_strdup("$");
+		lexer_push(msh, str, WORD);
+		free_chars(&str);
+	}
 	else if (ft_isalpha(prompt[*i + 1]) || (!ft_isalpha(prompt[*i + 1])
 			&& prompt[*i + 1] == '_'))
 		var_name_isalpha(msh, prompt, i);
