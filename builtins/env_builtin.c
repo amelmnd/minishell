@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_builtin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:31:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 13:49:15 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 17:21:48 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,13 @@
 
 void	env_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
-	(void)msh;
+	t_env_list	*env_list;
+
 	(void)exec_list_node;
-	printf("env_builtin : Entrée ; pas de code pour le moment\n");
+	env_list = msh->env_list;
+	while (env_list)
+	{
+		printf("%s=\"%s\"\n", env_list->name, env_list->value);
+		env_list = env_list->next;
+	}
 }
