@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/17 15:07:56 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 19:01:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,8 @@ t_bool	prompt_isempty(char **prompt)
 void	lexer_check(t_msh *msh, char *prompt)
 {
 	if (prompt_isempty(&prompt) == TRUE)
-	{
-		free(prompt);
 		exit_new_line(msh);
-	}
 	else
 		lexer_create_list(msh, prompt);
-	free_chars(&prompt);
+	//free_chars(&prompt);
 }

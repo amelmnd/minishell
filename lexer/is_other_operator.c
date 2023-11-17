@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:12:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/17 15:07:43 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/09 16:17:30 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 int	is_blank(t_msh *msh, char *prompt, int *i)
 {
-	char *str;
-
-	str = ft_strdup(" ");
-	lexer_push(msh, str, BLANK);
-	free_chars(&str);
+	lexer_push(msh, ft_strdup(" "), BLANK);
 	if (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t')
 	{
 		while (prompt[*i] == ' ' || prompt[*i] == '\t')
@@ -32,7 +28,6 @@ int	is_blank(t_msh *msh, char *prompt, int *i)
 
 int	is_pipe(t_msh *msh, char *prompt, int *i)
 {
-	char *str;
 	if (*i == 0 || prompt[*i + 1] == '|'
 		|| prompt[ft_strlen(prompt) - 1] == '|')
 	{
@@ -40,10 +35,6 @@ int	is_pipe(t_msh *msh, char *prompt, int *i)
 		return (2);
 	}
 	else
-	{
-		str = ft_strdup("|");
-		lexer_push(msh, str, PIPE);
-		free_chars(&str);
-	}
+		lexer_push(msh, ft_strdup("|"), PIPE);
 	return (0);
 }
