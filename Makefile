@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/16 13:32:08 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/16 14:28:47 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,7 +63,7 @@ SRCS_EXP = expander.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
-SRCS_EXEC = here_doc/hd_pipe.c \
+SRCS_EXEC = here_doc/hd_send_pipe.c \
 			here_doc/mark_all_erased_hd.c \
 			here_doc/new_hd.c \
 			here_doc/get_hd.c \
