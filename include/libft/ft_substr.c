@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:16:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/09/14 19:32:39 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:07:35 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		i++;
 	}
 	result[i] = '\0';
+	// ft_free_str((char**)s);
 	return (result);
 }
 /*

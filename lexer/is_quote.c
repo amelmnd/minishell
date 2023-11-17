@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:55 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 15:19:42 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:07:45 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	is_simple_quote(t_msh *msh, char *prompt, int *i)
 	printf("str = %s\n", str);
 	*i = *i + quote_len + 1;
 	lexer_push(msh, str, S_QUOTE);
+	free_chars(&str);
 	return (0);
 }
 
@@ -63,8 +64,14 @@ int	is_double_quote(t_msh *msh, char *prompt, int *i)
 	str = ft_substr(prompt, *i + 1, quote_len);
 	*i = *i + quote_len + 1;
 	if (as_var == TRUE)
+	{
 		lexer_push(msh, str, D_QUOTE_VAR);
+		free_chars(&str);
+	}
 	else
+	{
 		lexer_push(msh, str, D_QUOTE);
+		free_chars(&str);
+	}
 	return (0);
 }
