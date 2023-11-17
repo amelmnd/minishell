@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hd_pipe.c                                          :+:      :+:    :+:   */
+/*   hd_send_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ void	create_pipes_for_hd(t_msh *msh)
 		{
 			if (exec_list_node->contains_hd == TRUE)
 			{
-				ret = pipe(exec_list_node->hd_pipe);
+				ret = pipe(exec_list_node->hd_send_pipe);
 				if (ret == -1)
 					perror("pipe error");
 			}
@@ -35,16 +35,18 @@ void	create_pipes_for_hd(t_msh *msh)
 
 void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j)
 {
+	dprintf(2, "retrieve_hd_through_hdpipe : Entrée\n");
 	int	ret;
 
 	(void)j; // à supprimer à terme !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	// y compris dans le prototype
 	if (exec_list_node)
 	{
-		close(exec_list_node->hd_pipe[WRITE]);
-		ret = dup2(exec_list_node->hd_pipe[READ], STDIN_FILENO);
+		close(exec_list_node->hd_send_pipe[WRITE]);
+		ret = dup2(exec_list_node->hd_send_pipe[READ], STDIN_FILENO);
 		if (ret == -1)
 			perror("dup2 error");
-		close(exec_list_node->hd_pipe[READ]);
+		close(exec_list_node->hd_send_pipe[READ]);
 	}
 }
 
@@ -58,10 +60,10 @@ static void	write_hd_in_the_pipe(t_exec_list *exec_list_node)
 		while (hd_node)
 		{
 			if (!(hd_node->str))
-				write(exec_list_node->hd_pipe[WRITE], "\n", 1);
+				write(exec_list_node->hd_send_pipe[WRITE], "\n", 1);
 			else
 			{
-				write(exec_list_node->hd_pipe[WRITE],
+				write(exec_list_node->hd_send_pipe[WRITE],
 					hd_node->str, ft_strlen(hd_node->str));
 			}
 			hd_node = hd_node->next;
@@ -75,7 +77,7 @@ void	send_hd_through_pipe(t_exec_list *exec_list_node, int j)
 	if (exec_list_node && exec_list_node->contains_hd)
 	{
 		write_hd_in_the_pipe(exec_list_node);
-		close(exec_list_node->hd_pipe[READ]);
-		close(exec_list_node->hd_pipe[WRITE]);
+		close(exec_list_node->hd_send_pipe[READ]);
+		close(exec_list_node->hd_send_pipe[WRITE]);
 	}
 }

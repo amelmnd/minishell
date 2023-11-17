@@ -6,13 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/16 12:11:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 19:55:46 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int print = 1;
+static int print = 0;
 
 void	generate_prompt(char *envp[])
 {
@@ -25,10 +25,7 @@ void	generate_prompt(char *envp[])
 	{
 		if (print) {printf("generate_prompt(while) : début itération ; msh->return_code = %d\n", msh->return_code);}
 
-		generate_msh_env(msh); // ne pas supprimer
-		//assigne à msh->(char **)msh_env un char ** généré à partir de msh->env_list
-		// qui est modifiée et conservée au fur et à mesure de cette boucle (generate_prompt)
-		//print_charss(msh->msh_env);
+		generate_msh_env(msh);
 
 		msh->program_status = INTERACTIVE_STATUS;
 		msh->prompt = readline(msh->user);
@@ -56,10 +53,7 @@ void	generate_prompt(char *envp[])
 			execution(msh);
 		}
 		clean_msh_list(msh);
-		//break ;
 	}
-	//avec le break ci-dessous : à réactiver tant que les signaux n'ont pas été
-	//gérés pour tester les leaks
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -90,4 +84,8 @@ la variable est affichée par export tel que : nom_var=""
 la variable est affichée par env tel que : nom_var=
 
 fsanitize change les msh->return_code
+
+rectifier les messages d'erreur avec la recherche "minishell:"
+
+Chasser tous les perror (pour les remplacer par des ft_putstr_fd(2))
 */
