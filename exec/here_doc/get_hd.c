@@ -6,11 +6,76 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 23:44:12 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/17 10:17:52 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	child_part(t_exec_list *exec_list_node, int i)
+{
+	char	*line;
+
+	close(exec_list_node->hd_get_pipe[READ]);
+	while (42)
+	{
+		line = readline("> ");
+		if (line == NULL)
+		{
+			close(exec_list_node->hd_get_pipe[WRITE]);
+			exit(EXIT_SUCCESS);
+		}
+		if (ft_strcmp(line, exec_list_node->redirect_array[i].str))
+		{
+			free_chars(&line);
+			break ;
+		}
+		write(exec_list_node->hd_get_pipe[WRITE], line, ft_strlen(line));
+		write(exec_list_node->hd_get_pipe[WRITE], "\n", 1);
+		free_chars(&line);
+	}
+	close(exec_list_node->hd_get_pipe[WRITE]);
+	exit(EXIT_SUCCESS);
+}
+
+static void	parent_part(t_exec_list *exec_list_node)
+{
+	char	buffer[BUFFER_SIZE];
+	int		nbytes;
+	int		count;
+
+	close(exec_list_node->hd_get_pipe[WRITE]);
+	nbytes = read(exec_list_node->hd_get_pipe[READ], buffer, BUFFER_SIZE - 1);
+	count = 0;
+	while (nbytes > 0)
+	{
+		buffer[nbytes] = '\0';
+		if (count)
+			feed_append_new_hd_node(exec_list_node, buffer);
+		else
+			exec_list_node->hd->str = ft_strdup(buffer);
+		nbytes = read(exec_list_node->hd_get_pipe[READ],
+				buffer, BUFFER_SIZE - 1);
+		count++;
+	}
+	close(exec_list_node->hd_get_pipe[READ]);
+	waitpid(exec_list_node->hd_get_child, NULL, 0);
+}
+
+void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
+{
+	if (msh && exec_list_node)
+	{
+		pipe(exec_list_node->hd_get_pipe);
+		exec_list_node->hd_get_child = fork();
+		if (!(exec_list_node->hd_get_child))
+			child_part(exec_list_node, i);
+		else
+			parent_part(exec_list_node);
+	}
+}
+
+/*
 
 void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 {
@@ -36,7 +101,7 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 					free_chars(&line);
 					break ;
 				}
-				dprintf(2, "get_hd(child) : line = %s\n", line);
+				//dprintf(2, "get_hd(child) : line = %s\n", line);
 				write(exec_list_node->hd_get_pipe[WRITE], line, ft_strlen(line));
 				write(exec_list_node->hd_get_pipe[WRITE], "\n", 1);
 				free_chars(&line);
@@ -56,7 +121,7 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 			while (nbytes > 0)
 			{
 				buffer[nbytes] = '\0';
-				dprintf(2, "get_hd (parent) : buffer = %s\n", buffer);
+				//dprintf(2, "get_hd (parent) : buffer = %s\n", buffer);
 				if (count)
 					feed_append_new_hd_node(exec_list_node, buffer);
 				else
@@ -71,7 +136,6 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 	}
 }
 
-/*
 //peut-être qu'il n'y a plus besoin de cette version modifiée de strcmp
 // vu que readline ne prend pas le \n final, comme le faisait get_next_line
 static t_bool	hd_strcmp(char *limiter, char *line)
