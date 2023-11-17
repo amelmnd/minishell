@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:42:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/12 13:09:40 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/16 14:37:07 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ static void	init_exec_list_node(t_exec_list *exec_list_node)
 		exec_list_node->nb_words = 0;
 		exec_list_node->next_pipe = 0;
 		exec_list_node->nb_pipes = 0;
-		exec_list_node->hd_pipe[READ] = -1;
-		exec_list_node->hd_pipe[WRITE] = -1;
+		exec_list_node->hd_send_pipe[READ] = -1;
+		exec_list_node->hd_send_pipe[WRITE] = -1;
+		exec_list_node->hd_get_pipe[READ] = -1;
+		exec_list_node->hd_get_pipe[WRITE] = -1;
+		exec_list_node->hd_get_child = -1;
 		exec_list_node->contains_hd = FALSE;
 		exec_list_node->pos_ppl = INIT_POS_PPL_VALUE;
 		exec_list_node->contains_write_redirect = FALSE;

@@ -22,7 +22,7 @@ void	ft_duptwo(int pretender, int to_replace);
 
 int	ft_strcmp(char *s1, char *s2);
 
-# define BUFFER_SIZE 3
+//# define BUFFER_SIZE 3
 char	*get_next_line(int fd);
 size_t	gnl_strlen(char *s);
 char	*gnl_strchr(char *s, int c);

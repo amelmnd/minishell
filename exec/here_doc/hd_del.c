@@ -4,6 +4,7 @@
 //dev
 void	print_hd_in_exec_list_node(t_exec_list *exec_list_node)
 {
+	dprintf(2, "print_hd_in_exec_list_node : Entrée\n");
 	t_hd	*hd_node = exec_list_node->hd;
 
 	while (hd_node)
