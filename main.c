@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/16 19:55:46 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/18 21:26:32 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,11 @@ int	main(int argc, char *argv[], char *envp[])
 il faudra penser à retirer gnl lorsqu'il ne sera plus utilisé
 (ou pas, comme beaucoup de fichiers de la libft non utilisés dans minishell)
 
-il est possible d'export des variables sans valeur
-export les affiche
-env ne les affiche pas
-
-'export lol' ajoute une variable sans valeur
-'export lol=' ajoute une variable avec valeur
-
-la variable d'environnement _ est affichée par env, mais pas part export
-
-au moment de l'export : s'il y a un =, une chaine vide est associée au nom
-la variable est affichée par export tel que : nom_var=""
-la variable est affichée par env tel que : nom_var=
-
 fsanitize change les msh->return_code
 
 rectifier les messages d'erreur avec la recherche "minishell:"
 
 Chasser tous les perror (pour les remplacer par des ft_putstr_fd(2))
+
+sécuriser tous les appels système type : pipe, fork, close, dup2, dup, etc...
 */

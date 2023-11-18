@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/16 14:28:47 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/18 21:51:25 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,12 +71,13 @@ SRCS_EXEC = here_doc/hd_send_pipe.c \
 			here_doc/get_all_hd_content.c \
 			here_doc/feed_append_new_hd_node.c \
 			here_doc/hd_del.c \
-			solo_builtin/solo_builtin_del.c \
+			solo_builtin/builtin_solo_without_fork.c \
+			solo_builtin/do_all_redir_solo_builtin.c \
 			exec.c \
 			malloc_exec_list_node_arrays.c \
 			feed_the_only_exec_list_node_data.c \
 			get_nb_pipes_in_exp_list.c \
-			build_exec_list_del.c \
+			build_exec_list.c \
 			print_exec_list_del.c \
 			exec_list_node_management.c \
 			scan_redirects.c \
@@ -87,7 +88,7 @@ SRCS_EXEC = here_doc/hd_send_pipe.c \
 			pipe_fork_close_dup2_del.c \
 			new_exec.c \
 			redir_del.c \
-			cmd_parsing_del.c \
+			check_cmd_path_n_exec.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
