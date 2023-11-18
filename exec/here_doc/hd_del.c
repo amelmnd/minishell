@@ -1,5 +1,7 @@
 #include "minishell.h"
 
+/*
+//file for the museum
 // dev !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //dev
 void	print_hd_in_exec_list_node(t_exec_list *exec_list_node)
@@ -22,7 +24,8 @@ void	print_all_hd_remaining(t_msh *msh)
 	while (exec_list_node)
 	{
 		print_hd_in_exec_list_node(exec_list_node);
-		dprintf(2, "\n== Passage à l'exec_list_node suivant (ce dprintf 2, contient une nl au début) ==\n");
+		dprintf(2, "\n== Passage à l'exec_list_node suivant 
+		(ce dprintf 2, contient une nl au début) ==\n");
 		exec_list_node = exec_list_node->next;
 	}
 }
@@ -61,3 +64,4 @@ void	write_the_proper_number(int n)
 	else if (n == 14)
 		write(STDOUT_FILENO, "14", 2);
 }
+*/

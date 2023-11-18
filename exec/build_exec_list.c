@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_builtin.c                                      :+:      :+:    :+:   */
+/*   build_exec_list_del.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:31:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/18 21:16:30 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/18 21:47:41 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/18 21:47:42 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	env_builtin(t_msh *msh, t_exec_list *exec_list_node)
+void	build_exec_list(t_msh *msh)
 {
-	t_env_list	*env_list;
-
-	(void)exec_list_node;
-	env_list = msh->env_list;
-	while (env_list)
-	{
-		printf("%s=\"%s\"\n", env_list->name, env_list->value);
-		env_list = env_list->next;
-	}
+	malloc_exec_list_nodes(msh);
+	feed_exec_list_nodes_data(msh);
+	malloc_exec_list_node_arrays(msh);
+	feed_exec_list_nodes_cmd(msh);
+	assign_pos_ppl_exec_list(msh);
+	feed_exec_list_node(msh);
+	scan_redirects(msh);
 }
