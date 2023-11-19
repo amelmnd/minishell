@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/18 21:51:25 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/19 22:08:33 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,10 +74,12 @@ SRCS_EXEC = here_doc/hd_send_pipe.c \
 			solo_builtin/builtin_solo_without_fork.c \
 			solo_builtin/do_all_redir_solo_builtin.c \
 			exec.c \
+			pid_t_array.c \
 			malloc_exec_list_node_arrays.c \
 			feed_the_only_exec_list_node_data.c \
 			get_nb_pipes_in_exp_list.c \
 			build_exec_list.c \
+			do_redir.c \
 			print_exec_list_del.c \
 			exec_list_node_management.c \
 			scan_redirects.c \
@@ -87,7 +89,7 @@ SRCS_EXEC = here_doc/hd_send_pipe.c \
 			feed_exec_list_nodes_cmd.c \
 			pipe_fork_close_dup2_del.c \
 			new_exec.c \
-			redir_del.c \
+			do_all_redirections.c \
 			check_cmd_path_n_exec.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
@@ -143,6 +145,7 @@ SRCS_DEV = dev_color.c \
 		   dev_print_lexer_list.c \
 		   dev_print_exp_list.c \
 		   dev_print_env_list.c\
+		   dev_print_pid_t_array.c \
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 

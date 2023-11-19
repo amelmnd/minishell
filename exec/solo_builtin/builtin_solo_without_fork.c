@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   solo_builtin_del.c                                 :+:      :+:    :+:   */
+/*   builtin_solo_without_fork.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:46:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/18 21:46:07 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:06:53 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static t_bool	is_cmd_in_nfsolobuiltin_list(t_exec_list *exec_list_node)
 	return (bool);
 }
 
-static t_bool	no_fork_solo_builtin(t_msh *msh)
+t_bool	no_fork_solo_builtin(t_msh *msh)
 {
 	t_exec_list	*exec_list_node;
 

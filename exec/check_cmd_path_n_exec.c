@@ -6,13 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:52:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/18 21:52:11 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:21:53 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	exists_in_paths(t_msh *msh, t_exec_list *exec_list_node)
+static t_bool	exists_in_paths(t_msh *msh, t_exec_list *exec_list_node)
 {
 	char	*abs_path_candidate;
 	int		i;
@@ -24,7 +24,7 @@ t_bool	exists_in_paths(t_msh *msh, t_exec_list *exec_list_node)
 		while (msh->exec->paths_from_path[++i])
 		{
 			abs_path_candidate = ft_strjoin(msh->exec->paths_from_path[i],
-				exec_list_node->cmd);
+					exec_list_node->cmd);
 			if (!access(abs_path_candidate, X_OK))
 			{
 				msh->exec->cmd_path_ready = ft_strdup(abs_path_candidate);
@@ -38,7 +38,7 @@ t_bool	exists_in_paths(t_msh *msh, t_exec_list *exec_list_node)
 	return (FALSE);
 }
 
-int	get_index_last_slash(char *cmd_with_path)
+static int	get_index_last_slash(char *cmd_with_path)
 {
 	int	i;
 	int	index_last_slash;
@@ -56,20 +56,8 @@ int	get_index_last_slash(char *cmd_with_path)
 	return (index_last_slash);
 }
 
-int	get_size_cmd(char *cmd_with_path, int index)
-{
-	int	size;
-
-	size = 0;
-	if (cmd_with_path)
-	{
-		while (cmd_with_path[++index])
-			size++;
-	}
-	return (size);
-}
-
-void	get_cmd_without_path_in_args(t_msh *msh, t_exec_list *exec_list_node)
+static void	get_cmd_without_path_in_args(t_msh *msh,
+		t_exec_list *exec_list_node)
 {
 	int		index_last_slash;
 
@@ -78,11 +66,11 @@ void	get_cmd_without_path_in_args(t_msh *msh, t_exec_list *exec_list_node)
 		index_last_slash = get_index_last_slash(msh->exec->cmd_path_ready);
 		free_chars(&(exec_list_node->args_array[0]));
 		exec_list_node->args_array[0] = ft_substr(msh->exec->cmd_path_ready,
-			index_last_slash + 1, ft_strlen(msh->exec->cmd_path_ready));
+				index_last_slash + 1, ft_strlen(msh->exec->cmd_path_ready));
 	}
 }
 
-void	print_cmd_not_found_errormsg(char *cmdnf)
+static void	print_cmd_not_found_errormsg(char *cmdnf)
 {
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmdnf, 2);

@@ -106,8 +106,10 @@ void	print_exec_list_node(t_exec_list *exec_list_node)
 	if (print) {dprintf(2, "exec_list_node->cmd = %s\n", exec_list_node->cmd);}
 	print_args_array(exec_list_node);
 	if (print) {dprintf(2, "exec_list_node->contains_hd = %d\n", exec_list_node->contains_hd);}
+	/*
 	if (exec_list_node->contains_hd)
 		print_hd_in_exec_list_node(exec_list_node);
+	*/
 	if (print) {dprintf(2, "exec_list_node->contains_write_redirects = %d\n", exec_list_node->contains_write_redirect);}
 	print_pos_ppl_in_exec_list_node(exec_list_node);
 }
