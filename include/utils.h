@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 23:18:51 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:54:37 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 # include "minishell.h"
 
-void	reset_counts(int *x, int *y);
-char	**malloc_full_null_charss(int size);
+void		reset_counts(int *x, int *y);
+char		**malloc_full_null_charss(int size);
 
 //before prompt_loop
 void		generate_msh_env(t_msh *msh);

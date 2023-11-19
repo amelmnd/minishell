@@ -6,13 +6,11 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/18 21:26:32 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 00:03:36 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int print = 0;
 
 void	generate_prompt(char *envp[])
 {
@@ -23,10 +21,7 @@ void	generate_prompt(char *envp[])
 	build_user_for_prompt(msh);
 	while (42 && msh)
 	{
-		if (print) {printf("generate_prompt(while) : début itération ; msh->return_code = %d\n", msh->return_code);}
-
 		generate_msh_env(msh);
-
 		msh->program_status = INTERACTIVE_STATUS;
 		msh->prompt = readline(msh->user);
 		msh->program_status = EXECUTION_STATUS;
@@ -65,7 +60,6 @@ int	main(int argc, char *argv[], char *envp[])
 		show_no_args_for_minishell_error_msg();
 	return (0);
 }
-
 /*
 il faudra penser à retirer gnl lorsqu'il ne sera plus utilisé
 (ou pas, comme beaucoup de fichiers de la libft non utilisés dans minishell)
