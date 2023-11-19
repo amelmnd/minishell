@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/17 10:17:52 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	child_part(t_exec_list *exec_list_node, int i)
 			close(exec_list_node->hd_get_pipe[WRITE]);
 			exit(EXIT_SUCCESS);
 		}
-		if (ft_strcmp(line, exec_list_node->redirect_array[i].str))
+		if (ft_strcmp(line, exec_list_node->redir_array[i].str))
 		{
 			free_chars(&line);
 			break ;
@@ -96,7 +96,7 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 					close(exec_list_node->hd_get_pipe[WRITE]);
 					exit(EXIT_SUCCESS);
 				}
-				if (ft_strcmp(line, exec_list_node->redirect_array[i].str))
+				if (ft_strcmp(line, exec_list_node->redir_array[i].str))
 				{
 					free_chars(&line);
 					break ;
@@ -167,8 +167,8 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 
 	//line = NULL;
 	j = 0;
-	if (exec_list_node && exec_list_node->redirect_array
-		&& exec_list_node->redirect_array[i].str && exec_list_node->hd)
+	if (exec_list_node && exec_list_node->redir_array
+		&& exec_list_node->redir_array[i].str && exec_list_node->hd)
 	{
 		while (42)
 		{
@@ -193,7 +193,7 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 				break ;
 			}
 			printf("sortie de la structure conditionnelle if/else\n");
-			if (hd_strcmp(exec_list_node->redirect_array[i].str, line))
+			if (hd_strcmp(exec_list_node->redir_array[i].str, line))
 				break ;
 			if (j)
 				feed_append_new_hd_node(exec_list_node, line);

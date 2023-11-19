@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:40:37 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/18 21:45:46 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,9 @@ void	do_all_redir_solo_builtin(t_msh *msh)
 	t_redirect	*redirect;
 
 	i = -1;
-	if (msh && msh->exec_list && msh->exec_list->redirect_array)
+	if (msh && msh->exec_list && msh->exec_list->redir_array)
 	{
-		redirect = msh->exec_list->redirect_array;
+		redirect = msh->exec_list->redir_array;
 		while (++i < msh->exec_list->nb_redirects && !(msh->return_code))
 		{
 			if (redirect[i].exp_type == R_ORIGIN_REDIRECT)

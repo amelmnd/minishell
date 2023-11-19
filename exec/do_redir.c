@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:53:28 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:23:36 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i)
 {
 	t_redirect	redir_box;
 
-	if (msh && exec_list_node && exec_list_node->redirect_array)
+	if (msh && exec_list_node && exec_list_node->redir_array)
 	{
-		redir_box = exec_list_node->redirect_array[i];
+		redir_box = exec_list_node->redir_array[i];
 		if (redir_box.exp_type == LIMITER_HEREDOC)
 			retrieve_hd_through_hdpipe(exec_list_node);
 		else if (redir_box.exp_type == R_ORIGIN_REDIRECT)

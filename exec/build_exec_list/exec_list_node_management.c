@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:42:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 15:01:57 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_exec_list_node(t_exec_list *exec_list_node)
 	{
 		exec_list_node->next = NULL;
 		exec_list_node->previous = NULL;
-		exec_list_node->redirect_array = NULL;
+		exec_list_node->redir_array = NULL;
 		exec_list_node->nb_redirects = 0;
 		exec_list_node->cmd = NULL;
 		exec_list_node->args_array = NULL;

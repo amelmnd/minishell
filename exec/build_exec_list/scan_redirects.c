@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:43:53 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 18:44:17 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ static void	check_redir_in_exec_list_node(t_exec_list *exec_list_node)
 
 	if (exec_list_node
 		&& exec_list_node->args_array
-		&& exec_list_node->redirect_array)
+		&& exec_list_node->redir_array)
 	{
 		i = -1;
 		while (++i < exec_list_node->nb_redirects
 			&& (exec_list_node->contains_write_redirect == FALSE
 				|| exec_list_node->contains_read_redirect == FALSE))
 		{
-			if (exec_list_node->redirect_array[i].exp_type == W_DEST_REDIRECT
-				|| exec_list_node->redirect_array[i].exp_type == WA_DEST_REDIRECT)
+			if (exec_list_node->redir_array[i].exp_type == W_DEST_REDIRECT
+				|| exec_list_node->redir_array[i].exp_type == WA_DEST_REDIRECT)
 				exec_list_node->contains_write_redirect = TRUE;
-			if (exec_list_node->redirect_array[i].exp_type == R_ORIGIN_REDIRECT
-				|| exec_list_node->redirect_array[i].exp_type == LIMITER_HEREDOC)
+			if (exec_list_node->redir_array[i].exp_type == R_ORIGIN_REDIRECT
+				|| exec_list_node->redir_array[i].exp_type == LIMITER_HEREDOC)
 				exec_list_node->contains_read_redirect = TRUE;
 		}
 	}
