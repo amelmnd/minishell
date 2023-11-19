@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:58:04 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ struct	s_exec_list
 	int			nb_redirects;
 	char		*cmd;
 	char		**args_array;
-	int 		nb_words;
+	int			nb_words;
 	int			next_pipe;
 	int			nb_pipes;
 	t_hd		*hd;

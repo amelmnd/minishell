@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:07:10 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:55:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,5 @@ void	env_builtin(t_msh *msh, t_exec_list *exec_list_node);
 
 // exit
 void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node);
-
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 11:01:48 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/03 21:30:06 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:55:45 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,24 +30,3 @@ char	*ft_strdup(const char *s1)
 	copy[i] = '\0';
 	return (copy);
 }
-
-// commentaire à virer!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-/*
-char	*ft_strdup(const char *s)
-{
-	char	*dup;
-	int		i;
-
-	if (!s)
-		return (NULL);
-	dup = NULL;
-	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
-	if (!dup)
-		return (NULL);
-	i = -1;
-	while (s[++i])
-		dup[i] = s[i];
-	dup[i] = '\0';
-	return (dup);
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 09:57:53 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 09:58:08 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 00:01:00 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_chr_in_str(char *s, char c)
 {
 	int	i;
-	
+
 	i = -1;
 	while (s[++i])
 	{
