@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:29:03 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/18 21:29:13 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:06:19 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	create_pipes_for_hd(t_msh *msh)
 {
-	int			ret;
 	t_exec_list	*exec_list_node;
 
 	if (msh && msh->exec_list)
@@ -23,7 +22,7 @@ void	create_pipes_for_hd(t_msh *msh)
 		while (exec_list_node)
 		{
 			if (exec_list_node->contains_hd == TRUE)
-				ret = pipe(exec_list_node->hd_send_pipe);
+				pipe(exec_list_node->hd_send_pipe);
 			exec_list_node = exec_list_node->next;
 		}
 	}
@@ -31,12 +30,10 @@ void	create_pipes_for_hd(t_msh *msh)
 
 void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node)
 {
-	int	ret;
-
 	if (exec_list_node)
 	{
 		close(exec_list_node->hd_send_pipe[WRITE]);
-		ret = dup2(exec_list_node->hd_send_pipe[READ], STDIN_FILENO);
+		dup2(exec_list_node->hd_send_pipe[READ], STDIN_FILENO);
 		close(exec_list_node->hd_send_pipe[READ]);
 	}
 }

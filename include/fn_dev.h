@@ -21,6 +21,7 @@ void	ft_close(int fd);
 void	ft_duptwo(int pretender, int to_replace);
 
 int	ft_strcmp(char *s1, char *s2);
+void	print_pid_t_array(t_msh *msh);
 
 //# define BUFFER_SIZE 3
 char	*get_next_line(int fd);
@@ -32,8 +33,6 @@ char	*gnl_substr(char *s, unsigned int start, size_t len);
 
 void	print_hd_in_exec_list_node(t_exec_list *exec_list_node); //dev
 void	print_all_hd_remaining(t_msh *msh); //dev
-
-void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j);
 
 void	builtin_way(t_msh *msh, t_exec_list *exec_list_node);
 

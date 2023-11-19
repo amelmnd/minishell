@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:21:53 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/18 21:24:37 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:10:13 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,5 @@ void	get_hd_in_exec_list_node(t_msh *msh, t_exec_list *exec_list_node)
 				get_hd(msh, exec_list_node, i);
 			}
 		}
-		print_hd_in_exec_list_node(exec_list_node);
 	}
 }
