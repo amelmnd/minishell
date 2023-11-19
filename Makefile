@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/19 22:42:48 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/19 23:42:07 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,33 +63,32 @@ SRCS_EXP = expander.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
-SRCS_EXEC = here_doc/hd_send_pipe.c \
-			here_doc/mark_all_erased_hd.c \
-			here_doc/new_hd.c \
-			here_doc/get_hd.c \
-			here_doc/get_hd_in_exec_list_node.c \
-			here_doc/get_all_hd_content.c \
-			here_doc/feed_append_new_hd_node.c \
-			here_doc/hd_del.c \
-			solo_builtin/builtin_solo_without_fork.c \
-			solo_builtin/do_all_redir_solo_builtin.c \
-			build_exec_list/malloc_exec_list_node_arrays.c \
-			build_exec_list/feed_the_only_exec_list_node_data.c \
-			build_exec_list/get_nb_pipes_in_exp_list.c \
+SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 			build_exec_list/build_exec_list.c \
 			build_exec_list/exec_list_node_management.c \
-			build_exec_list/scan_redirects.c \
-			build_exec_list/assign_pos_ppl_exec_list.c \
 			build_exec_list/feed_exec_list_node.c \
-			build_exec_list/feed_exec_list_nodes_data.c \
 			build_exec_list/feed_exec_list_nodes_cmd.c \
-			exec.c \
-			pid_t_array.c \
-			do_redir.c \
-			pipe_fork_close_dup2_del.c \
-			new_exec.c \
-			do_all_redirections.c \
-			check_cmd_path_n_exec.c \
+			build_exec_list/feed_exec_list_nodes_data.c \
+			build_exec_list/feed_the_only_exec_list_node_data.c \
+			build_exec_list/get_nb_pipes_in_exp_list.c \
+			build_exec_list/malloc_exec_list_node_arrays.c \
+			build_exec_list/scan_redirects.c \
+			execution/check_cmd_path_n_exec.c \
+			execution/do_all_redirections.c \
+			execution/do_redir.c \
+			execution/exec.c \
+			execution/new_exec.c \
+			execution/pid_t_array.c \
+			execution/pipe_fork_close_dup2_del.c \
+			here_doc/feed_append_new_hd_node.c \
+			here_doc/get_all_hd_content.c \
+			here_doc/get_hd.c \
+			here_doc/get_hd_in_exec_list_node.c \
+			here_doc/hd_send_pipe.c \
+			here_doc/mark_all_erased_hd.c \
+			here_doc/new_hd.c \
+			solo_builtin/builtin_solo_without_fork.c \
+			solo_builtin/do_all_redir_solo_builtin.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
@@ -152,8 +151,11 @@ SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BU
 OBJS = $(SRCS:.c=.o)
 
 # RULES
-# Executor
 all: $(NAME)
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "compiling : $<                                      \r"
 
 libft:
 	@make -C ./include/libft

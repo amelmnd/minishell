@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 09:58:39 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:18:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ void		free_ints(int **dust);
 char		*msh_getenv(t_msh *msh, char *var_name);
 int			get_size_env_list(t_msh *msh);
 int			is_chr_in_str(char *s, char c);
+void		free_chars(char **dust);
 
 #endif
