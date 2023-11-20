@@ -3,9 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
+/*   Updated: 2023/11/16 11:56:13 by amennad          ###   ########.fr       */
 /*   Updated: 2023/11/20 15:40:05 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
@@ -25,6 +26,7 @@ void	generate_prompt(char *envp[])
 		msh->program_status = INTERACTIVE_STATUS;
 		msh->prompt = readline(msh->user);
 		msh->program_status = EXECUTION_STATUS;
+
 		lexer_check(msh, msh->prompt);
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
@@ -44,11 +46,16 @@ void	generate_prompt(char *envp[])
 		}
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
+
 			build_exec_list(msh);
 			execution(msh);
 		}
 		clean_msh_list(msh);
 	}
+	clear_history ();
+	//avec le break ci-dessous : à réactiver tant que les signaux n'ont pas été
+	//gérés pour tester les leaks
+
 }
 
 int	main(int argc, char *argv[], char *envp[])
