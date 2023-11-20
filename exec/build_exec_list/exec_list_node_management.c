@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:42:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 14:37:07 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_exec_list_node(t_exec_list *exec_list_node)
 	{
 		exec_list_node->next = NULL;
 		exec_list_node->previous = NULL;
-		exec_list_node->redirect_array = NULL;
+		exec_list_node->redir_array = NULL;
 		exec_list_node->nb_redirects = 0;
 		exec_list_node->cmd = NULL;
 		exec_list_node->args_array = NULL;
@@ -38,10 +38,11 @@ static void	init_exec_list_node(t_exec_list *exec_list_node)
 	}
 }
 
-static t_exec_list *new_exec_list_node(void)
+static t_exec_list	*new_exec_list_node(void)
 {
-	t_exec_list *new = NULL;
+	t_exec_list	*new;
 
+	new = NULL;
 	new = (t_exec_list *)malloc(sizeof(t_exec_list));
 	if (!new)
 		return (NULL);
@@ -51,8 +52,9 @@ static t_exec_list *new_exec_list_node(void)
 
 static void	plug_exec_list_node(t_msh *msh, t_exec_list *exec_list_node)
 {
-	t_exec_list *exec_list_i = msh->exec_list;
+	t_exec_list	*exec_list_i;
 
+	exec_list_i = msh->exec_list;
 	if (msh && exec_list_node)
 	{
 		while (exec_list_i->next)
@@ -72,7 +74,7 @@ static void	create_and_plug_all_empty_exec_list_nodes(t_msh *msh)
 	if (msh && msh->exec_list)
 	{
 		nb_pipes = msh->exec_list->nb_pipes;
-		while (++i < nb_pipes) // sachant qu'il y a déjà un node initial, le compte est bon
+		while (++i < nb_pipes)
 		{
 			exec_list_node = NULL;
 			exec_list_node = new_exec_list_node();

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 01:44:31 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,17 @@ void	free_exec(t_msh *msh)
 	}
 }
 
-void	free_redirect_array(t_exec_list *exec_list_node)
+void	free_redir_array(t_exec_list *exec_list_node)
 {
 	int	i;
 
 	i = -1;
-	if (exec_list_node->redirect_array)
+	if (exec_list_node->redir_array)
 	{
 		while (++i < exec_list_node->nb_redirects)
-			free_chars(&(exec_list_node->redirect_array->str));
-		free(exec_list_node->redirect_array);
-		exec_list_node->redirect_array = NULL;
+			free_chars(&(exec_list_node->redir_array->str));
+		free(exec_list_node->redir_array);
+		exec_list_node->redir_array = NULL;
 	}
 }
 
@@ -110,7 +110,7 @@ void	free_exec_list(t_msh *msh)
 		while (current)
 		{
 			next = current->next;
-			free_redirect_array(current);
+			free_redir_array(current);
 			free_chars(&(current->cmd));
 			free_ntcharss(&(current->args_array));
 			free_hd(current);
