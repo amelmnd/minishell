@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 20:10:38 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 20:19:16 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ void is_variable(t_lexer_list *tmp, char **str, t_bool *not_exist_var, t_exp_typ
 	else if (*not_exist_var == TRUE && (!tmp->var_value || !tmp->str) && (type_name != R_ORIGIN_REDIRECT ||
 	type_name != W_DEST_REDIRECT || type_name != WA_DEST_REDIRECT ))
 		all_in_str(str, tmp->var_name);
+	else if (*not_exist_var == TRUE && (!tmp->var_value || !tmp->str))
+		all_in_str(str, "");
 	else if (*not_exist_var == FALSE && !tmp->var_value)
 	{
 		char *tmp_str = ft_strdup("");
