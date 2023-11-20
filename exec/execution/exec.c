@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:01:27 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:24:28 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:26:05 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,17 @@ void	exec_loop(t_msh *msh)
 	while (exec_list_node)
 	{
 		if (exec_list_node->pos_ppl != SOLO)
-			pipe(msh->exec->pipefd);
-		ft_fork(msh);
+		{
+			if (pipe(msh->exec->pipefd) < 0)
+				errmsg_free_exit(msh, "pipe");
+		}
+		msh->exec->child = fork();
+		if (msh->exec->child < 0)
+			errmsg_free_exit(msh, "fork");
 		child_part(msh, exec_list_node);
 		parent_part(msh, exec_list_node, j);
 		exec_list_node = exec_list_node->next;
 		j++;
-		sleep(1); // à supprimer à terme
 	}
 }
 

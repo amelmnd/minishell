@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/20 10:27:01 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/20 15:26:19 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,7 +79,6 @@ SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 			execution/exec.c \
 			execution/new_exec.c \
 			execution/pid_t_array.c \
-			execution/pipe_fork_close_dup2_del.c \
 			here_doc/feed_append_new_hd_node.c \
 			here_doc/get_all_hd_content.c \
 			here_doc/get_hd.c \
@@ -127,6 +126,8 @@ SRCS_UTILS = utils.c \
 			 free_chars.c \
 			 manage_error.c \
 			 ft_execve.c \
+			 free_msh.c \
+			 errmsg_free_exit.c \
 			 free_ints.c \
 			 build_user_for_prompt.c \
 			 new_msh.c \
@@ -150,6 +151,18 @@ SRCS_DEV = dev_color.c \
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
 OBJS = $(SRCS:.c=.o)
+
+## RULES
+## Executor
+#all: $(NAME)
+#
+#libft:
+#	@make -C ./include/libft
+#
+#$(NAME): $(OBJS) libft
+#	@$(CC) $(CFLAGS) $(OBJS) $(INCLUDE) -o $(NAME)
+#	@echo "$(COLOR_MAGENTA)objs & $(NAME) generate 🌸$(END_COLOR)"
+
 
 # RULES
 all: $(NAME)

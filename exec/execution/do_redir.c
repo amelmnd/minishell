@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:53:28 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:29:14 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static void	do_read_redir(t_msh *msh, char *origin)
 			exit(1);
 		}
 		else
-			ft_duptwo(msh->exec->fd_read_redirect, STDIN_FILENO);
+		{
+			if (dup2(msh->exec->fd_read_redirect, STDIN_FILENO) < 0)
+				errmsg_free_exit(msh, "dup2");
+		}
 	}
 }
 
@@ -47,7 +50,10 @@ static void	do_write_redir(t_msh *msh, char *dest)
 			exit(1);
 		}
 		else
-			ft_duptwo(msh->exec->fd_write_redirect, STDOUT_FILENO);
+		{
+			if (dup2(msh->exec->fd_write_redirect, STDOUT_FILENO) < 0)
+				errmsg_free_exit(msh, "dup2");
+		}
 	}
 }
 
@@ -67,7 +73,10 @@ static void	do_wapp_redir(t_msh *msh, char *dest)
 			exit(1);
 		}
 		else
-			ft_duptwo(msh->exec->fd_write_redirect, STDOUT_FILENO);
+		{
+			if (dup2(msh->exec->fd_write_redirect, STDOUT_FILENO) < 0)
+				errmsg_free_exit(msh, "dup2");
+		}
 	}
 }
 

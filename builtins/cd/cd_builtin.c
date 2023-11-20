@@ -6,13 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 07:13:15 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 10:32:33 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:36:42 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_getcwd(void)
+static char	*ft_getcwd(t_msh *msh)
 {
 	char	*cwd;
 
@@ -21,6 +21,8 @@ static char	*ft_getcwd(void)
 	if (!cwd)
 		return (NULL);
 	getcwd(cwd, PATH_MAX);
+	if (!cwd)
+		errmsg_free_exit(msh, "getcwd");
 	return (cwd);
 }
 
@@ -65,7 +67,7 @@ void	cd_builtin(t_msh *msh, t_exec_list *exec_list_node)
 	{
 		path_arg = set_path_arg(msh, exec_list_node);
 		pwd = NULL;
-		oldpwd = ft_getcwd();
+		oldpwd = ft_getcwd(msh);
 		if (exec_list_node->nb_words > 2)
 			too_many_args_errmsg(msh);
 		else if (!path_arg[0])
@@ -74,7 +76,7 @@ void	cd_builtin(t_msh *msh, t_exec_list *exec_list_node)
 			generic_cd_errmsg(msh, path_arg);
 		else
 		{
-			pwd = ft_getcwd();
+			pwd = ft_getcwd(msh);
 			update_oldpwd_n_pwd(msh, oldpwd, pwd);
 		}
 		free_chars(&path_arg);
