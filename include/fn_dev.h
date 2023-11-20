@@ -17,8 +17,6 @@ void	free_ntcharss(char ***dust);
 void	free_envlist(t_msh *msh);
 
 
-void	ft_pipe(t_msh *msh);
-void	ft_fork(t_msh *msh);
 void	ft_close(int fd);
 void	ft_duptwo(int pretender, int to_replace);
 

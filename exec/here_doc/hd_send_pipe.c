@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:29:03 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:06:19 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:23:39 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	create_pipes_for_hd(t_msh *msh)
 		while (exec_list_node)
 		{
 			if (exec_list_node->contains_hd == TRUE)
-				pipe(exec_list_node->hd_send_pipe);
+			{
+				if (pipe(exec_list_node->hd_send_pipe) < 0)
+					errmsg_free_exit(msh, "pipe");
+			}
 			exec_list_node = exec_list_node->next;
 		}
 	}
