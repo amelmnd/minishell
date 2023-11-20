@@ -4,7 +4,7 @@ static int print = 0;
 
 void	print_exp_type_in_exec_array(t_exec_list *exec_list_node, int i)
 {
-	int exp_type = exec_list_node->redirect_array[i].exp_type;
+	int exp_type = exec_list_node->redir_array[i].exp_type;
 
 	if (exp_type == WORD_EXPANDED)
 	{
@@ -36,16 +36,16 @@ void	print_exp_type_in_exec_array(t_exec_list *exec_list_node, int i)
 	}
 }
 
-void	print_redirect_array(t_exec_list *exec_list_node)
+void	print_redir_array(t_exec_list *exec_list_node)
 {
-	if (exec_list_node->redirect_array)
+	if (exec_list_node->redir_array)
 	{
 		int i = -1;
 
 		while (++i < exec_list_node->nb_redirects)
 		{
 			print_exp_type_in_exec_array(exec_list_node, i);
-			if (print) {dprintf(2, "exec_list_node->redirect_array[%d].str = %s\n", i, exec_list_node->redirect_array[i].str);}
+			if (print) {dprintf(2, "exec_list_node->redir_array[%d].str = %s\n", i, exec_list_node->redir_array[i].str);}
 		}
 	}
 	else
@@ -102,12 +102,14 @@ void	print_exec_list_node(t_exec_list *exec_list_node)
 	if (print) {dprintf(2, "exec_list_node->nb_words = %d\n", exec_list_node->nb_words);}
 	if (print) {dprintf(2, "exec_list_node->next_pipe = %d\n", exec_list_node->next_pipe);}
 	if (print) {dprintf(2, "exec_list_node->nb_pipes = %d\n", exec_list_node->nb_pipes);}
-	print_redirect_array(exec_list_node);
+	print_redir_array(exec_list_node);
 	if (print) {dprintf(2, "exec_list_node->cmd = %s\n", exec_list_node->cmd);}
 	print_args_array(exec_list_node);
 	if (print) {dprintf(2, "exec_list_node->contains_hd = %d\n", exec_list_node->contains_hd);}
+	/*
 	if (exec_list_node->contains_hd)
 		print_hd_in_exec_list_node(exec_list_node);
+	*/
 	if (print) {dprintf(2, "exec_list_node->contains_write_redirects = %d\n", exec_list_node->contains_write_redirect);}
 	print_pos_ppl_in_exec_list_node(exec_list_node);
 }

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 14:28:47 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:03:20 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,10 @@ void	feed_exec_list_node(t_msh *msh);
 void	build_exec_list(t_msh *msh);
 
 //exec
+// builtin_solo_without_fork
+void	builtin_solo_without_fork(t_msh *msh);
+t_bool	no_fork_solo_builtin(t_msh *msh);
+void	do_all_redir_solo_builtin(t_msh *msh);
 // hd
 void	mark_all_erased_hd(t_msh *msh);
 t_hd	*new_hd(void);
@@ -37,10 +41,14 @@ void	get_all_hd_content(t_msh *msh);
 void	feed_append_new_hd_node(t_exec_list *exec_list_node, char *line);
 // hd_send_pipe
 void	create_pipes_for_hd(t_msh *msh);
-void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node, int j);
-void	send_hd_through_pipe(t_exec_list *exec_list_node, int j);
+void	retrieve_hd_through_hdpipe(t_exec_list *exec_list_node);
+void	send_hd_through_pipe(t_exec_list *exec_list_node);
 // execution
 void	execution(t_msh *msh);
 t_exec	*new_exec(void);
+void	wait_and_get_the_last_return_code(t_msh *msh);
+void	create_pid_t_array(t_msh *msh);
+void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i);
+void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node);
 
 #endif

@@ -1,9 +1,17 @@
 {
 	"C_Cpp.errorSquiggles": "enabled",
 	"files.associations": {
+<<<<<<< HEAD
     "readline.h": "c",
     "minishell.h": "c",
     "time.h": "c",
     "sstream": "c"
   }
+=======
+		"readline.h": "c",
+		"minishell.h": "c",
+		"time.h": "c",
+		"history.h": "c"
+	}
+>>>>>>> 3ebb3a38151e5059e7f045e15e1e0c1597e544e3
 }

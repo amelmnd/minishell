@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 12:33:17 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 17:39:28 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,11 @@ struct	s_exec_list
 {
 	t_exec_list	*previous;
 	t_exec_list	*next;
-	t_redirect	*redirect_array;
+	t_redirect	*redir_array;
 	int			nb_redirects;
 	char		*cmd;
 	char		**args_array;
-	int 		nb_words;
+	int			nb_words;
 	int			next_pipe;
 	int			nb_pipes;
 	t_hd		*hd;
