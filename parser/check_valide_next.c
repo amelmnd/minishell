@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:23:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/10 11:13:11 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 16:23:18 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	redirect_next_valide(t_msh *msh, t_lexer_list *list)
 		|| list->next->lexer_type == HEREDOC
 		|| list->next->lexer_type == W_REDIRECT
 		|| list->next->lexer_type == W_APPEND_REDIRECT
-		|| list->next->lexer_type == PIPE
-
 		)
 		exit_synthax_error(msh, list->next->str);
 	else if ((list->next->lexer_type == BLANK
@@ -32,7 +30,6 @@ int	redirect_next_valide(t_msh *msh, t_lexer_list *list)
 				|| list->next->next->lexer_type == HEREDOC
 				|| list->next->next->lexer_type == W_REDIRECT
 				|| list->next->next->lexer_type == W_APPEND_REDIRECT
-				|| list->next->next->lexer_type == PIPE
 				)))
 		exit_synthax_error(msh, list->next->next->str);
 	else
@@ -59,7 +56,7 @@ int	check_valid_next(t_msh *msh)
 			|| list->lexer_type == HEREDOC
 			||list->lexer_type == W_REDIRECT
 			|| list->lexer_type == W_APPEND_REDIRECT
-			|| list->lexer_type == PIPE)
+			)
 		{
 			return_code = redirect_next_valide(msh, list);
 			if (return_code == 2)
