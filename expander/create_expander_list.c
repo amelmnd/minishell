@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:56:41 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 17:06:25 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,16 @@ t_lexer_list    *check_lexer_list(t_msh *msh, t_lexer_list *tmp)
     defined_type(msh, tmp);
     if (tmp && tmp->lexer_type == PIPE)
     {
-        expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
-        tmp = generate_str(msh, tmp, WORD_EXPANDED);
-    }
-    else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
+		// char *str = ft_strdup("|");
+        expander_push(msh, tmp->str, PIPE_EXPANDED);
+        // tmp = generate_str(msh, tmp, WORD_EXPANDED);
+		/* The line `char *str = ft_strdup("|");` is creating a new string `str` that is a duplicate of the
+		string "|". The function `ft_strdup` is used to allocate memory for the new string and copy the
+		contents of the original string into it. In this case, it is creating a duplicate of the "|"
+		character, which is then passed to the `expander_push` function. */
+		// free_chars(&str);
+	}
+	else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
         tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
     else if (msh->exp_current_type == LIMITER_HEREDOC)
         tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
@@ -47,29 +53,6 @@ t_lexer_list    *check_lexer_list(t_msh *msh, t_lexer_list *tmp)
         tmp = generate_str(msh, tmp, WORD_EXPANDED);
     return (tmp);
 }
-/*
-//NO TUCH
-t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
-{
-	defined_type(msh, tmp);
-	if (tmp && tmp->lexer_type == PIPE)
-	{
-		expander_push(msh, "|", PIPE_EXPANDED);
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
-	}
-	else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
-		tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
-	else if (msh->exp_current_type == LIMITER_HEREDOC)
-		tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
-	else if (msh->exp_current_type == W_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
-	else if (msh->exp_current_type == WA_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
-	else if (msh->exp_current_type == WORD_EXPANDED)
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
-	return (tmp);
-}
-*/
 
 void	create_expander_list(t_msh *msh)
 {

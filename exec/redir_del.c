@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-static int print = 1;
+static int print = 0;
 
 void	do_read_redir(t_msh *msh, char *origin, int j)
 {

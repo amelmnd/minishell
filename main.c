@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/16 19:55:46 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 16:00:05 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,25 @@ void	generate_prompt(char *envp[])
 		lexer_check(msh, msh->prompt);
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
-			//print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
 			parser(msh);
 		}
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell
-			/*
+
 			if (msh->exp_list)
 			{
-				//print_exp_list_one_line(msh); // à supprimer à terme
-				//print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
+				print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
+				// print_exp_list_one_line(msh); // à supprimer à terme
+				print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
 			}
-			*/
+
 		}
-		if (msh->return_code == 0 && msh->lexer_list)
-		{
-			build_exec_list(msh);
-			execution(msh);
-		}
+		// if (msh->return_code == 0 && msh->lexer_list)
+		// {
+		// 	build_exec_list(msh);
+		// 	execution(msh);
+		// }
 		clean_msh_list(msh);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:24:25 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 17:00:33 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/17 18:08:54 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,13 @@ int	ft_flag_n_cmp(char *s1)
 	while (s1[i])
 	{
 		if (s1[i] != 'n')
+		{
+			free_chars(&s1);
 			return (0);
+		}
 		i++;
 	}
+	free_chars(&s1);
 	return (1);
 }
 

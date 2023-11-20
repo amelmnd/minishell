@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 14:36:32 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 12:33:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ enum	e_expander_type
 	W_DEST_REDIRECT,
 	WA_DEST_REDIRECT,
 	PIPE_EXPANDED,
-	HEREDOC_ERASED
+	HEREDOC_ERASED,
+	AMBIGUOUS_REDIRECT
 };
 
 struct	s_expander_list

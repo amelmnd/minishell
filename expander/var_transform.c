@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:04:39 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 17:04:45 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,15 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 	str = NULL;
 	while (tmp)
 	{
-		if ((tmp->lexer_type > 4 && tmp->lexer_type < 10)
-			|| tmp->lexer_type == 0)
+		if (tmp->lexer_type > 4 && tmp->lexer_type < 10)
 			break ;
+		// else if (tmp->lexer_type == 0)
+		// {
+		// 	// expander_push(msh, str, type_name);
+		// 	str = ft_strdup(tmp->str);
+		// 	expander_push(msh, str, PIPE_EXPANDED);
+		// 	str = NULL;
+		// }
 		else if (tmp->lexer_type == VARIABLE || tmp->lexer_type == RETURN_VALUE)
 			that_is_variable(msh, tmp, &str);
 		else if (tmp->lexer_type == D_QUOTE_VAR)
