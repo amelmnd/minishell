@@ -1,3 +1,25 @@
+18/11/2023 21h17
+
+Penser à sécuriser pwd et env avec le protection du code des fonctions dans des if
+tels que :
+if (msh && exec_list_node)
+C'est pour éviter les segfaults
+
+Retoucher env pour prendre en compte ceci :
+il est possible d'export des variables sans valeur
+export les affiche
+env ne les affiche pas
+
+'export lol' ajoute une variable sans valeur
+'export lol=' ajoute une variable avec valeur
+
+la variable d'environnement _ est affichée par env, mais pas part export
+
+au moment de l'export : s'il y a un =, une chaine vide est associée au nom
+la variable est affichée par export tel que : nom_var=""
+la variable est affichée par env tel que : nom_var=
+
+
 11/11/2023 à 9h04
 L'expander conserve les s_quote et d_quote vides, ce qui est un très bonne chose
 Pendant les retouches de l'expander, il faut que ça soit toujours le cas !

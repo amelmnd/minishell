@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:29:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 09:41:06 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:25:11 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	feed_exec_list_node_cmd(t_msh *msh)
 			{
 				exec_list_node->cmd = ft_strdup(exp_list_node->str);
 				exec_list_node = exec_list_node->next;
-				while (exp_list_node && exp_list_node->exp_type != PIPE_EXPANDED)
+				while (exp_list_node
+					&& exp_list_node->exp_type != PIPE_EXPANDED)
 					exp_list_node = exp_list_node->next;
 			}
 			if (exp_list_node)

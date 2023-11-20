@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 01:16:30 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 23:58:04 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,15 +115,17 @@ struct	s_exec_list
 {
 	t_exec_list	*previous;
 	t_exec_list	*next;
-	t_redirect	*redirect_array;
+	t_redirect	*redir_array;
 	int			nb_redirects;
 	char		*cmd;
 	char		**args_array;
-	int 		nb_words;
+	int			nb_words;
 	int			next_pipe;
 	int			nb_pipes;
 	t_hd		*hd;
-	int			hd_pipe[2];
+	int			hd_send_pipe[2];
+	int			hd_get_pipe[2];
+	pid_t		hd_get_child;
 	t_bool		contains_hd;
 	t_pos_ppl	pos_ppl;
 	t_bool		contains_write_redirect;

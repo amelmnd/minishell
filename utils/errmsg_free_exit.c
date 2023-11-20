@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset_builtin.c                                    :+:      :+:    :+:   */
+/*   errmsg_free_exit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:29:02 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 13:50:10 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/20 15:12:26 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/20 15:19:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset_builtin(t_msh *msh, t_exec_list *exec_list_node)
+void	errmsg_free_exit(t_msh *msh, char *msg)
 {
-	(void)msh;
-	(void)exec_list_node;
-	dprintf(2, "unset_builtin : Entrée\n");
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(" error.\n", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n", 2);
+	free_msh(msh);
+	exit(EXIT_FAILURE);
 }
