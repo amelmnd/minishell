@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 13:31:27 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 10:26:32 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@
 
 // builtin_solo_without_fork
 void	builtin_solo_without_fork(t_msh *msh);
-t_bool	no_fork_solo_builtin(t_msh *msh);
 
 // echo
 void	echo_builtin(t_msh *msh, t_exec_list *exec_list_node);
 
 // cd
 void	cd_builtin(t_msh *msh, t_exec_list *exec_list_node);
+void	update_oldpwd_n_pwd(t_msh *msh, char *oldpwd, char *pwd);
 
 // pwd
 void	pwd_builtin(t_msh *msh, t_exec_list *exec_list_node);
@@ -49,6 +49,5 @@ void	env_builtin(t_msh *msh, t_exec_list *exec_list_node);
 
 // exit
 void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node);
-
 
 #endif

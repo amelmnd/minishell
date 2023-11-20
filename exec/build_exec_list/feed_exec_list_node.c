@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:48:14 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/12 13:12:14 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	add_r(int *red, t_exp_list *exp, t_exec_list *ex)
 {
 	if (exp && ex)
 	{
-		ex->redirect_array[*red].exp_type = exp->exp_type;
-		ex->redirect_array[*red].str = ft_strdup(exp->str);
+		ex->redir_array[*red].exp_type = exp->exp_type;
+		ex->redir_array[*red].str = ft_strdup(exp->str);
 		(*red)++;
 	}
 }

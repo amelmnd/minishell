@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer.c                                            :+:      :+:    :+:   */
+/*   build_exec_list_del.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 19:01:50 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/18 21:47:41 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/18 21:47:42 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	prompt_isempty(char **prompt)
+void	build_exec_list(t_msh *msh)
 {
-	int	i;
-	int	len;
-
-	i = 0;
-	len = ft_strlen(*prompt);
-	while (i < len)
-	{
-		if ((*prompt)[i] != ' ' && (*prompt)[i] != '\t')
-		{
-			*prompt = ft_substr(*prompt, i, (len - i));
-			return (FALSE);
-		}
-		i++;
-	}
-	return (TRUE);
-}
-
-void	lexer_check(t_msh *msh, char *prompt)
-{
-	if (prompt_isempty(&prompt) == TRUE)
-		exit_new_line(msh);
-	else
-		lexer_create_list(msh, prompt);
-	//free_chars(&prompt);
+	malloc_exec_list_nodes(msh);
+	feed_exec_list_nodes_data(msh);
+	malloc_exec_list_node_arrays(msh);
+	feed_exec_list_nodes_cmd(msh);
+	assign_pos_ppl_exec_list(msh);
+	feed_exec_list_node(msh);
+	scan_redirects(msh);
 }
