@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:56:31 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:23:03 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:16:40 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static void	manage_stdin(t_msh *msh, t_exec_list *exec_list_node)
 	{
 		if (exec_list_node->pos_ppl == MIDDLE
 			|| exec_list_node->pos_ppl == LAST)
-			dup2(msh->exec->fd_temp, STDIN_FILENO);
+		{
+			if (dup2(msh->exec->fd_temp, STDIN_FILENO) < 0)
+				errmsg_free_exit(msh, "dup2");
+		}
 	}
 }
 
@@ -29,7 +32,10 @@ static void	manage_stdout(t_msh *msh, t_exec_list *exec_list_node)
 		if ((exec_list_node->pos_ppl == FIRST
 				|| exec_list_node->pos_ppl == MIDDLE)
 			&& exec_list_node->contains_write_redirect == FALSE)
-			dup2(msh->exec->pipefd[WRITE], STDOUT_FILENO);
+		{
+			if (dup2(msh->exec->pipefd[WRITE], STDOUT_FILENO) < 0)
+				errmsg_free_exit(msh, "dup2");
+		}
 	}
 }
 

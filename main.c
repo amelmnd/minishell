@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 00:03:36 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:40:05 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	generate_prompt(char *envp[])
 	msh = new_msh();
 	env_list_generate(msh, envp);
 	build_user_for_prompt(msh);
-	while (42 && msh)
+	while (msh)
 	{
 		generate_msh_env(msh);
 		msh->program_status = INTERACTIVE_STATUS;
@@ -60,15 +60,3 @@ int	main(int argc, char *argv[], char *envp[])
 		show_no_args_for_minishell_error_msg();
 	return (0);
 }
-/*
-il faudra penser à retirer gnl lorsqu'il ne sera plus utilisé
-(ou pas, comme beaucoup de fichiers de la libft non utilisés dans minishell)
-
-fsanitize change les msh->return_code
-
-rectifier les messages d'erreur avec la recherche "minishell:"
-
-Chasser tous les perror (pour les remplacer par des ft_putstr_fd(2))
-
-sécuriser tous les appels système type : pipe, fork, close, dup2, dup, etc...
-*/
