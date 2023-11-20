@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 18:49:20 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 19:36:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	generate_prompt(char *envp[])
 		{
 			parser(msh);
 		}
+				print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell

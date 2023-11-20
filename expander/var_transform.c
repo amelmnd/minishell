@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 19:02:18 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 20:10:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,9 @@ void is_special_var(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 	}
 }
 
-void is_variable(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
+void is_variable(t_lexer_list *tmp, char **str, t_bool *not_exist_var, t_exp_type type_name)
 {
-	if (tmp->var_value != NULL)
+	if (tmp->var_value && type_name != LIMITER_HEREDOC)
 	{
 		if (*not_exist_var == TRUE)
 		{
@@ -104,15 +104,14 @@ void is_variable(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 			all_in_str(str, tmp->var_value);
 		*not_exist_var = FALSE;
 	}
-	else {
-		if (*not_exist_var == TRUE)
-			all_in_str(str, tmp->var_name);
-		else if (*not_exist_var == FALSE)
-		{
-			char *tmp_str = ft_strdup("");
-			all_in_str(str, tmp_str);
-			free_chars(&tmp_str);
-		}
+	else if (*not_exist_var == TRUE && (!tmp->var_value || !tmp->str) && (type_name != R_ORIGIN_REDIRECT ||
+	type_name != W_DEST_REDIRECT || type_name != WA_DEST_REDIRECT ))
+		all_in_str(str, tmp->var_name);
+	else if (*not_exist_var == FALSE && !tmp->var_value)
+	{
+		char *tmp_str = ft_strdup("");
+		all_in_str(str, tmp_str);
+		free_chars(&tmp_str);
 	}
 }
 
@@ -135,7 +134,7 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 		else if (tmp->lexer_type == SPECIAL_VAR)
 			is_special_var(tmp, &str, &not_exist_var);
 		else if (tmp->lexer_type == VARIABLE)
-			is_variable(tmp, &str, &not_exist_var);
+			is_variable(tmp, &str, &not_exist_var, type_name);
 		else if (tmp && tmp->lexer_type > 0 && tmp->lexer_type < 4)
 		{
 			if (not_exist_var == TRUE)
@@ -156,7 +155,8 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 		msh->exp_current_type = WORD_EXPANDED;
 	}
 	else
-		expander_push(msh, str, type_name);
+	{
+		expander_push(msh, str, type_name);}
 	//free_chars(&str);
 	return (tmp);
 }
