@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 18:53:32 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 19:02:18 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str)
 			all_in_str(str, tmp->var_value);
 	}
 }
-
-
 
 void is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 {
@@ -85,7 +83,11 @@ void is_special_var(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 	if ((*not_exist_var == TRUE && tmp->next->lexer_type > 4 && tmp->next->lexer_type <= 9) || !*str)
 		all_in_str(str, tmp->str);
 	else
-		all_in_str(str, NULL);
+	{
+		char *tmp_str = ft_strdup("");
+		all_in_str(str, tmp_str);
+		free_chars(&tmp_str);
+	}
 }
 
 void is_variable(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
@@ -106,7 +108,11 @@ void is_variable(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 		if (*not_exist_var == TRUE)
 			all_in_str(str, tmp->var_name);
 		else if (*not_exist_var == FALSE)
-			all_in_str(str, NULL);
+		{
+			char *tmp_str = ft_strdup("");
+			all_in_str(str, tmp_str);
+			free_chars(&tmp_str);
+		}
 	}
 }
 
