@@ -1,46 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   build_user_for_prompt.c                            :+:      :+:    :+:   */
+/*   unset_builtin.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 18:50:08 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 00:00:44 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/14 14:29:02 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/16 13:32:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*msh_getenv(t_msh *msh, char *var_name)
+static t_bool	exists_in_mshenv(t_msh *msh, char *var_name)
 {
+	t_bool		ret;
 	t_env_list	*env_list;
-	char		*var_value;
 
-	env_list = NULL;
-	var_value = NULL;
-	if (msh && msh->env_list && var_name)
+	ret = FALSE;
+	if (msh && msh->env_list)
 	{
 		env_list = msh->env_list;
 		while (env_list)
 		{
-			if (ft_strcmp(env_list->name, var_name) && env_list->value)
-				var_value = ft_strdup(env_list->value);
+			if (ft_strcmp(var_name, env_list->name))
+				ret = TRUE;
 			env_list = env_list->next;
 		}
 	}
-	return (var_value);
+	return (ret);
 }
 
-void	build_user_for_prompt(t_msh *msh)
+void	unset_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
-	char	*proto_user;
+	int	i;
 
-	proto_user = NULL;
-	if (msh && msh->env_list)
+	if (msh && exec_list_node->nb_words > 1)
 	{
-		proto_user = msh_getenv(msh, "USER");
-		msh->user = ft_strjoin(proto_user, " $> ");
-		free_chars(&(proto_user));
+		i = 0;
+		while (++i < exec_list_node->nb_words)
+		{
+			if (exists_in_mshenv(msh, exec_list_node->args_array[i]))
+				remove_from_env_list(msh, exec_list_node->args_array[i]);
+		}
 	}
 }

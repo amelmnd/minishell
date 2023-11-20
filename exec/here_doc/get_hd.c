@@ -6,65 +6,76 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 15:13:28 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 15:20:58 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	hd_strcmp(char *limiter, char *line)
+static void	child_part(t_exec_list *exec_list_node, int i)
 {
-	char	*limiter_with_nl;
-	t_bool	return_value;
+	char	*line;
 
-	return_value = FALSE;
-	if (limiter && line)
+	close(exec_list_node->hd_get_pipe[READ]);
+	while (42)
 	{
-		limiter_with_nl = ft_strjoin(limiter, "\n");
-		if (limiter_with_nl)
+		line = readline("> ");
+		if (line == NULL)
 		{
-			if (ft_strcmp(limiter_with_nl, line))
-				return_value = TRUE;
-			else
-				return_value = FALSE;
-			free(limiter_with_nl);
+			close(exec_list_node->hd_get_pipe[WRITE]);
+			exit(EXIT_SUCCESS);
 		}
+		if (ft_strcmp(line, exec_list_node->redir_array[i].str))
+		{
+			free_chars(&line);
+			break ;
+		}
+		write(exec_list_node->hd_get_pipe[WRITE], line, ft_strlen(line));
+		write(exec_list_node->hd_get_pipe[WRITE], "\n", 1);
+		free_chars(&line);
 	}
-	return (return_value);
+	close(exec_list_node->hd_get_pipe[WRITE]);
+	exit(EXIT_SUCCESS);
+}
+
+static void	parent_part(t_msh *msh, t_exec_list *exec_list_node)
+{
+	char	buffer[BUFFER_SIZE];
+	int		nbytes;
+	int		count;
+
+	close(exec_list_node->hd_get_pipe[WRITE]);
+	nbytes = read(exec_list_node->hd_get_pipe[READ], buffer, BUFFER_SIZE - 1);
+	if (nbytes < 0)
+		errmsg_free_exit(msh, "read");
+	count = 0;
+	while (nbytes > 0)
+	{
+		buffer[nbytes] = '\0';
+		if (count)
+			feed_append_new_hd_node(exec_list_node, buffer);
+		else
+			exec_list_node->hd->str = ft_strdup(buffer);
+		nbytes = read(exec_list_node->hd_get_pipe[READ],
+				buffer, BUFFER_SIZE - 1);
+		count++;
+	}
+	close(exec_list_node->hd_get_pipe[READ]);
+	waitpid(exec_list_node->hd_get_child, NULL, 0);
 }
 
 void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 {
-	char	*line;
-	int		j;
-
-	line = NULL;
-	j = 0;
-	if (exec_list_node && exec_list_node->redirect_array
-		&& exec_list_node->redirect_array[i].str && exec_list_node->hd)
+	if (msh && exec_list_node)
 	{
-		while (42)
-		{
-			//dev
-			/*
-			write(STDOUT_FILENO, exec_list_node->redirect_array[i].str, ft_strlen(exec_list_node->redirect_array[i].str));
-			write(STDOUT_FILENO, "(", 1);
-			write_the_proper_number(ft_strlen(exec_list_node->redirect_array[i].str));
-			write(STDOUT_FILENO, ")", 1);
-			*/
-			write(STDOUT_FILENO, " > ", 2);
-			msh->program_status = HEREDOC_STATUS;
-			line = get_next_line(STDIN_FILENO);
-			msh->program_status = EXECUTION_STATUS;
-			if (hd_strcmp(exec_list_node->redirect_array[i].str, line))
-				break ;
-			if (j)
-				feed_append_new_hd_node(exec_list_node, line);
-			else
-				exec_list_node->hd->str = ft_strdup(line);
-			free_chars(&line);
-			j++;
-		}
+		if (pipe(exec_list_node->hd_get_pipe) < 0)
+			errmsg_free_exit(msh, "pipe");
+		exec_list_node->hd_get_child = fork();
+		if (exec_list_node->hd_get_child < 0)
+			errmsg_free_exit(msh, "fork");
+		if (!(exec_list_node->hd_get_child))
+			child_part(exec_list_node, i);
+		else
+			parent_part(msh, exec_list_node);
 	}
-	free_chars(&line);
 }

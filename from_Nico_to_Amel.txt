@@ -1,12 +1,36 @@
+18/11/2023 21h17
+
+Penser à sécuriser pwd et env avec le protection du code des fonctions dans des if
+tels que :
+if (msh && exec_list_node)
+C'est pour éviter les segfaults
+
+Retoucher env pour prendre en compte ceci :
+il est possible d'export des variables sans valeur
+export les affiche
+env ne les affiche pas
+
+'export lol' ajoute une variable sans valeur
+'export lol=' ajoute une variable avec valeur
+
+la variable d'environnement _ est affichée par env, mais pas part export
+
+au moment de l'export : s'il y a un =, une chaine vide est associée au nom
+la variable est affichée par export tel que : nom_var=""
+la variable est affichée par env tel que : nom_var=
+
+
 11/11/2023 à 9h04
 L'expander conserve les s_quote et d_quote vides, ce qui est un très bonne chose
 Pendant les retouches de l'expander, il faut que ça soit toujours le cas !
 
 11/11/2023 à 06h49
 Deux sujets au niveau de l'expander :
-- Pour les ambiguous_redirect, il faut non seulement prendre en compte les variables
+🧨 - Pour les ambiguous_redirect, il faut non seulement prendre en compte les variables
 inexistantes, mais aussi les variables spéciales
-- En réfléchissant aux fonctions env, export et unset, puis à l'expander, je me suis dit
+
+
+✅ - En réfléchissant aux fonctions env, export et unset, puis à l'expander, je me suis dit
 qu'il valait mieux régler ces trois builtins avant de retoucher l'expander ; je m'explique :
 L'expander va, notamment pour (tenter de) remplacer les variables par leur valeur,
 interroger l'environnement de minishell, lequel sera (potentiellement) modifié au fil
@@ -25,7 +49,8 @@ Cependant, elle a une implication au niveau de l'expander :
 	par leur valeur.
 Concernant unset : il faudra interroger les deux listes aussi.
 
-10/11/2023 à 18h35
+
+✅ 10/11/2023 à 18h35
 Les erreurs classiques des redirections sont maintenant gérées
 Il manque cependant les erreurs provoquées par les variables inexistantes ou spéciales
 Je réalise que je perds une information lors de l'expander (que je ne peux pas récupérer
@@ -52,53 +77,80 @@ inexistante, ou si c'était le contenu d'une s_quote, ou encore le résultat d'u
 plusieurs mots/caractères
 
 Tests autour des variables inexistantes et des ambiguous_redirect :
-bash 3.2: > $lol                                                                    
+bash 3.2: > $lol
 bash: $lol: ambiguous redirect
-bash 3.2: < $lol$mdr                                                                
+bash 3.2: < $lol$mdr
 bash: $lol$mdr: ambiguous redirect
-bash 3.2: < $lol""$mdr                                                              
+bash 3.2: < $lol""$mdr
 bash: : No such file or directory
-bash 3.2: < "$lol"                                                                  
+bash 3.2: < "$lol"
 bash: : No such file or directory
-bash 3.2: < $lol                                                                    
+bash 3.2: < $lol
 bash: $lol: ambiguous redirect
-bash 3.2: < $lol$mdr                                                                
+bash 3.2: < $lol$mdr
 bash: $lol$mdr: ambiguous redirect
-bash 3.2: < $"lol"$mdr                                                              
+bash 3.2: < $"lol"$mdr
 bash: lol: No such file or directory
-bash 3.2: < "$lol"$mdr                                                              
+bash 3.2: < "$lol"$mdr
 bash: : No such file or directory
-bash 3.2: < "$lol$mdr"                                                              
+bash 3.2: < "$lol$mdr"
 bash: : No such file or directory
-bash 3.2: < $lol""                                                                  
+bash 3.2: < $lol""
 bash: : No such file or directory
-bash 3.2: < ""$lol                                                                  
+bash 3.2: < ""$lol
 bash: : No such file or directory
-bash 3.2: < ''$lol                                                                  
+bash 3.2: < ''$lol
 bash: : No such file or directory
-bash 3.2: < $lol''                                                                  
+bash 3.2: < $lol''
+bash: : No such file or directory
+Tests autour des variables inexistantes et des ambiguous_redirect :
+> $lol
+bash: $lol: ambiguous redirect
+< $lol$mdr
+bash: $lol$mdr: ambiguous redirect
+< $lol""$mdr
+bash: : No such file or directory
+< "$lol"
+bash: : No such file or directory
+< $lol
+bash: $lol: ambiguous redirect
+< $lol$mdr
+bash: $lol$mdr: ambiguous redirect
+< $"lol"$mdr
+bash: lol: No such file or directory
+< "$lol"$mdr
+bash: : No such file or directory
+< "$lol$mdr"
+bash: : No such file or directory
+< $lol""
+bash: : No such file or directory
+< ""$lol
+bash: : No such file or directory
+< ''$lol
+bash: : No such file or directory
+< $lol''
 bash: : No such file or directory
 
 (copié collé des messages discords explicatifs)
-En fait, tu as fait en sorte que les variables inexistantes disparaissent lorsqu'elles ne 
-sont pas l'objet de redirection. Aucun problème de ce côté là, c'est ce qu'o navait prévu, 
+En fait, tu as fait en sorte que les variables inexistantes disparaissent lorsqu'elles ne
+sont pas l'objet de redirection. Aucun problème de ce côté là, c'est ce qu'o navait prévu,
 et rien à retoucher là-dessus
 On avait aussi prévu de conserver le nom de la variable dans le cas où elle n'existe pas,
  et qu'elle est l'objet d'une redirection ; ça aussi c'est ce que l'on avait prévu,
   et c'est comme ça que ça foncitonne, et tant mieux aussi
-Là où j'ai un problème, c'est qu'une fois à l'exécutor, je ne sais pas distinguer 
+Là où j'ai un problème, c'est qu'une fois à l'exécutor, je ne sais pas distinguer
 les deux cas suivants (par exemple) :
 (la variable lol n'existe pas)
 < '$lol'
 ET
 < $lol
-l'expander me sort la même chose en terme de texte, et c'est ce que l'on veut
+🧨 l'expander me sort la même chose en terme de texte, et c'est ce que l'on veut
 Par contre, dans le premier cas, l'executor doit lire à partir du fichier nommé $lol
 Alors que dans le deuxième cas, l'executor doit retourner une erreur "ambiguous redirect"
 (Je me suis fait un peu mieux comprendre ?)
-Donc, dans le cas où tu reçois < $lol dans l'expander, 
+Donc, dans le cas où tu reçois < $lol dans l'expander,
 tu conserves toujours le nom de la variable inexistante (rien à changer de ce côté-là),
- mais au lieu de mettre l'enum     R_ORIGIN_REDIRECT, 
+ mais au lieu de mettre l'enum     R_ORIGIN_REDIRECT,
  tu mettrais un nouveau AMBIGUOUS_REDIRECT
 amel — Aujourd’hui à 18:55
 Ok mais c'est pour quel chevrons qu'on dooit faire ca ?
@@ -106,7 +158,7 @@ Spardaspirit — Aujourd’hui à 18:55
 tous sauf <<
 
 
-9/11/2023 à 18h38
+🐥 9/11/2023 à 18h38 CODE RETOUR
 
 au démarrage : msh->return_code est à 0
 lexer :
@@ -129,12 +181,12 @@ executor :
 
 
 
-9/11/2023 à 16h05
+✅ 9/11/2023 à 16h05
 Certes, << $toto entraine une erreur qui fait crash
 mais $toto aussi :/
 
 
-9/11/2023 : Signaux
+🐥 9/11/2023 : Signaux
 En mode interactif, le sujet précise déjà les comportements des trois signaux ;
 Ctrl + C :
 	(free entre deux itérations)
@@ -149,7 +201,7 @@ Ctrl + \ :
 	msh->return_code laissé à 0
 
 Pendant l'exécution :
-Ctrl + C : 
+Ctrl + C :
 	(free entre deux itérations)
 	interrompt (kill certainement) tous les processus en cours
 	affiche à nouveau le prompt
@@ -171,24 +223,24 @@ Ctrl + \ :
 
 
 
-<> est un opérateur de redirection "lecture-écriture" ; après relecture attentive du sujet, il n'est pas à implémenter, contrairement à ce que les tests des pages github peuvent sous-entendre
+✅ <> est un opérateur de redirection "lecture-écriture" ; après relecture attentive du sujet, il n'est pas à implémenter, contrairement à ce que les tests des pages github peuvent sous-entendre
 Ainsi, <> doit provoquer une syntax error chez nous
 Je crois que nous l'avions déjà noté, mais au cas où, un rappel (vu que je suis tombé dessus dans les tests sur github).
 
-ls|cat ne fonctionne pas :
+🧨 ls|cat ne fonctionne pas :
 	le pipe n'est pas pris en compte
 	l'expander sort juste deux mots d'affilée
 
 Les commandes suivantes :
 
-- première commande : ls > lol
+✅ - première commande : ls > lol
 spardaspirit $> ls > lol
-(WORD_EXPANDED)ls (W_DEST_REDIRECT)lol 
+(WORD_EXPANDED)ls (W_DEST_REDIRECT)lol
 spardaspirit $> Segmentation fault (core dumped)
 // le Segmentation fault (core dumped) s'affiche tout seul dans le prompt,
 // je ne l'ai pas saisi
 
-- deuxième commande : echo coucou > mdr
+✅ - deuxième commande : echo coucou > mdr
 (même erreur)
 
 provoquent une segfault au moment du réaffichage du prompt
@@ -207,19 +259,19 @@ A adapter et incure dans chaque fichier
 
 Observations expander test:
 
-//arrive lors de la première saisie de prompt, mais pas durant les suivantes
+✅ //arrive lors de la première saisie de prompt, mais pas durant les suivantes
 spardaspirit $> e'c'ho lol
 str = c
 Segmentation fault (core dumped)
 
-// pareil, lors de la première saisie, mais pas durant les suivantes
+✅ // pareil, lors de la première saisie, mais pas durant les suivantes
 spardaspirit $> lol lol
 Segmentation fault (core dumped)
 
 Hypothèse : s'il y a plus de deux mots dans le premier prompt : segfault
 
 
-// un seul chevron ouvert provoque une segfault,
+✅ // un seul chevron ouvert provoque une segfault,
 	même après plusieurs saisies d'autres prompts précédents
 spardaspirit $> <
 
@@ -232,7 +284,7 @@ bash: syntax error near unexpected token 'newline'
 Segmentation fault (core dumped)
 
 
-//même problème ici
+✅ //même problème ici
 spardaspirit $> <<
 
 ______ main lexer_list ______
@@ -246,7 +298,7 @@ Segmentation fault (core dumped)
 // tous les chevrons provoquent le même type d'erreur menant à une segfault
 
 
-spardaspirit $> lol
+✅ spardaspirit $> lol
 
 ______ main lexer_list ______
 str -> [lol]
@@ -258,7 +310,7 @@ ______ main expander_list ______
 str -> [lol]
 type -> WORD_EXPANDED
 ***********
-spardaspirit $> > lol
+✅ spardaspirit $> > lol
 
 ______ main lexer_list ______
 str -> [>]
@@ -273,7 +325,7 @@ Après de nombreux tests durant une même exécution (donc après plusieurs sais
 	les chevrons tout seul fonctionnent
 
 
-Je remarque aussi que l'expander ne s'affiche plus.
+✅ Je remarque aussi que l'expander ne s'affiche plus.
 En regardant le main.c,
 	je remarque que le parser et l'expander ne se déclenchent que selon la valeur d'une variable dans msh qui ne semble pas initialisée.
 La valeur de cette variable n'est ajustée que dans le lexer (lexer_create_list),

@@ -6,17 +6,19 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/16 11:20:49 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 19:06:36 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define BUFFER_SIZE 1024
+
 # include "libft/libft.h"
 # include "all_struct.h"
-# include "fn_dev.h" // à supprimer à terme
 // TODO DELETE START
+# include "fn_dev.h" // à supprimer à terme
 # include "for_dev.h"
 // TODO DELETE END
 
@@ -37,13 +39,12 @@
 # include <signal.h>
 
 // IMP : readline.h is last include to avoid errors
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
-
 
 void	exit_new_line(t_msh *msh);
 void	clean_msh_list(t_msh *msh);

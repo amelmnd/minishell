@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/19 23:59:06 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/19 23:59:41 by nstoutze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 //Les builtins, lorsqu'ils ne sont pas exécutés dans le processus parent,
@@ -44,5 +56,3 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 	if (builtin)
 		exit(msh->return_code);
 }
-/*
-*/

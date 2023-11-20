@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:24:11 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/13 15:11:49 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ static t_bool	hd_in_exec_list_node(t_exec_list *exec_list_node)
 	int		i;
 
 	i = -1;
-	if (exec_list_node && exec_list_node->redirect_array)
+	if (exec_list_node && exec_list_node->redir_array)
 	{
 		while (++i < exec_list_node->nb_redirects)
 		{
-			if (exec_list_node->redirect_array[i].exp_type == LIMITER_HEREDOC)
+			if (exec_list_node->redir_array[i].exp_type == LIMITER_HEREDOC)
 				return (TRUE);
 		}
 	}

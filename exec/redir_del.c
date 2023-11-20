@@ -11,7 +11,8 @@ void	do_read_redir(t_msh *msh, char *origin, int j)
 		msh->exec->fd_read_redirect = open(origin, O_RDONLY);
 		if (msh->exec->fd_read_redirect == -1)
 		{
-			ft_putstr_fd("minishell : ", 2);
+			//ft_putstr_fd("minishell: (do_read_redir)", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(origin, 2);
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(strerror(errno), 2);
@@ -34,7 +35,8 @@ void	do_write_redir(t_msh *msh, char *dest, int j)
 		if (msh->exec->fd_write_redirect == -1)
 		{
 			printf("minishell: %s: %s\n", dest, strerror(errno));
-			ft_putstr_fd("minishell : ", 2);
+			//ft_putstr_fd("minishell :(do_write_redir) ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(dest, 2);
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(strerror(errno), 2);
@@ -56,7 +58,8 @@ void	do_wapp_redir(t_msh *msh, char *dest, int j)
 			O_WRONLY | O_CREAT | O_APPEND, S_IRUSR | S_IWUSR);
 		if (msh->exec->fd_write_redirect == -1)
 		{
-			ft_putstr_fd("minishell : ", 2);
+			//ft_putstr_fd("minishell: (do_wapp_redir) ", 2);
+			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(dest, 2);
 			ft_putstr_fd(": ", 2);
 			ft_putstr_fd(strerror(errno), 2);
@@ -136,8 +139,8 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 	if (print) {dprintf(2, "do_all_redirections(%d) : STDIN_FILENO = %d\n", j, STDIN_FILENO);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : STDOUT_FILENO = %d\n", j, STDOUT_FILENO);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_temp = %d\n", j, msh->exec->fd_temp);}
-	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);}
-	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_pipe[WRITE] = %d\n", j, exec_list_node->hd_pipe[WRITE]);}
+	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_send_pipe[READ] = %d\n", j, exec_list_node->hd_send_pipe[READ]);}
+	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_send_pipe[WRITE] = %d\n", j, exec_list_node->hd_send_pipe[WRITE]);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_write_redirect = %d\n", j, msh->exec->fd_write_redirect);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_read_redirect = %d\n", j, msh->exec->fd_read_redirect);}
 
@@ -147,7 +150,7 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 			close(msh->exec->pipefd[READ]);
 		manage_stdin(msh, exec_list_node, j);
 		if (exec_list_node->contains_hd)
-			close(exec_list_node->hd_pipe[WRITE]);
+			close(exec_list_node->hd_send_pipe[WRITE]);
 		i = -1;
 		while (++i < exec_list_node->nb_redirects)
 			do_redir(msh, exec_list_node, i, j);
@@ -169,8 +172,8 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node, int j)
 	if (print) {dprintf(2, "do_all_redirections(%d) : STDIN_FILENO = %d\n", j, STDIN_FILENO);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : STDOUT_FILENO = %d\n", j, STDOUT_FILENO);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_temp = %d\n", j, msh->exec->fd_temp);}
-	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_pipe[READ] = %d\n", j, exec_list_node->hd_pipe[READ]);}
-	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_pipe[WRITE] = %d\n", j, exec_list_node->hd_pipe[WRITE]);}
+	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_send_pipe[READ] = %d\n", j, exec_list_node->hd_send_pipe[READ]);}
+	if (print) {dprintf(2, "do_all_redirections(%d) : exec_list_node->hd_send_pipe[WRITE] = %d\n", j, exec_list_node->hd_send_pipe[WRITE]);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_write_redirect = %d\n", j, msh->exec->fd_write_redirect);}
 	if (print) {dprintf(2, "do_all_redirections(%d) : msh->exec->fd_read_redirect = %d\n", j, msh->exec->fd_read_redirect);}
 

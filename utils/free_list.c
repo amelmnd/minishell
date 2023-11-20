@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 01:44:31 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 18:13:36 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,17 @@ void	free_lexer_list(t_msh *msh)
 		{
 			next = current->next;
 			free_chars(&(current->str));
-			free_chars(&(current->var_name));
-			free_chars(&(current->var_value));
+			/* TODO :
+			ce code genere une erreur
+			free(): double free detected in tcache 2
+			Aborted (core dumped
+			*/
+			// if (current->var_name)
+			// 	free_chars(&(current->var_name));
+			// if (current->var_value)
+			// 	free_chars(&(current->var_name));
+			// free_chars(&(current->var_name));
+			// free_chars(&(current->var_value));
 			free(current);
 			current = next;
 		}
@@ -68,17 +77,17 @@ void	free_exec(t_msh *msh)
 	}
 }
 
-void	free_redirect_array(t_exec_list *exec_list_node)
+void	free_redir_array(t_exec_list *exec_list_node)
 {
 	int	i;
 
 	i = -1;
-	if (exec_list_node->redirect_array)
+	if (exec_list_node->redir_array)
 	{
 		while (++i < exec_list_node->nb_redirects)
-			free_chars(&(exec_list_node->redirect_array->str));
-		free(exec_list_node->redirect_array);
-		exec_list_node->redirect_array = NULL;
+			free_chars(&(exec_list_node->redir_array->str));
+		free(exec_list_node->redir_array);
+		exec_list_node->redir_array = NULL;
 	}
 }
 
@@ -103,14 +112,14 @@ void	free_exec_list(t_msh *msh)
 {
 	t_exec_list	*current;
 	t_exec_list	*next;
-	
+
 	if (msh && msh->exec_list)
 	{
 		current = msh->exec_list;
 		while (current)
 		{
 			next = current->next;
-			free_redirect_array(current);
+			free_redir_array(current);
 			free_chars(&(current->cmd));
 			free_ntcharss(&(current->args_array));
 			free_hd(current);
@@ -122,16 +131,17 @@ void	free_exec_list(t_msh *msh)
 }
 
 // clean entre deux itérations de generate_prompt (donc msh et msh->msh_env ne sont pas free ici)
-// msh, msh->msh_env et msh->env_list doivent être free lors d'une sortie du programme 
+// msh, msh->msh_env et msh->env_list doivent être free lors d'une sortie du programme
 //via un signal
 void	clean_msh_list(t_msh *msh)
 {
+	// (void) msh;
 	free_lexer_list(msh);
 	free_exp_list(msh);
 	free_exec_list(msh);
 	free_exec(msh);
 	free_ntcharss(&(msh->msh_env));
-	//free_chars(&(msh->prompt));
+	free_chars(&(msh->prompt));
 }
 
 void	free_envlist(t_msh *msh)

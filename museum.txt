@@ -1,0 +1,199 @@
+/*
+// hd_del.c
+//file for the museum
+// dev !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//dev
+void	print_hd_in_exec_list_node(t_exec_list *exec_list_node)
+{
+	dprintf(2, "print_hd_in_exec_list_node : Entrée\n");
+	t_hd	*hd_node = exec_list_node->hd;
+
+	while (hd_node)
+	{
+		dprintf(2, "hd_node->str = %s", hd_node->str);
+		hd_node = hd_node->next;
+	}
+}
+
+// dev
+void	print_all_hd_remaining(t_msh *msh)
+{
+	t_exec_list	*exec_list_node = msh->exec_list;
+
+	while (exec_list_node)
+	{
+		print_hd_in_exec_list_node(exec_list_node);
+		dprintf(2, "\n== Passage à l'exec_list_node suivant 
+		(ce dprintf 2, contient une nl au début) ==\n");
+		exec_list_node = exec_list_node->next;
+	}
+}
+
+// dev
+void	write_the_proper_number(int n)
+{
+	if (n == 0)
+		write(STDOUT_FILENO, "0", 1);
+	else if (n == 1)
+		write(STDOUT_FILENO, "1", 1);
+	else if (n == 2)
+		write(STDOUT_FILENO, "2", 1);
+	else if (n == 3)
+		write(STDOUT_FILENO, "3", 1);
+	else if (n == 4)
+		write(STDOUT_FILENO, "4", 1);
+	else if (n == 5)
+		write(STDOUT_FILENO, "5", 1);
+	else if (n == 6)
+		write(STDOUT_FILENO, "6", 1);
+	else if (n == 7)
+		write(STDOUT_FILENO, "7", 1);
+	else if (n == 8)
+		write(STDOUT_FILENO, "8", 1);
+	else if (n == 9)
+		write(STDOUT_FILENO, "9", 1);
+	else if (n == 10)
+		write(STDOUT_FILENO, "10", 2);
+	else if (n == 11)
+		write(STDOUT_FILENO, "11", 2);
+	else if (n == 12)
+		write(STDOUT_FILENO, "12", 2);
+	else if (n == 13)
+		write(STDOUT_FILENO, "13", 2);
+	else if (n == 14)
+		write(STDOUT_FILENO, "14", 2);
+}
+*/
+
+/*
+Ancien get_hd.c
+void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
+{
+	char	*line;
+
+	if (msh && exec_list_node)
+	{
+		pipe(exec_list_node->hd_get_pipe);
+		exec_list_node->hd_get_child = fork();
+		if (!(exec_list_node->hd_get_child))
+		{
+			close(exec_list_node->hd_get_pipe[READ]);
+			while (42)
+			{
+				line = readline("> ");
+				if (line == NULL)
+				{
+					close(exec_list_node->hd_get_pipe[WRITE]);
+					exit(EXIT_SUCCESS);
+				}
+				if (ft_strcmp(line, exec_list_node->redir_array[i].str))
+				{
+					free_chars(&line);
+					break ;
+				}
+				//dprintf(2, "get_hd(child) : line = %s\n", line);
+				write(exec_list_node->hd_get_pipe[WRITE], line, ft_strlen(line));
+				write(exec_list_node->hd_get_pipe[WRITE], "\n", 1);
+				free_chars(&line);
+			}
+			close(exec_list_node->hd_get_pipe[WRITE]);
+			exit(EXIT_SUCCESS);
+		}
+		else
+		{
+			close(exec_list_node->hd_get_pipe[WRITE]);
+			
+			char	buffer[1024];
+			int		nbytes;
+			int		count = 0;
+
+			nbytes = read(exec_list_node->hd_get_pipe[READ], buffer, 1023);
+			while (nbytes > 0)
+			{
+				buffer[nbytes] = '\0';
+				//dprintf(2, "get_hd (parent) : buffer = %s\n", buffer);
+				if (count)
+					feed_append_new_hd_node(exec_list_node, buffer);
+				else
+					exec_list_node->hd->str = ft_strdup(buffer);
+				nbytes = read(exec_list_node->hd_get_pipe[READ], buffer, 1023);
+				// régler le problème du stockage du heredoc ici
+				count++;
+			}
+			close(exec_list_node->hd_get_pipe[READ]);
+			waitpid(exec_list_node->hd_get_child, NULL, 0);
+		}
+	}
+}
+
+//peut-être qu'il n'y a plus besoin de cette version modifiée de strcmp
+// vu que readline ne prend pas le \n final, comme le faisait get_next_line
+static t_bool	hd_strcmp(char *limiter, char *line)
+{
+	char	*limiter_with_nl;
+	t_bool	return_value;
+
+	return_value = FALSE;
+	if (limiter && line)
+	{
+		limiter_with_nl = ft_strjoin(limiter, "\n");
+		if (limiter_with_nl)
+		{
+			if (ft_strcmp(limiter_with_nl, line))
+				return_value = TRUE;
+			else
+				return_value = FALSE;
+			free(limiter_with_nl);
+		}
+	}
+	return (return_value);
+}
+
+void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
+{
+	//kill(0, SIGKILL);
+	char	*line;
+	int		j;
+
+	//line = NULL;
+	j = 0;
+	if (exec_list_node && exec_list_node->redir_array
+		&& exec_list_node->redir_array[i].str && exec_list_node->hd)
+	{
+		while (42)
+		{
+			write(STDOUT_FILENO, " > ", 2);
+			msh->program_status = HEREDOC_STATUS;
+			line = get_next_line(STDIN_FILENO);
+			if (feof(stdin))
+				printf("Fin du fichier (Ctrl+D) détectée.\n");
+			else
+				printf("Erreur de lecture.\n");
+			msh->program_status = EXECUTION_STATUS;
+			if (ft_strlen(line) == 0)
+			{	
+				
+				//rl_on_new_line();
+				//rl_replace_line("", 0);
+				//printf("\n");
+				//rl_redisplay();
+				
+				kill(0, SIGKILL);
+				printf("vide\n");
+				break ;
+			}
+			printf("sortie de la structure conditionnelle if/else\n");
+			if (hd_strcmp(exec_list_node->redir_array[i].str, line))
+				break ;
+			if (j)
+				feed_append_new_hd_node(exec_list_node, line);
+			else
+				exec_list_node->hd->str = ft_strdup(line);
+			free_chars(&line);
+			j++;
+		}
+	}
+	free_chars(&line);
+	printf("get_hd : sortie\n");
+}
+*/

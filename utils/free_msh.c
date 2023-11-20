@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd_builtin.c                                      :+:      :+:    :+:   */
+/*   free_msh.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:27:55 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 16:49:44 by amennad          ###   ########.fr       */
+/*   Created: 2023/11/20 14:46:01 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/20 18:06:46 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	pwd_builtin(t_msh *msh, t_exec_list *exec_list_node)
+void	free_msh(t_msh *msh)
 {
-	t_env_list	*env_list;
-
-	(void)exec_list_node;
-	env_list = msh->env_list;
-	while (env_list)
-	{
-		if (ft_strcmp(env_list->name, "PWD"))
-		{
-			printf("%s\n", env_list->value);
-			break ;
-		}
-		env_list = env_list->next;
-	}
+	free_envlist(msh);
+	free_ntcharss(&(msh->msh_env));
+	free_chars(&(msh->user));
+	free_chars(&(msh->prompt)); // à étudier si nécessaire
+	free_lexer_list(msh);
+	free_exp_list(msh);
+	free_exec_list(msh);
+	free_exec(msh);
+	free(msh);
 }
