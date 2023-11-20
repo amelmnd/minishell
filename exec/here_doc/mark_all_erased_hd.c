@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 22:34:39 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/07 22:37:59 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@ static void	mark_erased_hd(t_exec_list *exec_list_node)
 	int	i;
 	int	nb_hd;
 
-	if (exec_list_node && exec_list_node->redirect_array)
+	if (exec_list_node && exec_list_node->redir_array)
 	{
 		i = exec_list_node->nb_redirects;
 		nb_hd = 0;
 		while (--i >= 0)
 		{
-			if (exec_list_node->redirect_array[i].exp_type == LIMITER_HEREDOC)
+			if (exec_list_node->redir_array[i].exp_type == LIMITER_HEREDOC)
 			{
 				nb_hd++;
 				if (nb_hd >= 2)
-					exec_list_node->redirect_array[i].exp_type = HEREDOC_ERASED;
+					exec_list_node->redir_array[i].exp_type = HEREDOC_ERASED;
 			}
 		}
 	}

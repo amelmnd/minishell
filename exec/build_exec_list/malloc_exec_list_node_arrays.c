@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:45:43 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/08 14:30:50 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	malloc_exec_list_node_arrays(t_msh *msh)
 		while (node)
 		{
 			if (node->nb_redirects)
-				node->redirect_array = malloc_redir_array(node->nb_redirects);
+				node->redir_array = malloc_redir_array(node->nb_redirects);
 			if (node->nb_words)
 				node->args_array = malloc_full_null_charss(node->nb_words);
 			node = node->next;
