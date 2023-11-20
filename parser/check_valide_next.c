@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 15:23:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 16:23:18 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 19:26:35 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,23 @@ int	redirect_next_valide(t_msh *msh, t_lexer_list *list)
 {
 	(void)msh;
 	(void)list;
-	if (list->next == NULL || (list->next->lexer_type == BLANK && list->next->next == NULL))
+	if (list->next == NULL || (list->next->lexer_type == BLANK
+			&& list->next->next == NULL))
 		exit_synthax_error(msh, list->str);
 	else if (list->next == NULL
 		|| list->next->lexer_type == R_REDIRECT
 		|| list->next->lexer_type == HEREDOC
 		|| list->next->lexer_type == W_REDIRECT
 		|| list->next->lexer_type == W_APPEND_REDIRECT
-		)
+	)
 		exit_synthax_error(msh, list->next->str);
 	else if ((list->next->lexer_type == BLANK
 			&& (list->next->next->lexer_type == R_REDIRECT
 				|| list->next->next->lexer_type == HEREDOC
 				|| list->next->next->lexer_type == W_REDIRECT
 				|| list->next->next->lexer_type == W_APPEND_REDIRECT
-				)))
+			))
+	)
 		exit_synthax_error(msh, list->next->next->str);
 	else
 		return (0);
@@ -52,11 +54,10 @@ int	check_valid_next(t_msh *msh)
 			exit_synthax_error(msh, "|");
 			return (2);
 		}
-		else if (list->lexer_type == R_REDIRECT
-			|| list->lexer_type == HEREDOC
+		else if (list->lexer_type == R_REDIRECT || list->lexer_type == HEREDOC
 			||list->lexer_type == W_REDIRECT
 			|| list->lexer_type == W_APPEND_REDIRECT
-			)
+		)
 		{
 			return_code = redirect_next_valide(msh, list);
 			if (return_code == 2)

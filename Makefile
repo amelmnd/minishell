@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
+#    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/20 15:26:19 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/20 19:23:27 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -183,7 +183,7 @@ run: libft
 	@echo "$(COLOR_GREEN)$(NAME) generate 🍀$(END_COLOR)"
 
 norme:
-	norminette $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(ORIGIN)
+	norminette $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(ORIGIN)
 
 # Debug
 debugv : $(OBJS) libft
