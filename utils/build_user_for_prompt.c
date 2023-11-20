@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 18:50:08 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 08:57:51 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/20 00:00:44 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*msh_getenv(t_msh *msh, char *var_name)
 {
 	t_env_list	*env_list;
 	char		*var_value;
-	
+
 	env_list = NULL;
 	var_value = NULL;
 	if (msh && msh->env_list && var_name)

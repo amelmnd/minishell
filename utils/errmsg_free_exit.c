@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_chars.c                                       :+:      :+:    :+:   */
+/*   errmsg_free_exit.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/19 23:18:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 23:18:23 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/20 15:12:26 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/20 15:19:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_chars(char **dust)
+void	errmsg_free_exit(t_msh *msh, char *msg)
 {
-	if (*dust)
-	{
-		free(*dust);
-		*dust = NULL;
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd(" error.\n", 2);
+	ft_putstr_fd(strerror(errno), 2);
+	ft_putstr_fd("\n", 2);
+	free_msh(msh);
+	exit(EXIT_FAILURE);
 }
