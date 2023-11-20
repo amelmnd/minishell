@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 17:43:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 18:49:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	generate_prompt(char *envp[])
 				print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
 			}
 		}
-		// if (msh->return_code == 0 && msh->lexer_list)
-		// {
-		// 	build_exec_list(msh);
-		// 	execution(msh);
-		// }
+		if (msh->return_code == 0 && msh->lexer_list) // TODO c'est pas plutot expander liste qu'il faut tester ?
+		{
+			build_exec_list(msh);
+			execution(msh);
+		}
 		clean_msh_list(msh);
 	}
 	clear_history ();

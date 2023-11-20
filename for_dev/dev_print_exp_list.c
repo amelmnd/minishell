@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 12:16:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 18:45:33 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,29 @@ void    print_exp_type_a(int exp_type)
 {
 	switch (exp_type)
 	{
-		case 1:
+		case INIT_VALUE_EXP_CURRENT_TYPE:
 			printf("type -> WORD_EXPANDED");
 			break;
-		case 2:
+		case WORD_EXPANDED:
+			printf("type -> WORD_EXPANDED");
+			break;
+		case R_ORIGIN_REDIRECT:
 			printf("type -> R_ORIGIN_REDIRECT");
 			break;
-		case 3:
+		case LIMITER_HEREDOC:
 			printf("type -> LIMITER_HEREDOC");
 			break;
-		case 4:
+		case W_DEST_REDIRECT:
 			printf("type -> W_DEST_REDIRECT");
 			break;
-		case 5:
+		case WA_DEST_REDIRECT:
 			printf("type -> WA_DEST_REDIRECT");
 			break;
-		case 6:
+		case PIPE_EXPANDED:
 			printf("type -> PIPE_EXPANDED");
+			break;
+		case AMBIGUOUS_REDIRECT:
+			printf("type -> AMBIGUOUS_REDIRECT");
 			break;
 		default:
 			break;
