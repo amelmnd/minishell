@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/19 23:42:07 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/20 10:27:01 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,7 +92,8 @@ SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 
 PATH_BUIL = $(addprefix $(DIR_BUIL), $(SRCS_BUIL))
 DIR_BUIL = builtins/
-SRCS_BUIL = builtins.c \
+SRCS_BUIL = cd/cd_builtin.c \
+			cd/update_oldpwd_n_pwd.c \
 			export/export_builtin.c \
 			export/export_without_args.c \
 			export/export_without_args_utils.c \
@@ -103,13 +104,13 @@ SRCS_BUIL = builtins.c \
 			export/export_get_var_value.c \
 			export/add_var_to_env_list.c \
 			export/export_with_args.c \
-			echo_builtin.c \
-			cd_builtin.c \
-			pwd_builtin.c \
 			unset/unset_builtin.c \
 			unset/remove_from_env_list.c \
+			builtins.c \
+			echo_builtin.c \
 			env_builtin.c \
 			exit_builtin.c \
+			pwd_builtin.c \
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
