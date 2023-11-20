@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:17:46 by amennad           #+#    #+#             */
-/*   Updated: 2023/10/28 16:10:52 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/20 17:16:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ char	*ft_join_word(char *s1, char *s2)
 		y++;
 	}
 	result[i + y] = '\0';
+	//TODO free s1 and s2
 	return (result);
 }
 
@@ -56,5 +57,6 @@ char	*ft_one_word(char *s1)
 		i++;
 	}
 	result[i] = '\0';
+	//TODO free s1
 	return (result);
 }
