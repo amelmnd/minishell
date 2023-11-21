@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:04:39 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/21 08:52:04 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str)
 	}
 }
 
-void	db_quote_var_trans(t_lexer_list *tmp, char **str)
+void	db_quote_var_trans(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 {
 	int		dollar_pos;
 	int		len;
@@ -60,23 +60,40 @@ void	db_quote_var_trans(t_lexer_list *tmp, char **str)
 	}
 	else
 		*str = ft_strjoin(start_str, end_str);
+	*not_exist_var = FALSE;
+}
+void is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
+{
+	*not_exist_var = FALSE;
+	if (!tmp->var_value)
+	{
+		char *tmp_str = ft_strdup("0");
+		all_in_str(str, tmp_str);
+		free_chars(&tmp_str);
+	}
+	else
+		all_in_str(str, tmp->var_value);
 }
 
 t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 		t_exp_type type_name)
 {
 	char	*str;
+	t_bool	not_exist_var;
 
 	str = NULL;
+	not_exist_var = TRUE;
 	while (tmp)
 	{
 		if ((tmp->lexer_type > 4 && tmp->lexer_type < 10)
 			|| tmp->lexer_type == 0)
 			break ;
-		else if (tmp->lexer_type == VARIABLE || tmp->lexer_type == RETURN_VALUE)
+		else if (tmp->lexer_type == VARIABLE)
 			that_is_variable(msh, tmp, &str);
+		else if (tmp->lexer_type == RETURN_VALUE)
+			is_return_value(tmp, &str, &not_exist_var);
 		else if (tmp->lexer_type == D_QUOTE_VAR)
-			db_quote_var_trans(tmp, &str);
+			db_quote_var_trans(tmp, &str, &not_exist_var);
 		else if (tmp && tmp->lexer_type > 0 && tmp->lexer_type < 5)
 			all_in_str(&str, tmp->str);
 		if (!tmp->next)
@@ -88,6 +105,9 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 		expander_push(msh, str, type_name);
 		msh->exp_current_type = WORD_EXPANDED;
 	}
+	else if (!str && type_name != R_ORIGIN_REDIRECT &&
+		type_name != W_DEST_REDIRECT && type_name != WA_DEST_REDIRECT)
+		expander_push(msh, "", WORD_EXPANDED);
 	//free_chars(&str);
 	return (tmp);
 }
