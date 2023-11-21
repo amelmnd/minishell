@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:12:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 16:17:30 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:34:08 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 
 int	is_blank(t_msh *msh, char *prompt, int *i)
 {
-	lexer_push(msh, ft_strdup(" "), BLANK);
+	char	*tmp_str;
+
+	tmp_str = ft_strdup(" ");
+	lexer_push(msh, tmp_str, BLANK);
+	free_chars(&tmp_str);
 	if (prompt[*i + 1] == ' ' || prompt[*i + 1] == '\t')
 	{
 		while (prompt[*i] == ' ' || prompt[*i] == '\t')
@@ -28,6 +32,7 @@ int	is_blank(t_msh *msh, char *prompt, int *i)
 
 int	is_pipe(t_msh *msh, char *prompt, int *i)
 {
+	char	*tmp_str;
 	if (*i == 0 || prompt[*i + 1] == '|'
 		|| prompt[ft_strlen(prompt) - 1] == '|')
 	{
@@ -35,6 +40,10 @@ int	is_pipe(t_msh *msh, char *prompt, int *i)
 		return (2);
 	}
 	else
-		lexer_push(msh, ft_strdup("|"), PIPE);
+	{
+		tmp_str = ft_strdup("|");
+		lexer_push(msh, tmp_str, PIPE);
+		free_chars(&tmp_str);
+	}
 	return (0);
 }
