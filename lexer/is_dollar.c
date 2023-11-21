@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/09 17:40:57 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 08:08:27 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int	is_var_end(char *prompt, int i)
 	var_len = 0;
 	while (prompt[i] && prompt[i] != ' ' && prompt[i] != '\t'
 		&& prompt[i] != '\0' && prompt[i] != '>' && prompt[i] != '<'
-		&& prompt[i] != '|' && prompt[i] != '"' && prompt[i] != 39)
+		&& prompt[i] != '|' && prompt[i] != '"' && prompt[i] != 39 && prompt[i] != '$')
 	{
 		var_len++;
 		i++;
 	}
-	return (var_len);
+	return (var_len + 1);
 }
 
 void	var_name_is_return_value(t_msh *msh, char *prompt, int *i)
@@ -41,7 +41,7 @@ void	var_name_isalpha(t_msh *msh, char *prompt, int *i)
 	int		var_len;
 	char	*var_name;
 
-	var_len = is_var_end(prompt, *i);
+	var_len = is_var_end(prompt, *i + 1);
 	var_name = ft_substr(prompt, *i, var_len);
 	lexer_push(msh, var_name, VARIABLE);
 	*i += var_len - 1;
