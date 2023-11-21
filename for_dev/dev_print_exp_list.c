@@ -3,44 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   dev_print_exp_list.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/05 12:15:16 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/21 14:24:27 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-void    print_exp_type_one_line(int exp_type)
+
+void    print_exp_type_a(int exp_type)
 {
 	switch (exp_type)
 	{
-		case 0:
+		case 1:
 			dprintf(2, "type -> WORD_EXPANDED");
 			break;
-		case 1:
+		case 2:
 			dprintf(2, "type -> R_ORIGIN_REDIRECT");
 			break;
-		case 2:
+		case 3:
 			dprintf(2, "type -> LIMITER_HEREDOC");
 			break;
-		case 3:
+		case 4:
 			dprintf(2, "type -> W_DEST_REDIRECT");
 			break;
-		case 4:
+		case 5:
 			dprintf(2, "type -> WA_DEST_REDIRECT");
 			break;
-		case 5:
+		case 6:
 			dprintf(2, "type -> PIPE_EXPANDED");
+			break;
+		case 8:
+			dprintf(2, "type -> AMBIGOUS_REDIRECT_EXP");
 			break;
 		default:
 			break;
 	}
 	dprintf(2, "\n");
 }
-*/
+
 
 void	print_exp_list(t_exp_list *list)
 {
@@ -66,7 +69,7 @@ void	print_exp_list(t_exp_list *list)
 				dprintf(2, "v_name -> [%s]\n", list->str);
 			}
 			cyan();
-			//print_exp_type_one_line(list->exp_type);
+			print_exp_type_a(list->exp_type);
 			list = list->next;
 		}
 		reset();

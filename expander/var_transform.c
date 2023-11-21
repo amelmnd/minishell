@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 15:16:01 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 16:26:26 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str,
 			*not_exist_var = FALSE;
 		}
 		else if (tmp->var_value == NULL && *not_exist_var == TRUE)
+		{
 			all_in_str(str, tmp->var_name);
+			*not_exist_var = FALSE;
+		}
 		else if (tmp->var_value == NULL && str && *not_exist_var == FALSE)
 			all_in_str(str, "");
 		else if (tmp->var_value && !str && *not_exist_var == TRUE)
@@ -200,12 +203,15 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 			break ;
 		tmp = tmp->next;
 	}
-	if (str && not_exist_var == FALSE)
+	if ((str || ft_strcmp(str, "\'\'")) && not_exist_var == FALSE)
 	{
 		expander_push(msh, str, type_name);
 		msh->exp_current_type = WORD_EXPANDED;
 	}
-	else if (str && not_exist_var == TRUE)
+	else if (str && not_exist_var == TRUE
+			&& type_name == R_ORIGIN_REDIRECT
+			&& type_name == W_DEST_REDIRECT
+			&& type_name == WA_DEST_REDIRECT)
 	{
 		expander_push(msh, str, AMBIGOUS_REDIRECT_EXP);
 		msh->exp_current_type = WORD_EXPANDED;
