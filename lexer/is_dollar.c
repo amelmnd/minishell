@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 18:45:31 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:54:04 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ int	is_var_end(char *prompt, int i)
 	var_len = 0;
 	while (prompt[i] && prompt[i] != ' ' && prompt[i] != '\t'
 		&& prompt[i] != '\0' && prompt[i] != '>' && prompt[i] != '<'
-		&& prompt[i] != '|' && prompt[i] != '"' && prompt[i] != 39 && prompt[i] != '$')
+		&& prompt[i] != '|' && prompt[i] != '"' && prompt[i] != 39
+		&& prompt[i] != '$')
 	{
 		var_len++;
 		i++;
@@ -61,7 +62,8 @@ void	var_name_not_isalpha(t_msh *msh, char *prompt, int *i)
 
 int	is_dollar(t_msh *msh, char *prompt, int *i)
 {
-	char *tmp_str;
+	char	*tmp_str;
+
 	if (prompt[*i + 1] == '?')
 		var_name_is_return_value(msh, prompt, i);
 	else if (prompt[*i + 1] == 34 || prompt[*i + 1] == 39

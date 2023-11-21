@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:12:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 18:34:08 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:53:33 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	is_blank(t_msh *msh, char *prompt, int *i)
 int	is_pipe(t_msh *msh, char *prompt, int *i)
 {
 	char	*tmp_str;
+
 	if (*i == 0 || prompt[*i + 1] == '|'
 		|| prompt[ft_strlen(prompt) - 1] == '|')
 	{
