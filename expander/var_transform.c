@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 08:52:04 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 11:27:10 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str)
 		if (tmp->var_value)
 			all_in_str(str, tmp->var_value);
 		else if (msh->exp_current_type == R_ORIGIN_REDIRECT
-			|| msh->exp_current_type == W_DEST_REDIRECT
-			|| msh->exp_current_type == WA_DEST_REDIRECT)
+				|| msh->exp_current_type == W_DEST_REDIRECT
+				|| msh->exp_current_type == WA_DEST_REDIRECT)
 			all_in_str(str, tmp->var_name);
 	}
 	else if (tmp->lexer_type == RETURN_VALUE)
@@ -41,6 +41,29 @@ void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str)
 			all_in_str(str, tmp->var_value);
 	}
 }
+
+// NOTE : this is the old function
+// void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str)
+// {
+// 	if (msh->exp_current_type == LIMITER_HEREDOC)
+// 		all_in_str(str, tmp->var_name);
+// 	else if (tmp->lexer_type == VARIABLE)
+// 	{
+// 		if (tmp->var_value)
+// 			all_in_str(str, tmp->var_value);
+// 		else if (msh->exp_current_type == R_ORIGIN_REDIRECT
+// 				|| msh->exp_current_type == W_DEST_REDIRECT
+// 				|| msh->exp_current_type == WA_DEST_REDIRECT)
+// 			all_in_str(str, tmp->var_name);
+// 	}
+// 	else if (tmp->lexer_type == RETURN_VALUE)
+// 	{
+// 		if (!tmp->var_value)
+// 			all_in_str(str, "0");
+// 		else
+// 			all_in_str(str, tmp->var_value);
+// 	}
+// }
 
 void	db_quote_var_trans(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 {
@@ -62,12 +85,15 @@ void	db_quote_var_trans(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 		*str = ft_strjoin(start_str, end_str);
 	*not_exist_var = FALSE;
 }
-void is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
+
+void	is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 {
+	char	*tmp_str;
+
 	*not_exist_var = FALSE;
 	if (!tmp->var_value)
 	{
-		char *tmp_str = ft_strdup("0");
+		tmp_str = ft_strdup("0");
 		all_in_str(str, tmp_str);
 		free_chars(&tmp_str);
 	}
@@ -75,11 +101,38 @@ void is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 		all_in_str(str, tmp->var_value);
 }
 
+int	check_word(t_lexer_list *tmp, char **str)
+{
+	if (ft_strlen(tmp->str) > 1)
+		return (0);
+	if (ft_strlen(tmp->str) == 1 && ft_strcmp(tmp->str, "$") == 1)
+	{
+		if (tmp->previous == NULL && tmp->next && (tmp->next->lexer_type == D_QUOTE
+					|| tmp->next->lexer_type == S_QUOTE)
+				&& ft_strlen(tmp->next->str) == 0)
+			{
+				*str = NULL;
+				*str = ft_strdup("\'\'");
+				return (1);
+			}
+		else if (tmp->next && (tmp->next->lexer_type == D_QUOTE
+					|| tmp->next->lexer_type == S_QUOTE)
+				&& ft_strlen(tmp->next->str) == 0)
+			{
+				*str = NULL;
+				*str = ft_strdup("");
+				return (1);
+			}
+	}
+	return (0);
+}
+
 t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 		t_exp_type type_name)
 {
 	char	*str;
 	t_bool	not_exist_var;
+	int		str_check;
 
 	str = NULL;
 	not_exist_var = TRUE;
@@ -94,7 +147,16 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 			is_return_value(tmp, &str, &not_exist_var);
 		else if (tmp->lexer_type == D_QUOTE_VAR)
 			db_quote_var_trans(tmp, &str, &not_exist_var);
-		else if (tmp && tmp->lexer_type > 0 && tmp->lexer_type < 5)
+		else if (tmp && tmp->lexer_type == WORD)
+		{
+			str_check = check_word(tmp, &str);
+			if (str_check == 0)
+				all_in_str(&str, tmp->str);
+			else if (str_check == 1)
+
+				break ;
+		}
+		else if (tmp && tmp->lexer_type >= 2 && tmp->lexer_type < 5)
 			all_in_str(&str, tmp->str);
 		if (!tmp->next)
 			break ;
@@ -106,7 +168,7 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 		msh->exp_current_type = WORD_EXPANDED;
 	}
 	else if (!str && type_name != R_ORIGIN_REDIRECT &&
-		type_name != W_DEST_REDIRECT && type_name != WA_DEST_REDIRECT)
+				type_name != W_DEST_REDIRECT && type_name != WA_DEST_REDIRECT)
 		expander_push(msh, "", WORD_EXPANDED);
 	//free_chars(&str);
 	return (tmp);
