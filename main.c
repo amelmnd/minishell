@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 15:40:05 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/21 07:28:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ void	generate_prompt(char *envp[])
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell
-			/*
+
 			if (msh->exp_list)
 			{
-				//print_exp_list_one_line(msh); // à supprimer à terme
-				//print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
+				print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
+				// print_exp_list_one_line(msh); // à supprimer à terme
+				print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
 			}
-			*/
+
 		}
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
