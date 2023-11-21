@@ -1,0 +1,270 @@
+Gestion du dollar (particulièrement dans les cas limites ($ seul, ou variables inexistantes))
+
+Précisions préalables :
+	- lorsque la redirection < est testée, le résultat vaut aussi pour > et >>
+	<< fait l'objet de tests spécifiques
+	- le symbole £ est suivi d'un espace, puis la commande testée commence
+	- lorsque la variable existe, on connait déjà :
+		- remplacée si nue
+		- pas remplacée si entre simples quotes
+		- remplacée si entre double quotes
+		- pas remplacée si elle fait office de limiter de heredoc
+
+
+$ ESSEULE
+(observations : il n'y a aucun cas où le caractère $ disparait,
+ou est remplacé par quoi que ce soit)
+bash 3.2£ $
+$: command not found
+
+bash 3.2£ ls | $ | pwd
+/home/spardaspirit/Desktop/minishell
+$: command not found
+
+bash 3.2£ $ | ls
+builtins    exec      for_dev                include  main.c  Makefile  minishell   parser     utils
+dollar.txt  expander  from_Nico_to_Amel.txt  lexer    main.o  mdr       museum.txt  README.md
+$: command not found
+
+bash 3.2£ ls | $
+$: command not found
+
+bash 3.2£ < $
+bash: $: No such file or directory
+
+bash 3.2£ << $
+£ lol
+£ $
+
+
+$ (sans nom de variable) COLLE A DES QUOTES VIDES
+	Non précédé d'une redirection, ni d'une commande : (c'est débile à ce stade)
+		Si les quotes vides se trouvent après, le $ disparait ; les quotes vides persistent
+		Si les quotes vides se trouvent avant, le $ persiste ; les quotes vides disparaissent
+		Exemples :
+			bash 3.2£ $''
+			'': command not found
+			bash 3.2£ ''$
+			$: command not found
+			bash 3.2£ $""
+			'': command not found
+			bash 3.2£ ""$
+			$: command not found
+	Précédé d'une redirection : (toujours la même débilité)
+		Si les quotes vides se trouvent après, le $ disparait ; les quotes vides persistent
+		Si les quotes vides se trouvent avant, le $ persiste ; les quotes vides disparaissent
+		Exemples :
+			bash 3.2£ < $''
+			bash: : No such file or directory
+			bash 3.2£ < ''$
+			bash: $: No such file or directory
+			bash 3.2£ < $""
+			bash: : No such file or directory
+			bash 3.2£ < ""$
+			bash: $: No such file or directory
+	Précédé d'un heredoc : (encore la même débilité ; pratique)
+		Si les quotes vides se trouvent après, le $ disparait ; les quotes vides persistent
+		Si les quotes vides se trouvent avant, le $ persiste ; les quotes vides disparaissent
+		Exemples :
+			bash 3.2£ << $''
+			> $
+			> 
+			bash 3.2£ << ''$
+			> $
+			bash 3.2£ << $""
+			> $
+			> 
+			bash 3.2£ << ""$
+			> $
+	Précédé d'une commande : (donc en tant qu'argument de commande ; on prend ici echo)
+	(débilité constante dans tout ce chapitre)
+		Si les quotes vides se trouvent après, le $ disparait ; les quotes vides persistent
+		Si les quotes vides se trouvent avant, le $ persiste ; les quotes vides disparaissent
+		Exemples :
+			bash 3.2£ echo $''
+
+			bash 3.2£ echo ''$
+			$
+			bash 3.2£ echo $""
+
+			bash 3.2£ echo ""$
+			$
+	
+$ SEUL ENTOURE DE QUOTES VIDES :
+Seul un rien est conservé ; jamais le $ n'apparait
+bash 3.2£ echo ""$""
+
+bash 3.2£ echo ''$''
+
+bash 3.2£ ''$''
+'': command not found
+bash 3.2£ ""$""
+'': command not found
+bash 3.2£ < ''$''
+bash: : No such file or directory
+bash 3.2£ < ""$""
+bash: : No such file or directory
+
+
+$ CORRESPONDANT A UNE VARIABLE AYANT ETE EXPORTEE TEL QUE : export lol
+export lol enregistre une variable lol avec "" comme valeur, soit le caractère \0
+On va donc tester $lol avec export lol au préalable
+J'ai remarqué que les tests (de ce "chapitre", titré en majuscules)
+donnent les mêmes résultats en n'ayant même pas pris 
+la peine d'export lol (tout court, sans =).
+Ces tests valent donc aussi pour les variables totalement inexistantes 
+(n'ayant jamais fait l'objet d'un export sans =)
+J'ai aussi remarqué que les tests (de ce "chapitre", titré en majuscules)
+donnent les mêmes résultats si la valeur (ce qu'il y a juste après le = de l'export)
+ne sont que des espaces ou des tabulations.
+Ces tests valent donc aussi pour les variables dont la valeur ne sont que des espaces/tab.
+Observations :
+	Non précédé d'une redirection, ni d'une commande :
+		Quand $lol est seul, ou collé à une variable inexistante :
+			Retour au prompt immédiatement, aucune exécution ; code de retour à 0
+			Exemples :
+				bash 3.2£ export lol
+				bash 3.2£ $lol
+				bash 3.2£ $lol$mdr
+				bash 3.2£ $mdr$lol
+		Quand $lol est collé à quelque chose qui existe (des quotes, des caractères, une variable qui existe) :
+			$lol est remplacé par rien, et l'autre chose qui existe occupe l'espace
+			Exemples :
+				bash 3.2£ $lol''
+				bash: : command not found
+				bash 3.2£ ''$lol
+				bash: : command not found
+				bash 3.2£ $lol""
+				bash: : command not found
+				bash 3.2£ ""$lol
+				bash: : command not found
+				bash 3.2£ '$lol'
+				$lol: command not found
+				bash 3.2£ "$lol"
+				bash: : command not found
+				bash 3.2£ $lol$
+				$: command not found
+				bash 3.2£ coucou$lol
+				coucou: command not found
+				bash 3.2£ $PWD$lol
+				bash: /home/spardaspirit/Desktop/minishell: Is a directory
+				bash 3.2£ $lol$PWD
+				bash: /home/spardaspirit/Desktop/minishell: Is a directory
+	Précédé d'une redirection :
+		Quand $lol est seul, ou collé à une variable inexistante :
+			nom de la (ou des) variable(s) conservé(s) pour la concaténation
+			enum ambiguous redirect est assigné
+			Exemples :
+				bash 3.2£ < $lol
+				bash: $lol: ambiguous redirect
+				bash 3.2£ < $lol$mdr
+				bash: $lol$mdr: ambiguous redirect
+				bash 3.2£ < $mdr$lol
+				bash: $mdr$lol: ambiguous redirect
+		Quand $lol est collé à des quotes vides :
+			$lol est remplacé par rien, qui fusionne avec le rien des quotes vides
+			Exemples :
+				bash 3.2£ < $lol''
+				bash: : No such file or directory
+				bash 3.2£ < ''$lol
+				bash: : No such file or directory
+				bash 3.2£ < $lol""
+				bash: : No such file or directory
+				bash 3.2£ < ""$lol
+				bash: : No such file or directory
+		Quand $lol est collé à des caractères ou des variables existantes :
+			$lol est remplacé par rien ; le reste occupe l'espace
+			Exemples :
+				bash 3.2£ < coucou$lol
+				bash: coucou: No such file or directory
+				bash 3.2£ < $USER$lol
+				bash: spardaspirit: No such file or directory
+				bash 3.2£ < $lol"coucou"
+				bash: coucou: No such file or directory
+				bash 3.2£ < $lol$USER
+				bash: spardaspirit: No such file or directory
+	Précédé d'un heredoc :
+		Quand $lol est seul, ou collé à une variable inexistante :
+			nom de la (ou des) variable(s) conservé(s) pour la concaténation
+			Exemples :
+				bash 3.2£ << $lol
+				> coucou
+				> lol
+				> 
+				> $lol
+				bash 3.2£ << $lol$mdr
+				> lol
+				> mdr
+				> 
+				> lolmdr
+				> $lol$mdr
+				bash3.2£ << $mdr$lol(n'ayant jamais fait l'objet d'un export sans =)
+
+				> $mdr$lol
+		Quand $lol est collé à des quotes vides :
+			$lol est conservé, les quotes vides ne font pas disparaitre $lol
+			par contre, les quotes vides "disparaissent"
+			Exemples :
+				bash 3.2£ << $lol''
+				> $lol
+				bash 3.2£ << ''$lol
+				> $lol
+				bash 3.2£ << $lol""
+				> $lol
+				bash 3.2£ << ""$lol
+				> $lol
+				bash 3.2£ << '$lol'
+				> $lol
+				bash 3.2£ << "$lol"
+				> $lol
+		Quand $lol est collé à des caractères ou des variables existantes :
+			Le nom de la variable $lol est conservé, puis fusionné avec les éventuels autres
+			caractères ou quotes (dont seul le contenu est conservé pour la concaténation ;
+			les quotes ne sont eux pas conservés)
+			Exemples :
+				bash 3.2£ << coucou$lol
+				> coucou$lol
+				bash 3.2£ << $lol"coucou"
+				> $lol"coucou" //ne fonctionne donc pas pour sortir du heredoc
+				> $lolcoucou
+				bash 3.2£ << $lol'coucou'
+				> $lolcoucou
+				bash 3.2£ << $USER$lol
+				> $USER$lol
+				bash 3.2£ << $lol$USER
+				> $lol$USER
+	Précédé d'une commande : (donc en tant qu'argument de commande ; on prend ici echo)
+		Quand $lol est seul, ou collé à une variable inexistante :
+			un rien est conservé
+			Exemples :
+				bash 3.2£ echo $lol
+
+				bash 3.2£ echo $lol$mdr
+
+				bash 3.2£ echo $mdr$lol
+
+				bash 3.2£ 
+		Quand $lol est collé à des quotes vides :
+			un rien est conservé
+			Exemples :
+				bash 3.2£ echo $lol''
+
+				bash 3.2£ echo ''$lol
+
+				bash 3.2£ echo $lol""
+
+				bash 3.2£ echo ""$lol
+		Quand $lol est collé à des caractères ou des variables existantes :
+			$lol est remplacé par rien ; le reste occupe l'espace
+			Exemples :
+				bash 3.2£ echo coucou$lol
+				coucou
+				bash 3.2£ echo $lol"coucou"
+				coucou
+				bash 3.2£ echo $lol'coucou'
+				coucou
+				bash 3.2£ echo $lol$USER
+				spardaspirit
+				bash 3.2£ echo $USER$lol
+				spardaspirit
+
