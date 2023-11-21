@@ -37,7 +37,7 @@ void	get_path_from_mshenv(t_msh *msh)
 {
 	char	*temp;
 	int		i;
-	
+
 	temp = NULL;
 	i = 0;
 	while (msh->msh_env[i] && ft_strncmp(msh->msh_env[i], "PATH=", 5))
