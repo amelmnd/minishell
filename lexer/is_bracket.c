@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/10 11:04:15 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 18:32:03 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,13 @@
 
 int	is_right_bracket(t_msh *msh, char *prompt, int *i)
 {
+	char *tmp_str;
 	if (prompt[*i + 1] != '>' && prompt[*i + 1] != '|')
-		lexer_push(msh, ft_strdup(">"), W_REDIRECT);
+	{
+		tmp_str = ft_strdup(">");
+		lexer_push(msh, tmp_str, W_REDIRECT);
+		free_chars(&tmp_str);
+	}
 	if (prompt[*i + 1] == '|')
 	{
 		exit_synthax_error(msh, "newline");
@@ -32,7 +37,11 @@ int	is_right_bracket(t_msh *msh, char *prompt, int *i)
 			return (2);
 		}
 		else
-			lexer_push(msh, ft_strdup(">>"), W_APPEND_REDIRECT);
+		{
+			tmp_str = ft_strdup(">>");
+			lexer_push(msh, tmp_str, W_APPEND_REDIRECT);
+			free_chars(&tmp_str);
+		}
 		*i += 1;
 	}
 	return (0);
@@ -40,8 +49,13 @@ int	is_right_bracket(t_msh *msh, char *prompt, int *i)
 
 int	is_left_bracket(t_msh *msh, char *prompt, int *i)
 {
+	char *tmp_str;
 	if (prompt[*i + 1] != '<' && prompt[*i + 1] != '|')
-		lexer_push(msh, ft_strdup("<"), R_REDIRECT);
+	{
+		tmp_str = ft_strdup("<");
+		lexer_push(msh, tmp_str, R_REDIRECT);
+		free_chars(&tmp_str);
+	}
 	if (prompt[*i + 1] == '|')
 	{
 		exit_synthax_error(msh, "|");
@@ -58,7 +72,11 @@ int	is_left_bracket(t_msh *msh, char *prompt, int *i)
 			return (2);
 		}
 		else
-			lexer_push(msh, ft_strdup("<<"), HEREDOC);
+		{
+			tmp_str = ft_strdup("<<");
+			lexer_push(msh, tmp_str, HEREDOC);
+			free_chars(&tmp_str);
+		}
 		*i += 1;
 	}
 	return (0);
