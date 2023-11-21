@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 15:16:01 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 16:45:50 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str,
 			*not_exist_var = FALSE;
 		}
 		else if (tmp->var_value == NULL && *not_exist_var == TRUE)
+		{
 			all_in_str(str, tmp->var_name);
+			*not_exist_var = FALSE;
+		}
 		else if (tmp->var_value == NULL && str && *not_exist_var == FALSE)
 			all_in_str(str, "");
 		else if (tmp->var_value && !str && *not_exist_var == TRUE)
@@ -98,12 +101,17 @@ void	is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 	*not_exist_var = FALSE;
 }
 
-int	check_word(t_lexer_list *tmp, char **str)
+int	check_word(t_lexer_list *tmp, char **str, t_exp_type type_name)
 {
+	(void)str;
 	if (ft_strlen(tmp->str) > 1)
 		return (0);
-	if (ft_strlen(tmp->str) == 1 && ft_strcmp(tmp->str, "$") == 1)
+	if (ft_strlen(tmp->str) == 1 && ft_strcmp(tmp->str, "$") == 1
+			&& type_name == R_ORIGIN_REDIRECT
+			&& type_name == W_DEST_REDIRECT
+			&& type_name == WA_DEST_REDIRECT)
 	{
+		printf("str = %s\n", tmp->str);
 		if (tmp->previous == NULL && tmp->next
 			&& (tmp->next->lexer_type == D_QUOTE
 				|| tmp->next->lexer_type == S_QUOTE)
@@ -147,7 +155,7 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 			db_quote_var_trans(tmp, &str, &not_exist_var);
 		else if (tmp && tmp->lexer_type == WORD)
 		{
-			str_check = check_word(tmp, &str);
+			str_check = check_word(tmp, &str, type_name);
 			if (str_check == 0)
 			{
 				if (ft_strlen(tmp->str) > 0)
@@ -200,12 +208,15 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 			break ;
 		tmp = tmp->next;
 	}
-	if (str && not_exist_var == FALSE)
+	if ((str || ft_strcmp(str, "\'\'")) && not_exist_var == FALSE)
 	{
 		expander_push(msh, str, type_name);
 		msh->exp_current_type = WORD_EXPANDED;
 	}
-	else if (str && not_exist_var == TRUE)
+	else if (str && not_exist_var == TRUE
+			&& type_name == R_ORIGIN_REDIRECT
+			&& type_name == W_DEST_REDIRECT
+			&& type_name == WA_DEST_REDIRECT)
 	{
 		expander_push(msh, str, AMBIGOUS_REDIRECT_EXP);
 		msh->exp_current_type = WORD_EXPANDED;
