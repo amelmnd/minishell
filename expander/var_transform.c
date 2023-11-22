@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 16:48:14 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 19:59:54 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	db_quote_var_trans(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
 	else
 		*str = ft_strjoin(start_str, end_str);
 	*not_exist_var = FALSE;
+	free_chars(&start_str);
+	free_chars(&end_str);
 }
 
 void	is_return_value(t_lexer_list *tmp, char **str, t_bool *not_exist_var)
@@ -224,6 +226,6 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp,
 	else if (!str && type_name != R_ORIGIN_REDIRECT &&
 				type_name != W_DEST_REDIRECT && type_name != WA_DEST_REDIRECT)
 		expander_push(msh, "", WORD_EXPANDED);
-	//free_chars(&str);
+	free_chars(&str);
 	return (tmp);
 }
