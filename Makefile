@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/21 07:54:50 by amennad          ###   ########.fr        #
+#    Updated: 2023/11/22 11:54:38 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS_EXP = expander.c \
 		   create_expander_list.c \
 		   ft_join_words.c \
 		   var_transform.c \
+		   expander_fn.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
