@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:27:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,17 @@ void	free_exec_list(t_msh *msh)
 	}
 }
 
+void	free_exit(t_msh *msh)
+{
+	if (msh && msh->exit)
+	{
+		free_chars(&(msh->exit->ht_spaces_stripped));
+		free_chars(&(msh->exit->front_zeros_stripped));
+		free(msh->exit);
+		msh->exit = NULL;
+	}
+}
+
 // clean entre deux itérations de generate_prompt (donc msh et msh->msh_env ne sont pas free ici)
 // msh, msh->msh_env et msh->env_list doivent être free lors d'une sortie du programme 
 //via un signal
@@ -132,6 +143,7 @@ void	clean_msh_list(t_msh *msh)
 	free_exec(msh);
 	free_ntcharss(&(msh->msh_env));
 	//free_chars(&(msh->prompt));
+	free_exit(msh);
 }
 
 void	free_envlist(t_msh *msh)
