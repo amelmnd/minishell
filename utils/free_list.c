@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_list.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/22 11:50:55 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	free_lexer_list(t_msh *msh)
 		{
 			next = current->next;
 			free_chars(&(current->str));
-			free_chars(&(current->var_name));
-			free_chars(&(current->var_value));
+			// free_chars(&(current->var_name));
+			// free_chars(&(current->var_value));
 			free(current);
 			current = next;
 		}
@@ -103,7 +103,7 @@ void	free_exec_list(t_msh *msh)
 {
 	t_exec_list	*current;
 	t_exec_list	*next;
-	
+
 	if (msh && msh->exec_list)
 	{
 		current = msh->exec_list;
@@ -122,7 +122,7 @@ void	free_exec_list(t_msh *msh)
 }
 
 // clean entre deux itérations de generate_prompt (donc msh et msh->msh_env ne sont pas free ici)
-// msh, msh->msh_env et msh->env_list doivent être free lors d'une sortie du programme 
+// msh, msh->msh_env et msh->env_list doivent être free lors d'une sortie du programme
 //via un signal
 void	clean_msh_list(t_msh *msh)
 {

@@ -34,7 +34,10 @@ t_bool	prompt_isempty(char **prompt)
 void	lexer_check(t_msh *msh, char *prompt)
 {
 	if (prompt_isempty(&prompt) == TRUE)
+	{
 		exit_new_line(msh);
+		return ;
+	}
 	else
 	{
 		add_history(msh->prompt); // TODO verifier le fonctionnement avec les signaux et le heredoc fini
