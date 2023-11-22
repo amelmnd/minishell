@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 10:08:26 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/19 23:54:22 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:49:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int		ft_msh_strchr(const char *s, int c);
 // error
 void	exit_synthax_error(t_msh *msh, char *str);
 void	exit_command_not_foud(char *str);
+void	exit_no_file_directory(char *str);
 
 // env
 void	env_list_generate(t_msh *msh, char *envp[]);
