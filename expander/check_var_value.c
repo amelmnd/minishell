@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:58:49 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 11:06:32 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:45:50 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,4 @@ void	check_var_value(t_msh *msh)
 			tmp->var_value = ft_itoa(msh->return_code);
 		tmp = tmp->next;
 	}
-	free_lexer_list(tmp);
 }
