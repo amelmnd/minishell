@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/20 15:40:05 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:05:32 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	generate_prompt(char *envp[])
 	build_user_for_prompt(msh);
 	while (msh)
 	{
+		dprintf(2, "generate_prompt ; début itération ; msh->return_code = %d\n", msh->return_code);
 		generate_msh_env(msh);
 		msh->program_status = INTERACTIVE_STATUS;
 		msh->prompt = readline(msh->user);

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 23:58:04 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/22 20:40:55 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_hd						t_hd;
 typedef enum e_pos_ppl					t_pos_ppl;
 typedef struct s_env_list				t_env_list;
 typedef enum e_program_status			t_program_status;
+typedef struct s_exit					t_exit;
 
 enum	e_bool
 {
@@ -162,6 +163,16 @@ enum	e_program_status
 	HEREDOC_STATUS
 };
 
+struct s_exit
+{
+	t_bool			tests_ok;
+	char			*ht_spaces_stripped;
+	int				len_htss;
+	char			*front_zeros_stripped;
+	int				len_fzs;
+};
+
+
 struct s_msh
 {
 	t_program_status	program_status;
@@ -175,6 +186,7 @@ struct s_msh
 	t_exp_list			*exp_list;
 	t_exec_list			*exec_list;
 	t_exec				*exec;
+	t_exit				*exit;
 };
 
 #endif
