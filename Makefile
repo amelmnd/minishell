@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
+#    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/20 15:26:19 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/22 11:54:38 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,16 +50,12 @@ SRCS_PARS = parser.c \
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
 SRCS_EXP = expander.c \
-		   exp_list_generator_del.c \
-		   print_exp_list_del.c \
-		   gen_random_str_del.c \
-		   exp_list_node_management_del.c \
-		   feed_msh_acavenvp_del.c \
 		   check_var_value.c \
 		   expander_list_manage.c \
 		   create_expander_list.c \
 		   ft_join_words.c \
 		   var_transform.c \
+		   expander_fn.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
@@ -147,6 +143,8 @@ SRCS_DEV = dev_color.c \
 		   dev_print_env_list.c\
 		   dev_print_pid_t_array.c \
 		   print_exec_list_del.c \
+		   print_exp_list_del.c \
+		feed_msh_acavenvp_del.c \
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
