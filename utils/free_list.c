@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 07:22:05 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:04:06 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 //TODO add here other free list inside msh
 
-void	free_lexer_list(t_msh *msh)
+void	free_lexer_list(t_lexer_list *list)
 {
 	t_lexer_list	*current;
 	t_lexer_list	*next;
 
-	if (msh->lexer_list)
+	if (list)
 	{
-		current = msh->lexer_list;
+		current = list;
 		while (current != NULL)
 		{
 			next = current->next;
@@ -31,7 +31,7 @@ void	free_lexer_list(t_msh *msh)
 			free(current);
 			current = next;
 		}
-		msh->lexer_list = NULL;
+		list = NULL;
 	}
 }
 
@@ -126,7 +126,7 @@ void	free_exec_list(t_msh *msh)
 //via un signal
 void	clean_msh_list(t_msh *msh)
 {
-	free_lexer_list(msh);
+	free_lexer_list(msh->lexer_list);
 	free_exp_list(msh);
 	free_exec_list(msh);
 	free_exec(msh);
