@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/22 11:04:42 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:45:27 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int			get_size_env_list(t_msh *msh);
 int			is_chr_in_str(char *s, char c);
 void		free_chars(char **dust);
 
-void	free_lexer_list(t_lexer_list *list);
+void	free_lexer_list(t_msh *msh);
 void	free_exp_list(t_msh *msh);
 void	free_exec_list(t_msh *msh);
 void	free_exec(t_msh *msh);
