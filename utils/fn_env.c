@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 07:13:51 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:09:05 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ char	*ft_getenv(t_msh *msh, char *env_var)
 	}
 	if (ft_strncmp(tmp->name, &env_var[1], ft_strlen(env_var)) == 0)
 		return (tmp->value);
+	//TODO FREE TMP
 	return (NULL);
 }
 
