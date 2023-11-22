@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 11:47:01 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 17:12:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,16 @@ t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 	{
 		expander_push(msh, tmp->str, PIPE_EXPANDED);
 	}
-	else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
-		tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
-	else if (msh->exp_current_type == LIMITER_HEREDOC)
-		tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
-	else if (msh->exp_current_type == W_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
-	else if (msh->exp_current_type == WA_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
-	else if (msh->exp_current_type == WORD_EXPANDED)
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
+	// else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
+		tmp = generate_str(msh, tmp);
+	// else if (msh->exp_current_type == LIMITER_HEREDOC)
+	// 	tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
+	// else if (msh->exp_current_type == W_DEST_REDIRECT)
+	// 	tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
+	// else if (msh->exp_current_type == WA_DEST_REDIRECT)
+	// 	tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
+	// else if (msh->exp_current_type == WORD_EXPANDED)
+	// 	tmp = generate_str(msh, tmp, WORD_EXPANDED);
 	return (tmp);
 }
 
