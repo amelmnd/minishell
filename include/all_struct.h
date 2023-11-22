@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/21 14:23:56 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 11:30:24 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ struct s_msh
 	t_env_list			*env_list;
 	char				**msh_env;
 	char				*user;
-	char				*prompt;
+	// char				*prompt;
 	t_exp_type			exp_current_type;
 	t_lexer_list		*lexer_list;
 	t_exp_list			*exp_list;

@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 18:48:18 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/21 19:27:54 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,5 @@ void	lexer_check(t_msh *msh, char *prompt)
 	}
 	else
 		lexer_create_list(msh, prompt);
-	free(prompt);
+	free_chars(&prompt);
 }
