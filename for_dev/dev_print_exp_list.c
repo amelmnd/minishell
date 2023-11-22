@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 10:39:51 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 14:24:27 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/22 15:44:52 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,19 @@ void	print_exp_list(t_exp_list *list)
 	{
 		while (list != NULL)
 		{
+			cyan();
+			print_exp_type_a(list->exp_type);
 			if (list->str)
 			{
 				green();
-				dprintf(2, "str -> [%s]\n", list->str);
+				dprintf(2, "str -> [%s]		", list->str);
 			}
 			else if (list->str)
 			{
 				blue();
-				dprintf(2, "v_name -> [%s]\n", list->str);
+				dprintf(2, "v_name -> [%s]		", list->str);
 			}
-			cyan();
-			print_exp_type_a(list->exp_type);
+			dprintf(2, "\n");
 			list = list->next;
 		}
 		reset();
