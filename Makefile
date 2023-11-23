@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/22 11:54:38 by amennad          ###   ########.fr        #
+#    Updated: 2023/11/23 12:47:07 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 			execution/do_all_redirections.c \
 			execution/do_redir.c \
 			execution/exec.c \
+			execution/get_paths_from_path.c \
 			execution/new_exec.c \
 			execution/pid_t_array.c \
 			here_doc/feed_append_new_hd_node.c \
@@ -99,12 +100,21 @@ SRCS_BUIL = cd/cd_builtin.c \
 			export/export_get_var_value.c \
 			export/add_var_to_env_list.c \
 			export/export_with_args.c \
+			exit/contains_non_sign_or_num_chr.c \
+			exit/easy_tests.c \
+			exit/exit_builtin.c \
+			exit/front_zeros_stripped_parsing.c \
+			exit/get_htss.c \
+			exit/ht_spaces_stripped_parsing.c \
+			exit/limits_single_shortcuts.c \
+			exit/more_than_one_sign.c \
+			exit/non_numeric_arg_assignation.c \
+			exit/normal_cases_exit_atoi.c \
 			unset/unset_builtin.c \
 			unset/remove_from_env_list.c \
 			builtins.c \
 			echo_builtin.c \
 			env_builtin.c \
-			exit_builtin.c \
 			pwd_builtin.c \
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
@@ -124,6 +134,8 @@ SRCS_UTILS = utils.c \
 			 ft_execve.c \
 			 free_msh.c \
 			 errmsg_free_exit.c \
+			 get_size_ntcharss.c \
+			 ntcharss_copy.c \
 			 free_ints.c \
 			 build_user_for_prompt.c \
 			 new_msh.c \
@@ -131,7 +143,6 @@ SRCS_UTILS = utils.c \
 			 fn_env.c \
 			 fn_env_list.c \
 			 adapt_libft.c \
-			 print_charss_del.c \
 			 free_ntcharss.c \
 
 # TODO DELETE
@@ -144,7 +155,7 @@ SRCS_DEV = dev_color.c \
 		   dev_print_pid_t_array.c \
 		   print_exec_list_del.c \
 		   print_exp_list_del.c \
-		feed_msh_acavenvp_del.c \
+		   print_ntcharss_del.c \
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 

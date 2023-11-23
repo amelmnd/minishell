@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	print_charss(char **str_array)
+void	print_ntcharss(char **str_array)
 {
 	int	i = -1;
 

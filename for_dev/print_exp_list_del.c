@@ -39,17 +39,7 @@ void	print_exp_list(t_msh *msh)
 	}
 	dprintf(2, "===== print_explist : Sortie =====\n");
 }
-*/
 
-/*
-WORD_EXPANDED,
-	R_ORIGIN_REDIRECT,
-	LIMITER_HEREDOC,
-	W_DEST_REDIRECT,
-	WA_DEST_REDIRECT,
-	PIPE_EXPANDED,
-	HEREDOC_ERASED
-*/
 void	print_exp_type_one_line(int exp_type)
 {
 	if (exp_type == WORD_EXPANDED)
