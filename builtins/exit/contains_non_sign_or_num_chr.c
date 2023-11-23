@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_msh.c                                         :+:      :+:    :+:   */
+/*   contains_non_sign_or_num_chr.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 14:46:01 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:05:25 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 11:04:33 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_msh(t_msh *msh)
+static t_bool	is_diff_than_sign_or_num(char c)
 {
-	free_envlist(msh);
-	free_ntcharss(&(msh->msh_env));
-	free_chars(&(msh->user));
-	free_chars(&(msh->prompt)); // à étudier si nécessaire
-	free_lexer_list(msh);
-	free_exp_list(msh);
-	free_exec_list(msh);
-	free_exec(msh);
-	free_exit(msh);
-	free(msh);
+	if (ft_isdigit(c) || c == '+' || c == '-')
+		return (FALSE);
+	return (TRUE);
+}
+
+void	contains_non_sign_or_num_chr(t_msh *msh)
+{
+	int		i;
+	char	*htss;
+
+	i = -1;
+	htss = msh->exit->ht_spaces_stripped;
+	while (htss[++i])
+	{
+		if (is_diff_than_sign_or_num(htss[i]))
+			non_numeric_arg_assignation(msh);
+	}
 }

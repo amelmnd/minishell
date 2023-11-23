@@ -1,27 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_msh.c                                         :+:      :+:    :+:   */
+/*   more_than_one_sign.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 14:46:01 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:05:25 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 10:20:25 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 11:05:56 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_msh(t_msh *msh)
+t_bool	is_a_sign(char c)
 {
-	free_envlist(msh);
-	free_ntcharss(&(msh->msh_env));
-	free_chars(&(msh->user));
-	free_chars(&(msh->prompt)); // à étudier si nécessaire
-	free_lexer_list(msh);
-	free_exp_list(msh);
-	free_exec_list(msh);
-	free_exec(msh);
-	free_exit(msh);
-	free(msh);
+	return (c == '+' || c == '-');
+}
+
+int	nb_signs_in_str(char *str)
+{
+	int	nb_signs;
+	int	i;
+
+	nb_signs = 0;
+	i = -1;
+	while (str[++i])
+	{
+		if (is_a_sign(str[i]))
+			nb_signs++;
+	}
+	return (nb_signs);
+}
+
+void	more_than_one_sign(t_msh *msh)
+{
+	if (nb_signs_in_str(msh->exit->ht_spaces_stripped) > 1)
+		non_numeric_arg_assignation(msh);
 }
