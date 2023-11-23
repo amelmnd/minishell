@@ -31,19 +31,18 @@ t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 	defined_type(msh, tmp);
 	if (tmp && tmp->lexer_type == PIPE)
 	{
-		expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
+		expander_push(msh, tmp->str, PIPE_EXPANDED);
 	}
-	else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
-		tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
-	else if (msh->exp_current_type == LIMITER_HEREDOC)
-		tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
-	else if (msh->exp_current_type == W_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
-	else if (msh->exp_current_type == WA_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
-	else if (msh->exp_current_type == WORD_EXPANDED)
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
+	// else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
+		tmp = generate_str(msh, tmp);
+	// else if (msh->exp_current_type == LIMITER_HEREDOC)
+	// 	tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
+	// else if (msh->exp_current_type == W_DEST_REDIRECT)
+	// 	tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
+	// else if (msh->exp_current_type == WA_DEST_REDIRECT)
+	// 	tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
+	// else if (msh->exp_current_type == WORD_EXPANDED)
+	// 	tmp = generate_str(msh, tmp, WORD_EXPANDED);
 	return (tmp);
 }
 

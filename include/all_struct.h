@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   all_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
 /*   Updated: 2023/11/23 12:31:55 by nstoutze         ###   ########.fr       */
@@ -74,7 +74,8 @@ enum	e_expander_type
 	W_DEST_REDIRECT,
 	WA_DEST_REDIRECT,
 	PIPE_EXPANDED,
-	HEREDOC_ERASED
+	HEREDOC_ERASED,
+	AMBIGOUS_REDIRECT_EXP,
 };
 
 struct	s_expander_list
@@ -180,7 +181,7 @@ struct s_msh
 	t_env_list			*env_list;
 	char				**msh_env;
 	char				*user;
-	char				*prompt;
+	// char				*prompt;
 	t_exp_type			exp_current_type;
 	t_lexer_list		*lexer_list;
 	t_exp_list			*exp_list;
