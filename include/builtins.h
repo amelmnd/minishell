@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 10:26:32 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:42:52 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,17 @@ void	remove_from_env_list(t_msh *msh, char *var_name);
 void	env_builtin(t_msh *msh, t_exec_list *exec_list_node);
 
 // exit
+void	contains_non_sign_or_num_chr(t_msh *msh);
+void	easy_tests(t_msh *msh, char *arg);
 void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node);
+void	front_zeros_stripped_parsing(t_msh *msh);
+char	*get_htss(char *arg);
+void	ht_spaces_stripped_parsing(t_msh *msh, char *arg);
+t_bool	is_a_sign(char c);
+void	limits_single_shortcuts(t_msh *msh);
+void	more_than_one_sign(t_msh *msh);
+int		nb_signs_in_str(char *str);
+void	non_numeric_arg_assignation(t_msh *msh);
+void	normal_cases_exit_atoi(t_msh *msh);
 
 #endif

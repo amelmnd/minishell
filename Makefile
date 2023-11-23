@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/20 15:26:19 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/23 10:42:39 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,12 +103,21 @@ SRCS_BUIL = cd/cd_builtin.c \
 			export/export_get_var_value.c \
 			export/add_var_to_env_list.c \
 			export/export_with_args.c \
+			exit/contains_non_sign_or_num_chr.c \
+			exit/easy_tests.c \
+			exit/exit_builtin.c \
+			exit/front_zeros_stripped_parsing.c \
+			exit/get_htss.c \
+			exit/ht_spaces_stripped_parsing.c \
+			exit/limits_single_shortcuts.c \
+			exit/more_than_one_sign.c \
+			exit/non_numeric_arg_assignation.c \
+			exit/normal_cases_exit_atoi.c \
 			unset/unset_builtin.c \
 			unset/remove_from_env_list.c \
 			builtins.c \
 			echo_builtin.c \
 			env_builtin.c \
-			exit_builtin.c \
 			pwd_builtin.c \
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 14:46:01 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 15:24:27 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:05:25 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,6 @@ void	free_msh(t_msh *msh)
 	free_exp_list(msh);
 	free_exec_list(msh);
 	free_exec(msh);
+	free_exit(msh);
 	free(msh);
 }
