@@ -1,25 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   retrieve_prim_env_in_prim_env_list_del.c           :+:      :+:    :+:   */
+/*   fn_env_list.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/15 00:53:03 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:49:48 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
 #include "minishell.h"
-//les deux fonctions ci-dessous doivent rester solidaires
-static void	init_prim_env_list(t_env_list *prim_env_list)
-{
-	prim_env_list->name = NULL;
-	prim_env_list->next = NULL;
-	prim_env_list->previous = NULL;
-	prim_env_list->value = NULL;
-}
+
+// à nettoyer
 
 t_env_list	*new_env_list(void)
 {
@@ -29,7 +22,10 @@ t_env_list	*new_env_list(void)
 	new = (t_env_list *)malloc(sizeof(t_env_list));
 	if (!new)
 		return (NULL);
-	init_prim_env_list(new);
+	new->name = NULL;
+	new->next = NULL;
+	new->previous = NULL;
+	new->value = NULL;
 	return (new);
 }
 
@@ -91,13 +87,30 @@ char	*get_value_var(char *var_n_value)
 	return (value_var);
 }
 
+void	feed_env_list_node(t_env_list *env_list_node, char *var_n_value)
+{
+	char	*name_var;
+	char	*value_var;
+
+	name_var = get_name_var(var_n_value);
+	value_var = get_value_var(var_n_value);
+	env_list_node->name = ft_strdup(name_var);
+	env_list_node->value = ft_strdup(value_var);
+	free_chars(&name_var);
+	free_chars(&value_var);
+	/*
+	Nico : il y a peut-être moyen de faire plus simple (c'est mon code) :
+	env_list_node->name = get_name_var(var_n_value);
+	env_list_node->value = get_value_var(var_n_value);
+	*/
+}
+
 void	fill_first_env_list_node(t_msh *msh, char *var_n_value)
 {
 	t_env_list	*first_env_list_node;
 
-	first_env_list_node = msh->prim_env_list;
-	first_env_list_node->name = get_name_var(var_n_value);
-	first_env_list_node->value = get_value_var(var_n_value);
+	first_env_list_node = msh->env_list;
+	feed_env_list_node(first_env_list_node, var_n_value);
 }
 
 void	append_new_fed_list_node(t_msh *msh, char *var_n_value)
@@ -105,25 +118,24 @@ void	append_new_fed_list_node(t_msh *msh, char *var_n_value)
 	t_env_list	*last_env_list_node;
 	t_env_list	*new_env_list_node;
 
-	last_env_list_node = msh->prim_env_list;
+	last_env_list_node = msh->env_list;
 	new_env_list_node = new_env_list();
 	while (last_env_list_node->next)
 		last_env_list_node = last_env_list_node->next;
 	last_env_list_node->next = new_env_list_node;
 	new_env_list_node->previous = last_env_list_node;
-	new_env_list_node->name = get_name_var(var_n_value);
-	new_env_list_node->value = get_value_var(var_n_value);
+	feed_env_list_node(new_env_list_node, var_n_value);
 }
 
-void	retrieve_env_in_env_list(t_msh *msh, char *envp[])
+void	env_list_generate(t_msh *msh, char *envp[])
 {
 	int	i;
 
+	i = -1;
 	if (msh)
 	{
 		if (envp)
-			msh->prim_env_list = new_env_list();
-		i = -1;
+			msh->env_list = new_env_list();
 		while (envp && envp[++i])
 		{
 			if (!i)
@@ -133,4 +145,3 @@ void	retrieve_env_in_env_list(t_msh *msh, char *envp[])
 		}
 	}
 }
-*/

@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/23 15:50:27 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/23 17:31:53 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,6 +74,7 @@ SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 			execution/do_all_redirections.c \
 			execution/do_redir.c \
 			execution/exec.c \
+			execution/ft_execve.c \
 			execution/get_paths_from_path.c \
 			execution/new_exec.c \
 			execution/pid_t_array.c \
@@ -119,31 +120,29 @@ SRCS_BUIL = cd/cd_builtin.c \
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
-SRCS_UTILS = adapt_libft.c \
-			 build_user_for_prompt.c \
-			 errmsg_free_exit.c \
-			 fn_env.c \
-			 fn_env_list.c \
-			 free_chars.c \
-			 free_ints.c \
-			 free_list.c \
-			 free_msh.c \
-			 free_ntcharss.c \
-			 ft_execve.c \
-			 ft_strcmp.c \
-			 generate_msh_env.c \
-			 get_next_line.c \
-			 get_next_line_utils.c \
-			 get_size_env_list.c \
-			 get_size_ntcharss.c \
-			 is_chr_in_str.c \
-			 malloc_full_null_charss.c \
+SRCS_UTILS = before_prompt_loop/build_user_for_prompt.c \
+			 before_prompt_loop/new_msh.c \
+			 before_prompt_loop/show_no_args_for_minishell_error_msg.c \
+			 environment_management/fn_env.c \
+			 environment_management/fn_env_list.c \
+			 environment_management/generate_msh_env.c \
+			 environment_management/get_size_env_list.c \
+			 environment_management/split_env_value.c \
+			 free/errmsg_free_exit.c \
+			 free/free_chars.c \
+			 free/free_ints.c \
+			 free/free_list.c \
+			 free/free_msh.c \
+			 free/free_ntcharss.c \
+			 generic/ft_msh_strchr.c \
+			 generic/ft_strcmp.c \
+			 generic/get_size_ntcharss.c \
+			 generic/is_chr_in_str.c \
+			 generic/malloc_full_null_charss.c \
+			 generic/ntcharss_copy.c \
+			 generic/reset_counts.c \
+			 exit_new_line.c \
 			 manage_error.c \
-			 new_msh.c \
-			 ntcharss_copy.c \
-			 reset_counts.c \
-			 show_no_args_for_minishell_error_msg.c \
-			 utils.c \
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))

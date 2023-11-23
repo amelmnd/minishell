@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 15:50:41 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:45:22 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	create_pid_t_array(t_msh *msh);
 void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node);
 void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i);
 void	execution(t_msh *msh);
+void	ft_execve(t_msh *msh, t_exec_list *exec_list_node);
 void	get_paths_from_path(t_msh *msh);
 t_exec	*new_exec(void);
 void	wait_and_get_the_last_return_code(t_msh *msh);
