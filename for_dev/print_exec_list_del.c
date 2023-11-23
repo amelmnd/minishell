@@ -52,7 +52,7 @@ void	print_redir_array(t_exec_list *exec_list_node)
 		if (print) {dprintf(2, "Le tableau des redirections est vide.\n");}
 }
 
-void	print_charss_execln(t_exec_list *exec_list_node)
+void	print_ntcharss_execln(t_exec_list *exec_list_node)
 {
 	int	i = -1;
 
@@ -66,7 +66,7 @@ void	print_charss_execln(t_exec_list *exec_list_node)
 void	print_args_array(t_exec_list *exec_list_node)
 {
 	if (exec_list_node->args_array)
-		print_charss_execln(exec_list_node);
+		print_ntcharss_execln(exec_list_node);
 	else
 		if (print) {dprintf(2, "Le tableau des arguments est vide.\n");}
 }

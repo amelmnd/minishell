@@ -1,31 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execve.c                                        :+:      :+:    :+:   */
+/*   more_than_one_sign.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 12:29:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 12:42:33 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 10:20:25 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 11:05:56 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_execve(t_msh *msh, t_exec_list *exec_list_node)
+t_bool	is_a_sign(char c)
 {
-	t_exec	*exec;
+	return (c == '+' || c == '-');
+}
 
-	if (msh && msh->exec && exec_list_node && exec_list_node->args_array)
+int	nb_signs_in_str(char *str)
+{
+	int	nb_signs;
+	int	i;
+
+	nb_signs = 0;
+	i = -1;
+	while (str[++i])
 	{
-		exec = msh->exec;
-		if (execve(exec->cmd_path_ready,
-				exec_list_node->args_array, msh->msh_env))
-		{
-			ft_putstr_fd("minishell: execve: ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("\n", 2);
-			exit(EXIT_FAILURE);
-		}
+		if (is_a_sign(str[i]))
+			nb_signs++;
 	}
+	return (nb_signs);
+}
+
+void	more_than_one_sign(t_msh *msh)
+{
+	if (nb_signs_in_str(msh->exit->ht_spaces_stripped) > 1)
+		non_numeric_arg_assignation(msh);
 }

@@ -10,7 +10,7 @@ void	print_exec_list(t_msh *msh);
 void	print_node(t_exp_list *node);
 void	print_pid_t_array(t_msh *msh);
 void	print_paths_from_path(t_msh *msh);
-void	print_charss(char **str_array);
+void	print_ntcharss(char **str_array);
 
 //void	free_chars(char **dust);
 void	free_ntcharss(char ***dust);
@@ -36,11 +36,7 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node);
 
 t_exec	*new_exec(void);
 void	execution(t_msh *msh);
-int	    get_size_ntcharss(char **ntcharss);
-char	**ntcharss_copy(char **ntcharss_to_copy);
-void	get_path_from_envp(t_msh *msh);
 void	get_paths_from_path(t_msh *msh);
-void	feed_msh_with_envp(t_msh *msh, char **envp);
 
 
 #endif

@@ -1,19 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_builtin.c                                     :+:      :+:    :+:   */
+/*   contains_non_sign_or_num_chr.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:32:25 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 14:36:40 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 11:04:33 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node)
+static t_bool	is_diff_than_sign_or_num(char c)
 {
-	(void)msh;
-	(void)exec_list_node;
+	if (ft_isdigit(c) || c == '+' || c == '-')
+		return (FALSE);
+	return (TRUE);
+}
+
+void	contains_non_sign_or_num_chr(t_msh *msh)
+{
+	int		i;
+	char	*htss;
+
+	i = -1;
+	htss = msh->exit->ht_spaces_stripped;
+	while (htss[++i])
+	{
+		if (is_diff_than_sign_or_num(htss[i]))
+			non_numeric_arg_assignation(msh);
+	}
 }

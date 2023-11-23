@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execve.c                                        :+:      :+:    :+:   */
+/*   ntcharss_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 12:29:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 12:42:33 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 12:22:01 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 12:22:10 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_execve(t_msh *msh, t_exec_list *exec_list_node)
+char	**ntcharss_copy(char **ntcharss_to_copy)
 {
-	t_exec	*exec;
+	char	**copy;
+	int		len_to_copy;
 
-	if (msh && msh->exec && exec_list_node && exec_list_node->args_array)
-	{
-		exec = msh->exec;
-		if (execve(exec->cmd_path_ready,
-				exec_list_node->args_array, msh->msh_env))
-		{
-			ft_putstr_fd("minishell: execve: ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("\n", 2);
-			exit(EXIT_FAILURE);
-		}
-	}
+	if (!ntcharss_to_copy)
+		return (NULL);
+	len_to_copy = get_size_ntcharss(ntcharss_to_copy);
+	copy = (char **)malloc(sizeof(char *) * (len_to_copy + 1));
+	if (!copy)
+		return (NULL);
+	len_to_copy = -1;
+	while (ntcharss_to_copy[++len_to_copy])
+		copy[len_to_copy] = ft_strdup(ntcharss_to_copy[len_to_copy]);
+	copy[len_to_copy] = NULL;
+	return (copy);
 }
