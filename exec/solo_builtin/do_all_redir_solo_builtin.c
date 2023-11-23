@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:40:37 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:31:59 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:52:12 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	do_wapp_redirect_solo_builtin(t_msh *msh, char *dest)
 	}
 }
 
+//no exit in these redirections (they take place in the parent process)
 void	do_all_redir_solo_builtin(t_msh *msh)
 {
 	int			i;
@@ -88,8 +89,6 @@ void	do_all_redir_solo_builtin(t_msh *msh)
 			//else if (redirect[i].exp_type == AMBIGUOUS_REDIRECT)
 			//	printf("minishell: %s: ambiguous redirect\n", redirect[i].str);
 			// ce bloc sera activé quand l'expander assignera l'enum AMBIGUOUS_REDIRECT
-			
-			//aucun exit dans ces redirections (car elles s'effectuent dans le parent)
 		}
 	}
 }

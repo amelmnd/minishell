@@ -6,13 +6,11 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:03:55 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 11:00:43 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:13:01 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//minishell tourne avec son propre environnement  grâce à, entre autres, ces fonctions
 
 static char	*join_var_equal_value(t_env_list *env_list)
 {

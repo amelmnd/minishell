@@ -325,3 +325,158 @@ t_bool PARSING_ARG(msh, arg) :
 		NORMAL_CASES_EXIT_ATOI(msh)
 	return (msh->exit->tests_ok)
 */
+
+/*
+// gen_random_str_del.c
+char gen_random_printable_char_ascii(t_msh *msh)
+{
+	char	random_char = 0;
+
+	while (!ft_isprint((int)random_char))
+		random_char = (char)msh_random_0_127(msh);
+	return (random_char);
+}
+
+char *gen_random_str(t_msh *msh)
+{
+	int len_str = 0;
+	char *random_str;
+	int i = -1;
+
+	while (len_str < 1 || len_str > 15)
+		len_str = msh_random_0_99(msh) % 15;
+	random_str = (char *)malloc(sizeof(char) * (len_str + 1));
+	if (!random_str)
+		return (NULL);
+	random_str[len_str] = '\0';
+	while (++i < len_str)
+		random_str[i] = gen_random_printable_char_ascii(msh);
+	return (random_str);
+}
+*/
+
+/*
+// exp_list_node_management_del.c
+void	fill_the_first_node(t_msh *msh)
+{
+	t_exp_list *first_node = NULL;
+
+	if (msh)
+	{
+		if (msh->exp_list)
+		{
+			while (msh->exp_list->previous)
+			{
+				print_node(first_node);
+				first_node = msh->exp_list->previous;
+			}
+		}
+	}
+	if (!first_node)
+		first_node = msh->exp_list;
+	first_node->str = gen_random_str(msh);
+}
+
+
+t_exp_list	*new_exp_list_node(void)
+{
+	t_exp_list *new_node;
+
+	new_node = NULL;
+	new_node = (t_exp_list *)malloc(sizeof(t_exp_list));
+	if (!new_node)
+		return (NULL);
+	return (new_node);
+}
+
+void	init_node_exp_list(t_msh *msh)
+{
+	msh->exp_list->previous = NULL;
+	msh->exp_list->next = NULL;
+	msh->exp_list->str = NULL;
+	msh->exp_list->exp_type = 0;
+}
+
+void	add_exp_list_node(t_msh *msh, t_exp_list *node)
+{
+	t_exp_list	*node_i;
+
+	node_i = msh->exp_list;
+	while (node_i->next)
+		node_i = node_i->next;
+	node_i->next = node;
+	node->previous = node_i;
+}
+
+void	feed_exp_list_node(t_exp_list *exp_list, char *str, int exp_type)
+{
+	exp_list->str = str;
+	exp_list->exp_type = exp_type;
+}
+
+void	add_pipe_exp_list_node(t_msh *msh)
+{
+	t_exp_list	*pipe_exp_list_node;
+
+	pipe_exp_list_node = new_exp_list_node();
+	feed_exp_list_node(pipe_exp_list_node, NULL, 5);
+	add_exp_list_node(msh, pipe_exp_list_node);
+}
+*/
+
+/*
+//exp_list_generator_del.c
+void	exp_list_generator(t_msh *msh)
+{
+	int nb_pipe = 0;
+	int i = -1;
+	int nb_elt;
+	int j;
+	t_exp_list	*node = NULL;
+	char *str = NULL;
+	int exp_type = 0;
+
+	while (nb_pipe <= 2 || nb_pipe >= 7)
+		nb_pipe = msh_random_0_99(msh)%8;
+	while (++i < nb_pipe + 1)
+	{
+		nb_elt = 0;
+		while (nb_elt <= 5 || nb_elt >= 10)
+			nb_elt = msh_random_0_99(msh)%10;
+		j = -1;
+		while (++j < nb_elt)
+		{
+			node = new_exp_list_node();
+			str = gen_random_str(msh);
+			exp_type = msh_random_0_99(msh) % 5;
+			feed_exp_list_node(node, str, exp_type);
+			add_exp_list_node(msh, node);
+		}
+		if (i != nb_pipe)
+			add_pipe_exp_list_node(msh);
+	}
+	fill_the_first_node(msh);
+}
+
+int	main(int ac, char **av, char **envp)
+{
+	t_msh	*msh;
+
+	
+	msh = new_msh();
+	init_msh(msh);
+
+	init_node_exp_list(msh);
+	exp_list_generator(msh);
+	//print_exp_list(msh);
+	print_exp_list_one_line(msh);
+	
+	build_exec_list(msh);
+	//print_exec_list(msh);
+
+	execution(msh, ac, av, envp);
+
+	//free_msh(msh);
+	return (0);
+}
+*/
