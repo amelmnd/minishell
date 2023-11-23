@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 07:13:15 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 15:36:42 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 23:10:11 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static void	too_many_args_errmsg(t_msh *msh)
 
 static void	generic_cd_errmsg(t_msh *msh, char *path_arg)
 {
-	ft_putstr_fd("minishell :", 2);
+	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(path_arg, 2);
-	ft_putstr_fd(" :", 2);
+	ft_putstr_fd(": ", 2);
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 	msh->return_code = 1;

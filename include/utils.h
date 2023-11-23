@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 20:33:56 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 00:14:08 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,15 @@ void		env_list_generate(t_msh *msh, char *envp[]);
 int			get_size_env_list(t_msh *msh);
 char		*ft_getenv(t_msh *msh, char *env_var);
 char		*msh_getenv(t_msh *msh, char *var_name);
+t_env_list	*new_env_list(void);
 void		split_env_value(char *env_var, char **name, char **value);
 
 // error
+void		ambiguous_redirect_errmsg(char *str);
 void		exit_synthax_error(t_msh *msh, char *str);
-t_env_list	*new_env_list(void);
 void		exit_command_not_foud(char *str);
 void		exit_no_file_directory(char *str);
-void		ambiguous_redirect_errmsg(char *str);
+void		is_a_directory_errmsg(char *path);
 
 //free
 void		clean_msh_list(t_msh *msh);

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:52:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/19 22:21:53 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 00:15:55 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,17 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 		msh->exec->cmd_path_ready = ft_strdup(exec_list_node->cmd);
 		if (!access(exec_list_node->cmd, X_OK))
 		{
-			get_cmd_without_path_in_args(msh, exec_list_node);
-			ft_execve(msh, exec_list_node);
+			stat(exec_list_node->cmd, msh->exec->s_path_stat);
+			if (S_ISREG(msh->exec->s_path_stat->st_mode))
+			{
+				get_cmd_without_path_in_args(msh, exec_list_node);
+				ft_execve(msh, exec_list_node);
+			}
+			else if (S_ISDIR(msh->exec->s_path_stat->st_mode))
+			{
+				is_a_directory_errmsg(exec_list_node->cmd);
+				exit(126);
+			}
 		}
 		if (exists_in_paths(msh, exec_list_node))
 			ft_execve(msh, exec_list_node);
