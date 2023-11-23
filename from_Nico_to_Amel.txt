@@ -1,3 +1,6 @@
+23/11/2023 14h10
+On vire get_next_line du coup ?
+
 18/11/2023 21h17
 
 Penser à sécuriser pwd et env avec le protection du code des fonctions dans des if

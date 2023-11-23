@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 11:04:33 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:55:22 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ void	contains_non_sign_or_num_chr(t_msh *msh)
 	int		i;
 	char	*htss;
 
-	i = -1;
-	htss = msh->exit->ht_spaces_stripped;
-	while (htss[++i])
+	if (msh && msh->exit)
 	{
-		if (is_diff_than_sign_or_num(htss[i]))
-			non_numeric_arg_assignation(msh);
+		i = -1;
+		htss = msh->exit->ht_spaces_stripped;
+		while (htss[++i])
+		{
+			if (is_diff_than_sign_or_num(htss[i]))
+				non_numeric_arg_assignation(msh);
+		}
+		
 	}
 }

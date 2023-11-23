@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 15:05:32 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 14:09:50 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,6 @@ void	generate_prompt(char *envp[])
 		clean_msh_list(msh);
 	}
 	clear_history ();
-	//avec le break ci-dessous : à réactiver tant que les signaux n'ont pas été
-	//gérés pour tester les leaks
-
 }
 
 int	main(int argc, char *argv[], char *envp[])

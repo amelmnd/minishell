@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:32:25 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 11:05:05 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:17:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,20 @@
 
 static t_bool	parsing_arg(t_msh *msh, char *arg)
 {
-	easy_tests(msh, arg);
-	if (msh->exit->tests_ok && !(msh->exit->ready))
-		ht_spaces_stripped_parsing(msh, arg);
-	if (msh->exit->tests_ok && !(msh->exit->ready))
-		front_zeros_stripped_parsing(msh);
-	if (msh->exit->tests_ok && !(msh->exit->ready))
-		limits_single_shortcuts(msh);
-	if (msh->exit->tests_ok && !(msh->exit->ready))
-		normal_cases_exit_atoi(msh);
-	return (msh->exit->tests_ok);
+	if (msh && msh->exit)
+	{
+		easy_tests(msh, arg);
+		if (msh->exit->tests_ok && !(msh->exit->ready))
+			ht_spaces_stripped_parsing(msh, arg);
+		if (msh->exit->tests_ok && !(msh->exit->ready))
+			front_zeros_stripped_parsing(msh);
+		if (msh->exit->tests_ok && !(msh->exit->ready))
+			limits_single_shortcuts(msh);
+		if (msh->exit->tests_ok && !(msh->exit->ready))
+			normal_cases_exit_atoi(msh);
+		return (msh->exit->tests_ok);
+	}
+	return (FALSE);
 }
 
 static t_exit	*new_exit_struct(void)
@@ -50,8 +54,11 @@ static void	num_arg_required_errmsg(char *arg)
 
 static void	too_many_args_errmsg(t_msh *msh)
 {
-	ft_putstr_fd("minishell: exit: too many arguments\n", 2);
-	msh->return_code = 1;
+	if (msh)
+	{
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
+		msh->return_code = 1;
+	}
 }
 
 void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node)
