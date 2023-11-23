@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 17:19:00 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:33:56 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void		exit_synthax_error(t_msh *msh, char *str);
 t_env_list	*new_env_list(void);
 void		exit_command_not_foud(char *str);
 void		exit_no_file_directory(char *str);
+void		ambiguous_redirect_errmsg(char *str);
 
 //free
 void		clean_msh_list(t_msh *msh);
