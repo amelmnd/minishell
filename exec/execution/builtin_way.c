@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   builtin_way.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 23:59:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 11:47:33 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 15:50:17 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,5 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 			builtin = FALSE;
 	}
 	if (builtin)
-	{
-		dprintf(2, "builtin_way : entrée dans le if (builtin)\n");
 		exit(msh->return_code);
-	}
 }

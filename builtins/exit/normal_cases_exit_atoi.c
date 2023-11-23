@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:39:07 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 11:06:09 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 16:16:03 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 static int	get_sign(char *arg)
 {
-	if (arg[0] == '-')
-		return (-1);
+	if (arg)
+	{
+		if (arg[0] == '-')
+			return (-1);
+	}
 	return (1);
 }
 
