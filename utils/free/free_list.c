@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 17:09:22 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 23:58:39 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ void	free_exp_list(t_msh *msh)
 
 void	free_exec(t_msh *msh)
 {
-	if (msh->exec)
+	if (msh && msh->exec)
 	{
 		free_chars(&(msh->exec->path_from_mshenv));
 		free_ntcharss(&(msh->exec->paths_from_path));
 		free_chars(&(msh->exec->cmd_path_ready));
 		free_ints(&(msh->exec->pid_t_array));
+		free(msh->exec->s_path_stat);
 		free(msh->exec);
 		msh->exec = NULL;
 	}

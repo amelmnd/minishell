@@ -6,11 +6,22 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 22:25:54 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/15 01:17:24 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 00:05:28 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static struct stat	*new_path_stat(void)
+{
+	struct stat	*new;
+	
+	new = NULL;
+	new = (struct stat *)malloc(sizeof(struct stat));
+	if (!new)
+		return (NULL);
+	return (new);
+}
 
 static void	init_exec(t_exec *exec)
 {
@@ -26,6 +37,7 @@ static void	init_exec(t_exec *exec)
 		exec->fd_write_redirect = -1;
 		exec->cmd_path_ready = NULL;
 		exec->pid_t_array = NULL;
+		exec->s_path_stat = new_path_stat();
 	}
 }
 
