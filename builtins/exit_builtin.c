@@ -6,196 +6,65 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:32:25 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/22 21:53:47 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 01:46:49 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	num_arg_required_errmsg(t_msh *msh, char *arg)
+void	non_numeric_arg_assignation(t_msh *msh)
 {
-	ft_putstr_fd("minishell: exit: ", 2);
-	ft_putstr_fd(arg, 2);
-	ft_putstr_fd(": numeric argument required\n", 2);
-	msh->return_code = 2;
+	if (msh && msh->exit)
+	{
+		msh->return_code = 2;
+		msh->exit->tests_ok = FALSE;
+	}
 }
 
-t_bool	is_diff_than_sign_or_num(char c)
+//assigne msh->return_code au passage
+void	arg_full_of_spaces(t_msh *msh, char *arg)
 {
-	if (ft_isdigit(c) || c == '+' || c == '-')
-		return (FALSE);
-	return (TRUE);
-}
-
-t_bool	contains_non_sign_or_num_chr(char *stripped_arg)
-{
-	int	len_stripped_arg;
 	int	i;
-
-	len_stripped_arg = ft_strlen(stripped_arg);
+	
 	i = -1;
-	while (++i < len_stripped_arg)
+	while (arg[++i])
 	{
-		if (is_diff_than_sign_or_num(stripped_arg[i]))
-			return (TRUE);
+		if (arg[i] != ' ')
+			return ;
 	}
-	return (FALSE);
+	non_numeric_arg_assignation(msh);
 }
 
-t_bool	more_than_one_sign(char *stripped_arg)
+//assigne msh->return_code au passage
+void	length_zero(t_msh *msh, char *arg)
 {
-	int	count_signs;
-	int	len_stripped_arg;
-	int	i;
+	if (!ft_strlen(arg))
+		non_numeric_arg_assignation(msh);
+}
 
-	count_signs = 0;
-	len_stripped_arg = ft_strlen(stripped_arg);
-	i = -1;
-	while (++i < len_stripped_arg && count_signs <= 1)
+//assigne msh->return_code au passage
+//assigne aussi msh->exit->ready
+void	lenght_one_digit(t_msh *msh, char *arg)
+{
+	if (ft_strlen(arg) == 1 && ft_isdigit(arg[0]))
 	{
-		if (stripped_arg[i] == '+' || stripped_arg[i] == '-')
-			count_signs++;
+		msh->return_code = (int)(arg[0] - 48);
+		msh->exit->ready = TRUE;
 	}
-	if (count_signs > 1)
-		return (TRUE);
-	return (FALSE);
+	else if (ft_strlen(arg) == 1)
+		non_numeric_arg_assignation(msh);
 }
 
-t_bool	only_one_sign_at_start(char *stripped_arg)
+//assigne msh->return_code au passage
+void easy_tests(t_msh *msh, char *arg)
 {
-	if (ft_strlen(stripped_arg) == 1
-		&& (stripped_arg[0] == '+' || stripped_arg[0] == '-'))
-		return (TRUE);
-	return (FALSE);
+	if (msh->exit->tests_ok)
+		arg_full_of_spaces(msh, arg);
+	if (msh->exit->tests_ok)
+		length_zero(msh, arg);
+	if (msh->exit->tests_ok)
+		lenght_one_digit(msh, arg);
 }
-
-
-t_bool	sign_in_the_middle(char *stripped_arg)
-{
-	int len_stripped_arg;
-	int	i;
-
-	len_stripped_arg = ft_strlen(stripped_arg);
-	i = -1;
-	while (++i < len_stripped_arg)
-	{
-		if (!i)
-			continue ;
-		if (stripped_arg[i] == '+' || stripped_arg[i] == '-')
-			return (TRUE);
-	}
-	return (FALSE);
-}
-
-t_bool	twenty_numbers_without_sign(char *stripped_arg)
-{
-	int	len_stripped_arg;
-	int	i;
-	int	count_signs;
-
-	len_stripped_arg = ft_strlen(stripped_arg);
-	i = -1;
-	count_signs = 0;
-	while (++i < len_stripped_arg)
-	{
-		if (stripped_arg[i] == '+' || stripped_arg[i] == '-')
-			count_signs++;
-	}
-	if (len_stripped_arg == 20 && !count_signs)
-		return (TRUE);
-	return (FALSE);
-}
-
-t_bool	anomaly_in_arg(char *stripped_arg)
-{
-	return (contains_non_sign_or_num_chr(stripped_arg)
-		|| more_than_one_sign(stripped_arg)
-		|| only_one_sign_at_start(stripped_arg)
-		|| sign_in_the_middle(stripped_arg));
-}
-
-int	get_sign(char *arg)
-{
-	if (arg[0] == '-')
-		return (-1);
-	return (1);
-}
-
-//9223372036854775807
-long long	modulo_for_neg(long long n)
-{
-	while (n < 0)
-	{
-		n += 256;
-		if (n == 256)
-			return (0);
-		
-		dprintf(2, "modulo_for_neg : fin itération ; n = %lld\n", n);
-		sleep(1);
-		
-	}
-	return (n);
-}
-
-int	normal_cases_exit_atoi(t_msh *msh, char *arg)
-{
-	int			len_arg;
-	int			i;
-	long long	ret;
-
-	len_arg = ft_strlen(arg);
-	i = -1;
-	ret = 0;
-	while (++i < len_arg)
-	{
-		ret *= 10;
-		if (!i && (arg[i] == '+' || arg[i] == '-'))
-			continue ;
-		ret += arg[i] - 48;
-		if (ret < 0 || (i < len_arg && ret >= 922337203685477580
-			&& arg[i + 1] >= '7'))
-		{
-			num_arg_required_errmsg(msh, arg);
-			free_msh(msh);
-			free_chars(&arg);
-			exit(2);
-		}
-		dprintf(2, "normal_cases_exit_atoi(while) ; ret = %lld\n", ret);
-	}
-	if (ret < 0)
-	{
-		dprintf(2, "normal_cases_exit_atoi ; après le while ; ret = %lld\n", ret);
-		while (ret < 0)
-			ret -= 256;		
-	}
-	if (ret < 0)
-		ret = modulo_for_neg(ret);
-	ret *= get_sign(arg);
-	//dprintf(2, "normal_cases_exit_atoi ; return imminent ; ret = %lld\n", ret);
-	return ((int)(ret % 256));
-}
-
-// à ce stade, il n'y a pas plus d'un signe, et s'il y en a un, il est au début d'arg
-/*
-int	exit_atoi(t_msh *msh, char *arg)
-{
-	if (arg_stripped[0] == '0')
-	{
-		arg_first_zeros_stripped = strip_firsts_zeros(arg_stripped);
-		free_chars(&arg_stripped);
-		return (arg_first_zeros_stripped);
-	}
-	// une fois le zero_stripped construit, on vérifie la longueur de 20
-	if (ft_strcmp(arg, "0") || ft_strcmp(arg, "+0") || ft_strcmp(arg, "-0")
-		|| ft_strcmp(arg, "-9223372036854775808"))
-		return (0);
-	if (ft_strcmp(arg, "9223372036854775807"))
-		return (255);
-	if (ft_strcmp(arg, "-9223372036854775807"))
-		return (1);
-	return (normal_cases_exit_atoi(msh, arg));
-}
-*/
 
 int	index_last_nschr(char *arg)
 {
@@ -223,26 +92,7 @@ int	get_size_arg_stripped(char *arg)
 	return (index_last_nschr(arg) - index_first_nschr(arg) + 1);
 }
 
-int	get_index_first_non_zero_chr(char *arg)
-{
-	int	i;
-
-	i = -1;
-	while (arg[++i] && arg[i] == '0')
-		;
-	return (i);
-}
-
-char	*strip_firsts_zeros(char *arg_stripped)
-{
-	int		index_first_non_zero_chr;
-	
-	index_first_non_zero_chr = get_index_first_non_zero_chr(arg_stripped);
-	return (ft_substr(arg_stripped,
-			index_first_non_zero_chr, ft_strlen(arg_stripped)));
-}
-
-char	*ft_strip(char *arg)
+char	*get_htss(char *arg)
 {
 	int		size_arg_stripped;
 	char	*arg_stripped;
@@ -255,48 +105,218 @@ char	*ft_strip(char *arg)
 	return (arg_stripped);
 }
 
-// renvoie un booléen en fonction de si l'argument a été validé ou pas 
-// assigne aussi msh->return_code
-// n'exit pas ; la fonction principale s'en charge avec le return_code assigné
-t_bool	valid_exit_arg(t_msh *msh, char *arg)
+t_bool	is_diff_than_sign_or_num(char c)
 {
-	char	*stripped_arg;
-	t_bool	ret;
-	
-	if (ft_strlen(arg) == 1 && ft_isdigit(arg[0]))
-	{
-		msh->return_code = arg[0] - 48;
-		return (TRUE);
-	}
-	stripped_arg = NULL;
-	stripped_arg = ft_strip(arg);
-	if (ft_strlen(stripped_arg) == 1 && ft_isdigit(stripped_arg[0]))
-	{
-		msh->return_code = (int)(stripped_arg[0] - 48);
-		ret = TRUE;
-	}
-	else if (anomaly_in_arg(stripped_arg))
-		ret = FALSE;
-	else
-	{
-		msh->return_code = exit_atoi(msh, stripped_arg);
-		ret = TRUE;
-	}
-	free_chars(&stripped_arg);
-	return (ret);
+	if (ft_isdigit(c) || c == '+' || c == '-')
+		return (FALSE);
+	return (TRUE);
 }
 
-t_bool	arg_full_of_spaces(char *arg)
+//assigne msh->return_code au passage
+void	contains_non_sign_or_num_chr(t_msh *msh)
+{
+	int		i;
+	char	*htss;
+
+	i = -1;
+	htss = msh->exit->ht_spaces_stripped;
+	while (htss[++i])
+	{
+		if (is_diff_than_sign_or_num(htss[i]))
+			non_numeric_arg_assignation(msh);
+	}
+}
+
+t_bool	is_a_sign(char c)
+{
+	return (c == '+' || c == '-');
+}
+
+int	nb_signs_in_str(char *str)
+{
+	int	nb_signs;
+	int	i;
+
+	nb_signs = 0;
+	i = - 1;
+	while (str[++i])
+	{
+		if (is_a_sign(str[i]))
+			nb_signs++;
+	}
+	return (nb_signs);
+}
+
+//assigne msh->return_code au passage
+void	more_than_one_sign(t_msh *msh)
+{
+	if (nb_signs_in_str(msh->exit->ht_spaces_stripped) > 1)
+		non_numeric_arg_assignation(msh);
+}
+
+//assigne msh->return_code au passage
+void	only_one_sign_at_start(t_msh *msh)
+{
+	char	*htss;
+
+	htss = msh->exit->ht_spaces_stripped;
+	if (ft_strlen(htss) >= 1 && nb_signs_in_str(htss) >= 1 
+		&& !is_a_sign(htss[0]))
+		non_numeric_arg_assignation(msh);
+}
+
+//assigne msh->return_code au passage
+void	ht_spaces_stripped_parsing(t_msh *msh, char *arg)
+{
+	msh->exit->ht_spaces_stripped = get_htss(arg);
+	if (msh->exit->tests_ok)
+		contains_non_sign_or_num_chr(msh);
+	if (msh->exit->tests_ok)
+		more_than_one_sign(msh);
+	if (msh->exit->tests_ok)
+		only_one_sign_at_start(msh);
+}
+
+//assigne msh->return_code au passage
+//assigne aussi msh->exit->ready
+void	full_of_zeros(t_msh *msh)
+{
+	char	*htss;
+	int		i;
+	
+	htss = msh->exit->ht_spaces_stripped;
+	i = -1;
+	while (htss[++i])
+	{
+		if (!i && is_a_sign(htss[i]))
+			continue ;
+		if (htss[i] != '0')
+			break ;
+	}
+	if (!(htss[i]))
+	{
+		msh->exit->ready = TRUE;
+		msh->return_code = 0;
+	}
+}
+
+int	get_index_first_non_zero_chr(char *arg)
 {
 	int	i;
-	
+
 	i = -1;
-	while (arg[++i])
+	while (arg[++i] && arg[i] == '0')
+		;
+	return (i);
+}
+
+char	*get_front_zeros_stripped(t_msh *msh)
+{
+	char	*htss;
+	int		index_first_non_zero_chr;
+	
+	htss = msh->exit->ht_spaces_stripped;
+	index_first_non_zero_chr = get_index_first_non_zero_chr(htss);
+	return (ft_substr(htss,
+			index_first_non_zero_chr, msh->exit->len_htss));
+}
+
+//assigne msh->return_code au passage
+void	check_len_fzs(t_msh *msh)
+{
+	char	*fzs;
+	int		nb_signs;
+
+	fzs = msh->exit->front_zeros_stripped;
+	nb_signs = nb_signs_in_str(fzs);
+	if ((nb_signs && msh->exit->len_fzs > 20)
+		|| (!nb_signs && msh->exit->len_fzs > 19))
+		non_numeric_arg_assignation(msh);
+}
+
+//assigne msh->return_code au passage
+void	front_zeros_stripped_parsing(t_msh *msh)
+{
+	if (msh->exit->tests_ok)
+		full_of_zeros(msh);
+	if (msh->exit->tests_ok && !(msh->exit->ready))
 	{
-		if (arg[i] != ' ')
-			return (FALSE);
+		msh->exit->front_zeros_stripped = get_front_zeros_stripped(msh);
+		msh->exit->len_fzs = ft_strlen(msh->exit->front_zeros_stripped);
 	}
-	return (TRUE);
+	if (msh->exit->tests_ok && !(msh->exit->ready))
+		check_len_fzs(msh);
+}
+
+//assigne msh->return_code au passage
+//assigne aussi msh->exit->ready
+void	limits_single_shortcuts(t_msh *msh)
+{
+	if (ft_strcmp(msh->exit->front_zeros_stripped, "-9223372036854775808"))
+	{
+		msh->return_code =  0;
+		msh->exit->ready = TRUE;
+	}
+	else if (ft_strcmp(msh->exit->front_zeros_stripped,
+			"-9223372036854775807"))
+	{
+		msh->return_code =  1;
+		msh->exit->ready = TRUE;
+	}
+	else if (ft_strcmp(msh->exit->front_zeros_stripped,
+			"9223372036854775807"))
+	{
+		msh->return_code =  255;
+		msh->exit->ready = TRUE;
+	}
+}
+
+int	get_sign(char *arg)
+{
+	if (arg[0] == '-')
+		return (-1);
+	return (1);
+}
+/*
+
+//9223372036854775807
+long long	modulo_for_neg(long long n)
+{
+	while (n < 0)
+	{
+		n += 256;
+		if (n == 256)
+			return (0);
+		
+		dprintf(2, "modulo_for_neg : fin itération ; n = %lld\n", n);
+		sleep(1);
+		
+	}
+	return (n);
+}
+*/
+
+void	normal_cases_exit_atoi(t_msh *msh)
+{
+	int			i;
+	long long	ret;
+	char		*fzs;
+
+	i = -1;
+	ret = 0;
+	fzs = msh->exit->front_zeros_stripped;
+	while (fzs[++i] && msh->exit->tests_ok)
+	{
+		ret *= 10;
+		if (!i && is_a_sign(fzs[i]))
+			continue ;
+		ret += fzs[i] - 48;
+		if (ret < 0 || (i < msh->exit->len_fzs && ret >= 922337203685477580
+			&& fzs[i + 1] > '7'))
+			non_numeric_arg_assignation(msh);
+	}
+	ret *= get_sign(fzs);
+	msh->return_code = (int)(ret % 256);
 }
 
 // renvoie un booléen en fonction de si l'argument a été validé ou pas 
@@ -304,9 +324,18 @@ t_bool	arg_full_of_spaces(char *arg)
 // n'exit pas ; la fonction principale s'en charge avec le return_code assigné
 t_bool	parsing_arg(t_msh *msh, char *arg)
 {
-	if (!ft_strlen(arg) || arg_full_of_spaces(arg))
-		return (FALSE);
-	return (valid_exit_arg(msh, arg));
+	easy_tests(msh, arg);
+	if (msh->exit->tests_ok && !(msh->exit->ready))
+		ht_spaces_stripped_parsing(msh, arg);
+	if (msh->exit->tests_ok && !(msh->exit->ready))
+		front_zeros_stripped_parsing(msh);
+	if (msh->exit->tests_ok && !(msh->exit->ready))
+		limits_single_shortcuts(msh);
+
+	if (msh->exit->tests_ok && !(msh->exit->ready))
+		normal_cases_exit_atoi(msh);
+
+	return (msh->exit->tests_ok);
 }
 
 static void	too_many_args_errmsg(t_msh *msh)
@@ -323,10 +352,18 @@ t_exit	*new_exit_struct(void)
 	new = (t_exit *)malloc(sizeof(t_exit));
 	if (!new)
 		return (NULL);
+	new->ready = FALSE;
+	new->tests_ok = TRUE;
 	new->ht_spaces_stripped = NULL;
 	new->front_zeros_stripped = NULL;
-	new->tests_ok = TRUE;
 	return (new);
+}
+
+void	num_arg_required_errmsg(char *arg)
+{
+	ft_putstr_fd("minishell: exit: ", 2);
+	ft_putstr_fd(arg, 2);
+	ft_putstr_fd(": numeric argument required\n", 2);
 }
 
 void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node)
@@ -341,14 +378,14 @@ void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node)
 		else if (exec_list_node->nb_words == 2)
 		{
 			if (!parsing_arg(msh, exec_list_node->args_array[1]))
-				num_arg_required_errmsg(msh, exec_list_node->args_array[1]);
+				num_arg_required_errmsg(exec_list_node->args_array[1]);
 		}
 		else if (exec_list_node->nb_words > 2)
 		{
 			if (parsing_arg(msh, exec_list_node->args_array[1]))
 				too_many_args_errmsg(msh);
 			else
-				num_arg_required_errmsg(msh, exec_list_node->args_array[1]);
+				num_arg_required_errmsg(exec_list_node->args_array[1]);
 		}
 		return_code = msh->return_code;
 		free_msh(msh);
@@ -410,6 +447,7 @@ void HT_SPACES_STRIPPED_PARSING(msh, arg)
 			(cond_tests_ok)s'il y a plus d'un signe
 			(cond_tests_ok)s'il n'y a qu'un seul signe, il doit être au début
 
+
 //assigne msh->return_code au passage
 void FRONT_ZEROS_STRIPPED_PARSING(msh)
 	si msh->exit->tests_ok	
@@ -417,8 +455,11 @@ void FRONT_ZEROS_STRIPPED_PARSING(msh)
 			(avec éventuellement un signe au début)
 		(malloc dans msh->front_zeros_stripped) : On strip les éventuels zéros 
 			entre le signe et le premier chiffre non nul			
-		(cond_tests_ok) on vérifie si msh->front_zeros_stripped a une 
-			longueur inférieure ou égale à 20
+		(cond_tests_ok)
+			avec signe
+				longueur inférieure ou égale à 20
+			sans signe
+				longueur inférieure ou égale à 19
 
 //assigne msh->return_code au passage
 t_bool LIMITS_SINGLE_SHORTCUTS(msh)
@@ -441,6 +482,8 @@ t_bool LIMITS_SINGLE_SHORTCUTS(msh)
 	return (FALSE);
 
 //assigne msh->return_code au passage
+
+
 void	NORMAL_CASES_EXIT_ATOI(msh)
 {
 	int			i;
@@ -462,12 +505,10 @@ void	NORMAL_CASES_EXIT_ATOI(msh)
 			msh->return_code = 2;
 			return ;
 		}
-		dprintf(2, "normal_cases_exit_atoi(while) ; ret = %lld\n", ret);
 	}
 	if (ret < 0)
 		ret = modulo_for_neg(ret);
 	ret *= get_sign(arg);
-	//dprintf(2, "normal_cases_exit_atoi ; return imminent ; ret = %lld\n", ret);
 	return ((int)(ret % 256));
 }
 

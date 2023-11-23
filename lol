@@ -1,0 +1,17 @@
+builtins
+dollar.txt
+exec
+expander
+for_dev
+from_Nico_to_Amel.txt
+include
+lexer
+lol
+main.c
+main.o
+Makefile
+minishell
+museum.txt
+parser
+README.md
+utils

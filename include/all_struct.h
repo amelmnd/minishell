@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/22 20:40:55 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/22 23:22:56 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,11 +165,12 @@ enum	e_program_status
 
 struct s_exit
 {
-	t_bool			tests_ok;
-	char			*ht_spaces_stripped;
-	int				len_htss;
-	char			*front_zeros_stripped;
-	int				len_fzs;
+	t_bool	ready;
+	t_bool	tests_ok;
+	char	*ht_spaces_stripped;
+	int		len_htss;
+	char	*front_zeros_stripped;
+	int		len_fzs;
 };
 
 
