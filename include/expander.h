@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:39:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 21:33:48 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/23 16:21:57 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 void			expander(t_msh *msh);
 
 // LIST
-int				expander_list_is_empty(t_exp_list *list);
 void			expander_first_node(t_exp_list *node);
+int				expander_list_is_empty(t_exp_list *list);
 void			expander_push_new_node(t_msh *msh, t_exp_list	*new_node);
 void			expander_push(t_msh *msh, char *str, t_exp_type type);
 
 // FN
-void			dq_var_exist(t_msh *msh, t_lexer_list *tmp);
+void			all_in_str(char **str, char *str_value);
 void			check_var_value(t_msh *msh);
 void			create_expander_list(t_msh *msh);
+void			db_quote_var_trans(t_msh *msh, t_lexer_list *tmp, char **str, int *not_exist_var);
+void			dq_var_exist(t_msh *msh, t_lexer_list *tmp);
 char			*ft_join_word(char *s1, char *s2);
 char			*ft_one_word(char *s1);
 t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp);
-void			all_in_str(char **str, char *str_value);
-void			db_quote_var_trans(t_msh *msh, t_lexer_list *tmp, char **str, int *not_exist_var);
 void			is_return_value(t_lexer_list *tmp, char **str, int *not_exist_var);
 
 
