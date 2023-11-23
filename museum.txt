@@ -606,3 +606,4 @@ void	retrieve_env_in_env_list(t_msh *msh, char *envp[])
 	}
 }
 */
+
