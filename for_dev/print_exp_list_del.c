@@ -39,7 +39,6 @@ void	print_exp_list(t_msh *msh)
 	}
 	dprintf(2, "===== print_explist : Sortie =====\n");
 }
-*/
 
 void	print_exp_type_one_line(int exp_type)
 {

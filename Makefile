@@ -3,7 +3,7 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
+#    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
 #    Updated: 2023/11/23 12:47:07 by nstoutze         ###   ########.fr        #
@@ -55,6 +55,7 @@ SRCS_EXP = expander.c \
 		   create_expander_list.c \
 		   ft_join_words.c \
 		   var_transform.c \
+		   expander_fn.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
@@ -155,7 +156,6 @@ SRCS_DEV = dev_color.c \
 		   print_exec_list_del.c \
 		   print_exp_list_del.c \
 		   print_ntcharss_del.c \
-
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
