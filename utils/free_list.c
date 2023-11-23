@@ -6,13 +6,11 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 18:27:51 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:52:09 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//TODO add here other free list inside msh
 
 void	free_lexer_list(t_msh *msh)
 {

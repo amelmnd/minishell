@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/22 23:22:56 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:31:55 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ struct s_exit
 	char	*front_zeros_stripped;
 	int		len_fzs;
 };
-
 
 struct s_msh
 {

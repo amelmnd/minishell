@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:01:33 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:31:31 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ int			get_size_env_list(t_msh *msh);
 int			is_chr_in_str(char *s, char c);
 void		free_chars(char **dust);
 
-void	free_lexer_list(t_msh *msh);
-void	free_exp_list(t_msh *msh);
-void	free_exec_list(t_msh *msh);
-void	free_exec(t_msh *msh);
-void	free_msh(t_msh *msh);
-void	free_exit(t_msh *msh);
+void		free_lexer_list(t_msh *msh);
+void		free_exp_list(t_msh *msh);
+void		free_exec_list(t_msh *msh);
+void		free_exec(t_msh *msh);
+void		free_msh(t_msh *msh);
+void		free_exit(t_msh *msh);
 
-void	errmsg_free_exit(t_msh *msh, char *msg);
+void		errmsg_free_exit(t_msh *msh, char *msg);
+
+int			get_size_ntcharss(char **ntcharss);
+char		**ntcharss_copy(char **ntcharss_to_copy);
 
 #endif

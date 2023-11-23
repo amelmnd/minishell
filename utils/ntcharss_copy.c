@@ -1,40 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_msh.c                                          :+:      :+:    :+:   */
+/*   ntcharss_copy.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/08 19:20:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 12:38:49 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 12:22:01 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 12:22:10 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	init_msh(t_msh *msh)
+char	**ntcharss_copy(char **ntcharss_to_copy)
 {
-	msh->return_code = 0;
-	msh->env_list = NULL;
-	msh->msh_env = NULL;
-	msh->user = NULL;
-	msh->prompt = NULL;
-	msh->lexer_list = NULL;
-	msh->exp_current_type = INIT_VALUE_EXP_CURRENT_TYPE;
-	msh->exp_list = NULL;
-	msh->exec_list = NULL;
-	msh->exec = NULL;
-	msh->exit = NULL;
-}
+	char	**copy;
+	int		len_to_copy;
 
-t_msh	*new_msh(void)
-{
-	t_msh	*new;
-
-	new = NULL;
-	new = (t_msh *)malloc(sizeof(t_msh));
-	if (!new)
+	if (!ntcharss_to_copy)
 		return (NULL);
-	init_msh(new);
-	return (new);
+	len_to_copy = get_size_ntcharss(ntcharss_to_copy);
+	copy = (char **)malloc(sizeof(char *) * (len_to_copy + 1));
+	if (!copy)
+		return (NULL);
+	len_to_copy = -1;
+	while (ntcharss_to_copy[++len_to_copy])
+		copy[len_to_copy] = ft_strdup(ntcharss_to_copy[len_to_copy]);
+	copy[len_to_copy] = NULL;
+	return (copy);
 }

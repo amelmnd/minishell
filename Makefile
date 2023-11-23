@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/23 10:42:39 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/23 12:47:07 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,11 +50,6 @@ SRCS_PARS = parser.c \
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
 SRCS_EXP = expander.c \
-		   exp_list_generator_del.c \
-		   print_exp_list_del.c \
-		   gen_random_str_del.c \
-		   exp_list_node_management_del.c \
-		   feed_msh_acavenvp_del.c \
 		   check_var_value.c \
 		   expander_list_manage.c \
 		   create_expander_list.c \
@@ -77,6 +72,7 @@ SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 			execution/do_all_redirections.c \
 			execution/do_redir.c \
 			execution/exec.c \
+			execution/get_paths_from_path.c \
 			execution/new_exec.c \
 			execution/pid_t_array.c \
 			here_doc/feed_append_new_hd_node.c \
@@ -137,6 +133,8 @@ SRCS_UTILS = utils.c \
 			 ft_execve.c \
 			 free_msh.c \
 			 errmsg_free_exit.c \
+			 get_size_ntcharss.c \
+			 ntcharss_copy.c \
 			 free_ints.c \
 			 build_user_for_prompt.c \
 			 new_msh.c \
@@ -144,7 +142,6 @@ SRCS_UTILS = utils.c \
 			 fn_env.c \
 			 fn_env_list.c \
 			 adapt_libft.c \
-			 print_charss_del.c \
 			 free_ntcharss.c \
 
 # TODO DELETE
@@ -156,6 +153,9 @@ SRCS_DEV = dev_color.c \
 		   dev_print_env_list.c\
 		   dev_print_pid_t_array.c \
 		   print_exec_list_del.c \
+		   print_exp_list_del.c \
+		   print_ntcharss_del.c \
+
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
