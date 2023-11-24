@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 17:47:47 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 14:21:10 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:06:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ t_bool	is_a_valid_identifier(char *var_name);
 void	update_variable(t_msh *msh, char *var_name, char *arg);
 
 //unset
+t_bool	exists_in_mshenv(t_msh *msh, char *var_name);
 void	remove_from_env_list(t_msh *msh, char *var_name);
 void	unset_builtin(t_msh *msh, t_exec_list *exec_list_node);
 

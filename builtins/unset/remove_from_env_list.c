@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 13:30:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 13:34:01 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:49:37 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ static void	remove_in_the_middle(t_msh *msh, char *var_name)
 				current = previous;
 				previous->next = next;
 				next->previous = previous;
+				return ;
 			}
 			current = current->next;
 		}

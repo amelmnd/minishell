@@ -6,13 +6,13 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:29:02 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 13:32:31 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:06:36 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	exists_in_mshenv(t_msh *msh, char *var_name)
+t_bool	exists_in_mshenv(t_msh *msh, char *var_name)
 {
 	t_bool		ret;
 	t_env_list	*env_list;

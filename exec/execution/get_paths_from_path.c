@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:23:40 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 12:23:41 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:09:26 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,18 @@ static void	get_path_from_mshenv(t_msh *msh)
 
 void	get_paths_from_path(t_msh *msh)
 {
-	get_path_from_mshenv(msh);
-	if (msh->exec->path_from_mshenv)
-		msh->exec->paths_from_path = ft_split(msh->exec->path_from_mshenv,
-			':');
-	append_slash_to_paths(msh);
+	if (msh && msh->exec)
+	{
+		if (exists_in_mshenv(msh, "PATH"))
+		{
+			msh->exec->path_defined = TRUE;
+			get_path_from_mshenv(msh);
+			if (msh->exec->path_from_mshenv)
+				msh->exec->paths_from_path = ft_split(msh->exec->path_from_mshenv,
+					':');
+			append_slash_to_paths(msh);
+		}
+		else
+			msh->exec->path_defined = FALSE;
+	}
 }
