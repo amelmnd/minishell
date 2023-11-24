@@ -6,13 +6,14 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 23:08:47 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 08:13:22 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 t_bool var_exist(t_msh *msh, char *var_name)
 {
+	// on peut déplacer cette fonction ailleurs ?
 	t_env_list	*tmp;
 
 	tmp = msh->env_list;
@@ -73,7 +74,7 @@ void	generate_prompt(char *envp[])
 		}
 		clean_msh_list(msh);
 	}
-	clear_history ();
+	clear_history();
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -84,13 +85,4 @@ int	main(int argc, char *argv[], char *envp[])
 	else
 		show_no_args_for_minishell_error_msg();
 	return (0);
-	/*
-	(void)argc;
-	(void)argv;
-	(void)envp;
-	if (!access("/home/spardaspirit", X_OK))
-		printf("1\n");
-	else
-		printf("2\n");
-	*/
 }

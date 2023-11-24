@@ -6,138 +6,19 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 23:58:39 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 07:44:17 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//ménage à faire ici
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// ménage à finir ici ?
+// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-void	free_lexer_list(t_msh *msh)
-{
-	t_lexer_list	*current;
-	t_lexer_list	*next;
 
-	if (msh->lexer_list)
-	{
-		current = msh->lexer_list;
-		while (current != NULL)
-		{
-			next = current->next;
-			free_chars(&(current->str));
-			// free_chars(&(current->var_name));
-			// free_chars(&(current->var_value));
-			free(current);
-			current = next;
-		}
-		msh->lexer_list = NULL;
-	}
-}
-
-void	free_exp_list(t_msh *msh)
-{
-	t_exp_list	*current;
-	t_exp_list	*next;
-
-	if (msh->exp_list)
-	{
-		current = msh->exp_list;
-		while (current != NULL)
-		{
-			next = current->next;
-			//free_chars(&(current->str));
-			free(current);
-			current = next;
-		}
-		msh->exp_list = NULL;
-		msh->exp_current_type = 0;
-	}
-}
-
-void	free_exec(t_msh *msh)
-{
-	if (msh && msh->exec)
-	{
-		free_chars(&(msh->exec->path_from_mshenv));
-		free_ntcharss(&(msh->exec->paths_from_path));
-		free_chars(&(msh->exec->cmd_path_ready));
-		free_ints(&(msh->exec->pid_t_array));
-		free(msh->exec->s_path_stat);
-		free(msh->exec);
-		msh->exec = NULL;
-	}
-}
-
-void	free_redir_array(t_exec_list *exec_list_node)
-{
-	int	i;
-
-	i = -1;
-	if (exec_list_node->redir_array)
-	{
-		while (++i < exec_list_node->nb_redirects)
-			free_chars(&(exec_list_node->redir_array->str));
-		free(exec_list_node->redir_array);
-		exec_list_node->redir_array = NULL;
-	}
-}
-
-void	free_hd(t_exec_list *exec_list_node)
-{
-	t_hd	*current;
-	t_hd	*next;
-
-	if (exec_list_node->hd)
-	{
-		current = exec_list_node->hd;
-		while (current)
-		{
-			next = current->next;
-			free_chars(&(current->str));
-			current = next;
-		}
-	}
-}
-
-void	free_exec_list(t_msh *msh)
-{
-	t_exec_list	*current;
-	t_exec_list	*next;
-
-	if (msh && msh->exec_list)
-	{
-		current = msh->exec_list;
-		while (current)
-		{
-			next = current->next;
-			free_redir_array(current);
-			free_chars(&(current->cmd));
-			free_ntcharss(&(current->args_array));
-			free_hd(current);
-			free(current);
-			current = next;
-		}
-		msh->exec_list = NULL;
-	}
-}
-
-void	free_exit(t_msh *msh)
-{
-	if (msh && msh->exit)
-	{
-		free_chars(&(msh->exit->ht_spaces_stripped));
-		free_chars(&(msh->exit->front_zeros_stripped));
-		free(msh->exit);
-		msh->exit = NULL;
-	}
-}
-
-// clean entre deux itérations de generate_prompt (donc msh et msh->msh_env ne sont pas free ici)
-// msh, msh->msh_env et msh->env_list doivent être free lors d'une sortie du programme
-//via un signal
+// clean between two generate_prompt's iterations 
+// (thus, msh and msh->msh_env are not freed here)
 void	clean_msh_list(t_msh *msh)
 {
 	free_lexer_list(msh);
