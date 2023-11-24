@@ -3,23 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   get_hd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 15:20:58 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 11:46:24 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	child_part(t_exec_list *exec_list_node, int i)
+static void	child_part(t_msh *msh, t_exec_list *exec_list_node, int i)
 {
 	char	*line;
 
 	close(exec_list_node->hd_get_pipe[READ]);
 	while (42)
 	{
+		msh->program_status = HEREDOC_STATUS;
+		ft_signal(msh);
 		line = readline("> ");
+		msh->program_status = EXECUTION_STATUS;
 		if (line == NULL)
 		{
 			close(exec_list_node->hd_get_pipe[WRITE]);
@@ -70,12 +73,18 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 	{
 		if (pipe(exec_list_node->hd_get_pipe) < 0)
 			errmsg_free_exit(msh, "pipe");
+
 		exec_list_node->hd_get_child = fork();
 		if (exec_list_node->hd_get_child < 0)
 			errmsg_free_exit(msh, "fork");
 		if (!(exec_list_node->hd_get_child))
-			child_part(exec_list_node, i);
-		else
+			child_part(msh, exec_list_node, i);
+		else if ((exec_list_node->hd_get_child) > 0)
+		{
+			signal(SIGQUIT, SIG_IGN);
 			parent_part(msh, exec_list_node);
+			signal(SIGQUIT, SIG_DFL);
+		}
+
 	}
 }

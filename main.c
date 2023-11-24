@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 08:13:22 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 09:59:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,14 @@ void	generate_prompt(char *envp[])
 		dprintf(2, "generate_prompt ; début itération ; msh->return_code = %d\n", msh->return_code);
 		generate_msh_env(msh);
 		msh->program_status = INTERACTIVE_STATUS;
+		ft_signal(msh);
 		prompt = readline(msh->user);
+		if (prompt == NULL && msh->program_status == INTERACTIVE_STATUS)
+		{
+			kill(0, SIGKILL); //kill tout y compris la VM
+		}
 		msh->program_status = EXECUTION_STATUS;
+		ft_signal(msh);
 		//lexer_check(msh, msh->prompt);
 		lexer_check(msh, prompt);
 		free_chars(&prompt);
