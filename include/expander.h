@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:39:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 16:21:57 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:29:48 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void			expander_push(t_msh *msh, char *str, t_exp_type type);
 void			all_in_str(char **str, char *str_value);
 void			check_var_value(t_msh *msh);
 void			create_expander_list(t_msh *msh);
-void			db_quote_var_trans(t_msh *msh, t_lexer_list *tmp, char **str, int *not_exist_var);
+void			db_quote_var_trans(t_msh *msh, t_lexer_list *tmp, char **str,
+					int *not_exist_var);
 void			dq_var_exist(t_msh *msh, t_lexer_list *tmp);
 char			*ft_join_word(char *s1, char *s2);
 char			*ft_one_word(char *s1);
 t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp);
-void			is_return_value(t_lexer_list *tmp, char **str, int *not_exist_var);
-
+void			is_return_value(t_lexer_list *tmp, char **str,
+					int *not_exist_var);
 
 #endif

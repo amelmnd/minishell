@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 09:57:20 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:31:19 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void		reset_counts(int *x, int *y);
 void		exit_new_line(t_msh *msh);
 
 // signal
-void	ft_signal(t_msh *msh);
+void		ft_signal(t_msh *msh);
 
 #endif
