@@ -6,7 +6,7 @@
 #    By: amennad <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/22 11:54:38 by amennad          ###   ########.fr        #
+#    Updated: 2023/11/24 09:47:42 by amennad          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,30 +32,30 @@ DCFLAGS_FSA = $(CFLAGS) -g3 -fsanitize=address
 
 PATH_LEX = $(addprefix $(DIR_LEX), $(SRCS_LEX))
 DIR_LEX = lexer/
-SRCS_LEX =	lexer.c \
-			lexer_list_manage.c \
-			create_lexer_list.c \
-			is_bracket.c \
-			is_other_operator.c \
-			is_quote.c \
-			is_dollar.c \
-			is_word.c \
+SRCS_LEX = create_lexer_list.c \
+		   is_bracket.c \
+		   is_dollar.c \
+		   is_other_operator.c \
+		   is_quote.c \
+		   is_word.c \
+		   lexer.c \
+		   lexer_list_manage.c \
 
 PATH_PARS = $(addprefix $(DIR_PARS), $(SRCS_PARS))
 DIR_PARS = parser/
-SRCS_PARS = parser.c \
+SRCS_PARS = check_valide_next.c \
 			limit_is_valid.c \
-			check_valide_next.c \
+			parser.c \
 
 PATH_EXP = $(addprefix $(DIR_EXP), $(SRCS_EXP))
 DIR_EXP = expander/
-SRCS_EXP = expander.c \
-		   check_var_value.c \
-		   expander_list_manage.c \
+SRCS_EXP = check_var_value.c \
 		   create_expander_list.c \
+		   expander.c \
+		   expander_fn.c \
+		   expander_list_manage.c \
 		   ft_join_words.c \
 		   var_transform.c \
-		   expander_fn.c \
 
 PATH_EXEC = $(addprefix $(DIR_EXEC), $(SRCS_EXEC))
 DIR_EXEC = exec/
@@ -69,10 +69,13 @@ SRCS_EXEC = build_exec_list/assign_pos_ppl_exec_list.c \
 			build_exec_list/get_nb_pipes_in_exp_list.c \
 			build_exec_list/malloc_exec_list_node_arrays.c \
 			build_exec_list/scan_redirects.c \
+			execution/builtin_way.c \
 			execution/check_cmd_path_n_exec.c \
 			execution/do_all_redirections.c \
 			execution/do_redir.c \
 			execution/exec.c \
+			execution/ft_execve.c \
+			execution/get_paths_from_path.c \
 			execution/new_exec.c \
 			execution/pid_t_array.c \
 			here_doc/feed_append_new_hd_node.c \
@@ -99,40 +102,53 @@ SRCS_BUIL = cd/cd_builtin.c \
 			export/export_get_var_value.c \
 			export/add_var_to_env_list.c \
 			export/export_with_args.c \
+			exit/contains_non_sign_or_num_chr.c \
+			exit/easy_tests.c \
+			exit/exit_builtin.c \
+			exit/front_zeros_stripped_parsing.c \
+			exit/get_htss.c \
+			exit/ht_spaces_stripped_parsing.c \
+			exit/limits_single_shortcuts.c \
+			exit/more_than_one_sign.c \
+			exit/non_numeric_arg_assignation.c \
+			exit/normal_cases_exit_atoi.c \
 			unset/unset_builtin.c \
 			unset/remove_from_env_list.c \
-			builtins.c \
 			echo_builtin.c \
 			env_builtin.c \
-			exit_builtin.c \
 			pwd_builtin.c \
 
 PATH_UTILS = $(addprefix $(DIR_UTILS), $(SRCS_UTILS))
 DIR_UTILS = utils/
-SRCS_UTILS = utils.c \
-			 malloc_full_null_charss.c \
-			 generate_msh_env.c \
-			 show_no_args_for_minishell_error_msg.c \
-			 reset_counts.c \
-			 get_next_line.c \
-			 is_chr_in_str.c \
-			 get_next_line_utils.c \
-			 ft_strcmp.c \
-			 get_size_env_list.c \
-			 free_chars.c \
+SRCS_UTILS = before_prompt_loop/build_user_for_prompt.c \
+			 before_prompt_loop/new_msh.c \
+			 before_prompt_loop/show_no_args_for_minishell_error_msg.c \
+			 environment_management/fn_env.c \
+			 environment_management/fn_env_list.c \
+			 environment_management/generate_msh_env.c \
+			 environment_management/get_size_env_list.c \
+			 environment_management/split_env_value.c \
+			 free/errmsg_free_exit.c \
+			 free/free_chars.c \
+			 free/free_exec.c \
+			 free/free_exec_list.c \
+			 free/free_exit.c \
+			 free/free_exp_list.c \
+			 free/free_ints.c \
+			 free/free_lexer_list.c \
+			 free/free_list.c \
+			 free/free_msh.c \
+			 free/free_ntcharss.c \
+			 generic/ft_msh_strchr.c \
+			 generic/ft_strcmp.c \
+			 generic/get_size_ntcharss.c \
+			 generic/is_chr_in_str.c \
+			 generic/malloc_full_null_charss.c \
+			 generic/ntcharss_copy.c \
+			 generic/reset_counts.c \
+			 exit_new_line.c \
 			 manage_error.c \
-			 ft_execve.c \
-			 free_msh.c \
-			 errmsg_free_exit.c \
-			 free_ints.c \
-			 build_user_for_prompt.c \
-			 new_msh.c \
-			 free_list.c \
-			 fn_env.c \
-			 fn_env_list.c \
-			 adapt_libft.c \
-			 print_charss_del.c \
-			 free_ntcharss.c \
+			 ft_signal.c \
 
 # TODO DELETE
 PATH_DEV = $(addprefix $(DIR_DEV), $(SRCS_DEV))
@@ -144,7 +160,7 @@ SRCS_DEV = dev_color.c \
 		   dev_print_pid_t_array.c \
 		   print_exec_list_del.c \
 		   print_exp_list_del.c \
-		feed_msh_acavenvp_del.c \
+		   print_ntcharss_del.c \
 
 SRCS = $(PATH_UTILS) $(PATH_LEX) $(PATH_PARS) $(PATH_EXP) $(PATH_EXEC) $(PATH_BUIL) $(PATH_DEV) $(ORIGIN)
 
