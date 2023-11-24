@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 18:35:44 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 18:54:04 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:11:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,5 +83,5 @@ int	is_dollar(t_msh *msh, char *prompt, int *i)
 	else if (!ft_isalpha(prompt[*i + 1]) && prompt[*i + 1] != 60
 		&& prompt[*i + 1] != 62 && prompt[*i + 1] != '|' && prompt[*i + 1])
 		var_name_not_isalpha(msh, prompt, i);
-	return (0);
+	return (msh->return_code);
 }
