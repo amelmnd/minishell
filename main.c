@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 18:26:06 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 22:04:51 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ void	generate_prompt(char *envp[])
 	build_user_for_prompt(msh);
 	while (msh)
 	{
-		dprintf(2, "generate_prompt ; début itération ; msh->return_code = %d\n", msh->return_code);
+		msh->stored_return_code = msh->return_code;
+		msh->return_code = 0;
+		dprintf(2, "generate_prompt ; début itération ; msh->stored_return_code = %d ; msh->return_code = %d\n", msh->stored_return_code, msh->return_code);
 		generate_msh_env(msh);
 		msh->program_status = INTERACTIVE_STATUS;
 		ft_signal(msh);
@@ -50,14 +52,14 @@ void	generate_prompt(char *envp[])
 		//lexer_check(msh, msh->prompt);
 		lexer_check(msh, prompt);
 		free_chars(&prompt);
-		if (msh->lexer_list)
+		if (!(msh->return_code) && msh->lexer_list)
 		{
 				// print_debug_lexer_list(msh->lexer_list, "main after lexer"); // à supprimer à terme
 			//print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
 			parser(msh);
 				// print_debug_lexer_list(msh->lexer_list, "main after parser"); // à supprimer à terme
 		}
-		if (msh->lexer_list)
+		if (!(msh->return_code) && msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell
 				// print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
@@ -72,9 +74,8 @@ void	generate_prompt(char *envp[])
 				exit_command_not_foud("");
 			}
 		}
-		if (msh->exp_list)
+		if (!(msh->return_code) && msh->lexer_list)
 		{
-
 			build_exec_list(msh);
 			execution(msh);
 		}
@@ -92,3 +93,31 @@ int	main(int argc, char *argv[], char *envp[])
 		show_no_args_for_minishell_error_msg();
 	return (0);
 }
+
+
+/*
+CONTEXTE DE CETTE REFLEXION :
+lexer, parser, expander, executor, conditionné à msh->return_code == 0
+
+au démarrage, avant la boucle
+msh->return_code = 0
+msh->stored_return_code = 0
+
+boucle :
+	msh->stored_return_code = msh->return_code;
+	msh->return_code = 0
+	prompt saisi :
+		si erreur au lexer/parser :
+			return_code = 2 (par exemple) => expander et executor ne sont pas atteints
+				retour au prompt
+		sinon (msh->return_code toujours à 0 donc):
+			expander atteint (pas d'erreur possible dans l'expander):
+				$? remplacé par msh->stored_return_code
+			executor atteint :
+				si erreur :
+					msh->return_code = 127 (par exemple)
+				sinon
+					msh->return_code laissé à 0
+				retour au prompt
+
+*/
