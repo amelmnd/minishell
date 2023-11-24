@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 14:51:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 19:07:43 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:11:31 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_end(t_msh *msh, t_lexer_list *list)
 		exit_synthax_error(msh, "newline");
 		return (2);
 	}
-	return (0);
+	return (msh->return_code);
 }
 
 int	limit_is_valid(t_msh *msh)
