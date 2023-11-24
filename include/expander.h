@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 14:39:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 15:29:48 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:32:10 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			expander(t_msh *msh);
 // LIST
 void			expander_first_node(t_exp_list *node);
 int				expander_list_is_empty(t_exp_list *list);
-void			expander_push_new_node(t_msh *msh, t_exp_list	*new_node);
+void			expander_push_new_node(t_msh *msh, t_exp_list *new_node);
 void			expander_push(t_msh *msh, char *str, t_exp_type type);
 
 // FN
@@ -35,5 +35,13 @@ char			*ft_one_word(char *s1);
 t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp);
 void			is_return_value(t_lexer_list *tmp, char **str,
 					int *not_exist_var);
+int				check_word(t_msh *msh, t_lexer_list *tmp, char **str);
+void			that_is_variable(t_msh *msh, t_lexer_list *tmp, char **str,
+					int *not_exist_var);
+void			the_end(t_msh *msh, t_lexer_list *tmp, char **str,
+					int not_exist_var);
+int				that_is_wold(t_msh *msh, t_lexer_list *tmp, char **str,
+					int *not_exist_var);
+void			is_special_var(t_msh *msh, t_lexer_list *tmp, char **str);
 
 #endif
