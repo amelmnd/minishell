@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_msh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:20:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 12:38:49 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 21:15:28 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	init_msh(t_msh *msh)
 {
 	msh->return_code = 0;
+	msh->stored_return_code = 0;
 	msh->env_list = NULL;
 	msh->msh_env = NULL;
 	msh->user = NULL;
