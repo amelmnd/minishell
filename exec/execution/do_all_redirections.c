@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:56:31 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 15:16:40 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:00:14 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	do_all_redirections(t_msh *msh, t_exec_list *exec_list_node)
 
 	if (msh && msh->exec && exec_list_node)
 	{
-		if (exec_list_node->pos_ppl != SOLO || exec_list_node->pos_ppl != FIRST)
+		if (exec_list_node->pos_ppl == MIDDLE || exec_list_node->pos_ppl == LAST)
 			close(msh->exec->pipefd[READ]);
 		manage_stdin(msh, exec_list_node);
 		if (exec_list_node->contains_hd)

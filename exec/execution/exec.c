@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:01:27 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 07:58:52 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:04:07 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 // check_cmd_path_n_exec contains an exit, which runs anyway
 static void	child_part(t_msh *msh, t_exec_list *exec_list_node)
 {
-	if (!(msh->exec->child))
+	dprintf(2, "child_part : Entrée\n");
 	{
 		do_all_redirections(msh, exec_list_node);
+		dprintf(2, "child_part : PROBE\n");
 		if (exec_list_node->cmd)
 		{
 			builtin_way(msh, exec_list_node);
@@ -49,6 +50,7 @@ static void	parent_part(t_msh *msh, t_exec_list *exec_list_node, int j)
 // child_part exits anyway
 void	exec_loop(t_msh *msh)
 {
+	dprintf(2, "exec_loop : Entrée\n");
 	t_exec_list	*exec_list_node;
 	int			j;
 
@@ -64,8 +66,10 @@ void	exec_loop(t_msh *msh)
 		msh->exec->child = fork();
 		if (msh->exec->child < 0)
 			errmsg_free_exit(msh, "fork");
-		child_part(msh, exec_list_node);
-		parent_part(msh, exec_list_node, j);
+		if (!(msh->exec->child))
+			child_part(msh, exec_list_node);
+		else
+			parent_part(msh, exec_list_node, j);
 		exec_list_node = exec_list_node->next;
 		j++;
 	}
@@ -74,13 +78,14 @@ void	exec_loop(t_msh *msh)
 void	execution(t_msh *msh)
 {
 	msh->exec = new_exec();
+	print_exec_list(msh);
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
-	get_paths_from_path(msh);
 	if (no_fork_solo_builtin(msh))
 		builtin_solo_without_fork(msh);
 	else
 	{
+		get_paths_from_path(msh);
 		create_pipes_for_hd(msh);
 		create_pid_t_array(msh);
 		exec_loop(msh);
