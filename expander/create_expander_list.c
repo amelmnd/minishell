@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   create_expander_list.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 11:15:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 12:30:31 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:42:08 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void	defined_type(t_msh *msh, t_lexer_list *tmp)
 t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
 {
 	defined_type(msh, tmp);
-	if (tmp && tmp->lexer_type == PIPE)
-	{
-		expander_push(msh, tmp->str, PIPE_EXPANDED);
+
+	 if (tmp->lexer_type == PIPE)
+    {
+        expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
+        // tmp = generate_str(msh, tmp);
 	}
-	// else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
+	else if (tmp)
 		tmp = generate_str(msh, tmp);
 	// else if (msh->exp_current_type == LIMITER_HEREDOC)
 	// 	tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
@@ -53,31 +55,13 @@ void	create_expander_list(t_msh *msh)
 	tmp = msh->lexer_list;
 	while (tmp)
 	{
+			printf("1 tmp->lexer_type = %d\n", tmp->lexer_type);
+	printf("1 tmp->str = %s\n", tmp->str);
+	print_debug_lexer_list(msh->lexer_list, "A exp lexer_list"); // à supprimer à terme
+				print_debug_exp_list(msh->exp_list, "Aexp expander_list"); // à supprimer à terme
+				if (tmp->lexer_type == PIPE)
+		printf("I M PIPE\n");
 		tmp = check_lexer_list(msh, tmp);
 		tmp = tmp->next;
 	}
 }
-
-/*
-//NO TUCH
-t_lexer_list	*check_lexer_list(t_msh *msh, t_lexer_list *tmp)
-{
-	defined_type(msh, tmp);
-	if (tmp && tmp->lexer_type == PIPE)
-	{
-		expander_push(msh, "|", PIPE_EXPANDED);
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
-	}
-	else if (msh->exp_current_type == R_ORIGIN_REDIRECT)
-		tmp = generate_str(msh, tmp, R_ORIGIN_REDIRECT);
-	else if (msh->exp_current_type == LIMITER_HEREDOC)
-		tmp = generate_str(msh, tmp, LIMITER_HEREDOC);
-	else if (msh->exp_current_type == W_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, W_DEST_REDIRECT);
-	else if (msh->exp_current_type == WA_DEST_REDIRECT)
-		tmp = generate_str(msh, tmp, WA_DEST_REDIRECT);
-	else if (msh->exp_current_type == WORD_EXPANDED)
-		tmp = generate_str(msh, tmp, WORD_EXPANDED);
-	return (tmp);
-}
-*/
