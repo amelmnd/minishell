@@ -1,29 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execve.c                                        :+:      :+:    :+:   */
+/*   contains_non_sign_or_num_chr.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 12:29:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 00:02:11 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 15:55:22 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_execve(t_msh *msh, t_exec_list *exec_list_node)
+static t_bool	is_diff_than_sign_or_num(char c)
 {
-	t_exec	*exec;
+	if (ft_isdigit(c) || c == '+' || c == '-')
+		return (FALSE);
+	return (TRUE);
+}
 
-	if (msh && msh->exec && exec_list_node && exec_list_node->args_array)
+void	contains_non_sign_or_num_chr(t_msh *msh)
+{
+	int		i;
+	char	*htss;
+
+	if (msh && msh->exit)
 	{
-		exec = msh->exec;
-		if (execve(exec->cmd_path_ready, 
-			exec_list_node->args_array, msh->msh_env))
+		i = -1;
+		htss = msh->exit->ht_spaces_stripped;
+		while (htss[++i])
 		{
-			printf("minishell: execve: %s\n", strerror(errno)); // ft_putstr_fd
-			exit(EXIT_FAILURE);
+			if (is_diff_than_sign_or_num(htss[i]))
+				non_numeric_arg_assignation(msh);
 		}
+		
 	}
 }

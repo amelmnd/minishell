@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free_lexer_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 16:59:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 12:36:27 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/24 07:17:44 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/24 07:17:57 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strlen(const char *str)
+void	free_lexer_list(t_msh *msh)
 {
-	int	i;
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
+	t_lexer_list	*current;
+	t_lexer_list	*next;
+
+	if (msh->lexer_list)
 	{
-		i++;
+		current = msh->lexer_list;
+		while (current != NULL)
+		{
+			next = current->next;
+			free_chars(&(current->str));
+			// free_chars(&(current->var_name));
+			// free_chars(&(current->var_value));
+			free(current);
+			current = next;
+		}
+		msh->lexer_list = NULL;
 	}
-	return (i);
 }

@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   free_exp_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 16:59:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 12:36:27 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/24 07:19:21 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/24 07:19:35 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strlen(const char *str)
+void	free_exp_list(t_msh *msh)
 {
-	int	i;
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
+	t_exp_list	*current;
+	t_exp_list	*next;
+
+	if (msh->exp_list)
 	{
-		i++;
+		current = msh->exp_list;
+		while (current != NULL)
+		{
+			next = current->next;
+			//free_chars(&(current->str));
+			free(current);
+			current = next;
+		}
+		msh->exp_list = NULL;
+		msh->exp_current_type = 0;
 	}
-	return (i);
 }

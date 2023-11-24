@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_msh.c                                         :+:      :+:    :+:   */
+/*   free_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/20 14:46:01 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/22 11:42:00 by amennad          ###   ########.fr       */
+/*   Created: 2023/11/24 07:32:57 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/24 07:33:07 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_msh(t_msh *msh)
+void	free_exit(t_msh *msh)
 {
-	free_envlist(msh);
-	free_ntcharss(&(msh->msh_env));
-	free_chars(&(msh->user));
-	// free_chars(&(msh->prompt)); // à étudier si nécessaire
-	free_lexer_list(msh);
-	free_exp_list(msh);
-	free_exec_list(msh);
-	free_exec(msh);
-	free(msh);
+	if (msh && msh->exit)
+	{
+		free_chars(&(msh->exit->ht_spaces_stripped));
+		free_chars(&(msh->exit->front_zeros_stripped));
+		free(msh->exit);
+		msh->exit = NULL;
+	}
 }

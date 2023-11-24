@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 21:53:28 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 15:29:14 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:35:43 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,15 +95,10 @@ void	do_redir(t_msh *msh, t_exec_list *exec_list_node, int i)
 			do_write_redir(msh, redir_box.str);
 		else if (redir_box.exp_type == WA_DEST_REDIRECT)
 			do_wapp_redir(msh, redir_box.str);
-		/*
-		else if (redir_box.exp_type == AMBIGUOUS_REDIRECT)
+		else if (redir_box.exp_type == AMBIGOUS_REDIRECT_EXP)
 		{
-			ft_putstr_fd("minishell : ", 2);
-			ft_putstr_fd(redir_box.str, 2);
-			ft_putstr_fd(": ", 2);
-			ft_putstr_fd("ambiguous redirect\n", 2);
+			ambiguous_redirect_errmsg(redir_box.str);
 			exit(1);
 		}
-		*/
 	}
 }

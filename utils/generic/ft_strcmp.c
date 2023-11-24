@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 16:59:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 12:36:27 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 12:38:23 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 12:38:24 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strlen(const char *str)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
-	if (!str)
-		return (0);
+
 	i = 0;
-	while (str[i] != '\0')
-	{
+	if (!s1 || !s2)
+		return (0);
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (0);
+	while (s1[i] && s1[i] == s2[i])
 		i++;
-	}
-	return (i);
+	if (s1[i] || s2[i])
+		return (0);
+	return (1);
 }

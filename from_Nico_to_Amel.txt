@@ -1,3 +1,9 @@
+23/11/2023 14h10
+On vire get_next_line du coup ?
+Les prototypes des fonctions dans minishell.h :
+	on peut les déplacer dans les .h correspondants aux répertoires dans lesquels les fichiers
+	sources se trouvent ?
+
 18/11/2023 21h17
 
 Penser à sécuriser pwd et env avec le protection du code des fonctions dans des if

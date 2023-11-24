@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_builtin.c                                     :+:      :+:    :+:   */
+/*   exit_new_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/14 14:32:25 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/14 14:36:40 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/10/13 14:34:33 by amennad           #+#    #+#             */
+/*   Updated: 2023/11/23 17:26:54 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_builtin(t_msh *msh, t_exec_list *exec_list_node)
+void	exit_new_line(t_msh *msh)
 {
-	(void)msh;
-	(void)exec_list_node;
+	msh->return_code = 0;
+	rl_on_new_line();
 }

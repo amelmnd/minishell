@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   non_numeric_arg_assignation.c                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 16:59:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 12:36:27 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 10:42:12 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 10:42:21 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strlen(const char *str)
+void	non_numeric_arg_assignation(t_msh *msh)
 {
-	int	i;
-	if (!str)
-		return (0);
-	i = 0;
-	while (str[i] != '\0')
+	if (msh && msh->exit)
 	{
-		i++;
+		msh->return_code = 2;
+		msh->exit->tests_ok = FALSE;
 	}
-	return (i);
 }

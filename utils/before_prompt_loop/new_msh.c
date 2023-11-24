@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:20:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/21 19:50:43 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:38:49 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ static void	init_msh(t_msh *msh)
 	msh->exp_list = NULL;
 	msh->exec_list = NULL;
 	msh->exec = NULL;
+	msh->exit = NULL;
 }
 
-t_msh *new_msh(void)
+t_msh	*new_msh(void)
 {
 	t_msh	*new;
 

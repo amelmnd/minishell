@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:01:27 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/20 15:26:05 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 07:58:52 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,13 @@ static void	child_part(t_msh *msh, t_exec_list *exec_list_node)
 	if (!(msh->exec->child))
 	{
 		do_all_redirections(msh, exec_list_node);
-		builtin_way(msh, exec_list_node);
-		check_cmd_path_n_exec(msh, exec_list_node);
+		if (exec_list_node->cmd)
+		{
+			builtin_way(msh, exec_list_node);
+			check_cmd_path_n_exec(msh, exec_list_node);
+		}
+		else
+			exit(EXIT_SUCCESS);
 	}
 }
 

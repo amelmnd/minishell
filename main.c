@@ -6,13 +6,14 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/16 11:56:13 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 09:59:17 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 t_bool var_exist(t_msh *msh, char *var_name)
 {
+	// on peut déplacer cette fonction ailleurs ?
 	t_env_list	*tmp;
 
 	tmp = msh->env_list;
@@ -35,10 +36,17 @@ void	generate_prompt(char *envp[])
 	build_user_for_prompt(msh);
 	while (msh)
 	{
+		dprintf(2, "generate_prompt ; début itération ; msh->return_code = %d\n", msh->return_code);
 		generate_msh_env(msh);
 		msh->program_status = INTERACTIVE_STATUS;
+		ft_signal(msh);
 		prompt = readline(msh->user);
+		if (prompt == NULL && msh->program_status == INTERACTIVE_STATUS)
+		{
+			kill(0, SIGKILL); //kill tout y compris la VM
+		}
 		msh->program_status = EXECUTION_STATUS;
+		ft_signal(msh);
 		//lexer_check(msh, msh->prompt);
 		lexer_check(msh, prompt);
 		free_chars(&prompt);
@@ -72,10 +80,7 @@ void	generate_prompt(char *envp[])
 		}
 		clean_msh_list(msh);
 	}
-	clear_history ();
-	//avec le break ci-dessous : à réactiver tant que les signaux n'ont pas été
-	//gérés pour tester les leaks
-
+	clear_history();
 }
 
 int	main(int argc, char *argv[], char *envp[])

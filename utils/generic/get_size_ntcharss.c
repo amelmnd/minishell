@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   get_size_ntcharss.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/29 16:59:14 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 12:36:27 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/23 12:20:45 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/23 12:20:52 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_strlen(const char *str)
+int	get_size_ntcharss(char **ntcharss)
 {
 	int	i;
-	if (!str)
-		return (0);
+
 	i = 0;
-	while (str[i] != '\0')
-	{
+	while (ntcharss[i])
 		i++;
-	}
 	return (i);
 }
