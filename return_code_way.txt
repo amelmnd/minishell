@@ -1,0 +1,14 @@
+démarrage du minishell (avant la boucle generate_prompt)
+	msh->return_code = 0; initialisation (dans init_msh)
+
+Scénario 1 :
+	Première commande (pas exit avec une valeur particulière): ne provoque pas d'erreur :
+		ni le lexer, ni le parser, ni l'exécution ne modifient msh->return_code
+	Deuxième commande : echo $?
+		commande valide (ni le lexer, ni le parseur, ni l'exécution ne modifient msh->return_code)
+		affiche donc 0 (vu que le return_code en sortie de la première commande, et qu'il
+			n'a pas été modifié par la deuxième commande)
+
+Scénario 2 :
+	Première commande (toujours pas exit avec une valeur particulière) : PROVOQUE UNE ERREUR AU LEXER/PARSER
+	
