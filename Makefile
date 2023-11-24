@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/23 17:31:53 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/24 07:33:27 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -130,7 +130,12 @@ SRCS_UTILS = before_prompt_loop/build_user_for_prompt.c \
 			 environment_management/split_env_value.c \
 			 free/errmsg_free_exit.c \
 			 free/free_chars.c \
+			 free/free_exec.c \
+			 free/free_exec_list.c \
+			 free/free_exit.c \
+			 free/free_exp_list.c \
 			 free/free_ints.c \
+			 free/free_lexer_list.c \
 			 free/free_list.c \
 			 free/free_msh.c \
 			 free/free_ntcharss.c \
