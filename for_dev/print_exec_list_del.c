@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static int print = 1;
+static int print = 0;
 
 void	print_exp_type_in_exec_array(t_exec_list *exec_list_node, int i)
 {

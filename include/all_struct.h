@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   all_struct.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 00:03:37 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:30:37 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ struct	s_exec_list
 	t_bool		contains_read_redirect;
 };
 
-
 struct s_exec
 {
 	t_bool					path_defined;
@@ -183,7 +182,6 @@ struct s_msh
 	t_env_list			*env_list;
 	char				**msh_env;
 	char				*user;
-	// char				*prompt;
 	t_exp_type			exp_current_type;
 	t_lexer_list		*lexer_list;
 	t_exp_list			*exp_list;

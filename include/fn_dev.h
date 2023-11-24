@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fn_dev.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/24 15:31:07 by amennad           #+#    #+#             */
+/*   Updated: 2023/11/24 15:31:08 by amennad          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FN_DEV_H
 # define FN_DEV_H
 
@@ -15,19 +27,12 @@ void	print_ntcharss(char **str_array);
 //void	free_chars(char **dust);
 void	free_ntcharss(char ***dust);
 void	free_envlist(t_msh *msh);
-
-
 void	ft_close(int fd);
 void	ft_duptwo(int pretender, int to_replace);
-
-int	ft_strcmp(char *s1, char *s2);
-
+int		ft_strcmp(char *s1, char *s2);
 void	builtin_way(t_msh *msh, t_exec_list *exec_list_node);
-
 void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node);
-
 void	execution(t_msh *msh);
 void	get_paths_from_path(t_msh *msh);
-
 
 #endif
