@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:18:22 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 11:10:04 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:50:29 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	expander_push_new_node(t_msh *msh, t_exp_list *new_node)
 		tmp = tmp->next;
 	tmp->next = new_node;
 	new_node->previous = tmp;
-	//TODO FREE TMP
 }
 
 void	expander_push(t_msh *msh, char *str, t_exp_type type)

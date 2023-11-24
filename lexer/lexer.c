@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 21:50:06 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:33:58 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ void	lexer_check(t_msh *msh, char *prompt)
 		exit_new_line(msh);
 		return ;
 	}
-	else
-	{
-		add_history(prompt); // TODO verifier le fonctionnement avec les signaux et le heredoc fini
-		lexer_create_list(msh, prompt);
-	}
-	//free_chars(&prompt);
+	add_history(prompt);
+	lexer_create_list(msh, prompt);
 }
