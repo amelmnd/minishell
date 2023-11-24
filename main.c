@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 12:26:12 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 16:45:12 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,16 +52,16 @@ void	generate_prompt(char *envp[])
 		free_chars(&prompt);
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
-				print_debug_lexer_list(msh->lexer_list, "main after lexer"); // à supprimer à terme
+				// print_debug_lexer_list(msh->lexer_list, "main after lexer"); // à supprimer à terme
 			//print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
 			parser(msh);
-				print_debug_lexer_list(msh->lexer_list, "main after parser"); // à supprimer à terme
+				// print_debug_lexer_list(msh->lexer_list, "main after parser"); // à supprimer à terme
 		}
 		if (msh->return_code == 0 && msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell
-				print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
-				print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
+				// print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
+				// print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
 
 			if (expander_list_is_empty(msh->exp_list) == TRUE && (msh->exp_current_type == R_ORIGIN_REDIRECT || msh->exp_current_type == W_DEST_REDIRECT || msh->exp_current_type == WA_DEST_REDIRECT || msh->exp_current_type == LIMITER_HEREDOC))
 			{
