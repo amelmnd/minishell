@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 21:35:11 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 12:47:41 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,9 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp)
 	// msh->exp_current_type = msh->exp_current_type;
 	while (tmp)
 	{
+
 	// print_exp_list(msh->exp_list);
-		if ((tmp->lexer_type > 4 && tmp->lexer_type < 10) || tmp->lexer_type == 0)
+		if ((tmp->lexer_type > 4 && tmp->lexer_type < 10))
 			break ;
 		else if (tmp->lexer_type == RETURN_VALUE) // OK
 			is_return_value(tmp, &str, &not_exist_var);
@@ -201,14 +202,26 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp)
 			}
 			else if (not_exist_var == 0)
 				all_in_str(&str, tmp->str);
+
+		}
+		else if (tmp->lexer_type == PIPE)
+		{
+
+			// expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
+			break;
 		}
 		if (!tmp->next)
 			break ;
 		tmp = tmp->next;
 		not_exist_var = 1;
 	}
-		printf("not_exist_var = %d\n", not_exist_var);
-	if (str && (not_exist_var == 2 || not_exist_var == 3))
+	if (tmp->lexer_type == PIPE)
+	{
+		expander_push(msh, str, msh->exp_current_type);
+		expander_push(msh, ft_strdup("|"), PIPE_EXPANDED);
+		// tmp = generate_str(msh, tmp);
+	}
+	else if (str && (not_exist_var == 2 || not_exist_var == 3))
 	{
 		expander_push(msh, str, AMBIGOUS_REDIRECT_EXP);
 		msh->exp_current_type = WORD_EXPANDED;
