@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   echo_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/14 14:24:25 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/16 17:00:33 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 17:18:26 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
 int	ft_array_size(char **array)
 {
 	int	i;
@@ -41,15 +42,21 @@ int	ft_flag_n_cmp(char *s1)
 
 void	echo_builtin(t_msh *msh, t_exec_list *exec_list_node)
 {
+	dprintf(2, "echo_builtin : Entrée ; msh->return_code = %d\n", msh->return_code);
 	int		i;
 	t_bool	n_flag;
 	int		array_size;
 	int		compare;
 
-	(void)msh;
 	i = 1;
 	n_flag = FALSE;
+	if (exec_list_node->nb_words == 1)
+	{
+		printf("\n");
+		return ;
+	}
 	array_size = ft_array_size(exec_list_node->args_array);
+	dprintf(2, "echo_builtin : PROBE ; msh->return_code = %d\n", msh->return_code);
 	compare = ft_flag_n_cmp(exec_list_node->args_array[1]);
 	if (compare)
 		n_flag = TRUE;
@@ -64,4 +71,6 @@ void	echo_builtin(t_msh *msh, t_exec_list *exec_list_node)
 	}
 	if (n_flag == FALSE)
 		printf("\n");
+	msh->return_code = 0;
 }
+*/

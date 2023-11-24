@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 23:59:06 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 15:50:17 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:44:00 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static t_bool	norminette_pleasing(t_msh *msh, t_exec_list *exec_list_node)
 
 void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 {
+	dprintf(2, "builtin_way : Entrée ; msh->return_code = %d\n", msh->return_code);
 	t_bool	builtin;
 
 	builtin = TRUE;
@@ -43,7 +44,11 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 	{
 		if (ft_strcmp(exec_list_node->cmd, "echo")
 			|| ft_strcmp(exec_list_node->cmd, "/bin/echo"))
+		{
+			dprintf(2, "builtin_way : entrée dans le if interne echo ; msh->return_code = %d\n", msh->return_code);
 			echo_builtin(msh, exec_list_node);
+			dprintf(2, "builtin_way(if interne echo) ; echo_builtin DONE ; msh->return_code = %d\n", msh->return_code);
+		}
 		else if (ft_strcmp(exec_list_node->cmd, "cd"))
 			cd_builtin(msh, exec_list_node);
 		else if (ft_strcmp(exec_list_node->cmd, "pwd"))
@@ -51,6 +56,7 @@ void	builtin_way(t_msh *msh, t_exec_list *exec_list_node)
 		else if (!(norminette_pleasing(msh, exec_list_node)))
 			builtin = FALSE;
 	}
+	dprintf(2, "builtin_way : après le premier if ; msh->return_code = %d\n", msh->return_code);
 	if (builtin)
 		exit(msh->return_code);
 }
