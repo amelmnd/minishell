@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:01:27 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 20:02:22 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:06:19 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	exec_loop(t_msh *msh)
 	j = 0;
 	while (exec_list_node)
 	{
-		if (exec_list_node->pos_ppl != SOLO)
+		if (exec_list_node->pos_ppl == FIRST || exec_list_node->pos_ppl == MIDDLE)
 		{
 			if (pipe(msh->exec->pipefd) < 0)
 				errmsg_free_exit(msh, "pipe");
