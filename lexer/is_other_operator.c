@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:12:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 18:53:33 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:11:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	is_blank(t_msh *msh, char *prompt, int *i)
 		}
 		*i -= 1;
 	}
-	return (0);
+	return (msh->return_code);
 }
 
 int	is_pipe(t_msh *msh, char *prompt, int *i)
@@ -46,5 +46,5 @@ int	is_pipe(t_msh *msh, char *prompt, int *i)
 		lexer_push(msh, tmp_str, PIPE);
 		free_chars(&tmp_str);
 	}
-	return (0);
+	return (msh->return_code);
 }

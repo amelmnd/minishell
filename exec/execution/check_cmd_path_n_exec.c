@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:52:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 00:15:55 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:38:35 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 		if (exists_in_paths(msh, exec_list_node))
 			ft_execve(msh, exec_list_node);
 		if (exec_list_node->cmd)
+		{
 			print_cmd_not_found_errormsg(exec_list_node->cmd);
+			exit(127);
+		}
 	}
 	exit(EXIT_FAILURE);
 }
