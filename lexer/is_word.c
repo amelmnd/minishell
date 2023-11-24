@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 12:03:23 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 18:44:58 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:11:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ int	is_word(t_msh *msh, char *prompt, int *i)
 	lexer_push(msh, world, WORD);
 	free_chars(&world);
 	*i += world_len - 1;
-	return (0);
+	return (msh->return_code);
 }

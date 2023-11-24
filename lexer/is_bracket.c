@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 14:14:34 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/21 19:03:47 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:11:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	is_right_bracket(t_msh *msh, char *prompt, int *i)
 			generate_lexer_list(msh, ">>", W_APPEND_REDIRECT);
 		*i += 1;
 	}
-	return (0);
+	return (msh->return_code);
 }
 
 int	is_left_bracket(t_msh *msh, char *prompt, int *i)
@@ -70,5 +70,5 @@ int	is_left_bracket(t_msh *msh, char *prompt, int *i)
 			generate_lexer_list(msh, "<<", HEREDOC);
 		*i += 1;
 	}
-	return (0);
+	return (msh->return_code);
 }

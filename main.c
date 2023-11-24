@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 16:45:12 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 18:26:06 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	generate_prompt(char *envp[])
 		//lexer_check(msh, msh->prompt);
 		lexer_check(msh, prompt);
 		free_chars(&prompt);
-		if (msh->return_code == 0 && msh->lexer_list)
+		if (msh->lexer_list)
 		{
 				// print_debug_lexer_list(msh->lexer_list, "main after lexer"); // à supprimer à terme
 			//print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
 			parser(msh);
 				// print_debug_lexer_list(msh->lexer_list, "main after parser"); // à supprimer à terme
 		}
-		if (msh->return_code == 0 && msh->lexer_list)
+		if (msh->lexer_list)
 		{
 			expander(msh); // à réviser avec l'env propre à minishell
 				// print_debug_lexer_list(msh->lexer_list, "main lexer_list"); // à supprimer à terme
@@ -72,7 +72,7 @@ void	generate_prompt(char *envp[])
 				exit_command_not_foud("");
 			}
 		}
-		if (msh->return_code == 0 && msh->exp_list)
+		if (msh->exp_list)
 		{
 
 			build_exec_list(msh);
