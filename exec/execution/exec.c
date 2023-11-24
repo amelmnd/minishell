@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:01:27 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 14:52:07 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:04:07 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,11 @@ void	execution(t_msh *msh)
 	print_exec_list(msh);
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
-	get_paths_from_path(msh);
 	if (no_fork_solo_builtin(msh))
 		builtin_solo_without_fork(msh);
 	else
 	{
+		get_paths_from_path(msh);
 		create_pipes_for_hd(msh);
 		create_pid_t_array(msh);
 		exec_loop(msh);
