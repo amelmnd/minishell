@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contains_non_sign_or_num_chr.c                     :+:      :+:    :+:   */
+/*   print_cmd_not_found_errormsg.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 04:31:37 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/10/17 11:13:34 by amennad           #+#    #+#             */
+/*   Updated: 2023/11/25 04:46:43 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	is_diff_than_sign_or_num(char c)
+void	print_cmd_not_found_errormsg(char *cmdnf)
 {
-	if (ft_isdigit(c) || c == '+' || c == '-')
-		return (FALSE);
-	return (TRUE);
-}
-
-void	contains_non_sign_or_num_chr(t_msh *msh)
-{
-	int		i;
-	char	*htss;
-
-	if (msh && msh->exit)
-	{
-		i = -1;
-		htss = msh->exit->ht_spaces_stripped;
-		while (htss[++i])
-		{
-			if (is_diff_than_sign_or_num(htss[i]))
-				non_numeric_arg_assignation(msh);
-		}
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmdnf, 2);
+	ft_putstr_fd(": command not found\n", 2);
 }

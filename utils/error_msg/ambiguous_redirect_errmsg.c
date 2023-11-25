@@ -1,37 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   contains_non_sign_or_num_chr.c                     :+:      :+:    :+:   */
+/*   ambiguous_redirect_errmsg.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 04:31:37 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/25 04:43:59 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/25 04:44:10 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_bool	is_diff_than_sign_or_num(char c)
+void	ambiguous_redirect_errmsg(char *str)
 {
-	if (ft_isdigit(c) || c == '+' || c == '-')
-		return (FALSE);
-	return (TRUE);
-}
-
-void	contains_non_sign_or_num_chr(t_msh *msh)
-{
-	int		i;
-	char	*htss;
-
-	if (msh && msh->exit)
-	{
-		i = -1;
-		htss = msh->exit->ht_spaces_stripped;
-		while (htss[++i])
-		{
-			if (is_diff_than_sign_or_num(htss[i]))
-				non_numeric_arg_assignation(msh);
-		}
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
 }
