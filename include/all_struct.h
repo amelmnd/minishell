@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 00:00:37 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:26:27 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef enum e_pos_ppl					t_pos_ppl;
 typedef struct s_env_list				t_env_list;
 typedef enum e_program_status			t_program_status;
 typedef struct s_exit					t_exit;
+typedef struct s_expander				t_expander;
 
 enum	e_bool
 {
@@ -177,19 +178,22 @@ struct s_exit
 
 struct s_msh
 {
+	char				*transexp;
+	char				*temp;
+	char				*user;
 	char				*prompt;
 	t_program_status	program_status;
 	int					return_code;
 	int					stored_return_code;
 	t_env_list			*env_list;
 	char				**msh_env;
-	char				*user;
 	t_exp_type			exp_current_type;
 	t_lexer_list		*lexer_list;
 	t_exp_list			*exp_list;
 	t_exec_list			*exec_list;
 	t_exec				*exec;
 	t_exit				*exit;
+t_expander				*expander;
 };
 
 #endif

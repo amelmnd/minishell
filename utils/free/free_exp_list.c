@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_exp_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 07:19:21 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 17:30:09 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 04:26:49 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	free_exp_list(t_msh *msh)
 		while (current != NULL)
 		{
 			next = current->next;
+			free_chars(&(current->str));
 			free(current);
 			current = next;
 		}
