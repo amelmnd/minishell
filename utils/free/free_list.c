@@ -6,16 +6,11 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 17:09:30 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 07:44:17 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:22:20 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// ménage à finir ici ?
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 // clean between two generate_prompt's iterations 
 // (thus, msh and msh->msh_env are not freed here)
@@ -26,7 +21,9 @@ void	clean_msh_list(t_msh *msh)
 	free_exec_list(msh);
 	free_exec(msh);
 	free_ntcharss(&(msh->msh_env));
-	//free_chars(&(msh->prompt));
+	free_chars(&(msh->prompt));
+	free_chars(&(msh->transexp));
+	free_chars(&(msh->temp));
 	free_exit(msh);
 }
 

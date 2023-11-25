@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:18:23 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 15:55:22 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:31:37 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ void	contains_non_sign_or_num_chr(t_msh *msh)
 			if (is_diff_than_sign_or_num(htss[i]))
 				non_numeric_arg_assignation(msh);
 		}
-		
 	}
 }
