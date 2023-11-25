@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 05:38:13 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:22:15 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_bool	var_exist(t_msh *msh, char *var_name)
 {
 	t_env_list	*tmp;
 
-	// on peut déplacer cette fonction ailleurs ?
 	tmp = msh->env_list;
 	while (tmp)
 	{

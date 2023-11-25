@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 05:27:00 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:21:38 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,14 @@ void		exit_new_line(t_msh *msh);
 
 // signal
 void		ft_signal(t_msh *msh);
+
+//void	free_chars(char **dust);
+void		free_ntcharss(char ***dust);
+void		free_envlist(t_msh *msh);
+int			ft_strcmp(char *s1, char *s2);
+void		builtin_way(t_msh *msh, t_exec_list *exec_list_node);
+void		check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node);
+void		execution(t_msh *msh);
+void		get_paths_from_path(t_msh *msh);
 
 #endif

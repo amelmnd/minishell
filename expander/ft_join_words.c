@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 15:17:46 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 15:51:36 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 17:01:18 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ char	*ft_join_word(char *s1, char *s2)
 		result[i] = s1[i];
 		i++;
 	}
-	free_chars(&s1);
 	while (s2[y] != '\0')
 	{
 		result[i + y] = s2[y];
@@ -51,7 +50,6 @@ char	*ft_one_word(char *s1)
 	result = (char *)malloc(sizeof(char) * (ft_strlen(s1) + 1));
 	if (!result)
 	{
-		free_chars(&s1);
 		return (NULL);
 	}
 	while (s1[i] != '\0')

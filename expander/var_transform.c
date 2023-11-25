@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 05:04:26 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 18:33:06 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,11 @@ void	what_else(t_msh *msh, t_lexer_list *tmp, int *not_exist_var)
 		all_in_str(msh, tmp->str);
 		*not_exist_var = 0;
 	}
-	else if (ft_strlen(tmp->str) > 0 && msh->transexp && *not_exist_var == 1)
+	else
 	{
-		free_chars(&(msh->transexp));
-		msh->transexp = ft_strdup("");
 		all_in_str(msh, tmp->str);
 		*not_exist_var = 0;
 	}
-	else if (*not_exist_var == 0)
-		all_in_str(msh, tmp->str);
 }
 
 static int	is_big_conditional(t_msh *msh, t_lexer_list *tmp,
