@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_var_value.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:58:49 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/22 11:45:50 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/24 22:06:42 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,12 @@ void	check_var_value(t_msh *msh)
 		}
 		else if (tmp->lexer_type == D_QUOTE_VAR)
 			dq_var_exist(msh, tmp);
+		/*
 		else if (tmp->lexer_type == RETURN_VALUE)
 			tmp->var_value = ft_itoa(msh->return_code);
+		*/
+		else if (tmp->lexer_type == RETURN_VALUE)
+			tmp->var_value = ft_itoa(msh->stored_return_code);
 		tmp = tmp->next;
 	}
 }

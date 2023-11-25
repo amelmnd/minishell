@@ -6,28 +6,24 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:01:27 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 16:04:07 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:06:19 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 // builtin_way contains an exit, which runs in case of builtin
-// check_cmd_path_n_exec contains an exit, which runs anyway
+// check_cmd_path_n_exec contains an exit, which runs anyway in case of execve does not run
 static void	child_part(t_msh *msh, t_exec_list *exec_list_node)
 {
-	dprintf(2, "child_part : Entrée\n");
+	do_all_redirections(msh, exec_list_node);
+	if (exec_list_node->cmd)
 	{
-		do_all_redirections(msh, exec_list_node);
-		dprintf(2, "child_part : PROBE\n");
-		if (exec_list_node->cmd)
-		{
-			builtin_way(msh, exec_list_node);
-			check_cmd_path_n_exec(msh, exec_list_node);
-		}
-		else
-			exit(EXIT_SUCCESS);
+		builtin_way(msh, exec_list_node);
+		check_cmd_path_n_exec(msh, exec_list_node);
 	}
+	else
+		exit(EXIT_SUCCESS);
 }
 
 static void	parent_part(t_msh *msh, t_exec_list *exec_list_node, int j)
@@ -50,7 +46,6 @@ static void	parent_part(t_msh *msh, t_exec_list *exec_list_node, int j)
 // child_part exits anyway
 void	exec_loop(t_msh *msh)
 {
-	dprintf(2, "exec_loop : Entrée\n");
 	t_exec_list	*exec_list_node;
 	int			j;
 
@@ -58,7 +53,7 @@ void	exec_loop(t_msh *msh)
 	j = 0;
 	while (exec_list_node)
 	{
-		if (exec_list_node->pos_ppl != SOLO)
+		if (exec_list_node->pos_ppl == FIRST || exec_list_node->pos_ppl == MIDDLE)
 		{
 			if (pipe(msh->exec->pipefd) < 0)
 				errmsg_free_exit(msh, "pipe");
@@ -78,7 +73,6 @@ void	exec_loop(t_msh *msh)
 void	execution(t_msh *msh)
 {
 	msh->exec = new_exec();
-	print_exec_list(msh);
 	get_all_hd_content(msh);
 	mark_all_erased_hd(msh);
 	if (no_fork_solo_builtin(msh))
