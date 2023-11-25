@@ -1,5 +1,0 @@
-Plans de transformation
-	
-generate_str :
-	initialement, generate_str déclare char *str, et le passe par référence aux autres fonctions
-	Proposition : msh->(char *)transexp_str
