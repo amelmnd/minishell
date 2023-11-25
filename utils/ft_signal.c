@@ -6,11 +6,12 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:28:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 12:34:14 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 17:16:34 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 void	sig_handler(int sig)
 {
 	signal(sig, SIG_IGN);
