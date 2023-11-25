@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exp_list.c                                    :+:      :+:    :+:   */
+/*   get_index_first_equal.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 07:19:21 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 04:26:49 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/25 05:15:12 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/25 05:15:23 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exp_list(t_msh *msh)
+int	get_index_first_equal(char *str)
 {
-	t_exp_list	*current;
-	t_exp_list	*next;
+	int	index_first_equal;
 
-	if (msh->exp_list)
+	index_first_equal = -1;
+	while (str && str[++index_first_equal])
 	{
-		current = msh->exp_list;
-		while (current != NULL)
-		{
-			next = current->next;
-			free_chars(&(current->str));
-			free(current);
-			current = next;
-		}
-		msh->exp_list = NULL;
-		msh->exp_current_type = 0;
+		if (str[index_first_equal] == '=')
+			return (index_first_equal);
 	}
+	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_hd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 23:17:30 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 11:46:24 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 04:49:56 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 	{
 		if (pipe(exec_list_node->hd_get_pipe) < 0)
 			errmsg_free_exit(msh, "pipe");
-
 		exec_list_node->hd_get_child = fork();
 		if (exec_list_node->hd_get_child < 0)
 			errmsg_free_exit(msh, "fork");
@@ -85,6 +84,5 @@ void	get_hd(t_msh *msh, t_exec_list *exec_list_node, int i)
 			parent_part(msh, exec_list_node);
 			signal(SIGQUIT, SIG_DFL);
 		}
-
 	}
 }

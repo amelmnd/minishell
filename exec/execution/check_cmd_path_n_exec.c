@@ -6,8 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 21:52:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 19:37:58 by nstoutze         ###   ########.fr       */
-/*   Updated: 2023/11/24 18:38:35 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:49:21 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +70,19 @@ static void	get_cmd_without_path_in_args(t_msh *msh,
 	}
 }
 
-static void	print_cmd_not_found_errormsg(char *cmdnf)
+static void	path_case(t_msh *msh, t_exec_list *exec_list_node)
 {
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmdnf, 2);
-	ft_putstr_fd(": command not found\n", 2);
+	stat(exec_list_node->cmd, msh->exec->s_path_stat);
+	if (S_ISREG(msh->exec->s_path_stat->st_mode))
+	{
+		get_cmd_without_path_in_args(msh, exec_list_node);
+		ft_execve(msh, exec_list_node);
+	}
+	else if (S_ISDIR(msh->exec->s_path_stat->st_mode))
+	{
+		is_a_directory_errmsg(exec_list_node->cmd);
+		exit(126);
+	}
 }
 
 //exists_in_paths assigns msh->exec->cmd_path_ready in case of success
@@ -85,19 +92,7 @@ void	check_cmd_path_n_exec(t_msh *msh, t_exec_list *exec_list_node)
 	{
 		msh->exec->cmd_path_ready = ft_strdup(exec_list_node->cmd);
 		if (!access(exec_list_node->cmd, X_OK))
-		{
-			stat(exec_list_node->cmd, msh->exec->s_path_stat);
-			if (S_ISREG(msh->exec->s_path_stat->st_mode))
-			{
-				get_cmd_without_path_in_args(msh, exec_list_node);
-				ft_execve(msh, exec_list_node);
-			}
-			else if (S_ISDIR(msh->exec->s_path_stat->st_mode))
-			{
-				is_a_directory_errmsg(exec_list_node->cmd);
-				exit(126);
-			}
-		}
+			path_case(msh, exec_list_node);
 		if (exists_in_paths(msh, exec_list_node))
 			ft_execve(msh, exec_list_node);
 		if (exec_list_node->cmd)

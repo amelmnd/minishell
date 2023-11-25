@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 21:13:53 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:09:17 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,12 +177,15 @@ struct s_exit
 
 struct s_msh
 {
+	char				*transexp;
+	char				*temp;
+	char				*user;
+	char				*prompt;
 	t_program_status	program_status;
 	int					return_code;
 	int					stored_return_code;
 	t_env_list			*env_list;
 	char				**msh_env;
-	char				*user;
 	t_exp_type			exp_current_type;
 	t_lexer_list		*lexer_list;
 	t_exp_list			*exp_list;
