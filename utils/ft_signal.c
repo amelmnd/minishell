@@ -6,7 +6,7 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:28:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 17:31:39 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:29:20 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 void	sig_handler(int sig)
 {
 	signal(sig, SIG_IGN);
-	rl_on_new_line();
 	rl_replace_line("", 0);
 	printf("\n");
 	rl_redisplay();
