@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/12 20:13:22 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 21:13:53 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:00:37 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,7 @@ struct s_exit
 
 struct s_msh
 {
+	char				*prompt;
 	t_program_status	program_status;
 	int					return_code;
 	int					stored_return_code;

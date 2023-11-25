@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 22:04:51 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:05:21 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ t_bool var_exist(t_msh *msh, char *var_name)
 void	generate_prompt(char *envp[])
 {
 	t_msh	*msh;
-	char	*prompt;
 
 	msh = new_msh();
 	env_list_generate(msh, envp);
@@ -38,20 +37,17 @@ void	generate_prompt(char *envp[])
 	{
 		msh->stored_return_code = msh->return_code;
 		msh->return_code = 0;
-		dprintf(2, "generate_prompt ; début itération ; msh->stored_return_code = %d ; msh->return_code = %d\n", msh->stored_return_code, msh->return_code);
 		generate_msh_env(msh);
 		msh->program_status = INTERACTIVE_STATUS;
 		ft_signal(msh);
-		prompt = readline(msh->user);
-		if (prompt == NULL && msh->program_status == INTERACTIVE_STATUS)
-		{
-			kill(0, SIGKILL); //kill tout y compris la VM
-		}
+		msh->prompt = readline(msh->user);
+		if (msh->prompt == NULL && msh->program_status == INTERACTIVE_STATUS)
+			kill(0, SIGKILL);
 		msh->program_status = EXECUTION_STATUS;
 		ft_signal(msh);
 		//lexer_check(msh, msh->prompt);
-		lexer_check(msh, prompt);
-		free_chars(&prompt);
+		//prompt = ft_strdup(msh->prompt);
+		lexer_check(msh);
 		if (!(msh->return_code) && msh->lexer_list)
 		{
 				// print_debug_lexer_list(msh->lexer_list, "main after lexer"); // à supprimer à terme
