@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_list_manage.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/23 15:18:22 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 15:50:29 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 04:08:19 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	expander_push(t_msh *msh, char *str, t_exp_type type)
 	new_node = (t_exp_list *)malloc(sizeof(t_exp_list));
 	init_expander_node(new_node);
 	new_node->exp_type = type;
-	new_node->str = str;
+	new_node->str = ft_strdup(str);
 	if (expander_list_is_empty(msh->exp_list) == TRUE)
 		msh->exp_list = new_node;
 	else

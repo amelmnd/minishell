@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/26 10:58:49 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 22:06:42 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:16:58 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	dq_var_exist(t_msh *msh, t_lexer_list *tmp)
 			}
 			tmp->var_name = ft_substr(tmp->str, start, y);
 			tmp->var_value = ft_getenv(msh, ft_substr(tmp->str, start, y));
+			// proposition de remplacement :
+			//tmp->var_value = ft_strdup(ft_getenv(msh, tmp->var_name);
 		}
 		i++;
 	}

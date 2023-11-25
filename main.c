@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 09:11:01 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 00:05:21 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:09:34 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,9 @@ void	generate_prompt(char *envp[])
 				// print_debug_exp_list(msh->exp_list, "main expander_list"); // à supprimer à terme
 
 			if (expander_list_is_empty(msh->exp_list) == TRUE && (msh->exp_current_type == R_ORIGIN_REDIRECT || msh->exp_current_type == W_DEST_REDIRECT || msh->exp_current_type == WA_DEST_REDIRECT || msh->exp_current_type == LIMITER_HEREDOC))
-			{
 				exit_no_file_directory("");
-			}
 			else if (expander_list_is_empty(msh->exp_list) == TRUE )
-			{
 				exit_command_not_foud("");
-			}
 		}
 		if (!(msh->return_code) && msh->lexer_list)
 		{
