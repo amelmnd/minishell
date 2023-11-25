@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 04:14:29 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:04:26 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,16 @@ void	what_else_again(t_msh *msh, t_lexer_list *tmp, int *not_exist_var)
 		msh->transexp = ft_strdup("");
 		*not_exist_var = 0;
 	}
-	else if (msh->transexp != NULL && *not_exist_var == 1 && ft_strlen(tmp->str) > 0)
+	else if (msh->transexp != NULL && *not_exist_var == 1
+		&& ft_strlen(tmp->str) > 0)
 	{
 		free_chars(&(msh->transexp));
 		msh->transexp = ft_strdup("");
 		all_in_str(msh, tmp->str);
 		*not_exist_var = 0;
 	}
-	else if (msh->transexp == NULL && *not_exist_var == 1 && ft_strlen(tmp->str) > 0)
+	else if (msh->transexp == NULL && *not_exist_var == 1
+		&& ft_strlen(tmp->str) > 0)
 		all_in_str(msh, tmp->str);
 }
 

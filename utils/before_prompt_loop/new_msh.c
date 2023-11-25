@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 19:20:10 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 03:24:20 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:10:40 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static void	init_msh(t_msh *msh)
 	msh->exit = NULL;
 	msh->transexp = NULL;
 	msh->temp = NULL;
-	//msh->prompt = NULL;
 }
 
 t_msh	*new_msh(void)
