@@ -3,27 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 15:33:58 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 05:09:53 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	prompt_isempty(char **prompt)
+static t_bool	prompt_isempty(t_msh *msh)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
+	char	*temp;
 
 	i = 0;
-	len = ft_strlen(*prompt);
+	len = ft_strlen(msh->prompt);
 	while (i < len)
 	{
-		if ((*prompt)[i] != ' ' && (*prompt)[i] != '\t')
+		if (msh->prompt[i] != ' ' && msh->prompt[i] != '\t')
 		{
-			*prompt = ft_substr(*prompt, i, (len - i));
+			temp = ft_strdup(msh->prompt);
+			free_chars(&(msh->prompt));
+			msh->prompt = ft_substr(temp, i, (len - i));
+			free_chars(&(temp));
 			return (FALSE);
 		}
 		i++;
@@ -31,13 +35,13 @@ t_bool	prompt_isempty(char **prompt)
 	return (TRUE);
 }
 
-void	lexer_check(t_msh *msh, char *prompt)
+void	lexer_check(t_msh *msh)
 {
-	if (prompt_isempty(&prompt) == TRUE)
-	{
+	if (prompt_isempty(msh) == TRUE)
 		exit_new_line(msh);
-		return ;
+	else
+	{
+		add_history(msh->prompt);
+		lexer_create_list(msh);
 	}
-	add_history(prompt);
-	lexer_create_list(msh, prompt);
 }

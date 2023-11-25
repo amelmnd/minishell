@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 22:25:54 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 00:05:28 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:50:44 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static struct stat	*new_path_stat(void)
 {
 	struct stat	*new;
-	
+
 	new = NULL;
 	new = (struct stat *)malloc(sizeof(struct stat));
 	if (!new)

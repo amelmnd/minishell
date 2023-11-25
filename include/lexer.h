@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:49:53 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/23 16:22:40 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 00:14:34 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 # include "minishell.h"
 
-void	lexer_check(t_msh *msh, char *prompt);
-int		lexer_create_list(t_msh *msh, char *prompt);
-t_bool	prompt_isempty(char **prompt);
+void	lexer_check(t_msh *msh);
+int		lexer_create_list(t_msh *msh);
 
 // LIST
 void	init_lexer_node(t_lexer_list *node);

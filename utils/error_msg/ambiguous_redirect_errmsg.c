@@ -1,33 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exp_list.c                                    :+:      :+:    :+:   */
+/*   ambiguous_redirect_errmsg.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 07:19:21 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 04:26:49 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/25 04:43:59 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/25 04:44:10 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exp_list(t_msh *msh)
+void	ambiguous_redirect_errmsg(char *str)
 {
-	t_exp_list	*current;
-	t_exp_list	*next;
-
-	if (msh->exp_list)
-	{
-		current = msh->exp_list;
-		while (current != NULL)
-		{
-			next = current->next;
-			free_chars(&(current->str));
-			free(current);
-			current = next;
-		}
-		msh->exp_list = NULL;
-		msh->exp_current_type = 0;
-	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": ambiguous redirect\n", 2);
 }

@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 10:14:38 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/23 15:57:06 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 04:32:12 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	lenght_one_digit(t_msh *msh, char *arg)
 		}
 		else if (ft_strlen(arg) == 1)
 			non_numeric_arg_assignation(msh);
-	}		
+	}
 }
 
 void	easy_tests(t_msh *msh, char *arg)

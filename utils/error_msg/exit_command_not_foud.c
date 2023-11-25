@@ -1,33 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exp_list.c                                    :+:      :+:    :+:   */
+/*   exit_command_not_foud.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 07:19:21 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 04:26:49 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/25 04:41:12 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/25 04:41:35 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exp_list(t_msh *msh)
+void	exit_command_not_foud(char *str)
 {
-	t_exp_list	*current;
-	t_exp_list	*next;
-
-	if (msh->exp_list)
-	{
-		current = msh->exp_list;
-		while (current != NULL)
-		{
-			next = current->next;
-			free_chars(&(current->str));
-			free(current);
-			current = next;
-		}
-		msh->exp_list = NULL;
-		msh->exp_current_type = 0;
-	}
+	rl_on_new_line();
+	rl_replace_line("", 1);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": command not found\n", 2);
 }
