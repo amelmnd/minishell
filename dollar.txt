@@ -17,6 +17,7 @@ ou est remplacé par quoi que ce soit)
 bash 3.2£ $
 $: command not found
 
+
 bash 3.2£ ls | $ | pwd
 /home/spardaspirit/Desktop/minishell
 $: command not found
