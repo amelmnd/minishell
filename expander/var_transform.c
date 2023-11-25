@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   var_transform.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/28 16:18:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 17:27:18 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 00:46:59 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,6 @@ t_lexer_list	*generate_str(t_msh *msh, t_lexer_list *tmp)
 		not_exist_var = 1;
 	}
 	the_end(msh, tmp, &str, not_exist_var);
+	//free_chars(&str);
 	return (tmp);
 }
