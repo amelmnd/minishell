@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:48:20 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 00:41:52 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:09:53 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_bool	prompt_isempty(t_msh *msh)
 {
-	int	i;
-	int	len;
+	int		i;
+	int		len;
 	char	*temp;
 
 	i = 0;

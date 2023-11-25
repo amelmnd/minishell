@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fn_env.c                                           :+:      :+:    :+:   */
+/*   musical_chairs.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 13:04:31 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 05:21:54 by nstoutze         ###   ########.fr       */
+/*   Created: 2023/11/25 05:02:12 by nstoutze          #+#    #+#             */
+/*   Updated: 2023/11/25 05:03:08 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*ft_getenv(t_msh *msh, char *env_var)
+void	musical_chairs(t_msh *msh, char *start_str,
+		t_lexer_list *tmp, char *end_str)
 {
-	t_env_list	*tmp;
-
-	tmp = msh->env_list;
-	while (tmp->next != NULL)
-	{
-		if (ft_strncmp(tmp->name, &env_var[1], ft_strlen(env_var)) == 0)
-			return (tmp->value);
-		tmp = tmp->next;
-	}
-	if (ft_strncmp(tmp->name, &env_var[1], ft_strlen(env_var)) == 0)
-		return (tmp->value);
-	return (NULL);
+	free_chars(&(msh->temp));
+	msh->temp = ft_strdup(msh->transexp);
+	free_chars(&(msh->transexp));
+	msh->transexp = ft_strjoin(start_str, tmp->var_value);
+	free_chars(&(msh->temp));
+	msh->temp = ft_strdup(msh->transexp);
+	free_chars(&(msh->transexp));
+	msh->transexp = ft_strjoin(msh->temp, end_str);
+	free_chars(&(msh->temp));
 }

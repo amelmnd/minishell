@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 11:52:28 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 04:09:41 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:03:38 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@ void	all_in_str(t_msh *msh, char *str_value)
 	if (!(msh->transexp))
 	{
 		free_chars(&(msh->transexp));
-		msh->transexp = ft_one_word(str_value); //ft_one_word malloc
+		msh->transexp = ft_one_word(str_value);
 	}
 	else
 	{
 		free_chars(&(msh->temp));
 		msh->temp = ft_strdup(msh->transexp);
 		free_chars(&(msh->transexp));
-		msh->transexp = ft_join_word(msh->temp, str_value); //ft_join_word malloc
+		msh->transexp = ft_join_word(msh->temp, str_value);
 		free_chars(&(msh->temp));
 	}
 }
@@ -47,17 +47,7 @@ void	db_quote_var_trans(t_msh *msh, t_lexer_list *tmp, int *not_exist_var)
 	start_str = ft_substr(tmp->str, 0, dollar_pos);
 	end_str = ft_substr(tmp->str, dollar_pos + ft_strlen(tmp->var_name), len);
 	if (tmp->var_value)
-	{
-		free_chars(&(msh->temp));
-		msh->temp = ft_strdup(msh->transexp);
-		free_chars(&(msh->transexp));
-		msh->transexp = ft_strjoin(start_str, tmp->var_value);
-		free_chars(&(msh->temp));
-		msh->temp = ft_strdup(msh->transexp);
-		free_chars(&(msh->transexp));
-		msh->transexp = ft_strjoin(msh->temp, end_str);
-		free_chars(&(msh->temp));
-	}
+		musical_chairs(msh, start_str, tmp, end_str);
 	else
 	{
 		free_chars(&(msh->transexp));

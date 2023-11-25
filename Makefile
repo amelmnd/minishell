@@ -6,7 +6,7 @@
 #    By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/07 14:10:33 by amennad           #+#    #+#              #
-#    Updated: 2023/11/25 04:47:01 by nstoutze         ###   ########.fr        #
+#    Updated: 2023/11/25 05:26:11 by nstoutze         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ DIR_EXP = expander/
 SRCS_EXP = check_var_value.c \
 		   create_expander_list.c \
 		   expander.c \
+		   musical_chairs.c \
 		   expander_fn.c \
 		   expander_list_manage.c \
 		   ft_join_words.c \
@@ -125,9 +126,11 @@ DIR_UTILS = utils/
 SRCS_UTILS = before_prompt_loop/build_user_for_prompt.c \
 			 before_prompt_loop/new_msh.c \
 			 before_prompt_loop/show_no_args_for_minishell_error_msg.c \
+			 environment_management/feed_env_list_node.c \
 			 environment_management/fn_env.c \
-			 environment_management/fn_env_list.c \
+			 environment_management/env_list_generate.c \
 			 environment_management/generate_msh_env.c \
+			 environment_management/get_index_first_equal.c \
 			 environment_management/get_size_env_list.c \
 			 environment_management/split_env_value.c \
 			 error_msg/ambiguous_redirect_errmsg.c \
@@ -135,7 +138,7 @@ SRCS_UTILS = before_prompt_loop/build_user_for_prompt.c \
 			 error_msg/exit_command_not_foud.c \
 			 error_msg/exit_no_file_directory.c \
 			 error_msg/exit_synthax_error.c \
-			 error_msg/is_a_directory_errmsg. \
+			 error_msg/is_a_directory_errmsg.c \
 			 free/errmsg_free_exit.c \
 			 free/free_chars.c \
 			 free/free_exec.c \

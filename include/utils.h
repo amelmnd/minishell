@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/07 18:53:09 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/24 15:31:19 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 05:27:00 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,12 @@ t_msh		*new_msh(void);
 void		show_no_args_for_minishell_error_msg(void);
 
 //environment_management
-void		generate_msh_env(t_msh *msh);
 void		env_list_generate(t_msh *msh, char *envp[]);
-int			get_size_env_list(t_msh *msh);
+void		feed_env_list_node(t_env_list *env_list_node, char *var_n_value);
 char		*ft_getenv(t_msh *msh, char *env_var);
+void		generate_msh_env(t_msh *msh);
+int			get_index_first_equal(char *str);
+int			get_size_env_list(t_msh *msh);
 char		*msh_getenv(t_msh *msh, char *var_name);
 t_env_list	*new_env_list(void);
 void		split_env_value(char *env_var, char **name, char **value);
@@ -35,6 +37,7 @@ void		exit_synthax_error(t_msh *msh, char *str);
 void		exit_command_not_foud(char *str);
 void		exit_no_file_directory(char *str);
 void		is_a_directory_errmsg(char *path);
+void		print_cmd_not_found_errormsg(char *cmdnf);
 
 //free
 void		clean_msh_list(t_msh *msh);

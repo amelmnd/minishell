@@ -6,7 +6,7 @@
 /*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 16:02:57 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/25 03:53:35 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 05:05:57 by nstoutze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	is_exist_var(t_msh *msh, t_lexer_list *tmp, int *not_exist_var)
 void	is_biggest_condition(t_msh *msh, t_lexer_list *tmp, int *not_exist_var,
 		char **tmp_str)
 {
-	if (tmp->var_value == NULL && *not_exist_var == 1 && ft_strlen(msh->transexp) == 0
-		&& msh->transexp != NULL)
+	if (tmp->var_value == NULL && *not_exist_var == 1
+		&& ft_strlen(msh->transexp) == 0 && msh->transexp != NULL)
 		all_in_str(msh, "");
 	else if (tmp->var_value == NULL && *not_exist_var == 1 && ((tmp->next
 				&& (tmp->next->lexer_type == D_QUOTE
