@@ -6,16 +6,24 @@
 /*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 10:28:00 by amennad           #+#    #+#             */
-/*   Updated: 2023/11/24 17:31:39 by amennad          ###   ########.fr       */
+/*   Updated: 2023/11/25 12:34:14 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 void	sig_handler(int sig)
 {
 	signal(sig, SIG_IGN);
 	rl_on_new_line();
+	rl_replace_line("", 0);
+	printf("\n");
+	rl_redisplay();
+	signal(sig, sig_handler);
+}
+
+void	sig_handler_exec(int sig)
+{
+	signal(sig, SIG_IGN);
 	rl_replace_line("", 0);
 	printf("\n");
 	rl_redisplay();
@@ -42,8 +50,8 @@ void	ft_signal(t_msh *msh)
 	}
 	if (msh->program_status == EXECUTION_STATUS)
 	{
-		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, sig_handler);
+		signal(SIGINT, sig_handler_exec);
+		signal(SIGQUIT, sig_handler_exec);
 	}
 	if (msh->program_status == HEREDOC_STATUS)
 	{
