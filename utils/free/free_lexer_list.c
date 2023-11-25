@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_lexer_list.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nstoutze <nstoutze@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amennad <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 07:17:44 by nstoutze          #+#    #+#             */
-/*   Updated: 2023/11/25 13:40:23 by nstoutze         ###   ########.fr       */
+/*   Updated: 2023/11/25 17:13:37 by amennad          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void	free_lexer_list(t_msh *msh)
 		{
 			next = current->next;
 			free_chars(&(current->str));
-			free_chars(&(current->var_name));
-			free_chars(&(current->var_value));
 			free(current);
 			current = next;
 		}
